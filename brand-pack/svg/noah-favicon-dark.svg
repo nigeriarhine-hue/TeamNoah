@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Noah">
+  <title>Noah</title>
+  <defs><clipPath id="c1"><circle cx="60" cy="58" r="34"/></clipPath><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(99,102,241,0.280)"/><stop offset="1" stop-color="rgba(139,92,246,0.100)"/></linearGradient></defs>
+  <g clip-path="url(#c1)"><rect x="24" y="22" width="72" height="52" fill="rgba(43,53,122,0.100)"/><rect x="24" y="74" width="72" height="20" fill="url(#g2)"/></g>
+  
+  <circle cx="60" cy="58" r="34" fill="none" stroke="rgba(174,182,238,0.850)" stroke-width="9"/>
+  <line x1="30" y1="74" x2="90" y2="74" stroke="#C7CBFF" stroke-width="9" stroke-linecap="round"/>
+</svg>
