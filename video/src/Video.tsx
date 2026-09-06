@@ -22,7 +22,7 @@ loadFonts();
  *   voiceover      one continuous 57s file, public/audio/voiceover.mp3, with the
  *                  pauses baked in. Right for a human take against the timing
  *                  sheet — the reader controls the pacing.
- *   voiceoverLines eight clips, public/audio/vo-1.mp3 … vo-8.mp3, each placed at
+ *   voiceoverLines eight clips, public/audio/vo-1.wav … vo-8.wav, each placed at
  *                  its own mark below. Right for synthesised speech, which has no
  *                  way to hold a 6-second pause, and for re-cutting one line
  *                  without redoing the whole take.
@@ -72,7 +72,7 @@ export const NoahGoogleSlow: React.FC = () => {
       {AUDIO.voiceoverLines
         ? VO_MARKS.map((at, i) => (
             <Sequence key={`vo-${i}`} from={at} name={`vo-${i + 1}`}>
-              <Audio src={staticFile(`audio/vo-${i + 1}.mp3`)} />
+              <Audio src={staticFile(`audio/vo-${i + 1}.wav`)} />
             </Sequence>
           ))
         : null}

@@ -89,8 +89,19 @@ generated file will not land on the marks. Generate each line separately instead
 and let Remotion place them.
 
 ```
-video/public/audio/vo-1.mp3   … through …   vo-8.mp3
+video/public/audio/vo-1.wav   … through …   vo-8.wav
 ```
+
+Piper can generate all eight for you:
+
+```bash
+pip install piper-tts
+# grab a voice + its sidecar from huggingface.co/rhasspy/piper-voices
+cd video && ./scripts/make-vo.sh ~/voices/en_US-ryan-high.onnx
+```
+
+It prints each clip's length against its budget and flags any line that would
+collide with the next one.
 
 ```ts
 const AUDIO = { voiceover: false, voiceoverLines: true, music: false };
