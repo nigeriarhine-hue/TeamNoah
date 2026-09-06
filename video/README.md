@@ -78,13 +78,22 @@ Remotion will fetch its own browser.
 
 ## Two deliberate departures from the log
 
-**The command shown is the corrected one.** The log records a defect: the Wi-Fi
+**No interface name appears anywhere.** The log records a defect: the Wi-Fi
 refresh hardcoded the interface name `Wi-Fi` instead of the actual `en1`, so the
-chain exited 10 with `** Error: Error obtaining wireless information`. The toggle
-still worked through `networksetup`'s fallback, and the filed fix is to detect the
-interface name and use it. The video shows `en1` — the intended behaviour, not the
-buggy invocation. If that fix has not shipped yet, this video is ahead of the
-product and should wait for it.
+chain exited 10 with `** Error: Error obtaining wireless information`. The filed
+fix is to detect the interface name and use it.
+
+The video shows neither. Commands render as
+`networksetup -setairportpower <wi-fi> off`, with a placeholder, for two reasons.
+`en1` is *this* Mac's Wi-Fi interface — on another Mac it is `en0` or `en2`, so
+printing it in a general how-to would be wrong for most viewers. And a BSD device
+name is jargon in a film whose audience the brand kit describes as "explicitly
+non-technical and already scared of the Terminal." Noah itself detects and shows
+the real name at run time; a video for everyone shows the shape of the command,
+not one machine's answer.
+
+If the interface-detection fix has not shipped yet, this video is still ahead of
+the product and should wait for it.
 
 **The two tool defects are not in the video.** Both entries in the log's defect
 section (the hardcoded interface, and the malformed `open_loop` follow-up payload)

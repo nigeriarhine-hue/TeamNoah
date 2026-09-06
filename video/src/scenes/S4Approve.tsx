@@ -82,7 +82,7 @@ export const S4Approve: React.FC<{ dur: number }> = ({ dur }) => {
             marginBottom: 28,
           }}
         >
-          Turn Wi-Fi off and back on for en1, then run the same timing check again.
+          Turn your Wi-Fi off and back on, then run the same timing check again.
         </div>
 
         <Row
@@ -90,7 +90,7 @@ export const S4Approve: React.FC<{ dur: number }> = ({ dur }) => {
           k="Command"
           v={
             <span style={{ fontFamily: font.mono, fontSize: 25 }}>
-              networksetup -setairportpower en1 off &rarr; on
+              networksetup -setairportpower &lt;wi-fi&gt; off &rarr; on
             </span>
           }
         />
@@ -98,7 +98,7 @@ export const S4Approve: React.FC<{ dur: number }> = ({ dur }) => {
         <Row
           delay={78}
           k="Reversible"
-          v={<span style={{ color: color.teal }}>Yes — en1 rejoins the same network.</span>}
+          v={<span style={{ color: color.teal }}>Yes — your Mac rejoins the same network.</span>}
           tone={color.teal}
         />
         <Row delay={90} k="Cost" v="About ten seconds offline." />

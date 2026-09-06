@@ -143,7 +143,7 @@ export const S3Diagnose: React.FC<{ dur: number }> = ({ dur }) => {
           delay={116}
           tone={inkMuted}
           head="Signal: −68 dBm"
-          body="Wi-Fi on en1 rated Fair. A weak link is where slow handshakes come from."
+          body="Your Wi-Fi is rated Fair. A weak link is where slow handshakes come from."
         />
       </div>
 

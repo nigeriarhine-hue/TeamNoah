@@ -10,9 +10,9 @@ import { ease, useSceneFade } from '../components/anim';
  * re-running — not a claim of success.
  */
 const steps = [
-  { at: 22, cmd: 'networksetup -setairportpower en1 off', run: true, label: 'Wi-Fi off' },
-  { at: 52, cmd: 'networksetup -setairportpower en1 on', run: true, label: 'Wi-Fi on' },
-  { at: 82, cmd: 'en1 re-associated', run: false, label: 'Back on the network' },
+  { at: 22, cmd: 'networksetup -setairportpower <wi-fi> off', run: true, label: 'Wi-Fi off' },
+  { at: 52, cmd: 'networksetup -setairportpower <wi-fi> on', run: true, label: 'Wi-Fi on' },
+  { at: 82, cmd: 'wi-fi re-associated', run: false, label: 'Back on the network' },
   { at: 112, cmd: 'curl -w "%{time_total}" https://www.google.com  × 6', run: true, label: 'Re-running the check' },
 ];
 
