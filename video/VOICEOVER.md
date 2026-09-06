@@ -65,30 +65,53 @@ Silence is a legitimate choice and is probably the safer one.
 
 ## Delivering the audio
 
-Record at 48 kHz, mono is fine. Leave the head silent until 0:00.5. Deliver one
-continuous 57.00s file rather than per-line stems, so nothing drifts.
+There are two routes, and the right one depends on who is reading.
 
-Then drop it in and flip one flag:
+### Route A — one continuous file (a human take)
+
+Record against the timing sheet above, 48 kHz, mono is fine. Leave the head
+silent until 0:00.5 and hold the pauses between lines. Deliver a single 57.00s
+file, so nothing can drift.
 
 ```
-video/public/audio/voiceover.mp3     ← your recording
-video/public/audio/music.mp3         ← optional bed
+video/public/audio/voiceover.mp3
 ```
 
 ```ts
 // video/src/Video.tsx
-const AUDIO = { voiceover: true, music: false };
+const AUDIO = { voiceover: true, voiceoverLines: false, music: false };
 ```
 
-Re-render and the track is in:
+### Route B — eight clips, one per line (synthesised speech, or stems)
+
+Synthesised speech cannot hold a six-second pause between lines, so a single
+generated file will not land on the marks. Generate each line separately instead
+and let Remotion place them.
+
+```
+video/public/audio/vo-1.mp3   … through …   vo-8.mp3
+```
+
+```ts
+const AUDIO = { voiceover: false, voiceoverLines: true, music: false };
+```
+
+**Each clip must start speaking immediately.** Remotion positions them at
+`VO_MARKS` in `src/Video.tsx` — 15, 135, 306, 588, 855, 1038, 1317, 1572 frames.
+Padding a head with silence pushes that line late by exactly that much.
+
+This route is also the better one for a human take you expect to revise: a line
+that reads wrong can be re-recorded on its own.
+
+### Then
 
 ```bash
 npx remotion render src/index.ts NoahGoogleSlow out/noah-google-takes-forever-to-load.mp4
 ```
 
-Both flags are `false` by default, and a missing file with its flag off costs
-nothing. Turning a flag on without the file present will fail the render — that is
-deliberate, so a silent video never ships by accident.
+All three flags are `false` by default, and a missing file with its flag off
+costs nothing. Turning a flag on without the files present will fail the render —
+that is deliberate, so a silent video never ships by accident.
 
 ## If the timings need to move
 

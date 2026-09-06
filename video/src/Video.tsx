@@ -17,10 +17,26 @@ loadFonts();
  * Audio is off until a recording exists. See VOICEOVER.md for the timed script,
  * the read direction, and the file spec.
  *
- * Flipping a flag on without the matching file under public/audio will fail the
+ * Two ways in, and they are mutually exclusive:
+ *
+ *   voiceover      one continuous 57s file, public/audio/voiceover.mp3, with the
+ *                  pauses baked in. Right for a human take against the timing
+ *                  sheet — the reader controls the pacing.
+ *   voiceoverLines eight clips, public/audio/vo-1.mp3 … vo-8.mp3, each placed at
+ *                  its own mark below. Right for synthesised speech, which has no
+ *                  way to hold a 6-second pause, and for re-cutting one line
+ *                  without redoing the whole take.
+ *
+ * Flipping a flag on without the matching files under public/audio will fail the
  * render rather than quietly shipping a silent video — that is the point.
  */
-const AUDIO = { voiceover: false, music: false };
+const AUDIO = { voiceover: false, voiceoverLines: false, music: false };
+
+/**
+ * Line in-points from VOICEOVER.md, in frames at 30 fps. Change them here and in
+ * the script table together, or the two drift apart.
+ */
+const VO_MARKS = [15, 135, 306, 588, 855, 1038, 1317, 1572];
 
 /**
  * A bed, if used at all, must not change dynamics at the fix. Swelling into the
@@ -53,6 +69,13 @@ export const NoahGoogleSlow: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: color.cream }}>
       {AUDIO.voiceover ? <Audio src={staticFile('audio/voiceover.mp3')} /> : null}
+      {AUDIO.voiceoverLines
+        ? VO_MARKS.map((at, i) => (
+            <Sequence key={`vo-${i}`} from={at} name={`vo-${i + 1}`}>
+              <Audio src={staticFile(`audio/vo-${i + 1}.mp3`)} />
+            </Sequence>
+          ))
+        : null}
       {AUDIO.music ? (
         <Audio src={staticFile('audio/music.mp3')} volume={MUSIC_GAIN} />
       ) : null}
