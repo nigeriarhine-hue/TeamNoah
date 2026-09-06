@@ -1,3 +1,5 @@
 node_modules/
 out/
+
+# renders/ is tracked on purpose — the finished video is the deliverable.
 .remotion/
