@@ -144,6 +144,25 @@ the synthesised audio stream, so it cannot be captured — there is no way to tu
 this route into an MP4 with a baked-in track. It is a presentation surface, not
 an export. If you need a distributable file with audio, use Route A or B.
 
+### Route D — an espeak-ng scratch track (timing only, never ship it)
+
+```bash
+pip install espeakng-loader imageio-ffmpeg
+python3 scripts/make-vo-espeak.py
+```
+
+Writes `public/audio/vo-1.wav … vo-8.wav` and one continuous
+`renders/noah-voiceover-scratch.mp3`, and prints each line against its budget.
+Set `AUDIO.voiceoverLines = true` and re-render to hear it against picture.
+
+espeak-ng is a formant synthesiser: intelligible, exactly timed, and audibly a
+machine. It exists here because it is the only engine that needs no network at
+synthesis time — the library and its voice data ship inside the wheel — so it
+works where every neural engine is blocked. Its whole value is telling you
+whether the script fits before anyone books a read. **It is not a shipping
+voice**, and the generated files are gitignored so it cannot become one by
+accident.
+
 Its marks live in `LINES` in `present.html`, in seconds — the same instants as
 `VO_MARKS` in `src/Video.tsx`. Change one and change the other.
 

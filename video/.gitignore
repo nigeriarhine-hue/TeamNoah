@@ -5,3 +5,10 @@ out/
 # ...except the standalone player, which is 6MB of base64 rebuilt from it.
 renders/noah-presentation.html
 .remotion/
+
+# Generated scratch narration (espeak-ng). Robotic by nature — regenerate with
+# scripts/make-vo-espeak.py rather than committing it.
+public/audio/vo-*.wav
+public/audio/voiceover.mp3
+renders/noah-voiceover-scratch.mp3
+renders/noah-narrated-scratch.mp4
