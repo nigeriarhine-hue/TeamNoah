@@ -124,6 +124,14 @@ next to the render:
 open video/present.html     # or just double-click it
 ```
 
+`present.html` uses relative paths, so it only works **in the repo**, next to
+`renders/` and `public/`. To send it to someone, build the standalone copy — it
+inlines the video and the fonts, so there is nothing left to go missing:
+
+```bash
+python3 scripts/build-standalone.py     # → renders/noah-presentation.html, ~6.3 MB
+```
+
 Pick a voice and a pace at the top; click any transcript line to jump there.
 
 Use **Microsoft Edge** — it exposes 250+ Microsoft Natural voices, which are far

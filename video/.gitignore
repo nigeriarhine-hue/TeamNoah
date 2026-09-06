@@ -2,4 +2,6 @@ node_modules/
 out/
 
 # renders/ is tracked on purpose — the finished video is the deliverable.
+# ...except the standalone player, which is 6MB of base64 rebuilt from it.
+renders/noah-presentation.html
 .remotion/
