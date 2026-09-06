@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noah — Google takes forever to load</title>
+<style>
+  @font-face { font-family:'Plus Jakarta Sans'; src:url('public/fonts/plus-jakarta-sans-var.woff2') format('woff2-variations'); font-weight:200 800; font-display:swap; }
+  @font-face { font-family:'Instrument Serif'; src:url('public/fonts/instrument-serif-italic.woff2') format('woff2'); font-style:italic; font-display:swap; }
+  :root {
+    --cream:#ECE8DF; --ink:#2A251F; --structure:#1A1D61;
+    --muted:rgba(42,37,31,.62); --faint:rgba(42,37,31,.34); --rule:rgba(42,37,31,.14);
+    --teal:#0D9488; --amber:#D97706;
+  }
+  * { box-sizing:border-box; }
+  body {
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+    padding:40px 28px 72px;
+  }
+  .wrap { max-width:1180px; margin:0 auto; }
+  h1 { font-size:30px; font-weight:700; letter-spacing:-.035em; margin:0 0 4px; }
+  .sub { color:var(--muted); font-size:16px; margin:0 0 28px; }
+  video { width:100%; border-radius:12px; box-shadow:0 1px 2px rgba(42,37,31,.04),0 14px 40px rgba(42,37,31,.08); background:#000; display:block; }
+  .bar { display:flex; flex-wrap:wrap; gap:18px; align-items:flex-end; margin:22px 0 6px; padding-bottom:20px; border-bottom:1px solid var(--rule); }
+  label { display:block; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-bottom:7px; }
+  select, input[type=range] { font:inherit; font-size:15px; }
+  select { padding:9px 12px; border:1px solid var(--rule); border-radius:10px; background:#F7F4EF; color:var(--ink); min-width:290px; }
+  input[type=range] { width:170px; accent-color:var(--structure); }
+  .val { font-variant-numeric:tabular-nums; color:var(--muted); font-size:14px; margin-left:8px; }
+  .warn { display:none; margin:18px 0 0; padding:16px 20px; border-radius:12px;
+          background:#FBF3E7; border:1px solid rgba(217,119,6,.35); color:#7a4708; font-size:15px; line-height:1.5; }
+  .warn.on { display:block; }
+  ol { list-style:none; margin:26px 0 0; padding:0; }
+  li { display:flex; gap:20px; padding:13px 16px; border-radius:10px; color:var(--muted); font-size:17px; line-height:1.45; cursor:pointer; }
+  li:hover { background:rgba(42,37,31,.035); }
+  li .t { font-variant-numeric:tabular-nums; color:var(--faint); font-size:14px; min-width:54px; padding-top:3px; }
+  li.now { background:#F7F4EF; color:var(--ink); box-shadow:inset 3px 0 0 var(--structure); }
+  li.done { color:var(--faint); }
+  .note { margin-top:34px; padding-top:22px; border-top:1px solid var(--rule); color:var(--faint); font-size:14px; line-height:1.6; max-width:760px; }
+  .note em { font-family:'Instrument Serif',Georgia,serif; font-style:italic; color:var(--structure); font-size:16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Google takes forever to load</h1>
+  <p class="sub">The narration is spoken by your browser. Nothing is downloaded and nothing is sent anywhere.</p>
+
+  <video id="v" controls preload="metadata" src="renders/noah-google-takes-forever-to-load.mp4"></video>
+
+  <div class="bar">
+    <div>
+      <label for="voice">Voice</label>
+      <select id="voice"></select>
+    </div>
+    <div>
+      <label for="rate">Pace</label>
+      <input type="range" id="rate" min="0.7" max="1.15" step="0.01" value="0.94">
+      <span class="val" id="rateVal">0.94×</span>
+    </div>
+  </div>
+
+  <div class="warn" id="warn"></div>
+
+  <ol id="lines"></ol>
+
+  <p class="note">
+    Click any line to jump the video there. The read is deliberately slow — the brand voice is
+    <em>calm, plain, specific, unhurried</em>, and the screen is already carrying text.
+    Edge has the best voices by a wide margin (250+ Microsoft Natural); Chrome has about 19.
+  </p>
+</div>
+
+<script>
+// In-points from VOICEOVER.md. Keep these in step with VO_MARKS in src/Video.tsx
+// (these are the same instants, in seconds rather than frames).
+const LINES = [
+  { at: 0.5,  text: "Someone told Noah their Google was slow." },
+  { at: 4.5,  text: "Cleaning is the reflex. It rarely finds the cause." },
+  { at: 10.2, text: "So Noah measured instead of guessing. It timed the load in stages. One stage swallowed a second." },
+  { at: 19.6, text: "Then Noah stops. It says what it will do, and what it will touch. And waits." },
+  { at: 28.5, text: "You approve. Every command runs where you can read it." },
+  { at: 34.6, text: "Then the same test again. Not a new one. The same one that found the problem." },
+  { at: 43.9, text: "This is the part that usually goes unsaid. The stall is gone. The weak signal is not." },
+  { at: 52.4, text: "Find the real cause. Show the work." },
+];
+
+const synth = window.speechSynthesis;
+const v = document.getElementById('v');
+const sel = document.getElementById('voice');
+const rate = document.getElementById('rate');
+const rateVal = document.getElementById('rateVal');
+const warn = document.getElementById('warn');
+const list = document.getElementById('lines');
+
+let spoken = LINES.map(() => false);
+
+// Render the transcript.
+LINES.forEach((l, i) => {
+  const li = document.createElement('li');
+  li.innerHTML = '<span class="t"></span><span></span>';
+  li.firstChild.textContent = l.at.toFixed(1) + 's';
+  li.lastChild.textContent = l.text;
+  li.onclick = () => { v.currentTime = Math.max(0, l.at - 0.25); v.play(); };
+  list.appendChild(li);
+});
+
+/** Prefer the genuinely good voices, in the order each platform offers them. */
+function score(voice) {
+  const n = voice.name;
+  if (/Natural|Neural/i.test(n)) return 0;          // Edge / Microsoft
+  if (/^Google/.test(n)) return 1;                  // Chrome, Android
+  if (/Samantha|Daniel|Karen|Moira|Alex/i.test(n)) return 2; // macOS / iOS
+  return 3;
+}
+
+function loadVoices() {
+  const all = synth.getVoices().filter(x => x.lang.startsWith('en'));
+  if (!all.length) {
+    warn.className = 'warn on';
+    warn.textContent = synth.getVoices().length
+      ? 'No English voices are installed in this browser. Add one in your OS speech settings, or open this page in Microsoft Edge.'
+      : 'This browser reports no speech voices at all. Open the page in Microsoft Edge or Chrome on a desktop — headless and some Linux browsers ship none.';
+    return;
+  }
+  warn.className = 'warn';
+  all.sort((a, b) => score(a) - score(b) || a.name.localeCompare(b.name));
+  sel.innerHTML = '';
+  all.forEach((x, i) => {
+    const o = document.createElement('option');
+    o.value = x.name;
+    o.textContent = x.name + '  ·  ' + x.lang + (score(x) === 0 ? '  ★' : '');
+    sel.appendChild(o);
+    if (i === 0) o.selected = true;
+  });
+}
+loadVoices();
+synth.onvoiceschanged = loadVoices;
+
+rate.oninput = () => { rateVal.textContent = (+rate.value).toFixed(2) + '×'; };
+
+function speak(text) {
+  const u = new SpeechSynthesisUtterance(text);
+  const chosen = synth.getVoices().find(x => x.name === sel.value);
+  if (chosen) u.voice = chosen;
+  u.rate = +rate.value;
+  u.pitch = 1;
+  synth.cancel();       // never let two lines overlap
+  synth.speak(u);
+}
+
+v.addEventListener('timeupdate', () => {
+  const t = v.currentTime;
+  LINES.forEach((l, i) => {
+    // Fire once, and only just after the mark — never when scrubbing past it.
+    if (!spoken[i] && t >= l.at && t < l.at + 1.2) { spoken[i] = true; speak(l.text); }
+  });
+  const cur = LINES.reduce((acc, l, i) => (t >= l.at ? i : acc), -1);
+  [...list.children].forEach((li, i) => {
+    li.className = i === cur ? 'now' : (i < cur ? 'done' : '');
+  });
+});
+
+// A seek re-arms everything after the playhead and retires everything before it,
+// so jumping back replays the narration and jumping forward does not fire a burst.
+v.addEventListener('seeking', () => {
+  synth.cancel();
+  spoken = LINES.map(l => l.at < v.currentTime - 1.2);
+});
+
+v.addEventListener('pause', () => synth.pause());
+v.addEventListener('play',  () => synth.resume());
+v.addEventListener('ended', () => synth.cancel());
+</script>
+</body>
+</html>

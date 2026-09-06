@@ -114,7 +114,32 @@ Padding a head with silence pushes that line late by exactly that much.
 This route is also the better one for a human take you expect to revise: a line
 that reads wrong can be re-recorded on its own.
 
-### Then
+### Route C — no audio file at all: let the browser speak it
+
+`present.html` plays the MP4 and speaks each line at its mark using the viewer's
+own browser voices. No file to record, nothing to download, no API key. Open it
+next to the render:
+
+```bash
+open video/present.html     # or just double-click it
+```
+
+Pick a voice and a pace at the top; click any transcript line to jump there.
+
+Use **Microsoft Edge** — it exposes 250+ Microsoft Natural voices, which are far
+better than anything else free, and better than Piper. Chrome has about 19.
+Headless browsers and most Linux installs report none at all, and the page says
+so plainly rather than playing silence.
+
+The catch: this is live playback, not a file. The Web Speech API does not expose
+the synthesised audio stream, so it cannot be captured — there is no way to turn
+this route into an MP4 with a baked-in track. It is a presentation surface, not
+an export. If you need a distributable file with audio, use Route A or B.
+
+Its marks live in `LINES` in `present.html`, in seconds — the same instants as
+`VO_MARKS` in `src/Video.tsx`. Change one and change the other.
+
+### Then, for routes A and B
 
 ```bash
 npx remotion render src/index.ts NoahGoogleSlow out/noah-google-takes-forever-to-load.mp4
