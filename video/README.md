@@ -12,7 +12,11 @@ npx remotion render src/index.ts NoahGoogleSlow out/noah-google-takes-forever-to
 npx remotion studio        # to scrub and edit interactively
 ```
 
-1920×1080, 30 fps, 1710 frames. No audio track.
+1920×1080, 30 fps, 1710 frames. Silent by default.
+
+**Narration:** the timed script, read direction and file spec are in
+[`VOICEOVER.md`](VOICEOVER.md). Drop a recording at `public/audio/voiceover.mp3`,
+set `AUDIO.voiceover = true` in `src/Video.tsx`, and re-render.
 
 ## What's on screen, and where it came from
 
