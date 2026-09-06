@@ -56,7 +56,7 @@ export const S7Caveat: React.FC<{ dur: number }> = ({ dur }) => {
   const frame = useCurrentFrame();
 
   return (
-    <Frame opacity={useSceneFade(dur)} footer="Fix log · attempt 1 · 2026-08-21">
+    <Frame opacity={useSceneFade(dur)}>
       <Eyebrow delay={2} tone={color.amber}>
         And what Noah will not claim
       </Eyebrow>

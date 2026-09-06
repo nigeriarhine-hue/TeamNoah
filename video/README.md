@@ -1,7 +1,15 @@
 # Noah — "Google takes forever to load"
 
 A 57-second Remotion explainer built from one real entry in the Noah dashboard's
-fix log (attempt 1, 2026-08-21, conversation `249b3157`).
+fix log.
+
+**Nothing on screen identifies that entry.** No date, no attempt number, no
+conversation id, no trial label — the "Fix log · attempt · date" strip that used
+to sit at the bottom of six scenes is gone, and the timing line is shown without
+its `try5:` prefix. The measurements remain, because they are the argument the
+film makes. The bookkeeping around them does not. Keep it that way if you edit
+this: the source entry is referenced here, in the repo, and nowhere in the
+render.
 
 Render it:
 
@@ -24,7 +32,7 @@ Every number is quoted from the fix log. Nothing is illustrative.
 
 | On screen | Source |
 |---|---|
-| `try5: dns=0.002419 connect=1.048312 tls=1.140726 total=1.319595` | pre-fix evidence, verbatim |
+| `dns=0.002419 connect=1.048312 tls=1.140726 total=1.319595` | pre-fix evidence, verbatim (log's `try5:` label dropped) |
 | 1 of 5 trials stalled | "1/5 at 1.32s before" |
 | slowest after the fix, 0.363 s | `try6: total=0.362561s` |
 | fastest after the fix, 0.247 s | post-fix range 0.247–0.363s |

@@ -1,14 +1,13 @@
 import React from 'react';
 import { AbsoluteFill } from 'remotion';
-import { color, font, headlineTracking, inkFaint, inkMuted, rule } from '../brand';
+import { color, font, headlineTracking, inkMuted, rule } from '../brand';
 import { useRise } from './anim';
 
 /** The cream ground everything sits on. Generous margins, few elements. */
 export const Frame: React.FC<{
   children: React.ReactNode;
   opacity?: number;
-  footer?: string;
-}> = ({ children, opacity = 1, footer }) => (
+}> = ({ children, opacity = 1 }) => (
   <AbsoluteFill style={{ backgroundColor: color.cream, opacity }}>
     <AbsoluteFill
       style={{
@@ -20,21 +19,6 @@ export const Frame: React.FC<{
     >
       {children}
     </AbsoluteFill>
-    {footer ? (
-      <div
-        style={{
-          position: 'absolute',
-          left: 132,
-          bottom: 56,
-          fontFamily: font.mono,
-          fontSize: 19,
-          letterSpacing: '0.04em',
-          color: inkFaint,
-        }}
-      >
-        {footer}
-      </div>
-    ) : null}
   </AbsoluteFill>
 );
 

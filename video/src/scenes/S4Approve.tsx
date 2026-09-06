@@ -51,7 +51,7 @@ export const S4Approve: React.FC<{ dur: number }> = ({ dur }) => {
   const settle = useSettle(28);
 
   return (
-    <Frame opacity={useSceneFade(dur)} footer="Fix log · attempt 1 · 2026-08-21">
+    <Frame opacity={useSceneFade(dur)}>
       <Eyebrow delay={2}>Noah proposes</Eyebrow>
       <Headline delay={6} size={58}>
         One sentence, in plain English.

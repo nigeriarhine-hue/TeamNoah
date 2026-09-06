@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCurrentFrame } from 'remotion';
-import { color, font, inkFaint, inkMuted, rule } from '../brand';
+import { color, font, inkMuted, rule } from '../brand';
 import { Body, Card, Eyebrow, Frame, Headline } from '../components/Layout';
 import { ease, useSceneFade } from '../components/anim';
 
@@ -8,9 +8,9 @@ import { ease, useSceneFade } from '../components/anim';
  * Name the real thing. "Stale pre-Tahoe preferences" beats "some issues were
  * found" — specificity is the trust signal.
  *
- * Every number on screen is verbatim from the fix log. Only try5 was recorded,
- * so only try5 is shown: the other four trials are drawn as marks, never as
- * invented digits.
+ * Every number on screen is verbatim from the source measurements. Only one
+ * trial's timings were recorded, so only one line is shown: the other four
+ * trials are drawn as marks, never as invented digits.
  */
 const Seg: React.FC<{ label: string; value: string; tone: string; bold?: boolean }> = ({
   label,
@@ -58,7 +58,7 @@ export const S3Diagnose: React.FC<{ dur: number }> = ({ dur }) => {
   const frame = useCurrentFrame();
 
   return (
-    <Frame opacity={useSceneFade(dur)} footer="Fix log · attempt 1 · 2026-08-21">
+    <Frame opacity={useSceneFade(dur)}>
       <Eyebrow delay={2}>What Noah measured</Eyebrow>
       <Headline delay={6} size={62}>
         Noah timed the load itself. Five times.
@@ -114,7 +114,6 @@ export const S3Diagnose: React.FC<{ dur: number }> = ({ dur }) => {
           alignSelf: 'flex-start',
         }}
       >
-        <span style={{ color: inkFaint }}>try5: </span>
         <Seg label="dns" value="0.002419" tone={inkMuted} />
         {'  '}
         <Seg label="connect" value="1.048312" tone={color.amber} bold />
