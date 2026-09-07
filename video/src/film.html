@@ -1,0 +1,238 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Noah — Mine has one app on it</title>
+<link rel="stylesheet" href="../assets/fonts.css">
+<style>
+  :root{
+    --cream:#ECE8DF; --ink:#2A251F; --navy:#1A1D61; --night:#0B1024;
+    --horizon:#C7CBFF; --teal:#0D9488; --amber:#D97706;
+    --aur1:#2563EB; --aur2:#7C3AED;
+    --grey1:#9A948B; --grey2:#BDB7AD; --grey3:#6E6963; --greyline:#CFC9BF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--cream)}
+  #stage{position:relative;width:1080px;height:1920px;background:var(--cream);
+         font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);
+         -webkit-font-smoothing:antialiased;overflow:hidden}
+  .beat{position:absolute;inset:0;opacity:0;will-change:opacity}
+  .safe{position:absolute;left:96px;right:96px;top:300px;bottom:300px}
+  .h1{font-weight:800;letter-spacing:-0.035em;line-height:0.98;font-size:118px}
+  .h2{font-weight:800;letter-spacing:-0.035em;line-height:1.02;font-size:86px}
+  .kicker{font-weight:500;font-size:40px;line-height:1.35;color:#6B6459;letter-spacing:-0.01em}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+         letter-spacing:-0.01em;line-height:1.05}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:400;letter-spacing:-0.02em}
+  .ln{display:block;will-change:transform,opacity}
+  .card{position:absolute;border-radius:12px;background:#fff;
+        box-shadow:0 2px 3px rgba(42,37,31,.04),0 12px 34px rgba(42,37,31,.07)}
+  .bar{position:absolute;height:10px;border-radius:6px;background:var(--greyline);overflow:hidden}
+  .bar > i{position:absolute;inset:0;transform-origin:left center;background:var(--grey1);display:block}
+  .aurbtn{position:absolute;border-radius:12px;
+          background:linear-gradient(100deg,var(--aur1),var(--aur2));
+          color:#fff;font-weight:700;letter-spacing:-0.02em;
+          display:flex;align-items:center;justify-content:center;
+          box-shadow:0 10px 30px rgba(59,80,220,.28)}
+  .greybtn{position:absolute;border-radius:10px;background:var(--grey2);color:#fff;
+           font-weight:700;letter-spacing:-0.01em;display:flex;align-items:center;justify-content:center}
+  .cursor{position:absolute;width:34px;height:auto;filter:drop-shadow(0 2px 4px rgba(0,0,0,.22))}
+  .rule{position:absolute;height:2px;background:var(--greyline)}
+</style>
+
+<div id="stage">
+
+  <!-- ============ B1 · HOOK ============ -->
+  <div class="beat" id="b1">
+    <div class="safe" style="top:720px">
+      <div class="kicker" id="b1k">
+        <span class="ln">Every list of Mac apps</span>
+        <span class="ln">worth paying for has</span>
+        <span class="ln">ten apps on it.</span>
+      </div>
+      <div class="h1" id="b1h" style="margin-top:56px">
+        <span class="ln">Mine has</span>
+        <span class="ln">one.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ B2 · THE THEATER ============ -->
+  <div class="beat" id="b2">
+    <div class="kicker" id="b2k" style="position:absolute;left:96px;top:430px;font-size:38px">
+      <span class="ln">Your Mac gets slow.</span>
+      <span class="ln">So you install a cleaner.</span>
+    </div>
+
+    <div class="card" id="b2card" style="left:96px;top:700px;width:888px;height:560px">
+      <div class="mono" id="b2scan"
+           style="position:absolute;left:56px;top:56px;font-size:30px;color:var(--grey3)">scanning…</div>
+      <div id="b2num" class="h1"
+           style="position:absolute;left:56px;top:150px;font-size:186px;color:var(--grey3)">0</div>
+      <div id="b2lab" class="kicker"
+           style="position:absolute;left:60px;top:372px;font-size:38px;color:var(--grey1)">issues found</div>
+      <div class="bar" id="b2bar" style="left:56px;top:452px;width:776px"><i id="b2fill"></i></div>
+      <div class="greybtn" id="b2btn"
+           style="left:610px;top:150px;width:222px;height:88px;font-size:36px">Clean</div>
+    </div>
+    <svg class="cursor" id="b2cur" viewBox="0 0 24 24" style="left:700px;top:1000px">
+      <path d="M4 2 L4 20 L9 15.5 L12.5 22.5 L15.5 21 L12 14.2 L19 14 Z"
+            fill="#fff" stroke="#2A251F" stroke-width="1.4" stroke-linejoin="round"/>
+    </svg>
+
+    <div class="h2" id="b2still" style="position:absolute;left:96px;top:1340px">
+      <span class="ln">Your Mac is</span>
+      <span class="ln">still slow.</span>
+    </div>
+  </div>
+
+  <!-- ============ B3 · THE TURN ============ -->
+  <div class="beat" id="b3">
+    <div class="safe" style="top:600px">
+      <div class="serif" id="b3h" style="font-size:150px;color:var(--navy)">
+        <span class="ln">It's probably</span>
+        <span class="ln">not junk.</span>
+      </div>
+      <div class="kicker" id="b3k" style="margin-top:64px;font-size:40px">
+        <span class="ln">Slow is usually one process</span>
+        <span class="ln">eating a core. Or a login item</span>
+        <span class="ln">you forgot about.</span>
+      </div>
+      <div class="kicker" id="b3k2" style="margin-top:44px;font-size:36px;color:#8A837A">
+        <span class="ln">The cleaner emptied your caches.</span>
+        <span class="ln">It never looked at that.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ B4 · NOAH ENTERS ============ -->
+  <div class="beat" id="b4">
+    <svg id="b4mark" viewBox="0 0 120 120" style="position:absolute;left:426px;top:430px;width:228px;height:228px">
+      <defs>
+        <clipPath id="c1"><circle cx="60" cy="58" r="34"/></clipPath>
+        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="rgba(37,99,235,0.068)"/><stop offset="1" stop-color="rgba(37,99,235,0.150)"/>
+        </linearGradient>
+        <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#7c3aed"/>
+        </linearGradient>
+      </defs>
+      <g clip-path="url(#c1)">
+        <rect x="24" y="22" width="72" height="52" fill="url(#g2)"/>
+        <rect id="b4tide" x="24" y="74" width="72" height="20" fill="url(#g3)"/>
+      </g>
+      <circle id="b4ring" cx="60" cy="58" r="34" fill="none" stroke="#1A1D61" stroke-width="7"/>
+      <line id="b4line" x1="16" y1="74" x2="104" y2="74" stroke="#1A1D61" stroke-width="7"/>
+    </svg>
+
+    <div class="h2" id="b4h" style="position:absolute;left:96px;top:740px;font-size:80px">
+      <span class="ln">One app. Noah.</span>
+    </div>
+    <div class="kicker" id="b4k" style="position:absolute;left:96px;top:872px;font-size:40px">
+      <span class="ln">You tell it what's wrong</span>
+      <span class="ln">in plain English.</span>
+    </div>
+
+    <div class="card" id="b4card" style="left:96px;top:1060px;width:888px;height:172px">
+      <div class="mono" id="b4type"
+           style="position:absolute;left:52px;top:60px;font-size:44px;color:var(--ink)"></div>
+    </div>
+    <div class="kicker" id="b4note" style="position:absolute;left:96px;top:1288px;font-size:34px;color:#8A837A">
+      <span class="ln">That's a complete bug report.</span>
+    </div>
+  </div>
+
+  <!-- ============ B5 · THE DIAGNOSIS ============ -->
+  <div class="beat" id="b5">
+    <div class="kicker" id="b5k" style="position:absolute;left:96px;top:470px;font-size:38px">
+      <span class="ln">Noah runs a small set of</span>
+      <span class="ln">audited checks.</span>
+    </div>
+
+    <div class="mono" id="b5checks" style="position:absolute;left:96px;top:680px;font-size:34px;color:#8A837A">
+      <span class="ln" style="margin-bottom:26px">processes</span>
+      <span class="ln" style="margin-bottom:26px">login items</span>
+      <span class="ln" style="margin-bottom:26px">system log</span>
+    </div>
+
+    <div class="rule" id="b5rule" style="left:96px;top:1000px;width:888px"></div>
+
+    <div class="kicker" id="b5cl" style="position:absolute;left:96px;top:1060px;font-size:32px;color:#8A837A">
+      <span class="ln">The actual cause</span>
+    </div>
+    <div class="mono" id="b5cause" style="position:absolute;left:96px;top:1130px;font-size:56px;color:var(--navy);font-weight:500">
+      <span class="ln">WebKit.WebContent</span>
+    </div>
+    <div class="kicker" id="b5det" style="position:absolute;left:96px;top:1240px;font-size:36px;color:var(--ink)">
+      <span class="ln">Pinning one core for 41 minutes.</span>
+    </div>
+    <div class="kicker" id="b5not" style="position:absolute;left:96px;top:1330px;font-size:34px;color:#8A837A">
+      <span class="ln">Not “issues found.”</span>
+    </div>
+  </div>
+
+  <!-- ============ B6 · THE APPROVAL (hero) ============ -->
+  <div class="beat" id="b6">
+    <div class="kicker" id="b6k" style="position:absolute;left:96px;top:400px;font-size:38px">
+      <span class="ln">It shows you before</span>
+      <span class="ln">it touches anything.</span>
+    </div>
+
+    <div class="card" id="b6card" style="left:96px;top:640px;width:888px;height:330px">
+      <div class="kicker" style="position:absolute;left:52px;top:44px;font-size:28px;color:#8A837A">Noah will do this</div>
+      <div class="mono" id="b6plan"
+           style="position:absolute;left:52px;top:110px;font-size:40px;color:var(--ink);line-height:1.45">
+        <span class="ln">quit WebKit.WebContent</span>
+        <span class="ln" style="color:#8A837A;font-size:32px">Safari stays open. Nothing is deleted.</span>
+      </div>
+    </div>
+
+    <div class="aurbtn" id="b6btn" style="left:96px;top:1030px;width:888px;height:132px;font-size:46px">Approve</div>
+
+    <div class="h2" id="b6hero" style="position:absolute;left:96px;top:1240px;font-size:78px">
+      <span class="ln">Nothing runs</span>
+      <span class="ln">until you approve.</span>
+    </div>
+
+    <svg id="b6check" viewBox="0 0 48 48" style="position:absolute;left:96px;top:1476px;width:84px;height:84px;opacity:0">
+      <circle cx="24" cy="24" r="21" fill="none" stroke="#0D9488" stroke-width="4"/>
+      <path id="b6tick" d="M14 24.5 L21 31.5 L34 17.5" fill="none" stroke="#0D9488"
+            stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="kicker" id="b6done" style="position:absolute;left:206px;top:1484px;font-size:40px;opacity:0">
+      <span class="ln" style="color:var(--teal);font-weight:700">Done.</span>
+      <span class="ln" style="color:#8A837A;font-size:34px">Logged. And you can undo it.</span>
+    </div>
+  </div>
+
+  <!-- ============ B7 · SIGN-OFF ============ -->
+  <div class="beat" id="b7">
+    <svg id="b7mark" viewBox="0 0 120 120" style="position:absolute;left:456px;top:640px;width:168px;height:168px">
+      <defs>
+        <clipPath id="c7"><circle cx="60" cy="58" r="34"/></clipPath>
+        <linearGradient id="g72" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="rgba(37,99,235,0.068)"/><stop offset="1" stop-color="rgba(37,99,235,0.150)"/>
+        </linearGradient>
+        <linearGradient id="g73" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#7c3aed"/>
+        </linearGradient>
+      </defs>
+      <g clip-path="url(#c7)">
+        <rect x="24" y="22" width="72" height="52" fill="url(#g72)"/>
+        <rect x="24" y="74" width="72" height="20" fill="url(#g73)"/>
+      </g>
+      <circle cx="60" cy="58" r="34" fill="none" stroke="#1A1D61" stroke-width="7"/>
+      <line x1="16" y1="74" x2="104" y2="74" stroke="#1A1D61" stroke-width="7"/>
+    </svg>
+
+    <div class="h2" id="b7h" style="position:absolute;left:96px;top:900px;width:888px;font-size:76px;text-align:center">
+      <span class="ln">Noah finds what's</span>
+      <span class="ln">actually wrong</span>
+      <span class="ln">with your Mac.</span>
+    </div>
+    <div class="kicker" id="b7url" style="position:absolute;left:96px;top:1250px;width:888px;text-align:center;font-size:46px;color:var(--navy);font-weight:700;letter-spacing:-0.02em">
+      <span class="ln">onnoah.app</span>
+    </div>
+  </div>
+
+</div>
+
+<script src="film.js"></script>
