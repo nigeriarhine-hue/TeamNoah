@@ -1,0 +1,201 @@
+{
+  "topic": "How Noah works: a native macOS agent that finds the real cause of a Mac problem and fixes it only after you approve",
+  "genre": "education",
+  "animation_mode": "fully_animated",
+  "channel_type": "Explainer",
+  "style": "Editorial Motion Graphics",
+  "through_line": {
+    "name": "The issue-card stack",
+    "asset": "prop_card_stack",
+    "progression": "A pile of identical grey cards, each stamped with a vague phrase, grows beside the laptop as the fake problem count climbs, peaks at the approval moment, then unwinds.",
+    "resolution": "In the payoff the stack collapses flat and leaves exactly one card face up, with the actual cause named on it in plain type."
+  },
+  "arc": { "hook": 1, "build": [2,3,4,5,6,7,8,9,10], "turn": 11, "payoff": 12 },
+  "blocks": [
+    {
+      "n": 1,
+      "arc_role": "hook",
+      "vo_line": "Your Mac is slow. It is probably not junk, and the cleaner you just ran already emptied every cache you have.",
+      "location": "loc_desk",
+      "through_line_state": "one grey card lying alone beside the trackpad",
+      "shots": [
+        "WIDE eye-level: a sunlit home desk seen across the room, a calm adult seated still at an open laptop, morning light on the wall behind",
+        "ECU high: the spinning wait cursor turning on the laptop screen, its colours smeared by the angle",
+        "MEDIUM low: the adult leaning back from the desk, one hand lifted off the trackpad, shoulders dropping",
+        "CU overhead: a single grey issue card face up on the wood, one vague phrase stamped across it",
+        "WIDE lateral: the whole desk from the side, laptop open, the lone card small on the grain"
+      ],
+      "assets_used": ["loc_desk", "robin", "prop_laptop_panel", "prop_card_stack"]
+    },
+    {
+      "n": 2,
+      "arc_role": "build",
+      "vo_line": "The counter climbs past eighteen hundred problems found. None of them is the reason your fan has run all afternoon.",
+      "location": "loc_desk",
+      "through_line_state": "six cards stacked, edges no longer flush",
+      "shots": [
+        "CU eye-level: a cleaner application counter ticking upward through four digits on the laptop screen",
+        "WIDE high: the desk from above head height, the seated figure small, six grey cards piled at the corner",
+        "ECU lateral: the laptop vent seen edge-on, warm air visibly rippling the dust above it",
+        "MEDIUM low: a hand hovering over a bright coloured button without pressing it",
+        "CU overhead: the grey pile fanned apart, every stamped phrase vague and interchangeable"
+      ],
+      "assets_used": ["loc_desk", "robin", "prop_card_stack"]
+    },
+    {
+      "n": 3,
+      "arc_role": "build",
+      "vo_line": "Noah is a desktop app for macOS. It is not a chat window that hands you a Terminal command and wishes you luck.",
+      "location": "loc_kitchen",
+      "through_line_state": "twelve cards, the stack now upright and deliberate",
+      "shots": [
+        "WIDE eye-level: a kitchen table in flat morning light, an open laptop beside a mug, the adult standing at the counter behind",
+        "CU high: the laptop screen showing a calm cream panel with generous margins and one short sentence",
+        "MEDIUM lateral: the adult sitting down and pulling the chair in, both hands settling either side of the machine",
+        "ECU low: a dense black terminal window on a second display, a long command line, cursor blinking",
+        "WIDE high: the kitchen table from above, twelve grey cards stacked against the table edge"
+      ],
+      "assets_used": ["loc_kitchen", "robin", "prop_laptop_panel", "prop_card_stack"]
+    },
+    {
+      "n": 4,
+      "arc_role": "build",
+      "vo_line": "A browser tab cannot see your machine. Noah runs outside that sandbox, so it can read what your Mac is actually doing.",
+      "location": "loc_kitchen",
+      "through_line_state": "twenty cards, the stack as tall as the mug",
+      "shots": [
+        "CU eye-level: a browser window filling the display, its edges pressed hard against a flat grey boundary",
+        "MEDIUM low: the adult pushing the browser aside, a rounded app tile visible on the dock below",
+        "ECU overhead: the app tile on the dock, a level horizon line drawn inside its rounded square",
+        "WIDE lateral: the kitchen seen from the side, the laptop small, everything daylit and unhurried",
+        "CU high: a plain list of running processes as neat rows, one single row marked warm amber"
+      ],
+      "assets_used": ["loc_kitchen", "robin", "prop_card_stack"]
+    },
+    {
+      "n": 5,
+      "arc_role": "build",
+      "vo_line": "You describe the symptom in your own words. My fan will not stop is a complete and valid bug report here.",
+      "location": "loc_sofa",
+      "through_line_state": "the stack leaning against the sofa armrest",
+      "shots": [
+        "WIDE eye-level: a living room sofa in afternoon light, a laptop resting on a cushion, the adult settled comfortably",
+        "ECU lateral: fingers typing one short plain sentence into a wide empty text field",
+        "CU high: the typed words on screen, large and plain, no jargon anywhere around them",
+        "MEDIUM low: the adult shrugging slightly at the machine, an ordinary unbothered gesture",
+        "WIDE overhead: the sofa from above, the grey stack propped against the armrest"
+      ],
+      "assets_used": ["loc_sofa", "robin", "prop_laptop_panel", "prop_card_stack"]
+    },
+    {
+      "n": 6,
+      "arc_role": "build",
+      "vo_line": "Noah runs audited diagnostics against troubleshooting playbooks that ship inside the app. They name the cause rather than counting things that look untidy.",
+      "location": "loc_sofa",
+      "through_line_state": "top cards sliding, the stack near its limit",
+      "shots": [
+        "CU high: a short numbered checklist advancing on screen, each step resolving to a small teal mark",
+        "WIDE low: the living room from floor height, the laptop lit, the room otherwise entirely still",
+        "MEDIUM lateral: the adult watching the screen with chin resting on one hand, patient",
+        "ECU overhead: one teal confirmation mark settling beside a named check",
+        "CU low: the grey stack leaning further, its uppermost cards beginning to slide"
+      ],
+      "assets_used": ["loc_sofa", "robin", "prop_card_stack"]
+    },
+    {
+      "n": 7,
+      "arc_role": "build",
+      "vo_line": "The answer is usually dull and specific. A login item from an app you deleted, or stale preferences left behind by an update.",
+      "location": "loc_nook",
+      "through_line_state": "taller than the laptop lid",
+      "shots": [
+        "WIDE eye-level: a narrow study nook beside a window, a laptop on a shelf desk, soft grey daylight",
+        "ECU high: one line of a file path rendered in plain monospace across the screen",
+        "MEDIUM low: the adult leaning in to read, glasses pushed up, eyebrows lifting slightly",
+        "CU lateral: a single row in a list marked warm amber while every other row stays plain",
+        "WIDE overhead: the nook from above, the grey stack now standing taller than the laptop lid"
+      ],
+      "assets_used": ["loc_nook", "robin", "prop_laptop_panel", "prop_card_stack"]
+    },
+    {
+      "n": 8,
+      "arc_role": "build",
+      "vo_line": "Then Noah answers in plain English. One short sentence names the actual cause, and the next names exactly what it proposes to change.",
+      "location": "loc_nook",
+      "through_line_state": "the top card tilting off the stack",
+      "shots": [
+        "CU high: two plain sentences appearing on a wide cream panel with nothing else on it",
+        "MEDIUM lateral: the adult reading, lips still, giving one unhurried nod",
+        "ECU low: the words stale preferences set in plain type, sharp and specific",
+        "WIDE eye-level: the study nook framed wide, window light flat, the machine quiet",
+        "CU overhead: the grey stack beside the keyboard, its top card tilting away"
+      ],
+      "assets_used": ["loc_nook", "robin", "prop_card_stack"]
+    },
+    {
+      "n": 9,
+      "arc_role": "build",
+      "vo_line": "Nothing runs until you approve. Every action appears on screen before it happens, and the button is yours to press or refuse.",
+      "location": "loc_desk",
+      "through_line_state": "at its tallest, entirely unmoving",
+      "shots": [
+        "ECU eye-level: a single approve button carrying a blue to violet gradient bar, waiting and unpressed",
+        "MEDIUM low: a hand resting flat on the desk, deliberately not moving toward the trackpad",
+        "CU lateral: the exact proposed change written out above the button in one plain line",
+        "WIDE high: the sunlit desk from doorway height, the machine holding, nothing happening at all",
+        "CU overhead: a fingertip arriving on the trackpad and pressing once"
+      ],
+      "assets_used": ["loc_desk", "robin", "prop_approve_card", "prop_card_stack"]
+    },
+    {
+      "n": 10,
+      "arc_role": "build",
+      "vo_line": "Every action is logged, and all of it is reversible. Noah moves the old file aside rather than deleting anything blind.",
+      "location": "loc_desk",
+      "through_line_state": "still tall, a single card lifted clear",
+      "shots": [
+        "CU high: a plain log entry appearing with a small teal mark and a timestamp beside it",
+        "WIDE lateral: the desk from the side, the light warmer now, the grey stack beginning to slump",
+        "ECU low: a file name gaining a small backup suffix, the original sitting intact behind it",
+        "MEDIUM eye-level: the adult exhaling, shoulders dropping, hands leaving the keyboard",
+        "CU overhead: an undo control sitting plain and available beside the log"
+      ],
+      "assets_used": ["loc_desk", "robin", "prop_laptop_panel", "prop_approve_card", "prop_card_stack"]
+    },
+    {
+      "n": 11,
+      "arc_role": "turn",
+      "vo_line": "Do not trust any of that. The desktop client is open source, so anyone can read what Noah is allowed to touch.",
+      "location": "loc_kitchen",
+      "through_line_state": "down to three cards",
+      "shots": [
+        "ECU eye-level: plain readable source code scrolling slowly, calm and entirely unglamorous",
+        "MEDIUM high: the adult back at the kitchen table, scrolling the code with mild curiosity",
+        "WIDE low: the kitchen from chair height, daylight flat, three grey cards left on the table",
+        "CU lateral: a short permissions list written in plain words, every line kept brief",
+        "MEDIUM overhead: hands and laptop seen from above, the code still moving, unhurried"
+      ],
+      "assets_used": ["loc_kitchen", "robin", "prop_code_window", "prop_card_stack"]
+    },
+    {
+      "n": 12,
+      "arc_role": "payoff",
+      "vo_line": "One thousand eight hundred issues was never the count. It was always one, and the fan you heard all afternoon has stopped.",
+      "location": "loc_desk",
+      "through_line_state": "collapsed flat, leaving exactly one card face up",
+      "shots": [
+        "CU high: the grey stack collapsing flat and leaving one card face up on the wood",
+        "MEDIUM eye-level: the adult standing beside the desk, laptop quiet and cool, mug in hand",
+        "ECU overhead: the single remaining card, the actual cause named across it in plain type",
+        "MEDIUM lateral: the adult lifting the mug and walking unhurried out of frame",
+        "WIDE low: the emptied desk, laptop lid half closed, a level line of light across the wall"
+      ],
+      "assets_used": ["loc_desk", "robin", "prop_mug", "prop_card_stack"]
+    }
+  ],
+  "sources": [
+    "https://onnoah.app/",
+    "https://onnoah.app/mac/diagnostic-tool/",
+    "https://www.reddit.com/r/MacOS/comments/1ut5otc/i_built_noah_an_opensource_app_that_fixes_your/"
+  ]
+}
