@@ -56,7 +56,9 @@ screen drops onto the edit timeline with no retiming.
 
 ## The animatic
 
-`out/animatic.mp4` is the entire 34-second spot at its real cut points: the eleven UI screens
+`out/animatic.mp4` is the entire 34-second spot at its real cut points — rendered `--muted`, so
+the container is exactly 34.000s with no audio track to pad it, and it drops onto an NLE timeline
+frame-aligned: the eleven UI screens
 rendered live, the ten Runway shots as labelled slates, VO burned in as subtitles, the 2.39:1
 extraction matted, and timecode/clip/act burn-ins along the top.
 

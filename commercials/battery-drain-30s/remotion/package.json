@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "remotion studio",
     "render:all": "bash render-all.sh",
-    "animatic": "remotion render Animatic out/animatic.mp4 --codec=h264"
+    "animatic": "remotion render Animatic out/animatic.mp4 --codec=h264 --crf=18 --muted"
   },
   "dependencies": {
     "@remotion/cli": "4.0.522",

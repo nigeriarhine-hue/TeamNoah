@@ -18,7 +18,7 @@ for s in "${SCREENS[@]}"; do
 done
 
 echo "── Animatic (816f · 34.000s) ──"
-npx remotion render Animatic out/animatic.mp4 --codec=h264 --crf=18
+npx remotion render Animatic out/animatic.mp4 --codec=h264 --crf=18 --muted
 
 echo
 echo "Done. Deliverables in out/:"
