@@ -1,6 +1,6 @@
 # Noah — "Mine has one app on it"
 
-**Format:** vertical 9:16 (1080×1920) · **Runtime:** ~75s · **Platform:** YouTube Shorts / TikTok / Reels
+**Format:** vertical 9:16 (1080×1920) · **Runtime:** 82s · **Platform:** YouTube Shorts / TikTok / Reels
 **Reference shape:** the "Mac apps worth paying for" listicle — restructured so Noah is the number 1 and only pick.
 
 **Why this structure works:** the reference video's #1 app is a cleaner. That is the exact thing Noah's
@@ -15,40 +15,22 @@ Nothing here says "free", "trial", "subscription", or "IT".
 
 ## Voiceover script — with timings
 
-Read calm, plain, unhurried. ~2.2–2.5 words/sec. Let the pauses sit; they are load-bearing.
-Total ≈ 165 words.
+Full line-by-line timing sheet, including every pause, is in
+**[`VOICEOVER.txt`](VOICEOVER.txt)** — record from that one.
+This table is the beat-level summary.
+
+Read calm, plain, unhurried. ~2.6 words/sec. 155 words over 82s; the rest is pauses,
+and the pauses are load-bearing.
 
 | # | Time | Voiceover | On-screen | Direction |
 |---|------|-----------|-----------|-----------|
-| 1 | 0:00–0:07 | "Every list of Mac apps worth paying for has ten apps on it. **Mine has one.**" | `Mine has one.` | Hook. Beat of silence before "Mine has one." Cream ground, warm ink. |
-| 2 | 0:07–0:21 | "Here's what usually happens. Your Mac gets slow, so you install a cleaner. It scans. It finds eighteen hundred issues. You click clean. …Your Mac is still slow." | `1,847 issues found` → counter ticks → `Still slow.` | The theater. Let the number climb, then land flat. Deadpan, not snide. |
-| 3 | 0:21–0:32 | "Because it's probably not junk. Slow is usually one process eating a core, or a login item you forgot about. The cleaner emptied your caches. It never looked at that." | `It's probably not junk.` (Instrument Serif italic) | The turn. This is the thesis line — give it air. |
-| 4 | 0:32–0:44 | "So — one app. Noah. You tell it what's wrong in plain English. 'My fan won't stop.' That's a complete bug report. You don't have to translate it." | Typed line: `my fan won't stop` | Noah enters. Warm, not triumphant. No fanfare. |
-| 5 | 0:44–0:56 | "Noah runs a small set of audited checks and names the actual cause. Not 'issues found.' The actual process. The actual file." | `WebKit.WebContent — pinning one core` | Machine voice: SF Mono / JetBrains Mono. Specificity *is* the trust signal. |
-| 6 | 0:56–1:10 | "Then it shows you before it touches anything. **Nothing runs until you approve.** It's logged, and you can undo it." | Plan line + `Approve` button (aurora gradient) → teal check | **The hero moment.** If the viewer remembers one thing, it is this. Slowest beat in the film. |
-| 7 | 1:10–1:16 | "Noah finds what's actually wrong with your Mac. onnoah.app." | Logo + tagline + `onnoah.app` | Calm sign-off. No urgency, no CTA shout. |
-
----
-
-## Clean voiceover (paste into Clipchamp text-to-speech)
-
-> Every list of Mac apps worth paying for has ten apps on it. Mine has one.
->
-> Here's what usually happens. Your Mac gets slow, so you install a cleaner. It scans. It finds eighteen hundred issues. You click clean. Your Mac is still slow.
->
-> Because it's probably not junk. Slow is usually one process eating a core, or a login item you forgot about. The cleaner emptied your caches. It never looked at that.
->
-> So — one app. Noah. You tell it what's wrong in plain English. My fan won't stop. That's a complete bug report. You don't have to translate it.
->
-> Noah runs a small set of audited checks and names the actual cause. Not "issues found." The actual process. The actual file.
->
-> Then it shows you before it touches anything. Nothing runs until you approve. It's logged, and you can undo it.
->
-> Noah finds what's actually wrong with your Mac. onnoah dot app.
-
-**Clipchamp voice note:** pick a calm mid-range voice and drop the speed to ~0.9×. The default pace
-reads as an ad; Noah's voice is "a competent friend who already looked at the problem." Avoid the
-bright/upbeat presets — relief, not rescue.
+| 1 | 0:00–0:09 | "Every list of Mac apps worth paying for has ten apps on it. **Mine has one.**" | `Mine has one.` | Hook. 1.0s pause before the punchline, 1.5s after it. |
+| 2 | 0:09–0:24 | "Your Mac gets slow, so you install a cleaner. It scans. It finds eighteen hundred issues. You click clean. …Your Mac is still slow." | counter climbs to `1,847` → `Still slow.` | The theater. Deadpan, not snide. 1.6s of dead air after "still slow" — the longest pause in the film. |
+| 3 | 0:24–0:39 | "Because it's probably not junk. Slow is usually one process eating a core, or a login item you forgot about. The cleaner emptied your caches. It never looked at that." | `It's probably not junk.` (Instrument Serif italic) | The turn. This is the thesis — give it air. |
+| 4 | 0:39–0:52 | "So — one app. Noah. You tell it what's wrong in plain English. 'My fan won't stop.' That's a complete bug report." | mark draws in · typed `my fan won't stop` | Noah enters. Warm, no fanfare. The dash in "So —" is a real beat. |
+| 5 | 0:52–1:02 | "Noah runs a small set of audited checks, and names the actual cause. Not 'issues found.' The actual process." | `WebKit.WebContent — pinning one core` | Machine voice in mono. Specificity *is* the trust signal. |
+| 6 | 1:02–1:14 | "Then it shows you before it touches anything. **Nothing runs until you approve.** It's logged, and you can undo it." | plan line → `Approve` (aurora) → teal check | **The hero moment.** Slowest delivery in the film. 1.4s pause after it. |
+| 7 | 1:14–1:22 | "Noah finds what's actually wrong with your Mac. onnoah.app." | logo + tagline + `onnoah.app` | Calm sign-off. No urgency. Say "dot app". |
 
 ---
 

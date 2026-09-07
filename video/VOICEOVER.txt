@@ -1,0 +1,215 @@
+═══════════════════════════════════════════════════════════════
+  NOAH — "Mine has one app on it"
+  Voiceover script · 21 lines · 82.0 seconds
+═══════════════════════════════════════════════════════════════
+
+  PACE      Calm, plain, unhurried. About 2.6 words per second.
+  VOICE     A competent friend who already looked at the problem.
+            Not a salesperson. Not a wizard.
+  PAUSES    Load-bearing. They are most of the difference between
+            this sounding like Noah and sounding like an ad.
+            Where a pause is 1.2s or longer, resist filling it.
+
+  Timecodes match the visual track (noah-mine-has-one.mp4) exactly.
+
+───────────────────────────────────────────────────────────────
+ 01   0:00.6 → 0:05.6                                    5.0s
+
+      Every list of Mac apps worth paying for
+      has ten apps on it.
+
+                                             ⏸  PAUSE  1.0s
+───────────────────────────────────────────────────────────────
+ 02   0:06.6 → 0:08.2                                    1.6s
+
+      Mine has one.
+      → Deliberate. Three words, don't rush them.
+
+                                             ⏸  PAUSE  1.5s
+                                                let the hook land
+───────────────────────────────────────────────────────────────
+ 03   0:09.7 → 0:13.2                                    3.5s
+
+      Your Mac gets slow, so you install a cleaner.
+
+                                             ⏸  PAUSE  0.6s
+───────────────────────────────────────────────────────────────
+ 04   0:13.8 → 0:14.8                                    1.0s
+
+      It scans.
+      → Flat. No colour on this one.
+
+                                             ⏸  PAUSE  0.5s
+───────────────────────────────────────────────────────────────
+ 05   0:15.3 → 0:17.5                                    2.2s
+
+      It finds eighteen hundred issues.
+
+                                             ⏸  PAUSE  0.8s
+───────────────────────────────────────────────────────────────
+ 06   0:18.3 → 0:19.6                                    1.3s
+
+      You click clean.
+
+                                             ⏸  PAUSE  1.2s
+                                                the click lands here
+───────────────────────────────────────────────────────────────
+ 07   0:20.8 → 0:23.0                                    2.2s
+
+      Your Mac is still slow.
+      → Deadpan. Not smug, not triumphant. Just the fact.
+
+                                             ⏸  PAUSE  1.6s
+                                                longest pause in the film
+───────────────────────────────────────────────────────────────
+ 08   0:24.6 → 0:26.8                                    2.2s
+
+      Because it's probably not junk.
+      → The thesis. Slow and clear.
+
+                                             ⏸  PAUSE  1.0s
+───────────────────────────────────────────────────────────────
+ 09   0:27.8 → 0:33.6                                    5.8s
+
+      Slow is usually one process eating a core.
+      Or a login item you forgot about.
+      → Small breath at the full stop, not a full pause.
+
+                                             ⏸  PAUSE  0.8s
+───────────────────────────────────────────────────────────────
+ 10   0:34.4 → 0:38.4                                    4.0s
+
+      The cleaner emptied your caches.
+      It never looked at that.
+
+                                             ⏸  PAUSE  1.3s
+───────────────────────────────────────────────────────────────
+ 11   0:39.7 → 0:42.1                                    2.4s
+
+      So — one app. Noah.
+      → The dash is a real beat. "So —" then land "one app."
+
+                                             ⏸  PAUSE  0.9s
+───────────────────────────────────────────────────────────────
+ 12   0:43.0 → 0:46.1                                    3.1s
+
+      You tell it what's wrong in plain English.
+
+                                             ⏸  PAUSE  0.9s
+───────────────────────────────────────────────────────────────
+ 13   0:47.0 → 0:48.8                                    1.8s
+
+      My fan won't stop.
+      → Quoting a user. Slightly lighter, more casual.
+
+                                             ⏸  PAUSE  0.8s
+───────────────────────────────────────────────────────────────
+ 14   0:49.6 → 0:51.6                                    2.0s
+
+      That's a complete bug report.
+
+                                             ⏸  PAUSE  1.2s
+───────────────────────────────────────────────────────────────
+ 15   0:52.8 → 0:57.8                                    5.0s
+
+      Noah runs a small set of audited checks,
+      and names the actual cause.
+
+                                             ⏸  PAUSE  0.8s
+───────────────────────────────────────────────────────────────
+ 16   0:58.6 → 1:01.4                                    2.8s
+
+      Not "issues found." The actual process.
+
+                                             ⏸  PAUSE  1.3s
+───────────────────────────────────────────────────────────────
+ 17   1:02.7 → 1:05.9                                    3.2s
+
+      Then it shows you before it touches anything.
+
+                                             ⏸  PAUSE  0.9s
+───────────────────────────────────────────────────────────────
+ 18   1:06.8 → 1:09.2                                    2.4s
+
+      Nothing runs until you approve.
+      → THE line. Slowest delivery in the film.
+        If one sentence survives, it's this one.
+
+                                             ⏸  PAUSE  1.4s
+───────────────────────────────────────────────────────────────
+ 19   1:10.6 → 1:13.4                                    2.8s
+
+      It's logged, and you can undo it.
+
+                                             ⏸  PAUSE  1.3s
+───────────────────────────────────────────────────────────────
+ 20   1:14.7 → 1:17.9                                    3.2s
+
+      Noah finds what's actually wrong with your Mac.
+
+                                             ⏸  PAUSE  0.8s
+───────────────────────────────────────────────────────────────
+ 21   1:18.7 → 1:20.3                                    1.6s
+
+      onnoah dot app.
+      → Say "dot app". Don't spell out the URL.
+
+                                             ⏹  TAIL   1.7s
+                                                hold on the logo
+═══════════════════════════════════════════════════════════════
+  END  1:22.0
+═══════════════════════════════════════════════════════════════
+
+
+───────────────────────────────────────────────────────────────
+  QUICK REFERENCE — start times only, for scrubbing
+───────────────────────────────────────────────────────────────
+  01  0:00.6    08  0:24.6    15  0:52.8
+  02  0:06.6    09  0:27.8    16  0:58.6
+  03  0:09.7    10  0:34.4    17  1:02.7
+  04  0:13.8    11  0:39.7    18  1:06.8
+  05  0:15.3    12  0:43.0    19  1:10.6
+  06  0:18.3    13  0:47.0    20  1:14.7
+  07  0:20.8    14  0:49.6    21  1:18.7
+
+
+───────────────────────────────────────────────────────────────
+  CONTINUOUS READ — no timings, for a single take
+───────────────────────────────────────────────────────────────
+
+Every list of Mac apps worth paying for has ten apps on it.
+
+Mine has one.
+
+Your Mac gets slow, so you install a cleaner. It scans. It finds
+eighteen hundred issues. You click clean.
+
+Your Mac is still slow.
+
+Because it's probably not junk. Slow is usually one process eating
+a core. Or a login item you forgot about. The cleaner emptied your
+caches. It never looked at that.
+
+So — one app. Noah. You tell it what's wrong in plain English.
+My fan won't stop. That's a complete bug report.
+
+Noah runs a small set of audited checks, and names the actual cause.
+Not "issues found." The actual process.
+
+Then it shows you before it touches anything. Nothing runs until you
+approve. It's logged, and you can undo it.
+
+Noah finds what's actually wrong with your Mac. onnoah dot app.
+
+
+───────────────────────────────────────────────────────────────
+  CLIPCHAMP NOTES
+───────────────────────────────────────────────────────────────
+  · Record or generate each numbered line as its own clip, then
+    place it at its start time. That is more reliable than one long
+    take, because the pauses stay exactly where they're specified.
+  · For text-to-speech: a calm mid-range voice at ~0.9x speed.
+    Avoid the bright/upbeat presets — the feeling is relief, not rescue.
+  · If your read comes in longer than the duration shown for a line,
+    don't compress the pauses. Tell me and I'll re-time the visuals.
+  · Music, if any, sits very low and drops out entirely under line 18.

@@ -1,11 +1,12 @@
 # Noah — short-form video
 
 Vertical 9:16 film built for YouTube Shorts / TikTok / Reels.
-Concept, script and timings live in [`SCRIPT.md`](SCRIPT.md).
+Concept and beat structure: [`SCRIPT.md`](SCRIPT.md).
+Line-by-line voiceover timing sheet with every pause: [`VOICEOVER.txt`](VOICEOVER.txt).
 
 | | |
 |---|---|
-| **Output** | `out/noah-mine-has-one.mp4` — 1080×1920, 30fps, 75.9s, H.264 |
+| **Output** | `out/noah-mine-has-one.mp4` — 1080×1920, 30fps, 82.0s, H.264 |
 | **Audio** | none — the visual track is silent by design; voiceover is added in Clipchamp |
 | **Source** | `src/film.html` (structure + type) · `src/film.js` (timeline) · `src/grab.js` (renderer) |
 
@@ -40,15 +41,15 @@ node grab.js --probe    # 19 stills to out/probe — check the design fast
 node grab.js            # full render -> out/noah-mine-has-one.mp4
 ```
 
-Takes ~3 minutes for 2280 frames. Open `src/film.html` directly in a browser to preview
+Takes ~3 minutes for 2460 frames. Open `src/film.html` directly in a browser to preview
 the animation live (it loops).
 
 ## Assembling in Clipchamp
 
 1. Drop `out/noah-mine-has-one.mp4` on the timeline as the base track.
-2. Generate the voiceover from the block in `SCRIPT.md` → *Clean voiceover*. Calm mid-range
-   voice at ~0.9× speed.
-3. Line the VO up against the timing table in `SCRIPT.md` — the beats were cut to those marks.
+2. Generate the voiceover from `VOICEOVER.txt`. Calm mid-range voice at ~0.9× speed.
+3. Place each numbered line at its start time from that sheet. The visual beats were cut to
+   those exact marks, so the two line up without nudging.
 4. Music, if any, should sit very low. The silence around "Nothing runs until you approve"
    is doing work; don't fill it.
 

@@ -3,7 +3,7 @@
    No CSS transitions/animations anywhere, so frame N is always identical. */
 
 const FPS = 30;
-const DURATION = 76;
+const DURATION = 82;
 
 /* ---------- easing / helpers ---------- */
 const clamp01 = x => x < 0 ? 0 : x > 1 ? 1 : x;
@@ -41,107 +41,98 @@ function render(t) {
   const B1 = $('b1'), B2 = $('b2'), B3 = $('b3'), B4 = $('b4'),
         B5 = $('b5'), B6 = $('b6'), B7 = $('b7');
 
-  /* beat envelopes */
-  beat(B1, t,  0.0,  7.2);
-  beat(B2, t,  7.0, 21.3);
-  beat(B3, t, 21.1, 32.3);
-  beat(B4, t, 32.1, 44.3);
-  beat(B5, t, 44.1, 56.3);
-  beat(B6, t, 56.1, 70.3);
-  beat(B7, t, 70.1, DURATION);
+  /* beat envelopes — cut to the voiceover timing sheet in SCRIPT.md */
+  beat(B1, t,  0.0,  9.4);
+  beat(B2, t,  9.2, 24.4);
+  beat(B3, t, 24.2, 39.5);
+  beat(B4, t, 39.3, 52.6);
+  beat(B5, t, 52.4, 62.6);
+  beat(B6, t, 62.4, 74.5);
+  beat(B7, t, 74.3, DURATION);
 
   /* ============ B1 · HOOK ============ */
-  linesIn($('b1k'), t, 0.55, .30, .70, 26);
-  linesIn($('b1h'), t, 2.60, .22, .80, 46);
+  linesIn($('b1k'), t, 0.55, .30, .70, 26);   // VO 1 @ 0.6
+  linesIn($('b1h'), t, 6.30, .22, .80, 46);   // VO 2 @ 6.6
 
   /* ============ B2 · THE THEATER ============ */
-  linesIn($('b2k'), t, 7.40, .26, .70, 26);
+  linesIn($('b2k'), t, 9.50, .26, .70, 26);   // VO 3 @ 9.7
 
-  // card lifts in
-  {
-    const x = eOut(p(t, 10.40, 11.10));
+  {                                            // card lifts in — VO 4 "It scans." @ 13.8
+    const x = eOut(p(t, 13.40, 14.10));
     const card = $('b2card');
     card.style.opacity = String(x);
     card.style.transform = `translateY(${lerp(34, 0, x)}px)`;
   }
-  $('b2scan').style.opacity = String(p(t, 10.80, 11.20) * (1 - p(t, 14.30, 14.70)));
+  $('b2scan').style.opacity = String(p(t, 13.70, 14.10) * (1 - p(t, 17.90, 18.30)));
 
-  // the count-up: 0 -> 1,847
-  {
-    const x = eOut(p(t, 11.20, 14.20));
-    const n = Math.round(lerp(0, 1847, x));
-    $('b2num').textContent = n.toLocaleString('en-US');
-    $('b2num').style.opacity = String(p(t, 11.20, 11.50));
-    $('b2lab').style.opacity = String(p(t, 11.60, 12.00));
+  {                                            // count-up 0 -> 1,847 — VO 5 @ 15.3
+    const x = eOut(p(t, 15.00, 18.00));
+    $('b2num').textContent = Math.round(lerp(0, 1847, x)).toLocaleString('en-US');
+    $('b2num').style.opacity = String(p(t, 15.00, 15.30));
+    $('b2lab').style.opacity = String(p(t, 15.40, 15.80));
     $('b2fill').style.transform = `scaleX(${x})`;
-    $('b2bar').style.opacity = String(p(t, 11.10, 11.50));
+    $('b2bar').style.opacity = String(p(t, 14.90, 15.30));
   }
 
-  // "Clean" button, cursor travel, click
-  {
+  {                                            // click — VO 6 "You click clean." @ 18.3
     const btn = $('b2btn'), cur = $('b2cur');
-    btn.style.opacity = String(p(t, 14.60, 15.00));
-    const move = eInOut(p(t, 15.00, 16.20));
+    btn.style.opacity = String(p(t, 18.00, 18.40));
+    const move = eInOut(p(t, 18.30, 19.40));
     cur.style.left = `${lerp(760, 806, move)}px`;
     cur.style.top  = `${lerp(1290, 886, move)}px`;
-    cur.style.opacity = String(p(t, 14.90, 15.30) * (1 - p(t, 16.90, 17.30)));
-    const press = p(t, 16.20, 16.34) * (1 - p(t, 16.40, 16.58));   // quick squash
+    cur.style.opacity = String(p(t, 18.20, 18.60) * (1 - p(t, 20.10, 20.50)));
+    const press = p(t, 19.40, 19.54) * (1 - p(t, 19.60, 19.78));
     btn.style.transform = `scale(${1 - .05 * press})`;
   }
 
-  // the card drains away — nothing actually changed
-  {
-    const g = p(t, 16.70, 17.70);
+  {                                            // the card drains — nothing actually changed
+    const g = p(t, 19.90, 20.90);
     const card = $('b2card');
-    card.style.opacity = String((1 - g) * Number(p(t, 10.40, 11.10) > 0 ? 1 : 0));
+    card.style.opacity = String((1 - g) * (p(t, 13.40, 14.10) > 0 ? 1 : 0));
     card.style.transform = `translateY(${lerp(0, -22, eOut(g))}px)`;
-    out($('b2k'), t, 16.70, 1.0);
+    out($('b2k'), t, 19.90, 1.0);
   }
-
-  linesIn($('b2still'), t, 18.00, .20, .70, 34);
+  linesIn($('b2still'), t, 20.70, .20, .70, 34);  // VO 7 @ 20.8
 
   /* ============ B3 · THE TURN ============ */
-  linesIn($('b3h'),  t, 21.35, .22, .80, 40);
-  linesIn($('b3k'),  t, 24.20, .20, .66, 26);
-  linesIn($('b3k2'), t, 28.60, .20, .66, 26);
+  linesIn($('b3h'),  t, 24.50, .22, .80, 40);  // VO 8  @ 24.6
+  linesIn($('b3k'),  t, 27.70, .20, .66, 26);  // VO 9  @ 27.8
+  linesIn($('b3k2'), t, 34.30, .20, .66, 26);  // VO 10 @ 34.4
 
   /* ============ B4 · NOAH ENTERS ============ */
-  {
-    // the mark draws itself: ring, then the load line overshooting the disc
+  {                                            // the mark draws itself — VO 11 @ 39.7
     const ring = $('b4ring'), line = $('b4line'), tide = $('b4tide'), mark = $('b4mark');
     const C = 2 * Math.PI * 34, L = 88;
-    const r = eInOut(p(t, 32.30, 33.60));
+    const r = eInOut(p(t, 39.50, 40.80));
     ring.style.strokeDasharray = String(C);
     ring.style.strokeDashoffset = String(lerp(C, 0, r));
-    const l = eOut(p(t, 33.30, 34.20));
+    const l = eOut(p(t, 40.50, 41.40));
     line.style.strokeDasharray = String(L);
     line.style.strokeDashoffset = String(lerp(L, 0, l));
-    const w = eOut(p(t, 33.60, 34.60));
+    const w = eOut(p(t, 40.80, 41.80));
     tide.setAttribute('height', String(lerp(0.001, 20, w)));
     tide.setAttribute('y', String(lerp(94, 74, w)));
-    mark.style.opacity = String(p(t, 32.25, 32.55));
+    mark.style.opacity = String(p(t, 39.45, 39.75));
   }
-  linesIn($('b4h'),    t, 33.60, .18, .70, 32);
-  linesIn($('b4k'),    t, 35.20, .18, .66, 26);
-  {
-    const x = eOut(p(t, 37.60, 38.20));
+  linesIn($('b4h'), t, 40.20, .18, .70, 32);   // "One app. Noah."
+  linesIn($('b4k'), t, 42.90, .18, .66, 26);   // VO 12 @ 43.0
+  {                                            // typed in plain English — VO 13 @ 47.0
+    const x = eOut(p(t, 46.30, 46.90));
     const card = $('b4card');
     card.style.opacity = String(x);
     card.style.transform = `translateY(${lerp(26, 0, x)}px)`;
-    // typed in plain English, with a blinking block caret
     const phrase = "my fan won't stop";
-    const n = Math.floor(clamp01(p(t, 38.10, 40.30)) * phrase.length);
-    const caret = (t < 40.5 || Math.floor(t * 2) % 2 === 0) ? '<span style="opacity:.45">▍</span>' : '';
+    const n = Math.floor(clamp01(p(t, 46.90, 48.90)) * phrase.length);
+    const caret = (t < 49.1 || Math.floor(t * 2) % 2 === 0) ? '<span style="opacity:.45">▍</span>' : '';
     $('b4type').innerHTML = phrase.slice(0, n) + caret;
   }
-  linesIn($('b4note'), t, 41.00, .18, .66, 24);
+  linesIn($('b4note'), t, 49.50, .18, .66, 24); // VO 14 @ 49.6
 
   /* ============ B5 · THE DIAGNOSIS ============ */
-  linesIn($('b5k'), t, 44.35, .20, .66, 26);
+  linesIn($('b5k'), t, 52.70, .20, .66, 26);   // VO 15 @ 52.8
   {
-    // the three audited checks
     const kids = $('b5checks').querySelectorAll('.ln');
-    const at = [46.00, 46.60, 47.20];
+    const at = [54.00, 54.60, 55.20];
     kids.forEach((k, i) => {
       const x = eOut(p(t, at[i], at[i] + .55));
       k.style.opacity = String(x);
@@ -149,55 +140,52 @@ function render(t) {
     });
   }
   {
-    const x = eOut(p(t, 48.60, 49.30));
+    const x = eOut(p(t, 56.20, 56.90));
     $('b5rule').style.opacity = String(x);
     $('b5rule').style.transform = `scaleX(${x})`;
     $('b5rule').style.transformOrigin = 'left center';
   }
-  linesIn($('b5cl'),    t, 48.90, .18, .55, 18);
-  linesIn($('b5cause'), t, 49.30, .18, .70, 30);
-  linesIn($('b5det'),   t, 50.50, .18, .66, 24);
-  linesIn($('b5not'),   t, 51.80, .18, .66, 24);
+  linesIn($('b5cl'),    t, 56.40, .18, .55, 18);
+  linesIn($('b5cause'), t, 57.00, .18, .70, 30);  // lands on "...the actual cause"
+  linesIn($('b5det'),   t, 58.00, .18, .66, 24);
+  linesIn($('b5not'),   t, 59.20, .18, .66, 24);  // VO 16 @ 58.6
 
   /* ============ B6 · THE APPROVAL (hero) ============ */
-  linesIn($('b6k'), t, 56.35, .20, .66, 26);
+  linesIn($('b6k'), t, 62.60, .20, .66, 26);   // VO 17 @ 62.7
   {
-    const x = eOut(p(t, 57.60, 58.25));
+    const x = eOut(p(t, 64.00, 64.65));
     const card = $('b6card');
     card.style.opacity = String(x);
     card.style.transform = `translateY(${lerp(28, 0, x)}px)`;
   }
-  linesIn($('b6plan'), t, 58.20, .55, .66, 22);
-  {
-    // the one primary action — the only place the aurora gradient appears
+  linesIn($('b6plan'), t, 64.60, .55, .66, 22);
+  {                                            // the one primary action
     const btn = $('b6btn');
-    const x = eOutBack(p(t, 60.00, 60.75));
-    btn.style.opacity = String(p(t, 60.00, 60.35));
-    const press = p(t, 63.00, 63.16) * (1 - p(t, 63.22, 63.42));
-    btn.style.transform = `translateY(${lerp(20, 0, x)}px) scale(${(0.985 + .015*x) - .035 * press})`;
+    const x = eOutBack(p(t, 66.20, 66.95));
+    btn.style.opacity = String(p(t, 66.20, 66.55));
+    const press = p(t, 70.00, 70.16) * (1 - p(t, 70.22, 70.42));
+    btn.style.transform = `translateY(${lerp(20, 0, x)}px) scale(${(0.985 + .015 * x) - .035 * press})`;
   }
-  // hero line holds, then hands over to the confirmation
-  linesIn($('b6hero'), t, 60.40, .20, .72, 34);
-  {
-    const on = p(t, 63.55, 63.95);
-    const chk = $('b6check');
-    chk.style.opacity = String(on);
-    const d = eOut(p(t, 63.75, 64.45));
+  linesIn($('b6hero'), t, 66.70, .20, .72, 34);   // VO 18 @ 66.8 — holds to the end of the beat
+  {                                               // VO 19 @ 70.6
+    const on = p(t, 70.55, 70.95);
+    $('b6check').style.opacity = String(on);
+    const d = eOut(p(t, 70.75, 71.45));
     $('b6tick').style.strokeDasharray = '32';
     $('b6tick').style.strokeDashoffset = String(lerp(32, 0, d));
     $('b6done').style.opacity = String(on);
-    linesIn($('b6done'), t, 63.75, .35, .60, 20);
+    linesIn($('b6done'), t, 70.75, .35, .60, 20);
   }
 
   /* ============ B7 · SIGN-OFF ============ */
   {
-    const x = eOut(p(t, 70.35, 71.20));
+    const x = eOut(p(t, 74.50, 75.35));
     const m = $('b7mark');
-    m.style.opacity = String(p(t, 70.35, 70.80));
+    m.style.opacity = String(p(t, 74.50, 74.95));
     m.style.transform = `translateY(${lerp(22, 0, x)}px)`;
   }
-  linesIn($('b7h'),   t, 70.90, .20, .70, 30);
-  linesIn($('b7url'), t, 72.80, .20, .70, 24);
+  linesIn($('b7h'),   t, 74.90, .20, .70, 30);  // VO 20 @ 74.7
+  linesIn($('b7url'), t, 78.60, .20, .70, 24);  // VO 21 @ 78.7
 }
 
 /* expose for the frame grabber + allow live preview in a browser */
