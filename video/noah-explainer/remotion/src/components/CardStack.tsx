@@ -53,11 +53,14 @@ export const CardStack: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          right: RIGHT - 26,
-          top: WATERLINE_Y - BASE_GAP - LIMIT * PITCH - 30,
+          // sits to the LEFT of the pile: printed over the cards it is unreadable
+          right: RIGHT + CARD_W + 30,
+          top: WATERLINE_Y - BASE_GAP - LIMIT * PITCH - 25,
           fontFamily: MONO,
           fontSize: 15,
           letterSpacing: '0.06em',
+          whiteSpace: 'nowrap',
+          textAlign: 'right',
           color: limitColor,
           opacity: over || resolved ? 1 : 0,
         }}
