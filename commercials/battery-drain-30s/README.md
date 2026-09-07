@@ -31,11 +31,15 @@ legible UI out of an AI-video pipeline.
 | 9 | [`09-runway-models-and-settings.md`](09-runway-models-and-settings.md) | Which model and settings for each shot type, and the consistency protocol. |
 | 10 | [`10-master-timeline.md`](10-master-timeline.md) | The single sheet: every clip, VO line, UI overlay, SFX and transition on one grid. |
 
-## Buildable asset
+## Buildable assets
 
-- [`ui/noah-ui-screens.html`](ui/noah-ui-screens.html) — all 11 Noah interface screens, built to the
-  real Aurora dark ("Lantern") tokens with the real brand fonts embedded. Open it in a browser,
-  press **1:1** on a screen, and capture. Works offline; no network, no font fallback risk.
+- **[`remotion/`](remotion/)** — all 11 Noah interface screens as a Remotion project, each
+  composition set to its clip's exact frame count, rendering to ProRes 4444. Also renders **the
+  animatic**: the whole 34-second film with the UI live, the Runway shots as labelled slates, VO
+  burned in and the 2.39 matte on. `cd remotion && npm install && npm run dev`.
+- [`ui/noah-ui-screens.html`](ui/noah-ui-screens.html) — the same 11 screens as one static HTML
+  file with the brand fonts embedded. No toolchain, opens anywhere, offline. For art direction and
+  quick look-sees; use Remotion for anything going into the cut.
 
 ## The one idea
 

@@ -11,9 +11,13 @@ single Runway credit is spent.
    you have five stills you would be happy to see in the finished spot.
 2. **Build the UI screens** and capture them. `ui/noah-ui-screens.html` is ready; you need the
    captures before you can judge whether a plate works.
-3. **Record a scratch VO** — your own voice, phone mic, five minutes. Cut the whole thing as an
-   animatic against stills. **If the film doesn't work as an animatic, no amount of generation
-   will fix it.**
+3. **Watch the animatic.** `cd remotion && npm install && npm run animatic` renders the whole
+   34-second film at its real cut points — UI screens live, Runway shots as labelled slates, VO as
+   burned-in subtitles, 2.39 matte on. Lay a scratch VO under it (your own voice, phone mic, five
+   minutes) and watch it end to end. **If the film doesn't work as an animatic, no amount of
+   generation will fix it** — and it answers the questions that decide this spot without a single
+   generated frame: can you read clip 13 in 2.21 seconds, does the approval beat land, is Act I
+   too long, does 67% speech density fit.
 4. Generate the live-action clips. Budget 4–6 takes each; hands and faces need the most.
 5. Generate the plates. Fewer takes — you are only judging glow, focus falloff and reflection.
 6. Screen-replace the UI into the plates.

@@ -39,7 +39,7 @@ file so that anyone adding one later gets the real face rather than a Georgia fa
 | UI-04 composer — her sentence | 08 | 2560 × 1600 | types in, caret, send |
 | UI-05 measuring — named checks | 10 | 2560 × 1600 | checks tick through |
 | UI-06 the finding | 12 | 2560 × 1600 | mono line reveals last |
-| UI-07 the proposal + APPROVE / Not now | 13 | 2560 × 1600 | **static by design** |
+| UI-07 the proposal + APPROVE / Not now | 13 | 2560 × 1600 | card static — only the cursor moves |
 | UI-08 Noah acting + Undo | 16 | 2560 × 1600 | two confirms, then Done. |
 | UI-09 before / after | 18 | 2560 × 1600 | AFTER values count in |
 | UI-10 end card | 21 | 3840 × 2160 | fades, built in AE |
@@ -75,14 +75,29 @@ npx playwright screenshot --viewport-size=2560,1600 --wait-for-timeout=3000 \
 The page reads an `?only=<id>` query parameter and renders that screen alone, full-bleed, with no
 chrome — built for exactly this.
 
-**If you want frame-exact control**, rebuild UI-04 through UI-09 in Remotion. The HTML is already
-React-shaped: tokens at the top, one component per screen. Remotion gives you deterministic frame
-numbers, which matters because these screens have to hit marks like "the mono line reveals on
-frame 24 of clip 12." A screen recording will get you within a few frames; Remotion gets you
-exact. For a first cut, the recording is fine.
+**Frame-exact — this is now built.** [`remotion/`](remotion/) contains all eleven screens as a
+Remotion project, each composition set to its clip's exact frame count from
+`10-master-timeline.md`, so a render drops onto the edit timeline with no retiming. Use it for
+anything going into the actual cut:
+
+```bash
+cd remotion && npm install
+npm run dev          # Remotion Studio — scrub every screen frame by frame
+npm run render:all   # 11 ProRes 4444 screens + the animatic
+```
+
+It matters because these screens have to hit marks like *"the mono readout reveals on frame 8 of
+clip 12."* A screen recording gets within a few frames; Remotion is exact, every render. It also
+renders **[the animatic](remotion/README.md#the-animatic)** — the whole 34-second film with the UI
+live, the Runway shots as labelled slates, VO burned in and the 2.39 matte on. Watch that before
+spending a Runway credit.
+
+The HTML file stays useful for art direction and quick client look-sees: no toolchain, opens
+anywhere. Both read the same copy, but if you change a string, change it in `remotion/src/copy.ts`,
+in the HTML, **and** in `04-onscreen-text.md`.
 
 **Do not rebuild these in Figma** and export flats. You lose the animation and gain nothing — the
-HTML is already the design.
+code is already the design.
 
 ---
 
@@ -139,7 +154,7 @@ ui/
   ui-04-composer.mov                 2560×1600 ProRes 4444
   ui-05-measuring.mov                2560×1600 ProRes 4444
   ui-06-finding.mov                  2560×1600 ProRes 4444
-  ui-07-proposal.png                 2560×1600 @2x   (static — do not animate)
+  ui-07-proposal.mov                 2560×1600 ProRes 4444  (card static; cursor arrives f26–f44)
   ui-08-acting.mov                   2560×1600 ProRes 4444
   ui-09-before-after.mov             2560×1600 ProRes 4444
   ui-10-endcard/                     AE project, 3840×2160
