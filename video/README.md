@@ -72,6 +72,41 @@ The two frame-time charts share one axis in milliseconds so the shapes compare
 honestly — no second scale. Each panel carries one series; the "before" and "after"
 traces in scene 5 are both direct-labelled, so identity is never colour alone.
 
+## Refitting an existing clip for YouTube Shorts
+
+`ShortsSafe` takes an already-vertical 1080×1920 clip and refits it so a phone
+cannot lose any of it. Two different things eat a Shorts frame, and they need
+separate room:
+
+- **Hard crop.** Phones taller than 16:9 (19.5:9, 20:9) scale a 9:16 clip up to
+  fill the screen height, cropping roughly 10% off each side. Those pixels are
+  gone.
+- **Occlusion.** The action rail (like / comment / remix / sound) covers the right
+  edge; the title, handle, description and scrubber cover the bottom.
+
+The clip is scaled to sit inside the intersection of both, and the freed space is
+filled with a blurred, darkened copy of the clip itself — so the padding reads as
+deliberate instead of as a letterbox. Audio passes through untouched.
+
+Two presets, in `src/ShortsSafe.tsx`:
+
+| Composition | Picture | Clears |
+|---|---|---|
+| `ShortsSafeWide` | 860×1529 | the side crop, the action rail, the bottom chrome |
+| `ShortsSafe` | 765×1360 | the above plus every last pixel of chrome, at any margin |
+
+`ShortsSafeWideGuides` / `ShortsSafeGuides` render the same layout with YouTube's
+chrome drawn over it, for checking the fit at a glance.
+
+```bash
+cp your-clip.mp4 public/shorts-source.mp4
+npx remotion render ShortsSafeWide out/shorts.mp4 --browser-executable=<chrome>
+```
+
+The source clip lives at `public/shorts-source.mp4` and is gitignored — it is an
+input, not part of the project. Adjust the margins in `PRESETS` if YouTube's
+chrome changes; everything else derives from them.
+
 ## Fonts
 
 Plus Jakarta Sans, Instrument Serif and JetBrains Mono are vendored as woff2 into
