@@ -60,22 +60,27 @@ export const safeBox = (w: number, h: number, r: Reserved = RESERVED) => {
   };
 };
 
+/**
+ * The margins are painted, not blurred.
+ *
+ * A second decode of the clip under a 56px blur cost more per frame than the whole
+ * rest of the render put together, and bought nothing a gradient can't do: the
+ * clip's edges are near-black navy with a violet rim light, so these stops are
+ * sampled straight off it — mean sides #0e152d, bottom #060b18, brightest violet
+ * #372fca. Re-sample and update these if the clip is replaced.
+ */
+export const BACKDROP = [
+  'radial-gradient(125% 58% at 50% 33%, rgba(55,47,202,0.30) 0%, rgba(55,47,202,0.10) 46%, rgba(55,47,202,0) 72%)',
+  'linear-gradient(180deg, #141C33 0%, #0E152D 38%, #070C1B 78%, #04060E 100%)',
+].join(', ');
+
 export const ShortsSafe: React.FC<{reserved?: Reserved}> = ({reserved = RESERVED}) => {
   const {width, height} = useVideoConfig();
   const {vidW, vidH, left, top} = safeBox(width, height, reserved);
   const src = staticFile(SOURCE);
 
   return (
-    <AbsoluteFill style={{backgroundColor: '#05070F', overflow: 'hidden'}}>
-      {/* the clip's own colour, pushed far out of focus, so the margins belong to it */}
-      <AbsoluteFill
-        style={{
-          transform: 'scale(1.28)',
-          filter: 'blur(56px) saturate(1.15) brightness(0.38)',
-        }}
-      >
-        <OffthreadVideo src={src} muted style={{width: '100%', height: '100%', objectFit: 'cover'}} />
-      </AbsoluteFill>
+    <AbsoluteFill style={{background: BACKDROP, overflow: 'hidden'}}>
 
       {/* the clip itself — contained, never cropped. This copy carries the audio. */}
       <div
