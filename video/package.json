@@ -1,0 +1,25 @@
+{
+  "name": "noah-video-mac-games-stuttering",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Remotion video for the Noah fix guide: Mac games stuttering / low FPS",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "remotion render MacGamesStuttering out/noah-mac-games-stuttering.mp4",
+    "render:square": "remotion render MacGamesStutteringSquare out/noah-mac-games-stuttering-square.mp4",
+    "render:vertical": "remotion render MacGamesStutteringVertical out/noah-mac-games-stuttering-vertical.mp4",
+    "still": "remotion still MacGamesStuttering out/poster.png"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.408",
+    "@remotion/bundler": "4.0.408",
+    "@remotion/renderer": "4.0.408",
+    "remotion": "4.0.408",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
