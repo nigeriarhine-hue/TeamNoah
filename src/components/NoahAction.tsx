@@ -5,10 +5,13 @@ import { NoahScreen } from "./NoahScreen";
 import { ScreenLabel } from "./ScreenLabel";
 
 /** Beat 4 — approval granted, Noah executes. No invented actions. */
-export const NoahAction: React.FC<{ durationInFrames: number }> = ({
-  durationInFrames,
-}) => {
-  const first = Math.round(durationInFrames * 0.42);
+export const NoahAction: React.FC<{
+  durationInFrames: number;
+  /** Frame the second label takes over. Defaults to a proportional split;
+   *  pass the measured value when a voiceover drives the beat. */
+  labelSwitch?: number;
+}> = ({ durationInFrames, labelSwitch }) => {
+  const first = labelSwitch ?? Math.round(durationInFrames * 0.42);
   return (
     <NoahScreen
       screen="04-action"

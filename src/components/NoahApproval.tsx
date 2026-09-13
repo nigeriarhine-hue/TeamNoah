@@ -9,10 +9,13 @@ import { ScreenLabel } from "./ScreenLabel";
  * Beat 3 — the product moment. Noah has stopped and is waiting. Nothing in
  * this screenshot is altered; the modal is entirely genuine.
  */
-export const NoahApproval: React.FC<{ durationInFrames: number }> = ({
-  durationInFrames,
-}) => {
-  const half = Math.round(durationInFrames * 0.47);
+export const NoahApproval: React.FC<{
+  durationInFrames: number;
+  /** Frame the second label takes over. Defaults to a proportional split;
+   *  pass the measured value when a voiceover drives the beat. */
+  labelSwitch?: number;
+}> = ({ durationInFrames, labelSwitch }) => {
+  const half = labelSwitch ?? Math.round(durationInFrames * 0.47);
   return (
     <NoahScreen
       screen="03-approval"

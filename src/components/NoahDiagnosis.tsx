@@ -5,10 +5,13 @@ import { NoahScreen } from "./NoahScreen";
 import { ScreenLabel } from "./ScreenLabel";
 
 /** Beat 2 — Noah is introduced and shown checking the machine. */
-export const NoahDiagnosis: React.FC<{ durationInFrames: number }> = ({
-  durationInFrames,
-}) => {
-  const kicker = Math.round(durationInFrames * 0.4);
+export const NoahDiagnosis: React.FC<{
+  durationInFrames: number;
+  /** Frame the second label takes over. Defaults to a proportional split;
+   *  pass the measured value when a voiceover drives the beat. */
+  labelSwitch?: number;
+}> = ({ durationInFrames, labelSwitch }) => {
+  const kicker = labelSwitch ?? Math.round(durationInFrames * 0.4);
   return (
     <NoahScreen
       screen="02-diagnosis"

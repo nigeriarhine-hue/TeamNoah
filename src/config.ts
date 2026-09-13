@@ -46,10 +46,10 @@ const s = (seconds: number) => Math.round(seconds * FPS);
 export const SCENES = {
   ugc: s(7.0),
   diagnosis: s(3.6),
-  approval: s(4.2),
-  action: s(2.6),
-  result: s(2.7),
-  cta: s(2.9),
+  approval: s(3.9),
+  action: s(2.7),
+  result: s(3.0),
+  cta: s(2.8),
 } as const;
 
 export const SCENE_ORDER = [
@@ -123,6 +123,33 @@ export const CAPTIONS: CaptionGroup[] = [
 
 /** The single word inside group 1 that carries the Noah accent. */
 export const HERO_WORD = "Noah";
+
+/**
+ * Voiceover that carries the product beats (0:07-0:23).
+ *
+ * These words are NOT the locked script — that line is spoken only in the UGC
+ * beat and is untouched. This is the on-screen copy from the brief, read aloud
+ * in the same voice, assembled into one 16s track with each line placed on its
+ * beat.
+ *
+ * Offsets are relative to the track's own start (video 7.00s). Each line leads
+ * its beat by 150ms. The `labelSwitch` frame is where the second on-screen
+ * label takes over, measured from the silence between the two sentences in the
+ * generated audio, so text and voice change together.
+ */
+export const VO_TRACK = {
+  src: "ugc/korean/noah-vo-track.mp3",
+  /** Frame the track starts on, i.e. the end of the UGC beat. */
+  startFrame: s(7.0),
+  lines: {
+    diagnosis: { at: 0.15, dur: 2.69, labelSwitch: 44 },
+    approval: { at: 3.75, dur: 2.75, labelSwitch: 61 },
+    action: { at: 7.65, dur: 2.33, labelSwitch: 37 },
+    result: { at: 10.35, dur: 2.78, labelSwitch: null },
+    /** CTA steps land individually; frames are within the CTA beat. */
+    cta: { at: 13.35, dur: 2.57, stepFrames: [4, 40, 70] as const },
+  },
+} as const;
 
 export const HOOK_LINES = ["BEFORE YOU LET AN APP", "TOUCH YOUR MAC…"];
 

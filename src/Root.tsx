@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Composition, Sequence, Still } from "remotion";
+import { AbsoluteFill, Audio, Composition, Sequence, Still, staticFile } from "remotion";
 import {
   CAPTIONS,
   FPS,
@@ -9,6 +9,7 @@ import {
   SCENES,
   SCENE_START,
   TOTAL_FRAMES,
+  VO_TRACK,
   WIDTH,
 } from "./config";
 import { AnimatedCaption } from "./components/AnimatedCaption";
@@ -29,16 +30,29 @@ export type VideoProps = {
    * creator still instead, so the cut can be reviewed before the clip lands.
    */
   ugcClip: string | null;
+  /**
+   * Path under public/ to the assembled voiceover track for the product beats.
+   * Null renders them silent.
+   */
+  voTrack: string | null;
 };
 
 const HOOK_FROM = Math.round(0.25 * FPS);
 const HOOK_DURATION = Math.round(3.05 * FPS);
 
-export const NoahBeforeAppTouchesMac: React.FC<VideoProps> = ({ ugcClip }) => {
+export const NoahBeforeAppTouchesMac: React.FC<VideoProps> = ({ ugcClip, voTrack }) => {
   useBrandFonts();
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#080B11" }}>
+      {/* Her voice continues over the product beats. The UGC clip carries its
+          own dialogue, so this starts where that clip ends. */}
+      {voTrack ? (
+        <Sequence from={VO_TRACK.startFrame} name="Voiceover">
+          <Audio src={staticFile(voTrack)} />
+        </Sequence>
+      ) : null}
+
       {/* Beat 1 — the creator. Clip is generated clean; all text is drawn here. */}
       <Sequence durationInFrames={SCENES.ugc + OVERLAP} name="UGC">
         <UGCClip
@@ -71,7 +85,10 @@ export const NoahBeforeAppTouchesMac: React.FC<VideoProps> = ({ ugcClip }) => {
         name="Diagnosis"
       >
         <SceneTransition>
-          <NoahDiagnosis durationInFrames={SCENES.diagnosis} />
+          <NoahDiagnosis
+            durationInFrames={SCENES.diagnosis}
+            labelSwitch={voTrack ? VO_TRACK.lines.diagnosis.labelSwitch : undefined}
+          />
         </SceneTransition>
       </Sequence>
 
@@ -81,13 +98,19 @@ export const NoahBeforeAppTouchesMac: React.FC<VideoProps> = ({ ugcClip }) => {
         name="Approval"
       >
         <SceneTransition>
-          <NoahApproval durationInFrames={SCENES.approval} />
+          <NoahApproval
+            durationInFrames={SCENES.approval}
+            labelSwitch={voTrack ? VO_TRACK.lines.approval.labelSwitch : undefined}
+          />
         </SceneTransition>
       </Sequence>
 
       <Sequence from={SCENE_START.action} durationInFrames={SCENES.action + OVERLAP} name="Action">
         <SceneTransition>
-          <NoahAction durationInFrames={SCENES.action} />
+          <NoahAction
+            durationInFrames={SCENES.action}
+            labelSwitch={voTrack ? VO_TRACK.lines.action.labelSwitch : undefined}
+          />
         </SceneTransition>
       </Sequence>
 
@@ -99,7 +122,7 @@ export const NoahBeforeAppTouchesMac: React.FC<VideoProps> = ({ ugcClip }) => {
 
       <Sequence from={SCENE_START.cta} durationInFrames={SCENES.cta} name="CTA">
         <SceneTransition>
-          <CTAEndCard durationInFrames={SCENES.cta} />
+          <CTAEndCard durationInFrames={SCENES.cta} voiced={Boolean(voTrack)} />
         </SceneTransition>
       </Sequence>
     </AbsoluteFill>
@@ -120,7 +143,7 @@ export const RemotionRoot: React.FC = () => (
       fps={FPS}
       width={WIDTH}
       height={HEIGHT}
-      defaultProps={{ ugcClip: null } satisfies VideoProps}
+      defaultProps={{ ugcClip: null, voTrack: null } satisfies VideoProps}
     />
     <Still
       id="ShortsThumbnail"
