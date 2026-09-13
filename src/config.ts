@@ -93,19 +93,30 @@ export interface CaptionGroup {
   emphasis?: string[];
 }
 
+/**
+ * Timings come from a word-level Whisper transcript of the actual take
+ * (voice "Hana", mean confidence 0.962), not from estimates. Each group leads
+ * its first spoken word by ~60ms, which reads as in-sync rather than late.
+ * Speech ends at 6.52s; the clip runs 7.0s.
+ *
+ * Word boundaries: I 0.00 | tried 0.40 | Noah 0.72 | because 1.14 | my 1.56 |
+ * Mac 1.80 | was 2.00 | slow 2.26-2.56 | (pause) | I 3.16 | liked 3.38 |
+ * that 3.68 | the 3.88 | app 4.06 | showed 4.24 | me 4.52 | the 4.70 |
+ * fix 4.84 | and 5.16 | waited 5.48 | for 5.78 | my 5.96 | approval 6.14-6.52
+ */
 export const CAPTIONS: CaptionGroup[] = [
-  { lines: ["I tried Noah"], from: 0.0, to: 1.15, emphasis: [] },
-  { lines: ["because my Mac", "was slow."], from: 1.15, to: 2.75 },
+  { lines: ["I tried Noah"], from: 0.0, to: 1.1, emphasis: [] },
+  { lines: ["because my Mac", "was slow."], from: 1.1, to: 3.08 },
   {
     lines: ["I liked that the app", "showed me the fix"],
-    from: 2.75,
-    to: 5.1,
+    from: 3.08,
+    to: 5.12,
     emphasis: ["showed me the fix"],
   },
   {
     lines: ["and waited for", "my approval."],
-    from: 5.1,
-    to: 7.0,
+    from: 5.12,
+    to: 6.95,
     emphasis: ["my approval."],
   },
 ];
