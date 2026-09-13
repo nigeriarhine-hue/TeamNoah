@@ -20,6 +20,7 @@ import { NoahDiagnosis } from "./components/NoahDiagnosis";
 import { NoahResult } from "./components/NoahResult";
 import { OVERLAP, SceneTransition } from "./components/SceneTransition";
 import { ShortsThumbnail } from "./components/ShortsThumbnail";
+import { YT_HEIGHT, YT_WIDTH, YouTubeThumbnail } from "./components/YouTubeThumbnail";
 import { TextHook } from "./components/TextHook";
 import { UGCClip } from "./components/UGCClip";
 import { useBrandFonts } from "./lib/fonts";
@@ -134,6 +135,11 @@ const ThumbnailRoot: React.FC = () => {
   return <ShortsThumbnail />;
 };
 
+const YouTubeThumbnailRoot: React.FC = () => {
+  useBrandFonts();
+  return <YouTubeThumbnail />;
+};
+
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
@@ -150,6 +156,12 @@ export const RemotionRoot: React.FC = () => (
       component={ThumbnailRoot}
       width={WIDTH}
       height={HEIGHT}
+    />
+    <Still
+      id="YouTubeThumbnail"
+      component={YouTubeThumbnailRoot}
+      width={YT_WIDTH}
+      height={YT_HEIGHT}
     />
   </>
 );
