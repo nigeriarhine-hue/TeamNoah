@@ -139,6 +139,14 @@ export const HERO_WORD = "Noah";
  */
 export const VO_TRACK = {
   src: "ugc/korean/noah-vo-track.mp3",
+  /**
+   * The generated clip's dialogue came back hotter than the voiceover
+   * (-14.4 dB RMS vs -18.5 dB), which reads as her voice dropping in level at
+   * the handoff. +3.5 dB closes that to 0.6 dB — matching RMS exactly would
+   * put the voiceover peak at -0.5 dB, too close to clipping once AAC
+   * overshoot is allowed for.
+   */
+  volume: 1.5,
   /** Frame the track starts on, i.e. the end of the UGC beat. */
   startFrame: s(7.0),
   lines: {

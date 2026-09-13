@@ -49,7 +49,7 @@ export const NoahBeforeAppTouchesMac: React.FC<VideoProps> = ({ ugcClip, voTrack
           own dialogue, so this starts where that clip ends. */}
       {voTrack ? (
         <Sequence from={VO_TRACK.startFrame} name="Voiceover">
-          <Audio src={staticFile(voTrack)} />
+          <Audio src={staticFile(voTrack)} volume={VO_TRACK.volume} />
         </Sequence>
       ) : null}
 
