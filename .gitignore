@@ -1,4 +1,9 @@
 node_modules/
-out/
 .remotion/
 *.log
+
+# Renders are ignored by default — the container is ephemeral, so the two
+# named deliverables are tracked explicitly below.
+out/*
+!out/noah-before-app-touches-mac.mp4
+!out/noah-before-app-touches-mac-thumbnail.png
