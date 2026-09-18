@@ -1,0 +1,28 @@
+{
+  "name": "noah-ads",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Noah advertisement videos (Remotion)",
+  "scripts": {
+    "preview": "remotion studio",
+    "render:video2": "remotion render NoahGameNotTheProblem out/noah-game-not-the-problem.mp4 && node tools/master.mjs out/noah-game-not-the-problem.mp4",
+    "render:video2:thumb": "remotion still NoahGameNotTheProblemThumbnail out/noah-game-not-the-problem-thumbnail.png",
+    "typecheck": "tsc --noEmit",
+    "render:video2:raw": "remotion render NoahGameNotTheProblem out/noah-game-not-the-problem.mp4",
+    "master": "node tools/master.mjs out/noah-game-not-the-problem.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.526",
+    "@remotion/media-utils": "4.0.526",
+    "@remotion/shapes": "^4.0.526",
+    "@remotion/transitions": "^4.0.526",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.526"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}
