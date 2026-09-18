@@ -18,9 +18,18 @@ export const NoahOverlay: React.FC<{
         justifyContent: position === 'top' ? 'flex-start' : 'flex-end',
         alignItems: 'center',
         paddingTop: position === 'top' ? 210 : 0,
-        paddingBottom: position === 'bottom' ? 440 : 0,
+        paddingBottom: position === 'bottom' ? 400 : 0,
       }}
     >
+      <AbsoluteFill
+        style={{
+          background:
+            position === 'bottom'
+              ? 'linear-gradient(to top, rgba(6,8,14,0.94) 14%, rgba(6,8,14,0.80) 26%, rgba(6,8,14,0) 46%)'
+              : 'linear-gradient(to bottom, rgba(6,8,14,0.94) 8%, rgba(6,8,14,0.72) 20%, rgba(6,8,14,0) 34%)',
+          opacity: s,
+        }}
+      />
       <div
         style={{
           opacity: s,

@@ -140,10 +140,10 @@ export const MacListVideo: React.FC = () => {
         <FocusZoom
           src="noah-ui/02-diagnosis.jpg"
           aspect={UI_ASPECT_B}
-          focus={{x: 0.64, y: 0.43, from: 1.92, to: 2.08}}
+          focus={{x: 0.53, y: 0.50, from: 2.30, to: 2.44}}
           durationInFrames={T.diagnosis.dur}
         />
-        <NoahOverlay lines={['NO GUESSING.']} position="top" />
+        <NoahOverlay lines={['NO GUESSING.']} position="bottom" />
         <TideRule durationInFrames={T.diagnosis.dur} />
       </Sequence>
 
@@ -151,14 +151,14 @@ export const MacListVideo: React.FC = () => {
         <FocusZoom
           src="noah-ui/02-diagnosis.jpg"
           aspect={UI_ASPECT_B}
-          focus={{x: 0.64, y: 0.8, from: 2.15, to: 2.25}}
+          focus={{x: 0.55, y: 0.78, from: 2.26, to: 2.36}}
           durationInFrames={T.approval.dur}
         >
           {/* ring the real approve button rather than drawing a fake modal */}
-          <NoahApproval box={{left: 14, top: 44, width: 72, height: 10}} appearAt={8} />
+          <NoahApproval box={{left: 2, top: 49.2, width: 94, height: 6.2}} appearAt={8} />
           <CursorClick from={{x: 78, y: 74}} to={{x: 62, y: 50}} clickAt={44} />
         </FocusZoom>
-        <NoahOverlay lines={['YOU APPROVE', 'THE FIX.']} position="top" accentLast />
+        <NoahOverlay lines={['YOU APPROVE', 'THE FIX.']} position="bottom" accentLast />
         <Sequence from={44}>
           <Audio src={staticFile('sfx/uiclick.wav')} volume={0.5} />
         </Sequence>
@@ -169,10 +169,10 @@ export const MacListVideo: React.FC = () => {
         <FocusZoom
           src="noah-ui/03-approval-action.jpg"
           aspect={UI_ASPECT}
-          focus={{x: 0.64, y: 0.78, from: 2.0, to: 2.14}}
+          focus={{x: 0.53, y: 0.80, from: 2.24, to: 2.36}}
           durationInFrames={T.result.dur}
         />
-        <NoahOverlay lines={['THEN NOAH SHOWS', 'WHAT IT DID.']} position="top" />
+        <NoahOverlay lines={['THEN NOAH SHOWS', 'WHAT IT DID.']} position="bottom" />
         <Audio src={staticFile('sfx/chime.wav')} volume={0.34} />
         <TideRule durationInFrames={T.result.dur} />
       </Sequence>

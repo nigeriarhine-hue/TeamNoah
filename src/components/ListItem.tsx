@@ -41,7 +41,7 @@ export const ListItem: React.FC<{
           fontWeight: 900,
           lineHeight: 0.86,
           color: '#FFFFFF',
-          opacity: 0.32,
+          opacity: 0.5,
           transform: `scale(${interpolate(numPop, [0, 1], [0.5, 1])})`,
           textShadow: '0 4px 24px rgba(0,0,0,0.6)',
         }}
