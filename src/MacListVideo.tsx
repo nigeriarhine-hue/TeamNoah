@@ -2,13 +2,13 @@ import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile} from 'remotion';
 
 import assets from './assets.json';
+import {FontFaces} from './fonts';
+import {PATCHES_01, PATCHES_02, PATCHES_03} from './macPatches';
 import {AnimatedCaption} from './components/AnimatedCaption';
 import {CTAEndCard} from './components/CTAEndCard';
-import {CursorClick} from './components/CursorClick';
 import {FocusZoom} from './components/FocusZoom';
 import {FingerCountOverlay} from './components/FingerCountOverlay';
 import {ListItem} from './components/ListItem';
-import {NoahApproval} from './components/NoahApproval';
 import {NoahOverlay, TideRule} from './components/NoahScreen';
 import {SafeArea} from './components/SafeArea';
 import {TextHook} from './components/TextHook';
@@ -35,14 +35,18 @@ export const T = {
 
 export const TOTAL = T.cta.from + T.cta.dur; // 810 frames = 27.0s
 
-const UI_ASPECT = 1170 / 985;
-const UI_ASPECT_B = 1170 / 979;
+// source pixel dimensions of the genuine screenshots
+const UI_01 = {srcW: 1170, srcH: 985};
+const UI_02 = {srcW: 1170, srcH: 979};
+const UI_03 = {srcW: 1170, srcH: 985};
 
 export const MacListVideo: React.FC = () => {
   const ref = 'ugc/mac-list/video3-reference.png';
 
   return (
     <AbsoluteFill style={{backgroundColor: '#05070F'}}>
+      <FontFaces />
+
       {/* ---------- CLIP A : items one and two ---------- */}
       <Sequence from={T.clipA.from} durationInFrames={T.clipA.dur} name="Clip A">
         <UGCClip
@@ -128,8 +132,10 @@ export const MacListVideo: React.FC = () => {
       <Sequence from={T.problem.from} durationInFrames={T.problem.dur} name="Noah problem">
         <FocusZoom
           src="noah-ui/01-problem.jpg"
-          aspect={UI_ASPECT}
-          focus={{x: 0.72, y: 0.2, from: 2.05, to: 2.22}}
+          {...UI_01}
+          patches={PATCHES_01}
+          colX={390} colW={780} anchorY={500}
+          zoom={{from: 1.0, to: 1.05}}
           durationInFrames={T.problem.dur}
         />
         <NoahOverlay lines={['JUST TELL NOAH', "WHAT'S WRONG."]} position="bottom" />
@@ -139,8 +145,10 @@ export const MacListVideo: React.FC = () => {
       <Sequence from={T.diagnosis.from} durationInFrames={T.diagnosis.dur} name="Noah diagnosis">
         <FocusZoom
           src="noah-ui/02-diagnosis.jpg"
-          aspect={UI_ASPECT_B}
-          focus={{x: 0.53, y: 0.50, from: 2.30, to: 2.44}}
+          {...UI_02}
+          patches={PATCHES_02}
+          colX={392} colW={706} anchorY={520}
+          zoom={{from: 1.0, to: 1.05}}
           durationInFrames={T.diagnosis.dur}
         />
         <NoahOverlay lines={['NO GUESSING.']} position="bottom" />
@@ -150,14 +158,16 @@ export const MacListVideo: React.FC = () => {
       <Sequence from={T.approval.from} durationInFrames={T.approval.dur} name="Noah approval">
         <FocusZoom
           src="noah-ui/02-diagnosis.jpg"
-          aspect={UI_ASPECT_B}
-          focus={{x: 0.55, y: 0.78, from: 2.26, to: 2.36}}
+          {...UI_02}
+          patches={PATCHES_02}
+          colX={396} colW={706} anchorY={640}
+          zoom={{from: 0.97, to: 1.0}}
           durationInFrames={T.approval.dur}
-        >
-          {/* ring the real approve button rather than drawing a fake modal */}
-          <NoahApproval box={{left: 2, top: 49.2, width: 94, height: 6.2}} appearAt={8} />
-          <CursorClick from={{x: 78, y: 74}} to={{x: 62, y: 50}} clickAt={44} />
-        </FocusZoom>
+          // ring the real approve button rather than drawing a fake modal;
+          // source-space, so it tracks the button through any crop change
+          ring={{x: 398, y: 761, w: 702, h: 54, appearAt: 8}}
+          cursor={{fromX: 930, fromY: 700, toX: 762, toY: 786, clickAt: 44}}
+        />
         <NoahOverlay lines={['YOU APPROVE', 'THE FIX.']} position="bottom" accentLast />
         <Sequence from={44}>
           <Audio src={staticFile('sfx/uiclick.wav')} volume={0.5} />
@@ -168,8 +178,10 @@ export const MacListVideo: React.FC = () => {
       <Sequence from={T.result.from} durationInFrames={T.result.dur} name="Noah result">
         <FocusZoom
           src="noah-ui/03-approval-action.jpg"
-          aspect={UI_ASPECT}
-          focus={{x: 0.53, y: 0.80, from: 2.24, to: 2.36}}
+          {...UI_03}
+          patches={PATCHES_03}
+          colX={392} colW={740} anchorY={700}
+          zoom={{from: 1.0, to: 1.05}}
           durationInFrames={T.result.dur}
         />
         <NoahOverlay lines={['THEN NOAH SHOWS', 'WHAT IT DID.']} position="bottom" />

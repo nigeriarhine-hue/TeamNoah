@@ -1,10 +1,16 @@
-# Proposed Windows -> Mac text replacements (AWAITING APPROVAL)
+# Windows -> Mac text replacements (APPROVED AND APPLIED)
 
-The supplied Noah screenshots are the **Windows build**. Nothing below has been
-applied — the product UI in the current render is untouched and still says "PC",
-"C: Drive", "boot" and "temp files" on a video titled *fix my Mac*.
+The supplied Noah screenshots are the **Windows build**. All 12 rows below were
+approved and are now applied, as Remotion text overlays positioned in each
+screenshot's own pixel space (`src/macPatches.ts`). The underlying captures are
+never edited, so the originals stay intact and auditable.
 
-## A. Pre-approved in the brief
+Cover colours and glyph colours were sampled from the screenshots themselves
+(`scripts/sample.mjs`, `scripts/textcolor.mjs`), and the type is **Plus Jakarta
+Sans** — Noah's own brand sans per `brand-kit.html` (`--sans`) — so a patch is
+indistinguishable from the surrounding UI.
+
+## A. Pre-approved in the brief — APPLIED
 
 | # | Original (actual string in screenshot) | Replacement | Appears in |
 |---|---|---|---|
@@ -16,7 +22,7 @@ applied — the product UI in the current render is untouched and still says "PC
 `Still On at Boot -> Still On at Login` was on the brief's list but that string
 does not occur in these three screenshots.
 
-## B. NEW — not on the brief's list, needs your sign-off
+## B. New rows — APPROVED, APPLIED
 
 | # | Original | Proposed | Why |
 |---|---|---|---|
@@ -34,22 +40,23 @@ does not occur in these three screenshots.
 - `Move ~14 old installers to Trash`
 - `Clearing caches`
 
-## D. Not a text issue
+## D. Not a text issue — RESOLVED
 
-The window chrome in screenshots 01 and 02 shows **Windows minimise / maximise /
-close buttons at the top right**. macOS would show traffic lights at the top
-left. This cannot be fixed by text substitution.
+The window chrome shows **Windows minimise / maximise / close buttons at the top
+right**; macOS puts traffic lights at the top left, so no text substitution
+fixes it. Resolved with option 1: the title bar is painted out
+(`chromeCover()`), and the Noah beats now fit the content column rather than
+covering the frame, which keeps the chrome out of shot anyway.
 
-Options, cheapest first:
-1. **Crop it out of frame.** Already true for the diagnosis, approval and result
-   beats; only the problem beat (0:14.8-0:17.1) still shows it. A small framing
-   nudge removes it. Recommended.
-2. Leave it — most viewers will not register it at this size.
-3. Re-capture the screens on a Mac build. Cleanest, but needs new screenshots
-   from you.
+## E. STILL OUTSTANDING — one string, not on the approved list
 
-## How to apply
+| Original | Proposed | Where |
+|---|---|---|
+| `Trim startup & clear space` | `Trim login items & clear space` | the approve button, 0:19.8-0:22.5 |
 
-Say which rows you approve. The replacements go in as Remotion text overlays
-positioned over the genuine screenshots — the underlying captures are never
-edited, so the originals stay intact and auditable.
+This is the hero element of the approval beat and reads for ~2.7s at full size.
+It was **not** among the 12 rows, so per the brief it has not been touched. With
+`LOGIN ITEMS` now directly above it, leaving `startup` on the button is the last
+visible inconsistency.
+
+Say the word and it is one more patch row plus a re-render.

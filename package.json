@@ -8,11 +8,13 @@
     "still": "remotion still"
   },
   "dependencies": {
+    "@fontsource/plus-jakarta-sans": "^5.3.0",
     "@remotion/cli": "4.0.394",
     "@remotion/media-utils": "4.0.394",
-    "remotion": "4.0.394",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "remotion": "4.0.394",
+    "sharp": "^0.35.4"
   },
   "devDependencies": {
     "@types/react": "19.0.0",

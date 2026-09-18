@@ -44,8 +44,13 @@ Noah screens are the **genuine supplied screenshots**, never regenerated.
 region of interest. `NoahApproval` rings the real approve affordance instead of
 drawing a fake modal.
 
-The screenshots are the **Windows build**. No product text has been altered —
-see "Pending decisions" below.
+The screenshots are the **Windows build**. All 12 approved Windows -> Mac
+replacements are applied as overlays in `src/macPatches.ts`, positioned in each
+screenshot's own pixel space so they ride the zoom with the pixels they cover.
+Cover and glyph colours were sampled from the captures themselves; the type is
+**Plus Jakarta Sans**, Noah's own brand sans per `brand-kit.html`. The Windows
+title bar is painted out. See `MAC-TEXT-REPLACEMENTS.md` — one string
+(`Trim startup & clear space`) is still outstanding.
 
 ## Sound
 
@@ -82,5 +87,6 @@ this is one standalone short by design.
    blocks every Higgsfield host, so generated media cannot be pulled into the
    repo. Allowlist `d8j0ntlcm91z4.cloudfront.net` (and ideally
    `*.higgsfield.ai`) and the three files drop straight in.
-2. **Windows -> Mac product text** is unchanged pending sign-off on the
-   replacement list.
+2. **One product string is still Windows-flavoured**: the approve button reads
+   `Trim startup & clear space`. It was not among the 12 approved rows, so it
+   has not been touched. See section E of `MAC-TEXT-REPLACEMENTS.md`.
