@@ -10,8 +10,8 @@ mkdir -p "$D" out
 # Asset ids are overridable so a re-shot character drops straight in:
 #   REF=... CLIP_A=... CLIP_B=... bash scripts/finish.sh
 REF="${REF:-hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png}"
-CLIP_A="${CLIP_A:-hf_20260919_193237_7d6fa9ee-b281-49da-b940-30d170253ea5.mp4}"
-CLIP_B="${CLIP_B:-hf_20260919_193237_f6d8adbe-af4a-4725-bb5e-b6aca59d5f58.mp4}"
+CLIP_A="${CLIP_A:-hf_20260919_205905_9a4d231d-d14b-48a1-bbbe-03bd558ffe02.mp4}"
+CLIP_B="${CLIP_B:-hf_20260919_205906_f283e582-a2c2-4b7c-8d8c-5a40e8f52c97.mp4}"
 
 echo "==> fetching assets"
 curl -fsS -o "$D/video3-reference.png" "$B/$REF"
