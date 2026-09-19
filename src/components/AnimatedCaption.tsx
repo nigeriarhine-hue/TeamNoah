@@ -32,10 +32,16 @@ export const AnimatedCaption: React.FC<{
         maxWidth: 840,
       }}
     >
-      {parts.map((p, i) => (
+      {parts.map((p, i) => {
+        const pop = p.emphasis
+          ? spring({frame, fps, delay: 2 + i * 2, config: {damping: 10, mass: 0.4}})
+          : 1;
+        return (
         <span
           key={i}
           style={{
+            display: 'inline-block',
+            transform: p.emphasis ? `scale(${interpolate(pop, [0, 1], [0.7, 1])})` : undefined,
             fontFamily: fontStack,
             fontSize: size,
             lineHeight: 1.12,
@@ -48,7 +54,8 @@ export const AnimatedCaption: React.FC<{
         >
           {p.text}
         </span>
-      ))}
+        );
+      })}
     </div>
   );
 };

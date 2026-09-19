@@ -10,6 +10,7 @@ import {FocusZoom} from './components/FocusZoom';
 import {FingerCountOverlay} from './components/FingerCountOverlay';
 import {ListItem} from './components/ListItem';
 import {NoahOverlay, TideRule} from './components/NoahScreen';
+import {Flash, Punch} from './components/Punch';
 import {SafeArea} from './components/SafeArea';
 import {TextHook} from './components/TextHook';
 import {CaptionScrim, UGCClip} from './components/UGCClip';
@@ -49,19 +50,27 @@ export const MacListVideo: React.FC = () => {
 
       {/* ---------- CLIP A : items one and two ---------- */}
       <Sequence from={T.clipA.from} durationInFrames={T.clipA.dur} name="Clip A">
-        <UGCClip
-          src="ugc/mac-list/video3-list-a.mp4"
-          fallbackStill={ref}
-          hasClip={assets.clipA}
-          hasStill={assets.reference}
-        />
+        {/* beats: "Number one" 0.00s | "delete" 1.68s | "Number two" 3.66s | "install" 5.36s */}
+        <Punch beats={[0, 50, 110, 161]}>
+          <UGCClip
+            src="ugc/mac-list/video3-list-a.mp4"
+            fallbackStill={ref}
+            hasClip={assets.clipA}
+            hasStill={assets.reference}
+          />
+        </Punch>
         <CaptionScrim />
 
         {/* opening hook, clears before the first list item lands */}
         <Sequence durationInFrames={46} name="Hook">
-          <SafeArea justify="center">
-            <TextHook lines={['THINGS I WILL NOT DO', 'TO FIX MY MAC IN 2026']} />
-          </SafeArea>
+          <AbsoluteFill
+            style={{justifyContent: 'center', alignItems: 'center', padding: '0 30px'}}
+          >
+            <TextHook
+              lines={['THINGS I WILL NOT DO', 'TO FIX MY MAC IN 2026']}
+              tease="stay for #3"
+            />
+          </AbsoluteFill>
         </Sequence>
 
         {/* item 1 — enters on "delete", struck as "files" lands */}
@@ -87,12 +96,15 @@ export const MacListVideo: React.FC = () => {
 
       {/* ---------- CLIP B : item three, then the turn ---------- */}
       <Sequence from={T.clipB.from} durationInFrames={T.clipB.dur} name="Clip B">
-        <UGCClip
-          src="ugc/mac-list/video3-list-b.mp4"
-          fallbackStill={ref}
-          hasClip={assets.clipB}
-          hasStill={assets.reference}
-        />
+        {/* beats: "Number three" 0.00s | "Follow a seven-year-old" 1.62s | the turn 5.28s */}
+        <Punch beats={[0, 49, 158]} amount={0.06}>
+          <UGCClip
+            src="ugc/mac-list/video3-list-b.mp4"
+            fallbackStill={ref}
+            hasClip={assets.clipB}
+            hasStill={assets.reference}
+          />
+        </Punch>
         <CaptionScrim />
 
         <Sequence durationInFrames={150} name="Item 3">
@@ -138,6 +150,7 @@ export const MacListVideo: React.FC = () => {
           zoom={{from: 1.0, to: 1.05}}
           durationInFrames={T.problem.dur}
         />
+        <Flash at={0} />
         <NoahOverlay lines={['JUST TELL NOAH', "WHAT'S WRONG."]} position="bottom" />
         <TideRule durationInFrames={T.problem.dur} />
       </Sequence>
