@@ -3,17 +3,22 @@
 Total ~40s, 16:9. Six live-action takes carry all the dialogue; the four fabricated Noah
 screens cut in **over** that dialogue as full-frame inserts. Nothing needs re-voicing.
 
-## Timeline
+## Timeline — as built (40.25s)
 
-| # | In | Dur | Source | What's on screen | Audio |
+Built by `assemble.sh`; times are measured from the finished file, not planned.
+
+| # | In | Out | Source | What's on screen | Audio |
 |---|---|---|---|---|---|
-| 1 | 0:00 | 5s | take 1 | Tom alone, hands down his face, calls back over his shoulder | "Ell? Can you come here a sec?" |
-| 2 | 0:05 | 7s | take 2 | Ellie comes in with the mug, he explains | "What's it doing." / "It boots into Sequoia now — …SanDisk off the back and everything." |
-| 3 | 0:12 | 7s | take 3 | Over-shoulder, she leans in | "It's just slower than it was before…" / "So ask Noah. Tell it exactly what you just told me." |
-| 4 | 0:19 | 5s | take 5 | **Hold 1.5s, then cut to `screens/01-looking-into-it.png` for 3.5s** | "...All of that?" / "All of that." |
-| 5 | 0:24 | 7s | take 6 | **Cut to `screens/02-the-plan.png` on her first word; at "asked first" cut to `03-can-noah-do-this.png`** | "Spotlight's still rebuilding…" / "...It's not touching the OpenCore patches." / "Because it asked first." |
-| 6 | 0:31 | 5s | take 4 | **Open on `screens/04-done.png` 1.5s, then cut back to the two of them** | "Huh." / "Mm-hm." + footsteps out |
-| 7 | 0:36 | 4s | `screens/05-endcard.png` | End card | room tone falls away to silence |
+| 1 | 0:00.00 | 0:05.04 | take 1 | Tom alone, calls back over his shoulder | "Ell? Can you come here a sec?" |
+| 2 | 0:05.04 | 0:12.08 | take 2 | Ellie comes in with the mug | "What's it doing." / "It boots into Sequoia now…" |
+| 3 | 0:12.08 | 0:19.11 | take 3 | Over-shoulder, she leans in | "It's just slower…" / "So ask Noah." |
+| 4 | 0:19.11 | 0:24.15 | take 4 | live 1.5s, then `01-looking-into-it` | "...All of that?" / "All of that." |
+| 5 | 0:24.15 | 0:31.19 | take 5 | `02-the-plan`, then `03-can-noah-do-this` at +4.5s | "Spotlight's still rebuilding…" / "Because it asked first." |
+| 6 | 0:31.19 | 0:36.23 | take 6 | `04-done` for 1.5s, then back to them | "Huh." / "Mm-hm." |
+| 7 | 0:36.23 | 0:40.25 | `05-endcard` | End card | silent |
+
+Inserts are the app window at ~95% height, centred on `#0b0b10` — the same ground
+as the end card, so the two read as one system.
 
 ## How the inserts should sit
 
