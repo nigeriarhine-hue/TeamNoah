@@ -29,6 +29,13 @@ Type is Inter Variable + JetBrains Mono. The two terminal cards are the only
 dark surfaces — they read as a shell, and they give the light frame something
 to push against.
 
+The closer signs off with the official mark from `brand-pack/svg/noah-mark-light.svg`,
+inlined in `src/short.html` (its `defs` ids namespaced `nm*` so they can't collide
+with the page). It is the one brand-pack element in the video, and it follows the
+pack's rules: original navy `#1A1D61` and blue→violet tide, no tile behind it, no
+shadow or glow, level waterline, uncropped, scaled proportionally to 140 px with
+clear space far exceeding the stroke height.
+
 ## Cut
 
 | in | scene | beat |
