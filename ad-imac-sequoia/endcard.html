@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Noah end card</title>
+<link rel="stylesheet" href="font.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#07070b;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;word-spacing:.055em}
+  .card{width:1920px;height:1080px;background:#07070b;position:relative;overflow:hidden;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:44px}
+  /* the tide the mark sits in, kept far below the logo's own clear space */
+  .card::after{content:"";position:absolute;left:50%;bottom:-340px;transform:translateX(-50%);
+               width:1500px;height:620px;border-radius:50%;
+               background:radial-gradient(ellipse at center,
+                 rgba(99,102,241,.20) 0%, rgba(139,92,246,.10) 42%, transparent 70%)}
+  .mark{position:relative;z-index:1}
+  .line{position:relative;z-index:1;color:#EDEDF6;font-size:47px;font-weight:600;
+        letter-spacing:-.4px;text-align:center}
+  .line b{font-weight:800}
+  .sub{position:relative;z-index:1;color:#8C8CA6;font-size:26px;font-weight:500;
+       letter-spacing:.3px;margin-top:-26px}
+</style></head>
+<body>
+  <div class="card" id="card">
+    <svg class="mark" width="260" height="260" viewBox="0 0 120 120" role="img" aria-label="Noah">
+      <defs>
+        <clipPath id="c1"><circle cx="60" cy="58" r="34"/></clipPath>
+        <radialGradient id="rg2" cx="0.5" cy="0.94" r="0.9"><stop offset="0" stop-color="#8b8ff8"/><stop offset="0.45" stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></radialGradient>
+        <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(43,53,122,0.140)"/><stop offset="1" stop-color="rgba(99,102,241,0.300)"/></linearGradient>
+        <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(139,143,248,0.550)"/><stop offset="1" stop-color="rgba(139,143,248,0.000)"/></linearGradient>
+      </defs>
+      <g clip-path="url(#c1)"><rect x="24" y="22" width="72" height="52" fill="url(#g3)"/><rect x="24" y="74" width="72" height="20" fill="url(#rg2)"/></g>
+      <rect clip-path="url(#c1)" x="24" y="74" width="72" height="14" fill="url(#g4)"/>
+      <circle cx="60" cy="58" r="34" fill="none" stroke="#C7CBFF" stroke-width="7"/>
+      <line x1="16" y1="74" x2="104" y2="74" stroke="#C7CBFF" stroke-width="7" stroke-linecap="butt"/>
+    </svg>
+    <div class="line"><b>Noah.</b> Unlimited help, all year round.</div>
+    <div class="sub">Tell it what's broken. It asks before it touches anything.</div>
+  </div>
+</body></html>

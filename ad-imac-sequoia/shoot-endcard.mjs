@@ -1,0 +1,10 @@
+import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import path from 'node:path';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport:{width:1920,height:1080}, deviceScaleFactor:1 });
+await p.goto('file://' + path.resolve('endcard.html'));
+await p.waitForFunction(() => document.fonts.status === 'loaded');
+await p.waitForTimeout(300);
+await (await p.$('#card')).screenshot({ path: 'screens/05-endcard.png' });
+console.log('endcard shot');
+await b.close();
