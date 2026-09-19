@@ -16,12 +16,14 @@ export const SafeArea: React.FC<{
   children: React.ReactNode;
   justify?: React.CSSProperties['justifyContent'];
   align?: React.CSSProperties['alignItems'];
-}> = ({children, justify = 'flex-start', align = 'center'}) => {
+  /** override the bottom inset, e.g. to clear the creator's counting hand */
+  bottom?: number;
+}> = ({children, justify = 'flex-start', align = 'center', bottom}) => {
   return (
     <AbsoluteFill
       style={{
         paddingTop: SAFE.top,
-        paddingBottom: SAFE.bottom,
+        paddingBottom: bottom ?? SAFE.bottom,
         paddingLeft: SAFE.left,
         paddingRight: SAFE.right,
         display: 'flex',

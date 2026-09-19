@@ -17,25 +17,30 @@ import {CaptionScrim, UGCClip} from './components/UGCClip';
 
 /**
  * Timeline, 30fps. Cut points come from the word-level transcript of the
- * delivered clips, not from guessed beats. Re-derived after the clips moved to
- * Seedance 2.5 (native speech), whose delivery runs later than the TTS pass:
+ * delivered clips, not from guessed beats:
  *
- *   A  "Number one," 0.00-1.52 | "delete random files." 2.26-3.28
- *      "Number two," 4.12-4.86 | "install five cleaner apps." 5.40-7.06
- *   B  "number three" 0.00-1.38 | "...reddit command I don't understand" 1.38-4.80
- *      "I just tell Noah what's wrong" 4.80-6.92
+ *   INTRO "Three things I will not do to fix my Mac in 2026." 0.00-3.94
+ *   A     "Number one," 0.00-1.52 | "delete random files." 2.26-3.28
+ *         "Number two," 4.12-4.86 | "install five cleaner apps." 5.40-7.06
+ *   B     "number three" 0.00-1.38 | "...reddit command I don't understand" 1.38-4.80
+ *         "I just tell Noah what's wrong" 4.80-6.92
+ *
+ * The spoken hook was added after the original brief, which pushes the total
+ * past the 22-27s target; the product beats are trimmed a little to hold it
+ * near 29s rather than cutting the hook short.
  */
 export const T = {
-  clipA: {from: 0, dur: 225},
-  clipB: {from: 225, dur: 218},
-  problem: {from: 443, dur: 69},
-  diagnosis: {from: 512, dur: 81},
-  approval: {from: 593, dur: 81},
-  result: {from: 674, dur: 66},
-  cta: {from: 740, dur: 70},
+  intro: {from: 0, dur: 123},
+  clipA: {from: 123, dur: 225},
+  clipB: {from: 348, dur: 218},
+  problem: {from: 566, dur: 56},
+  diagnosis: {from: 622, dur: 68},
+  approval: {from: 690, dur: 72},
+  result: {from: 762, dur: 55},
+  cta: {from: 817, dur: 65},
 } as const;
 
-export const TOTAL = T.cta.from + T.cta.dur; // 810 frames = 27.0s
+export const TOTAL = T.cta.from + T.cta.dur; // 882 frames = 29.4s
 
 // source pixel dimensions of the genuine screenshots
 const UI_01 = {srcW: 1170, srcH: 985};
@@ -48,6 +53,26 @@ export const MacListVideo: React.FC = () => {
   return (
     <AbsoluteFill style={{backgroundColor: '#05070F'}}>
       <FontFaces />
+
+      {/* ---------- INTRO : she speaks the title ---------- */}
+      <Sequence from={T.intro.from} durationInFrames={T.intro.dur} name="Intro">
+        <Punch beats={[0]} amount={0.04}>
+          <UGCClip
+            src="ugc/mac-list/video3-intro.mp4"
+            fallbackStill={ref}
+            hasClip={assets.intro}
+            hasStill={assets.reference}
+          />
+        </Punch>
+        <CaptionScrim />
+        {/* sits low: her hands are down here, so the lower third is clear */}
+        <SafeArea justify="flex-end" bottom={430}>
+          <TextHook
+            lines={['THINGS I WILL NOT DO', 'TO FIX MY MAC IN 2026']}
+            tease="stay for #3"
+          />
+        </SafeArea>
+      </Sequence>
 
       {/* ---------- CLIP A : items one and two ---------- */}
       <Sequence from={T.clipA.from} durationInFrames={T.clipA.dur} name="Clip A">
@@ -62,22 +87,10 @@ export const MacListVideo: React.FC = () => {
         </Punch>
         <CaptionScrim />
 
-        {/* opening hook, clears before the first list item lands */}
-        <Sequence durationInFrames={46} name="Hook">
-          <AbsoluteFill
-            style={{justifyContent: 'center', alignItems: 'center', padding: '0 30px'}}
-          >
-            <TextHook
-              lines={['THINGS I WILL NOT DO', 'TO FIX MY MAC IN 2026']}
-              tease="stay for #3"
-            />
-          </AbsoluteFill>
-        </Sequence>
-
         {/* item 1 — enters on "delete" (2.26s), struck as "files" lands (3.28s) */}
         <Sequence from={68} durationInFrames={52} name="Item 1">
           <FingerCountOverlay count={1} />
-          <SafeArea justify="flex-end">
+          <SafeArea justify="flex-end" bottom={700}>
             <ListItem n={1} lines={['DELETE RANDOM', 'FILES']} strikeAt={30} />
           </SafeArea>
           <Audio src={staticFile('sfx/item1.wav')} startFrom={0} volume={0.5} />
@@ -86,7 +99,7 @@ export const MacListVideo: React.FC = () => {
         {/* item 2 — enters on "Number two" (4.12s), struck as "apps" lands (7.06s) */}
         <Sequence from={124} durationInFrames={101} name="Item 2">
           <FingerCountOverlay count={2} />
-          <SafeArea justify="flex-end">
+          <SafeArea justify="flex-end" bottom={700}>
             <ListItem n={2} lines={['INSTALL FIVE', 'CLEANER APPS']} strikeAt={88} />
           </SafeArea>
           <Sequence from={85}>
@@ -110,7 +123,7 @@ export const MacListVideo: React.FC = () => {
 
         <Sequence durationInFrames={146} name="Item 3">
           <FingerCountOverlay count={3} />
-          <SafeArea justify="flex-end">
+          <SafeArea justify="flex-end" bottom={700}>
             <ListItem
               n={3}
               lines={['FOLLOW A 7-YEAR-OLD', 'REDDIT COMMAND']}
@@ -123,7 +136,7 @@ export const MacListVideo: React.FC = () => {
 
         {/* the turn — "I just tell Noah what's wrong" 4.80-6.92s */}
         <Sequence from={144} durationInFrames={74} name="Turn">
-          <SafeArea justify="flex-end">
+          <SafeArea justify="flex-end" bottom={620}>
             <AnimatedCaption
               parts={[
                 {text: 'I just tell'},

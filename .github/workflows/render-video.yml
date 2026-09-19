@@ -44,6 +44,7 @@ jobs:
           B=https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb
           D=public/ugc/mac-list
           mkdir -p "$D" out
+          curl -fsS -o "$D/video3-intro.mp4"     "$B/hf_20260919_220915_b829bd81-ad99-4f16-94d4-b5b3968c31ea.mp4"
           curl -fsS -o "$D/video3-reference.png" "$B/hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png"
           curl -fsS -o "$D/video3-list-a.mp4"    "$B/hf_20260919_212023_99a9d7c3-dd37-4e78-bcac-4d6ea977a3e9.mp4"
           curl -fsS -o "$D/video3-list-b.mp4"    "$B/hf_20260919_212430_65828cac-cb24-46ab-9afb-ade24569860f.mp4"

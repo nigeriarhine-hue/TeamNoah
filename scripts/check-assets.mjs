@@ -5,6 +5,7 @@ import {existsSync, writeFileSync} from 'node:fs';
 const base = 'public/ugc/mac-list/';
 const assets = {
   reference: existsSync(base + 'video3-reference.png'),
+  intro: existsSync(base + 'video3-intro.mp4'),
   clipA: existsSync(base + 'video3-list-a.mp4'),
   clipB: existsSync(base + 'video3-list-b.mp4'),
 };
