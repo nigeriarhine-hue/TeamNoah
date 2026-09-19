@@ -79,7 +79,7 @@ const offA = {};
 for (const f of groupA) offA[f] = f === 'IMG_0588.jpeg' ? 0 : await verticalOffset(anchorA, P(f));
 
 // ── Group B: post-plan states (sidebar gained a TODAY row) ────────────────────
-const groupB = ['IMG_0591.jpeg', 'IMG_0592.jpeg', 'IMG_0594.jpeg', 'IMG_0595.jpeg'];
+const groupB = ['IMG_0591.jpeg', 'IMG_0594.jpeg', 'IMG_0595.jpeg'];
 const anchorB = await refStrip(P('IMG_0591.jpeg'));
 const offB = {};
 for (const f of groupB) offB[f] = f === 'IMG_0591.jpeg' ? 0 : await verticalOffset(anchorB, P(f));
@@ -104,7 +104,6 @@ manifest.push(await emit('pane-thinking',      P('IMG_0586.jpeg'), PANE, offA['I
 manifest.push(await emit('pane-thinking-5s',   P('IMG_0587.jpeg'), PANE, offA['IMG_0587.jpeg']));
 manifest.push(await emit('pane-plan',          P('IMG_0588.jpeg'), PANE, offA['IMG_0588.jpeg']));
 manifest.push(await emit('pane-plan-hover',    P('IMG_0591.jpeg'), PANE, offB['IMG_0591.jpeg']));
-manifest.push(await emit('pane-plan-typed',    P('IMG_0592.jpeg'), PANE, offB['IMG_0592.jpeg']));
 manifest.push(await emit('pane-sent',          P('IMG_0594.jpeg'), PANE, offB['IMG_0594.jpeg']));
 manifest.push(await emit('pane-result',        P('IMG_0595.jpeg'), PANE, offB['IMG_0595.jpeg']));
 
@@ -114,12 +113,10 @@ manifest.push(await emit('crop-situation',  P('IMG_0588.jpeg'), { left: 378, top
 manifest.push(await emit('crop-checked',    P('IMG_0588.jpeg'), { left: 386, top: 280, width: 744, height: 162 }, dyPlan, { scale: 3 }));
 manifest.push(await emit('crop-plan-list',  P('IMG_0588.jpeg'), { left: 386, top: 452, width: 744, height: 294 }, dyPlan, { scale: 3 }));
 manifest.push(await emit('crop-cta',        P('IMG_0588.jpeg'), { left: 386, top: 757, width: 728, height: 70  }, dyPlan, { scale: 3 }));
-manifest.push(await emit('crop-talk-note',  P('IMG_0588.jpeg'), { left: 400, top: 932, width: 712, height: 40  }, dyPlan, { scale: 3 }));
 
 manifest.push(await emit('crop-cta-hover',  P('IMG_0591.jpeg'), { left: 386, top: 760, width: 728, height: 70  }, offB['IMG_0591.jpeg'], { scale: 3 }));
-manifest.push(await emit('crop-typed',      P('IMG_0592.jpeg'), { left: 378, top: 868, width: 756, height: 72  }, offB['IMG_0592.jpeg'], { scale: 3 }));
 manifest.push(await emit('crop-dialog',     P('IMG_0593.jpeg'), { left: 330, top: 375, width: 514, height: 270 }, 0, { scale: 3 }));
-manifest.push(await emit('crop-sent',       P('IMG_0594.jpeg'), { left: 386, top: 505, width: 728, height: 62  }, offB['IMG_0594.jpeg'], { scale: 3 }));
+manifest.push(await emit('crop-approved',   P('IMG_0594.jpeg'), { left: 372, top: 712, width: 520, height: 54  }, offB['IMG_0594.jpeg'], { scale: 4 }));
 manifest.push(await emit('crop-executing',  P('IMG_0594.jpeg'), { left: 378, top: 795, width: 756, height: 108 }, offB['IMG_0594.jpeg'], { scale: 3 }));
 manifest.push(await emit('crop-done',       P('IMG_0595.jpeg'), { left: 386, top: 318, width: 744, height: 168 }, offB['IMG_0595.jpeg'], { scale: 3 }));
 manifest.push(await emit('crop-verify',     P('IMG_0595.jpeg'), { left: 386, top: 534, width: 744, height: 88  }, offB['IMG_0595.jpeg'], { scale: 3 }));

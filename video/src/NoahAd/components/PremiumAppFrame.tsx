@@ -31,6 +31,8 @@ type Props = {
   /** Ambient bloom behind the panel, in brand indigo. */
   glow?: number;
   blur?: number;
+  /** Multiplies the panel's luminance — for hover and focus states (§28). */
+  brightness?: number;
   style?: React.CSSProperties;
 };
 
@@ -47,6 +49,7 @@ export const PremiumAppFrame: React.FC<Props> = ({
   opacity = 1,
   glow = 1,
   blur = 0,
+  brightness = 1,
   style,
 }) => (
   <div
@@ -61,7 +64,14 @@ export const PremiumAppFrame: React.FC<Props> = ({
       transformStyle: 'preserve-3d',
       transform: `translate3d(${x}px, ${y}px, 0) perspective(2400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(${scale})`,
       opacity,
-      filter: blur > 0.05 ? `blur(${blur}px)` : undefined,
+      // one filter string: a caller-set brightness must not clobber the blur
+      filter:
+        [
+          blur > 0.05 ? `blur(${blur}px)` : '',
+          Math.abs(brightness - 1) > 0.002 ? `brightness(${brightness})` : '',
+        ]
+          .filter(Boolean)
+          .join(' ') || undefined,
       willChange: 'transform, opacity',
       ...style,
     }}

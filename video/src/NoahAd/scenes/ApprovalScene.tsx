@@ -12,10 +12,12 @@ import { headlineH, safe, stack, theme } from '../theme';
 
 /**
  * SCENE 6 — THE TRUST MOMENT.
- * The strongest beat in the film, and the one that must be literally true.
- * This is the order the real session happened in: Noah proposes a plan and
- * stops; the plan can be changed in plain language instead of clicked; and Noah
- * still asks for an explicit OK before it touches anything.
+ * The strongest beat in the film, and the one that has to be literally true.
+ *
+ * Noah is approved by clicking, so the sequence is two real gates and nothing
+ * else: the proposed plan with its action button, and then Noah asking outright
+ * before it touches anything. Every state here exists in a capture —
+ * IMG_0588 (plan), IMG_0593 (permission dialog), IMG_0594 (approved).
  */
 const ITEMS: AssetName[] = ['plan-item-1', 'plan-item-2', 'plan-item-3', 'plan-item-4'];
 const ITEM_W = 920;
@@ -29,37 +31,45 @@ export const ApprovalScene: React.FC<{ durationInFrames: number }> = ({ duration
   const f = (sec: number) => Math.round(sec * fps);
 
   const STOP = f(0.1);
-  const FIX = f(1.1);
-  const TYPED = f(2.15);
-  const DIALOG = f(2.95);
-  const CLICK = f(3.95);
+  const FIX = f(1.15);
+  const HOVER = f(2.0);
+  const CLICK1 = f(2.3);
+  const DIALOG = f(2.75);
+  const CLICK2 = f(3.95);
+  const APPROVED = f(4.15);
 
   const itemH = heightFor(ITEMS[0], ITEM_W);
   const stackGap = 18;
-  const ctaH = heightFor('crop-cta-hover', ITEM_W);
-  const noteH = heightFor('crop-talk-note', 890);
-  const typedH = heightFor('crop-typed', ITEM_W);
+  const ctaH = heightFor('crop-cta', ITEM_W);
   const planH = itemH * 4 + stackGap * 3;
 
-  // beat 1-2: the plan and its button, centred with the headline
+  // beats 1-2: the plan and its button, centred with the headline
   const PLAN = stack(headlineH.one, planH + 34 + ctaH);
   const planTop = PLAN.heroTop;
-  // beat 4: the dialog gets the frame to itself
-  const dlgH = heightFor('crop-dialog', DIALOG_W);
-  const sentH = heightFor('crop-sent', 760);
-  const DLG = stack(headlineH.one, dlgH + 42 + sentH);
-  const dialogY = DLG.heroTop + dlgH / 2 - 960;
-  const sentY = DLG.heroTop + dlgH + 42 + sentH / 2 - 960;
-
-  // the plan clears the frame when Noah asks the question
-  const planOut = anim(frame, [TYPED + 10, DIALOG - 2], [0, 1], ease.inOut);
-  const ctaP = anim(frame, [FIX, FIX + 22], [0, 1], ease.soft);
-  const typedP = anim(frame, [TYPED, TYPED + 20], [0, 1], ease.out);
-  const dlgP = anim(frame, [DIALOG, DIALOG + 24], [0, 1], ease.soft);
-  const approved = anim(frame, [CLICK + 2, CLICK + 20], [0, 1], ease.out);
-
   const ctaY = planTop + planH + 34 + ctaH / 2 - 960;
-  const ctaBox = regionRect('crop-cta-hover', ITEM_W, { u0: 0.02, v0: 0.08, u1: 0.98, v1: 0.92 }, 0, ctaY);
+
+  // beat 3: Noah's question gets the frame to itself
+  const dlgH = heightFor('crop-dialog', DIALOG_W);
+  const apprH = heightFor('crop-approved', 700);
+  const DLG = stack(headlineH.one, dlgH + 46 + apprH);
+  const dialogY = DLG.heroTop + dlgH / 2 - 960;
+  const approvedY = DLG.heroTop + dlgH + 46 + apprH / 2 - 960;
+
+  const planOut = anim(frame, [CLICK1 + 4, DIALOG], [0, 1], ease.inOut);
+  const ctaP = anim(frame, [FIX, FIX + 22], [0, 1], ease.soft);
+  const dlgP = anim(frame, [DIALOG, DIALOG + 24], [0, 1], ease.soft);
+  const approved = anim(frame, [APPROVED, APPROVED + 18], [0, 1], ease.out);
+  // once answered, the question recedes and the confirmation takes the frame
+  const answered = anim(frame, [CLICK2 + 5, APPROVED + 12], [0, 1], ease.inOut);
+
+  const ctaBox = regionRect('crop-cta', ITEM_W, { u0: 0.02, v0: 0.08, u1: 0.98, v1: 0.92 }, 0, ctaY);
+  const goAheadBox = regionRect('crop-dialog', DIALOG_W, GO_AHEAD, 0, dialogY);
+
+  // the button lifts under the pointer, then compresses on the click (§28)
+  const hover = anim(frame, [HOVER - 6, HOVER + 6], [0, 1], ease.out);
+  const press =
+    anim(frame, [CLICK1 - 2, CLICK1], [0, 1], ease.out) *
+    (1 - anim(frame, [CLICK1, CLICK1 + 8], [0, 1], ease.out));
 
   return (
     <GlowBackground mood="tense" intensity={0.8 + dlgP * 0.25} phase={19}>
@@ -83,73 +93,53 @@ export const ApprovalScene: React.FC<{ durationInFrames: number }> = ({ duration
         );
       })}
 
-      {/* the control Noah offers, and the promise printed under it */}
+      {/* the one control that starts the fix */}
       <NoahPanel
-        name="crop-cta-hover"
+        name="crop-cta"
         width={ITEM_W}
         y={ctaY - planOut * 360}
         radius={14}
-        scale={0.94 + ctaP * 0.06}
+        scale={(0.94 + ctaP * 0.06) * (1 + hover * 0.012 - press * 0.02)}
         opacity={ctaP * (1 - planOut)}
         blur={(1 - ctaP) * 10 + planOut * 8}
-        glow={ctaP * 0.8 * (1 - planOut)}
+        brightness={1 + hover * 0.09}
+        glow={ctaP * (0.8 + hover * 0.5) * (1 - planOut)}
       />
-      <UIFocus rect={ctaBox} at={FIX + 8} until={TYPED - 2} radius={14} dim={0.45} bloom={0.6} />
+      <UIFocus rect={ctaBox} at={FIX + 8} until={CLICK1 - 8} radius={14} dim={0.45} bloom={0.6} />
 
-      <NoahPanel
-        name="crop-talk-note"
-        width={890}
-        y={ctaY + ctaH / 2 + 28 + noteH / 2 - planOut * 360}
-        radius={10}
-        scale={0.95 + typedP * 0.05}
-        opacity={typedP * 0.95 * (1 - planOut)}
-        blur={(1 - typedP) * 8}
-        glow={0}
-      />
-      {/* so the plan gets changed in words, not clicks */}
-      <NoahPanel
-        name="crop-typed"
-        width={920}
-        y={ctaY + ctaH / 2 + 28 + noteH + 26 + typedH / 2 - planOut * 360}
-        tiltY={2}
-        radius={14}
-        scale={0.94 + typedP * 0.06}
-        opacity={typedP * (1 - planOut)}
-        blur={(1 - typedP) * 10}
-        glow={typedP * 0.6}
-      />
-
-      {/* and Noah still asks. This dialog is the whole product in one frame. */}
+      {/* Noah asks before it touches anything. This is the whole product. */}
       <NoahPanel
         name="crop-dialog"
         width={DIALOG_W}
         y={dialogY}
         tiltX={anim(frame, [DIALOG, DIALOG + 40], [4, 0], ease.soft)}
-        scale={0.9 + dlgP * 0.1}
-        opacity={dlgP}
-        blur={(1 - dlgP) * 16}
-        glow={dlgP * 1.25}
+        scale={(0.9 + dlgP * 0.1) * (1 - answered * 0.05)}
+        opacity={dlgP * (1 - answered * 0.62)}
+        blur={(1 - dlgP) * 16 + answered * 3}
+        glow={dlgP * 1.25 * (1 - answered * 0.7)}
       />
-      {/* click flash on the real approval control */}
-      {frame >= CLICK && (
+      {frame >= CLICK2 && (
         <div
           style={{
             position: 'absolute',
-            ...toStyle(regionRect('crop-dialog', DIALOG_W, GO_AHEAD, 0, dialogY)),
+            left: goAheadBox.x,
+            top: goAheadBox.y,
+            width: goAheadBox.w,
+            height: goAheadBox.h,
             borderRadius: 12,
             background: 'rgba(199,203,255,0.5)',
-            opacity: anim(frame, [CLICK, CLICK + 9], [0.8, 0], ease.out),
+            opacity: anim(frame, [CLICK2, CLICK2 + 9], [0.8, 0], ease.out),
             mixBlendMode: 'screen',
             zIndex: 55,
           }}
         />
       )}
 
-      {/* confirmation, straight from the capture */}
+      {/* and only then does it act — Noah's own confirmation */}
       <NoahPanel
-        name="crop-sent"
-        width={760}
-        y={sentY}
+        name="crop-approved"
+        width={700}
+        y={approvedY}
         radius={12}
         scale={0.94 + approved * 0.06}
         opacity={approved}
@@ -157,16 +147,38 @@ export const ApprovalScene: React.FC<{ durationInFrames: number }> = ({ duration
         glow={approved * 0.8}
       />
 
-      {/* cursor: hesitates, then commits */}
-      {frame >= DIALOG && <ApprovalCursor at={DIALOG + 12} clickAt={CLICK} dialogY={dialogY} />}
+      {/* one pointer, two gates: it reaches the button, waits, clicks — then
+          travels to Noah's question and waits again before answering it */}
+      {frame < DIALOG ? (
+        <AnimatedCursor
+          from={{ x: 902, y: 1664 }}
+          to={{ x: ctaBox.x + ctaBox.w * 0.53, y: ctaBox.y + ctaBox.h * 0.5 }}
+          at={FIX + 8}
+          travel={HOVER - (FIX + 8)}
+          clickAt={CLICK1}
+          bow={70}
+          size={46}
+        />
+      ) : (
+        <AnimatedCursor
+          from={{ x: ctaBox.x + ctaBox.w * 0.53, y: ctaBox.y + ctaBox.h * 0.5 }}
+          to={{ x: goAheadBox.x + goAheadBox.w * 0.42, y: goAheadBox.y + goAheadBox.h * 0.45 }}
+          at={DIALOG + 18}
+          travel={18}
+          clickAt={CLICK2}
+          appearAt={DIALOG - 12}
+          bow={54}
+          size={46}
+        />
+      )}
 
       <div style={{ position: 'absolute', left: safe.x, right: safe.x, top: PLAN.headline, zIndex: 50 }}>
-        <CinematicText at={STOP} until={FIX - 6} size={88} weight={700}>
+        <CinematicText at={STOP} until={FIX - 15} size={88} weight={700}>
           {copy.stop}
         </CinematicText>
         <CinematicText
           at={FIX}
-          until={DIALOG - 8}
+          until={DIALOG - 15}
           size={66}
           weight={600}
           color={theme.inkDim}
@@ -187,25 +199,3 @@ export const ApprovalScene: React.FC<{ durationInFrames: number }> = ({ duration
     </GlowBackground>
   );
 };
-
-const ApprovalCursor: React.FC<{ at: number; clickAt: number; dialogY: number }> = ({ at, clickAt, dialogY }) => {
-  const target = regionRect('crop-dialog', DIALOG_W, GO_AHEAD, 0, dialogY);
-  return (
-    <AnimatedCursor
-      from={{ x: 840, y: 1520 }}
-      to={{ x: target.x + target.w * 0.42, y: target.y + target.h * 0.45 }}
-      at={at}
-      travel={24}
-      clickAt={clickAt}
-      bow={64}
-      size={46}
-    />
-  );
-};
-
-const toStyle = (r: { x: number; y: number; w: number; h: number }) => ({
-  left: r.x,
-  top: r.y,
-  width: r.w,
-  height: r.h,
-});

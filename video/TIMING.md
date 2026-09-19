@@ -39,10 +39,12 @@ picture and sound land together by construction rather than by ear.
 | 14.05s | "Then found the real cause." | riser into subdued impact |
 | 15.15s | the four measurements | tick + bell |
 | 16.60s | "Then Noah stopped." | everything thins out |
-| 17.60s | "It showed me the fix…" | sweep, bell |
-| 18.65s | the plan changed in words | keyboard taps |
-| 19.45s | "Can Noah do this?" | riser, impact |
-| 20.45s | cursor clicks "Go ahead" | mouse click, bell |
+| 17.65s | "It showed me the fix…" — the action button appears | sweep, bell |
+| 18.50s | pointer reaches the button, which lifts | soft tick |
+| 18.80s | pointer clicks the button | mouse click, bell |
+| 19.25s | "Can Noah do this? / Noah needs your OK to continue." | riser, impact |
+| 20.45s | pointer clicks "Go ahead" | mouse click, bell |
+| 20.65s | "Approved: Action approved" | tick |
 | 21.32 / 21.92 / 22.52 / 23.12s | Diagnose / Explain / Approve / Fix | four rising impacts |
 | 24.05s | "Verify." | impact, key lifts to C major |
 | 25.15s | the re-measurement | resolving bells |

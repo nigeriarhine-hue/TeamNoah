@@ -26,6 +26,9 @@ type Props = {
   bow?: number;
   size?: number;
   opacity?: number;
+  /** Frame the pointer fades in. Defaults to 8 frames before the move starts;
+   *  set it earlier when handing off from another leg of the same journey. */
+  appearAt?: number;
   /** Render a soft ring on click. */
   ripple?: boolean;
 };
@@ -43,6 +46,7 @@ export const AnimatedCursor: React.FC<Props> = ({
   bow = 90,
   size = 46,
   opacity = 1,
+  appearAt,
   ripple = true,
 }) => {
   const frame = useCurrentFrame();
@@ -67,7 +71,8 @@ export const AnimatedCursor: React.FC<Props> = ({
   const rippleP =
     clickAt === undefined ? 0 : anim(frame, [clickAt, clickAt + 22], [0, 1], ease.out);
 
-  const appear = anim(frame, [at - 8, at + 2], [0, 1], ease.out);
+  const from0 = appearAt ?? at - 8;
+  const appear = anim(frame, [from0, from0 + 10], [0, 1], ease.out);
 
   return (
     <div

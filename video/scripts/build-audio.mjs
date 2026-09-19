@@ -39,10 +39,12 @@ const C = {
   diagnosis: S.diagnose + 0.45,
   tiles: S.diagnose + 1.55,
   stop: S.approval + 0.1,
-  showFix: S.approval + 1.1,
-  typed: S.approval + 2.15,
-  dialog: S.approval + 2.95,
-  click: S.approval + 3.95,
+  showFix: S.approval + 1.15,
+  hover: S.approval + 2.0,
+  clickAction: S.approval + 2.3,
+  dialog: S.approval + 2.75,
+  clickApprove: S.approval + 3.95,
+  approved: S.approval + 4.15,
   beat1: S.execution + 0.12,
   beat2: S.execution + 0.72,
   beat3: S.execution + 1.32,
@@ -307,16 +309,19 @@ pad(C.stop, 4.4, [N.A2, N.E3], { gain: 0.045, attack: 1.4, cutoff: 480, sweep: 4
 bell(C.stop, N.A3, { gain: 0.08, decay: 3.0, send: 0.95 });
 sweep(C.showFix - 0.1, 0.36, { gain: 0.04 });
 bell(C.showFix, N.E4, { gain: 0.055, decay: 1.8, pan: -0.2, send: 0.85 });
-for (let k = 0; k < 7; k++) keyTap(C.typed + k * 0.052, { gain: 0.055, pan: k % 2 ? 0.18 : -0.18 });
-tick(C.typed + 0.42, { gain: 0.07, freq: 1500 });
-// the ask
-riser(C.dialog - 0.45, 0.45, { gain: 0.05, toF: 4800 });
+// the pointer settles on the button, waits, then commits
+tick(C.hover, { gain: 0.05, freq: 1400, decay: 0.05 });
+mouseClick(C.clickAction, { gain: 0.24 });
+bell(C.clickAction + 0.02, N.E4, { gain: 0.06, decay: 1.3, pan: -0.15, send: 0.8 });
+// and Noah asks anyway
+riser(C.dialog - 0.4, 0.4, { gain: 0.05, toF: 4800 });
 impact(C.dialog, { gain: 0.19, from: 130, to: 38, decay: 0.5, noiseAmt: 0.12 });
 bell(C.dialog + 0.01, N.C5, { gain: 0.06, decay: 2.2, send: 0.9 });
-// the pause before the click is deliberately empty
-mouseClick(C.click, { gain: 0.3 });
-bell(C.click + 0.02, N.A4, { gain: 0.085, decay: 1.6, send: 0.8 });
-impact(C.click + 0.02, { gain: 0.16, from: 120, to: 44, decay: 0.34, noiseAmt: 0.1 });
+// the pause before answering is deliberately empty
+mouseClick(C.clickApprove, { gain: 0.3 });
+bell(C.clickApprove + 0.02, N.A4, { gain: 0.085, decay: 1.6, send: 0.8 });
+impact(C.clickApprove + 0.02, { gain: 0.16, from: 120, to: 44, decay: 0.34, noiseAmt: 0.1 });
+tick(C.approved, { gain: 0.06, freq: 2200 });
 
 // SCENE 7 — execution. The cadence, accelerating.
 sub(S.execution, 2.9, N.A1, { gain: 0.13, attack: 0.08, release: 0.7 });

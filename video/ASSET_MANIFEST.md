@@ -18,10 +18,16 @@ Eleven screenshots of one continuous Noah session on Windows, captured
 | `IMG_0587.jpeg` | All checks done, "Thinking… 5s" |
 | `IMG_0588.jpeg` | The plan: SITUATION, WHAT NOAH CHECKED, WHAT NOAH WOULD DO, action button |
 | `IMG_0591.jpeg` | Same screen, pointer hovering the action button |
-| `IMG_0592.jpeg` | The plan changed in words instead: "stop teams from auto starting and clear temp files" |
+| `IMG_0592.jpeg` | *(not used — see the note below)* |
 | `IMG_0593.jpeg` | Permission dialog: "Can Noah do this? / Noah needs your OK to continue." |
-| `IMG_0594.jpeg` | Button now "✓ Sent"; "Approved: Action approved"; execution starts |
+| `IMG_0594.jpeg` | "Approved: Action approved"; execution starts |
 | `IMG_0595.jpeg` | RESULT "Done.", with the same measurements taken again |
+
+`IMG_0592.jpeg` shows the plan being amended by typing rather than clicking.
+**Noah is approved by clicking, so that path is not a product capability and is
+not depicted anywhere in the film.** Nothing is cut from that capture, and the
+approval sequence uses only the two real gates: the plan's action button
+(IMG_0588 / IMG_0591) and the permission dialog (IMG_0593).
 
 `Photos-1-001 (5)/` holds duplicates of 0587, 0591 and 0594 and is unused.
 
@@ -37,7 +43,7 @@ as vector SVG and never re-drawn, recoloured or stretched.
 | 8.30–10.80 | Enter Noah | app icon; `crop-bubble`; `card-listening` | brand-pack, IMG_0583 |
 | 10.80–13.60 | Investigation | `card-listening` → `card-checks-2` → `card-checks-4` → `card-thinking` → `card-thinking-5s` | IMG_0583–0587 |
 | 13.60–16.50 | The real cause | `crop-situation`; `tile-startup`, `tile-background`, `tile-disk`, `tile-installers` | IMG_0588 |
-| 16.50–21.20 | The trust moment | `plan-item-1…4`; `crop-cta-hover`; `crop-talk-note`; `crop-typed`; `crop-dialog`; `crop-sent` | IMG_0588, 0591, 0592, 0593, 0594 |
+| 16.50–21.20 | The trust moment | `plan-item-1…4`; `crop-cta`; `crop-dialog`; `crop-approved` | IMG_0588, 0593, 0594 |
 | 21.20–24.00 | Execution | `tile-startup` + `tile-background`; `crop-situation`; `crop-dialog`; `crop-executing` | IMG_0588, 0593, 0594 |
 | 24.00–26.70 | Verification | `crop-done`; `res-startup`, `res-temp`, `res-boot` | IMG_0595 |
 | 26.70–31.40 | Brand and CTA | Noah mark (SVG) | brand-pack |
@@ -61,18 +67,15 @@ slight contrast lift. Regions are in source-image pixels.
 | `pane-thinking-5s` | IMG_0587.jpeg | 331,34 839x936 | 1678x1872 |
 | `pane-plan` | IMG_0588.jpeg | 331,30 839x936 | 1678x1872 |
 | `pane-plan-hover` | IMG_0591.jpeg | 331,30 839x936 | 1678x1872 |
-| `pane-plan-typed` | IMG_0592.jpeg | 331,33 839x936 | 1678x1872 |
 | `pane-sent` | IMG_0594.jpeg | 331,31 839x936 | 1678x1872 |
 | `pane-result` | IMG_0595.jpeg | 331,30 839x936 | 1678x1872 |
 | `crop-situation` | IMG_0588.jpeg | 378,108 762x168 | 2286x504 |
 | `crop-checked` | IMG_0588.jpeg | 386,280 744x162 | 2232x486 |
 | `crop-plan-list` | IMG_0588.jpeg | 386,452 744x294 | 2232x882 |
 | `crop-cta` | IMG_0588.jpeg | 386,757 728x70 | 2184x210 |
-| `crop-talk-note` | IMG_0588.jpeg | 400,932 712x40 | 2136x120 |
 | `crop-cta-hover` | IMG_0591.jpeg | 386,760 728x70 | 2184x210 |
-| `crop-typed` | IMG_0592.jpeg | 378,871 756x72 | 2268x216 |
 | `crop-dialog` | IMG_0593.jpeg | 330,375 514x270 | 1542x810 |
-| `crop-sent` | IMG_0594.jpeg | 386,506 728x62 | 2184x186 |
+| `crop-approved` | IMG_0594.jpeg | 372,713 520x54 | 2080x216 |
 | `crop-executing` | IMG_0594.jpeg | 378,796 756x108 | 2268x324 |
 | `crop-done` | IMG_0595.jpeg | 386,318 744x168 | 2232x504 |
 | `crop-verify` | IMG_0595.jpeg | 386,534 744x88 | 2232x264 |
@@ -105,4 +108,9 @@ slight contrast lift. Regions are in source-image pixels.
   logo or forum is depicted, so no third party appears to endorse Noah.
 - **The wait spinner in the opening is an abstract symbol**, not any operating
   system's UI.
+- **The approval sequence is click-only.** The pointer moves to the plan's
+  action button, waits, clicks; Noah then asks "Can Noah do this? / Noah needs
+  your OK to continue."; the pointer moves to "Go ahead", waits, clicks. The
+  button's hover lift and the click compression are added motion, not
+  fabricated UI — the labels and states are the captures'.
 - Everything else on screen is a real Noah capture.

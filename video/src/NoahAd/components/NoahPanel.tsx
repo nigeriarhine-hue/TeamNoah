@@ -17,6 +17,7 @@ type Props = {
   scale?: number;
   opacity?: number;
   blur?: number;
+  brightness?: number;
   glow?: number;
   radius?: number;
   style?: React.CSSProperties;
@@ -36,6 +37,7 @@ export const NoahPanel: React.FC<Props> = ({
   scale = 1,
   opacity = 1,
   blur = 0,
+  brightness = 1,
   glow = 1,
   radius,
   style,
@@ -51,6 +53,7 @@ export const NoahPanel: React.FC<Props> = ({
     scale={scale}
     opacity={opacity}
     blur={blur}
+    brightness={brightness}
     glow={glow}
     style={style}
   >
