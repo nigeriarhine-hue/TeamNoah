@@ -8,11 +8,14 @@ here. Any ONE of the options below fixes it.
 
 | Save as | URL |
 |---|---|
-| `public/ugc/mac-list/video3-reference.png` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260918_022104_9b866a6b-deaf-469f-9469-6057da1e7a72.png |
-| `public/ugc/mac-list/video3-list-a.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260918_022852_c55c12c3-c38f-4572-8b0c-4c5237e70c41.mp4 |
-| `public/ugc/mac-list/video3-list-b.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260918_022852_a1dab046-a66c-44d7-a120-37029f531782.mp4 |
+| `public/ugc/mac-list/video3-reference.png` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png |
+| `public/ugc/mac-list/video3-list-a.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_193237_7d6fa9ee-b281-49da-b940-30d170253ea5.mp4 |
+| `public/ugc/mac-list/video3-list-b.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_193237_f6d8adbe-af4a-4725-bb5e-b6aca59d5f58.mp4 |
 
 The filenames matter — `scripts/check-assets.mjs` looks for exactly these.
+
+These are the CURRENT assets, shot with the recurring character
+`mara-mac-creator` (Higgsfield element `2eecef95-b486-4bb9-a7dd-86f61831ec16`).
 
 ## Option 1 — do it from your machine (2 minutes, works right now)
 
@@ -21,14 +24,16 @@ git clone https://github.com/nigeriarhine-hue/TeamNoah.git
 cd TeamNoah && git checkout claude/practical-knuth-2ozmlo
 mkdir -p public/ugc/mac-list
 B=https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb
-curl -o public/ugc/mac-list/video3-reference.png "$B/hf_20260918_022104_9b866a6b-deaf-469f-9469-6057da1e7a72.png"
-curl -o public/ugc/mac-list/video3-list-a.mp4   "$B/hf_20260918_022852_c55c12c3-c38f-4572-8b0c-4c5237e70c41.mp4"
-curl -o public/ugc/mac-list/video3-list-b.mp4   "$B/hf_20260918_022852_a1dab046-a66c-44d7-a120-37029f531782.mp4"
+curl -o public/ugc/mac-list/video3-reference.png "$B/hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png"
+curl -o public/ugc/mac-list/video3-list-a.mp4   "$B/hf_20260919_193237_7d6fa9ee-b281-49da-b940-30d170253ea5.mp4"
+curl -o public/ugc/mac-list/video3-list-b.mp4   "$B/hf_20260919_193237_f6d8adbe-af4a-4725-bb5e-b6aca59d5f58.mp4"
 
 npm install
 node scripts/check-assets.mjs          # should print all three true
 npx remotion render src/index.ts MacList out/noah-things-i-wont-do.mp4
 ```
+
+Or just `bash scripts/finish.sh`, which does all of the above.
 
 Commit and push the three files and I can render here too.
 
