@@ -24,8 +24,10 @@ as the end card, so the two read as one system.
 
 - Cut to the insert **on a word, not on a pause** — the dialogue running underneath is what
   sells it as one continuous moment rather than a slideshow.
-- Scale the insert to ~96% and let it drift ~1% over its length. A perfectly static screengrab
-  reads as a screenshot; a hair of movement reads as a shot.
+- **Not yet done:** the inserts in the delivered cut are static. A ~1% drift over each
+  insert's length would help — a perfectly still screengrab reads as a screenshot, a hair of
+  movement reads as a shot. Left out because `zoompan` tends to judder on a still and there
+  was no way to eyeball the result from here; it's a two-minute fix in any NLE.
 - Keep the live-action room tone under every insert. Silence under a cutaway kills it.
 - Shots 4/5/6 were framed deliberately soft on the monitor so there's no clash between the
   out-of-focus glow in the take and the sharp UI in the insert.
