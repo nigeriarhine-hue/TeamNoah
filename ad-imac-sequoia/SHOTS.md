@@ -21,7 +21,7 @@ any shot against the same anchor and the casting holds.
 
 | # | Dur | Job ID | Keyframe | Line |
 |---|---|---|---|---|
-| 1 | 5s | `a0384fe3-9831-4c5e-91df-95190c0fdcd1` | Tom alone | "Ell? Can you come here a sec?" |
+| 1 | 7s | `d3b5c6d9-692a-4985-82f2-1e2304291155` | Tom alone | "Ell? Can you come here a sec?" |
 | 2 | 7s | `c0768d7d-21ac-4b65-b056-0ff67fb70f72` | establishing | "What's it doing." / "It boots into Sequoia now…" |
 | 3 | 7s | `086bd0b2-6d71-4197-a541-c69ac05933f6` | over-shoulder | "It's just slower…" / "So ask Noah." |
 | 4 | 5s | `a4bd00a5-cde2-47df-b12b-79db01669715` | over-shoulder | "...All of that?" / "All of that." |
@@ -29,6 +29,17 @@ any shot against the same anchor and the casting holds.
 | 6 | 5s | `980cf81e-8d34-4a0f-b455-0e61cad294ef` | reaction | "Huh." / "Mm-hm." |
 
 Spend: 4 keyframes + 6 takes, roughly 100 credits of the 2858 on the account.
+
+## Take 1 was re-rolled
+
+The original (`a0384fe3-9831-4c5e-91df-95190c0fdcd1`, 5s) ran the line to the final
+sample — speech still at full level 0.04s from the end — so "sec" was cut mid-word.
+Re-rolled at 7s asking for the line early and a held beat after: speech now ends at
+6.70s of 7.04s, leaving 0.34s of room tone to cut on.
+
+Worth knowing for future re-rolls: Kling paces the performance to **fill** whatever
+duration it is given. A longer take does not reliably buy trailing air — it mostly
+spreads the delivery. Ask for the held beat explicitly, then measure the result.
 
 ## If you re-roll a take
 

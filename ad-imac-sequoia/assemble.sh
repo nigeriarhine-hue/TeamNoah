@@ -7,7 +7,8 @@ set -euo pipefail
 CDN="https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb"
 RAW="https://raw.githubusercontent.com/nigeriarhine-hue/TeamNoah/claude/laughing-bohr-80al6h/ad-imac-sequoia/screens"
 
-curl -sS -o t1.mp4 "$CDN/hf_20260919_182220_a0384fe3-9831-4c5e-91df-95190c0fdcd1.mp4"
+# take 1 re-rolled at 7s: the 5s original ran the line to the last sample and cut "sec"
+curl -sS -o t1.mp4 "$CDN/hf_20260919_185748_d3b5c6d9-692a-4985-82f2-1e2304291155.mp4"
 curl -sS -o t2.mp4 "$CDN/hf_20260919_182254_c0768d7d-21ac-4b65-b056-0ff67fb70f72.mp4"
 curl -sS -o t3.mp4 "$CDN/hf_20260919_182220_086bd0b2-6d71-4197-a541-c69ac05933f6.mp4"
 curl -sS -o t4.mp4 "$CDN/hf_20260919_182255_a4bd00a5-cde2-47df-b12b-79db01669715.mp4"
@@ -48,6 +49,19 @@ ffmpeg -v error -y -loop 1 -t 4 -i s05.png -f lavfi -t 4 \
  -i anullsrc=channel_layout=stereo:sample_rate=48000 \
  -vf "scale=1920:1080,setsar=1,fps=30,format=yuv420p" $ENC -r 30 seg7.mp4
 
-for n in 1 2 3 4 5 6 7; do echo "file 'seg$n.mp4'"; done > list.txt
-ffmpeg -v error -y -f concat -safe 0 -i list.txt -c copy noah-its-just-slower-v1.mp4
-ffprobe -v error -show_entries format=duration -of csv=p=0 noah-its-just-slower-v1.mp4
+# --- 1->2 dissolve, placed off the MEASURED end of speech ---------------------
+# Kling paces a performance to fill whatever duration it is given, so the tail
+# of a take is never a reliable length. Guessing the offset put the crossfade
+# on top of the last word once already. Measure it instead: find where the
+# speech envelope drops back to the room-tone floor, and start the dissolve
+# after that. speech_end.py prints "<offset> <duration>".
+read OFF D REST < <(python3 speech_end.py seg1.mp4)
+echo "dissolve: offset=${OFF}s duration=${D}s"
+ffmpeg -v error -y -i seg1.mp4 -i seg2.mp4 -filter_complex \
+"[0:v][1:v]xfade=transition=fade:duration=$D:offset=$OFF[v];\
+ [0:a][1:a]acrossfade=d=$D:c1=tri:c2=tri[a]" \
+-map "[v]" -map "[a]" $ENC -r 30 segA.mp4
+
+{ echo "file 'segA.mp4'"; for n in 3 4 5 6 7; do echo "file 'seg$n.mp4'"; done; } > list.txt
+ffmpeg -v error -y -f concat -safe 0 -i list.txt -c copy noah-its-just-slower-v3.mp4
+ffprobe -v error -show_entries format=duration -of csv=p=0 noah-its-just-slower-v3.mp4
