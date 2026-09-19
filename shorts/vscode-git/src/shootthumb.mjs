@@ -1,0 +1,10 @@
+import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import { dirname, join } from 'node:path'; import { fileURLToPath } from 'node:url';
+const HERE = dirname(fileURLToPath(import.meta.url));
+const b = await chromium.launch({ args:['--no-sandbox','--force-color-profile=srgb','--font-render-hinting=none','--hide-scrollbars','--use-gl=swiftshader','--enable-unsafe-swiftshader'] });
+const p = await b.newPage({ viewport:{width:1080,height:1920}, deviceScaleFactor:1 });
+await p.goto('file://'+join(HERE,'thumb.html'), { waitUntil:'load' });
+await p.evaluate(()=>document.fonts.ready); await p.waitForTimeout(500);
+await p.screenshot({ path: join(HERE,'noah-vscode-git-thumb.png'), type:'png' });
+await p.screenshot({ path: join(HERE,'noah-vscode-git-thumb.jpg'), type:'jpeg', quality:95 });
+await b.close(); console.log('thumb rendered');

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Noah short — cover</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* cover-only: richer background than the video, since nothing moves to carry it */
+  .blob{opacity:.92}
+  #wash{background:linear-gradient(180deg,rgba(255,255,255,.50) 0%,rgba(255,255,255,.06) 30%,rgba(255,255,255,.10) 62%,rgba(255,255,255,.66) 100%)}
+  #grain{opacity:.26}
+  .quote{font-weight:900;letter-spacing:-.045em;line-height:.92}
+  .slab{
+    position:absolute;border-radius:30px;padding:16px 30px;font-size:34px;font-weight:850;
+    letter-spacing:.02em;box-shadow:var(--shadow-sm);
+  }
+</style>
+</head>
+<body>
+<div id="root">
+
+  <div id="bg">
+    <div class="blob b1" id="blob1" style="transform:translate3d(-160px,40px,0) scale(1.06)"></div>
+    <div class="blob b2" id="blob2" style="transform:translate3d(430px,-250px,0) scale(1.02)"></div>
+    <div class="blob b3" id="blob3" style="transform:translate3d(-190px,1120px,0) scale(1.08)"></div>
+    <div class="blob b4" id="blob4" style="transform:translate3d(300px,1210px,0) scale(1.0)"></div>
+    <div class="blob b5" id="blob5" style="transform:translate3d(600px,560px,0) scale(.96)"></div>
+  </div>
+  <div id="wash"></div>
+  <div id="grain"></div>
+  <div id="vignette"></div>
+
+  <div style="position:absolute;inset:0;z-index:5">
+
+    <!-- eyebrow -->
+    <div style="position:absolute;left:84px;top:250px">
+      <div class="pillLabel" style="font-size:29px;padding:16px 34px">
+        <span class="dot" style="background:var(--coral)"></span>macOS Golden Gate
+      </div>
+    </div>
+
+    <!-- the absurd claim -->
+    <div style="position:absolute;left:84px;top:366px;font-size:62px;font-weight:800;color:var(--ink-2);letter-spacing:-.02em">
+      VS&nbsp;Code said
+    </div>
+
+    <div style="position:absolute;left:78px;top:452px" class="quote">
+      <div style="font-size:166px;color:var(--ink)">“git isn’t</div>
+      <div style="font-size:166px;margin-top:6px" class="grad-warm">installed”</div>
+    </div>
+
+    <!-- and the machine disagreeing, right underneath -->
+    <div style="position:absolute;left:70px;top:830px">
+      <div class="term" style="width:940px">
+        <div class="termBar">
+          <i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i>
+          <span>zsh — ~</span>
+        </div>
+        <div class="termBody" style="font-size:33px;padding:32px 38px 36px">
+          <div><span class="p">$</span> <span class="c">git --version</span></div>
+          <div><span class="o">git version 2.54.0 (Apple Git-157)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- the stamp that sells the contradiction -->
+    <div style="position:absolute;left:846px;top:766px;width:168px;height:168px;border-radius:50%;
+                background:linear-gradient(135deg,#0FCFA0,#23A9FF);display:grid;place-items:center;
+                color:#fff;font-size:86px;font-weight:900;
+                box-shadow:0 30px 60px -18px rgba(15,207,160,.80)">✓</div>
+
+    <!-- payoff -->
+    <div style="position:absolute;left:84px;top:1150px;font-size:96px;font-weight:900;
+                letter-spacing:-.038em;line-height:.98;color:var(--ink)">
+      It was there
+    </div>
+    <div style="position:absolute;left:84px;top:1250px;font-size:96px;font-weight:900;
+                letter-spacing:-.038em;line-height:.98" class="grad-cool">
+      the whole time.
+    </div>
+
+    <!-- what actually broke -->
+    <div style="position:absolute;left:84px;top:1396px;display:flex;align-items:center;gap:18px">
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--coral);color:#fff;
+                  display:grid;place-items:center;font-size:30px;font-weight:900;flex:none">✕</div>
+      <div class="mono" style="font-size:36px;font-weight:600;color:#D62B4C">
+        /usr/local/bin/git
+      </div>
+      <div style="font-size:32px;font-weight:700;color:var(--ink-3)">— dead symlink</div>
+    </div>
+
+    <!-- sign-off -->
+    <div style="position:absolute;left:84px;top:1520px;display:flex;align-items:center;gap:26px">
+      <!-- brand-pack/svg/noah-mark-light.svg, unaltered -->
+      <svg width="104" height="104" viewBox="0 0 120 120" role="img" aria-label="Noah" style="flex:none;display:block">
+        <defs>
+          <clipPath id="tmC"><circle cx="60" cy="58" r="34"/></clipPath>
+          <linearGradient id="tmA" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(37,99,235,0.068)"/><stop offset="1" stop-color="rgba(37,99,235,0.150)"/></linearGradient>
+          <linearGradient id="tmB" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+        </defs>
+        <g clip-path="url(#tmC)">
+          <rect x="24" y="22" width="72" height="52" fill="url(#tmA)"/>
+          <rect x="24" y="74" width="72" height="20" fill="url(#tmB)"/>
+        </g>
+        <circle cx="60" cy="58" r="34" fill="none" stroke="#1A1D61" stroke-width="7"/>
+        <line x1="16" y1="74" x2="104" y2="74" stroke="#1A1D61" stroke-width="7" stroke-linecap="butt"/>
+      </svg>
+      <div>
+        <div style="font-size:58px;font-weight:900;letter-spacing:-.03em">Noah</div>
+        <div style="font-size:30px;font-weight:700;color:var(--mint);margin-top:2px">Fixed in 1 attempt</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
