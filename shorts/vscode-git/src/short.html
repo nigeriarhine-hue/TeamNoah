@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Noah — the git that was already there</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="root">
+
+  <!-- ============ BACKGROUND ============ -->
+  <div id="bg">
+    <div class="blob b1" id="blob1"></div>
+    <div class="blob b2" id="blob2"></div>
+    <div class="blob b3" id="blob3"></div>
+    <div class="blob b4" id="blob4"></div>
+    <div class="blob b5" id="blob5"></div>
+  </div>
+  <div id="wash"></div>
+  <div id="sweep"></div>
+  <div id="grain"></div>
+  <div id="vignette"></div>
+
+  <div id="scenes">
+
+  <!-- ============ S1 — HOOK ============ -->
+  <section class="scene" id="s1">
+    <div class="layer" id="s1pill" style="left:90px;top:370px">
+      <div class="pillLabel"><span class="dot" style="background:var(--coral)"></span>macOS Golden Gate</div>
+    </div>
+
+    <div class="layer" id="s1l1" style="left:90px;top:470px">
+      <div class="display" style="font-size:78px;color:var(--ink-2);font-weight:800">VS Code says</div>
+    </div>
+    <div class="layer" id="s1l2" style="left:90px;top:562px">
+      <div class="display" style="font-size:146px">git isn’t</div>
+    </div>
+    <div class="layer" id="s1l3" style="left:90px;top:710px">
+      <div class="display grad-warm" style="font-size:146px">installed.</div>
+    </div>
+
+    <div class="layer" id="s1term" style="left:70px;top:980px">
+      <div class="term" style="width:940px">
+        <div class="termBar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>zsh — ~</span></div>
+        <div class="termBody">
+          <div><span class="p">$</span> <span class="c" id="s1cmd"></span></div>
+          <div id="s1out"><span class="o">git version 2.54.0 (Apple Git-157)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer" id="s1stamp" style="left:852px;top:916px">
+      <div style="width:150px;height:150px;border-radius:50%;background:linear-gradient(135deg,#0FCFA0,#23A9FF);
+                  display:grid;place-items:center;box-shadow:0 26px 54px -16px rgba(15,207,160,.75);
+                  color:#fff;font-size:76px;font-weight:900">✓</div>
+    </div>
+
+    <div class="layer" id="s1kick" style="left:90px;top:1360px">
+      <div class="display" style="font-size:72px;color:var(--ink)">…it’s right there.</div>
+    </div>
+  </section>
+
+  <!-- ============ S2 — WHAT THEY SAID ============ -->
+  <section class="scene" id="s2">
+    <div class="layer" id="s2kick" style="left:90px;top:540px">
+      <div class="pillLabel"><span class="dot" style="background:var(--grape)"></span>What they said</div>
+    </div>
+    <div class="layer" id="s2bub" style="left:90px;top:650px">
+      <div class="bubble them" style="width:900px">
+        After upgrading to <b style="font-weight:850">macOS Golden Gate</b>, VS&nbsp;Code thinks I don’t have git installed — but the <span class="mono" style="font-size:36px;background:rgba(255,77,109,.10);padding:3px 12px;border-radius:10px;color:#D62B4C">git</span> command works and Xcode Command Line Tools are already installed.
+      </div>
+    </div>
+    <div class="layer" id="s2meta" style="left:90px;top:1290px">
+      <div style="display:flex;gap:18px;align-items:center">
+        <div class="pillLabel" style="text-transform:none;letter-spacing:.02em;font-size:28px;font-weight:700">
+          <span class="dot" style="background:var(--tangerine)"></span>1 attempt
+        </div>
+        <div class="pillLabel" style="text-transform:none;letter-spacing:.02em;font-size:28px;font-weight:700">
+          <span class="dot" style="background:var(--mint)"></span>2026-09-15 · fixed
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ S3 — NOAH TAKES IT ============ -->
+  <section class="scene" id="s3">
+    <div class="layer" id="s3win" style="left:-190px;top:605px">
+      <div class="noahWin">
+        <div class="nwBar">
+          <div class="nwDots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></div>
+          <div class="nwTitle">Noah</div>
+        </div>
+
+        <div class="nwSide">
+          <div class="sideBtn">＋ New chat</div>
+          <div class="sideBtn">▤ Knowledge</div>
+          <div class="sideSec">Today</div>
+          <div class="chatItem sel"><b>VS Code can’t find git</b><span>10:42 AM</span></div>
+          <div class="sideSec">Earlier</div>
+          <div class="chatItem"><b>Golden Gate upgrade check</b><span>Sep 14, 09:12 AM</span></div>
+          <div class="chatItem"><b>Xcode tools reinstall</b><span>Sep 12, 04:31 PM</span></div>
+          <div class="chatItem"><b>Homebrew cleanup</b><span>Sep 09, 11:05 AM</span></div>
+        </div>
+
+        <div class="nwMain">
+          <div class="nwHead">
+            <div class="chk">✓</div>
+            <h4>What Noah did</h4>
+            <div class="dur">· 2m 06s</div>
+            <div class="sw">Show work ⌄</div>
+          </div>
+
+          <div class="nwCard">
+            <div class="secLbl">— Situation</div>
+            <div class="sitTxt">Your shell and VS&nbsp;Code are both finding an <em>old Homebrew git symlink</em> that points at a folder Golden Gate removed. Apple’s own git is installed and healthy.</div>
+
+            <div class="metricRow">
+              <div class="metric"><div class="mk">First on PATH</div><div class="mv" style="color:var(--coral)">/usr/local/bin</div><div class="ms">Intel Homebrew</div></div>
+              <div class="metric"><div class="mk">That symlink</div><div class="mv" style="color:var(--coral)">broken</div><div class="ms">target missing</div></div>
+              <div class="metric"><div class="mk">Apple git</div><div class="mv" style="color:var(--mint)">2.54.0</div><div class="ms">/usr/bin/git — ok</div></div>
+              <div class="metric"><div class="mk">Xcode CLT</div><div class="mv" style="color:var(--sky)">installed</div><div class="ms">not the problem</div></div>
+            </div>
+
+            <div class="secLbl" style="margin-top:28px">— What Noah would do</div>
+            <div class="planRow"><div class="planNum">1</div><div><b>Trash the dead Homebrew symlink</b><span>/usr/local/bin/git — reversible, it’s only a link</span></div></div>
+            <div class="planRow"><div class="planNum">2</div><div><b>Let the shell fall back to Apple’s git</b><span>/usr/bin/git — already on your machine</span></div></div>
+            <div class="ctaBtn">Fix the git path →</div>
+          </div>
+
+          <div class="nwInput">…or tell Noah to do it differently</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer" id="s3cap" style="left:90px;top:250px">
+      <div class="pillLabel"><span class="dot" style="background:var(--sky)"></span>So they asked Noah</div>
+    </div>
+    <div class="layer" id="s3cap2" style="left:90px;top:340px">
+      <div class="display" style="font-size:104px">It read the<br><span class="grad-cool">whole path.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ S4 — WHAT NOAH CHECKED ============ -->
+  <section class="scene" id="s4">
+    <div class="layer" id="s4kick" style="left:100px;top:290px">
+      <div class="kicker">— What Noah checked</div>
+      <div class="display" style="font-size:96px;margin-top:18px">Four checks.<br><span class="grad-cool">No guessing.</span></div>
+    </div>
+
+    <div class="layer tile" id="s4t1" style="left:100px;top:640px">
+      <div class="tileIcon" style="background:linear-gradient(135deg,#FF4D6D,#FF922B)">➔</div>
+      <div><div class="tileK">Which git wins</div>
+        <div class="tileV mono" style="font-size:38px;color:var(--coral)">/usr/local/bin/git</div>
+        <div class="tileS">First match in <span class="mono">$PATH</span></div></div>
+    </div>
+
+    <div class="layer tile" id="s4t2" style="left:100px;top:878px">
+      <div class="tileIcon" style="background:linear-gradient(135deg,#FF4D6D,#FF6FC4)">✕</div>
+      <div><div class="tileK">That file</div>
+        <div class="tileV" style="color:var(--coral)">Broken symlink</div>
+        <div class="tileS">Points at <span class="mono">Cellar/git/2.39.1</span> — deleted</div></div>
+      <div class="tileFlag" style="background:rgba(255,77,109,.12);color:#D62B4C">cause</div>
+    </div>
+
+    <div class="layer tile" id="s4t3" style="left:100px;top:1116px">
+      <div class="tileIcon" style="background:linear-gradient(135deg,#0FCFA0,#23A9FF)">✓</div>
+      <div><div class="tileK">Apple’s git</div>
+        <div class="tileV mono" style="font-size:38px;color:var(--mint)">/usr/bin/git</div>
+        <div class="tileS">2.54.0 (Apple Git-157) — healthy</div></div>
+    </div>
+
+    <div class="layer tile" id="s4t4" style="left:100px;top:1354px">
+      <div class="tileIcon" style="background:linear-gradient(135deg,#23A9FF,#8B5CF6)">✓</div>
+      <div><div class="tileK">Xcode command line tools</div>
+        <div class="tileV" style="color:var(--sky)">Installed</div>
+        <div class="tileS">You were right — not the problem</div></div>
+      <div class="tileFlag" style="background:rgba(35,169,255,.12);color:#0E7BC4">clear</div>
+    </div>
+  </section>
+
+  <!-- ============ S5 — THE CULPRIT ============ -->
+  <section class="scene" id="s5">
+    <div class="layer" id="s5kick" style="left:100px;top:320px">
+      <div class="pillLabel"><span class="dot" style="background:var(--coral)"></span>The culprit</div>
+      <div class="display" style="font-size:98px;margin-top:22px">One dead<br><span class="grad-warm">shortcut.</span></div>
+    </div>
+
+    <div class="layer" id="s5box" style="left:70px;top:700px">
+      <div class="linkBox">
+        <div class="secLbl">Symlink</div>
+        <div class="pathChip" id="s5from" style="background:rgba(255,77,109,.09);border:1px solid rgba(255,77,109,.28);color:#D62B4C">
+          <span>🔗</span><span>/usr/local/bin/git</span>
+        </div>
+        <div class="arrowWrap">
+          <div id="s5arrow" style="font-size:48px;color:var(--ink-3)">↓</div>
+        </div>
+        <div class="pathChip" id="s5to" style="background:#F6F7FB;border:1px dashed rgba(16,23,51,.26);color:var(--ink-3);position:relative">
+          <span>📁</span><span style="font-size:30px">/usr/local/Cellar/git/2.39.1/bin/git</span>
+          <div id="s5strike" style="position:absolute;left:26px;right:26px;top:calc(50% - 2px);height:4px;border-radius:4px;background:var(--coral);transform-origin:left center;transform:scaleX(0)"></div>
+        </div>
+        <div id="s5gone" style="margin-top:22px;display:flex;align-items:center;gap:16px">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--coral);color:#fff;display:grid;place-items:center;font-size:26px;font-weight:900">✕</div>
+          <div style="font-size:31px;font-weight:750;color:var(--coral)">No such file or directory</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer" id="s5expl" style="left:100px;top:1420px">
+      <div style="font-size:42px;line-height:1.36;font-weight:650;color:var(--ink-2);width:900px">
+        Intel Homebrew left the link behind. <b style="color:var(--ink);font-weight:850">VS&nbsp;Code followed it, hit nothing, and gave up.</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ S6 — THE FIX ============ -->
+  <section class="scene" id="s6">
+    <div class="layer" id="s6kick" style="left:100px;top:320px">
+      <div class="kicker">— What Noah did</div>
+      <div class="display" style="font-size:98px;margin-top:18px">Delete the link.<br><span class="grad-cool">That’s it.</span></div>
+    </div>
+
+    <div class="layer" id="s6card" style="left:70px;top:680px">
+      <div class="card" style="width:940px;padding:48px 50px">
+        <div class="planRow" id="s6p1" style="margin-top:0">
+          <div class="planNum" style="width:48px;height:48px;font-size:25px">1</div>
+          <div><b style="font-size:35px">Move the dead symlink to the Trash</b>
+            <span class="mono" style="font-size:26px;display:block;margin-top:6px">mac_move_to_trash(["/usr/local/bin/git"])</span></div>
+        </div>
+        <div class="planRow" id="s6p2" style="margin-top:34px">
+          <div class="planNum" style="width:48px;height:48px;font-size:25px">2</div>
+          <div><b style="font-size:35px">Let the shell fall through to Apple’s git</b>
+            <span style="font-size:26px;display:block;margin-top:6px">Nothing installed. Nothing downloaded.</span></div>
+        </div>
+        <div class="planRow" id="s6p3" style="margin-top:34px">
+          <div class="planNum" style="width:48px;height:48px;font-size:25px">3</div>
+          <div><b style="font-size:35px">Re-check what VS&nbsp;Code resolves</b>
+            <span style="font-size:26px;display:block;margin-top:6px">Confirm before calling it done</span></div>
+        </div>
+
+        <div id="s6btn" style="margin-top:46px;height:104px;border-radius:26px;display:grid;place-items:center;
+             background:linear-gradient(97deg,#FF4D6D,#FF6FC4 45%,#8B5CF6);color:#fff;font-size:38px;font-weight:850;
+             box-shadow:0 22px 48px -18px rgba(139,92,246,.80);position:relative;overflow:hidden">
+          <span id="s6btnTxt">Fix the git path →</span>
+        </div>
+        <div id="s6sent" style="margin-top:-104px;height:104px;border-radius:26px;display:grid;place-items:center;
+             background:rgba(15,207,160,.12);border:1px solid rgba(15,207,160,.45);color:#0B9C79;font-size:38px;font-weight:850;opacity:0">
+          ✓ Sent
+        </div>
+      </div>
+    </div>
+
+    <div class="layer" id="s6cursor" style="left:660px;top:1620px">
+      <svg width="58" height="72" viewBox="0 0 24 30"><path d="M3 2 L3 23 L8.5 18 L12 27 L16 25 L12.5 16.5 L20 16 Z"
+        fill="#fff" stroke="#101733" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- ============ S7 — PROOF ============ -->
+  <section class="scene" id="s7">
+    <div class="layer" id="s7kick" style="left:100px;top:330px">
+      <div class="pillLabel"><span class="dot" style="background:var(--mint)"></span>Re-checked</div>
+      <div class="display" style="font-size:100px;margin-top:22px">Same command.<br><span class="grad-cool">New answer.</span></div>
+    </div>
+
+    <div class="layer" id="s7term" style="left:70px;top:720px">
+      <div class="term">
+        <div class="termBar"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i><span>zsh — ~</span></div>
+        <div class="termBody" style="min-height:330px">
+          <div id="t1"><span class="p">$</span> <span class="c" id="t1c"></span></div>
+          <div id="t2"><span class="o" id="t2c"></span></div>
+          <div id="t3" style="margin-top:14px"><span class="p">$</span> <span class="c" id="t3c"></span></div>
+          <div id="t4"><span class="o" id="t4c"></span><span class="caret" id="tcar"></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer" id="s7toast" style="left:150px;top:1360px">
+      <div class="card" style="width:780px;padding:30px 36px;display:flex;align-items:center;gap:24px;border-radius:28px">
+        <div style="width:62px;height:62px;border-radius:18px;background:linear-gradient(135deg,#0FCFA0,#23A9FF);
+             display:grid;place-items:center;color:#fff;font-size:32px;font-weight:900;flex:none">✓</div>
+        <div><div style="font-size:29px;font-weight:800">Moved 1 item to the Trash</div>
+             <div class="mono" style="font-size:23px;color:var(--ink-3);margin-top:4px">/usr/local/bin/git</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ S8 — THEY CONFIRM ============ -->
+  <section class="scene" id="s8">
+    <div class="layer" id="s8kick" style="left:90px;top:660px">
+      <div class="pillLabel"><span class="dot" style="background:var(--mint)"></span>And then they said</div>
+    </div>
+    <div class="layer" id="s8bub" style="left:90px;top:770px">
+      <div class="bubble good" style="width:920px;font-size:50px">
+        VS&nbsp;Code works. <span class="mono" style="font-size:40px;background:rgba(255,255,255,.22);padding:4px 14px;border-radius:12px">which git</span> points to <span class="mono" style="font-size:40px">/usr/bin/git</span>.
+      </div>
+    </div>
+    <div class="layer" id="s8meta" style="left:90px;top:1150px">
+      <div class="pillLabel" style="text-transform:none;letter-spacing:.02em;font-size:29px;font-weight:700">
+        <span class="dot" style="background:var(--mint)"></span>2026-09-15 · one attempt · fixed
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ S9 — CLOSER ============ -->
+  <section class="scene" id="s9">
+    <div class="layer" id="s9burst" style="left:540px;top:790px"></div>
+
+    <div class="layer" id="s9a" style="left:90px;top:570px">
+      <div class="display" style="font-size:150px">1 attempt.</div>
+    </div>
+    <div class="layer" id="s9b" style="left:90px;top:726px">
+      <div class="display grad-cool" style="font-size:150px">Fixed.</div>
+    </div>
+
+    <div class="layer" id="s9c" style="left:90px;top:940px">
+      <div style="font-size:40px;font-weight:650;color:var(--ink-2);width:900px;line-height:1.4">
+        Nothing installed. Nothing reset.<br>One dead shortcut in the Trash.
+      </div>
+    </div>
+
+    <div class="layer" id="s9d" style="left:90px;top:1170px">
+      <div style="display:flex;align-items:center;gap:26px">
+        <div style="width:96px;height:96px;border-radius:30px;background:linear-gradient(135deg,#FF4D6D,#FF6FC4 45%,#8B5CF6);
+             display:grid;place-items:center;color:#fff;font-size:52px;font-weight:900;
+             box-shadow:0 22px 46px -18px rgba(139,92,246,.7)">N</div>
+        <div>
+          <div style="font-size:72px;font-weight:900;letter-spacing:-.03em">Noah</div>
+          <div style="font-size:30px;font-weight:650;color:var(--ink-2);margin-top:2px">Tell it what's broken.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /scenes -->
+</div>
+
+<script src="anim.js"></script>
+</body>
+</html>
