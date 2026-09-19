@@ -1,0 +1,80 @@
+name: Render Noah short
+
+# Runs on GitHub's machines, so nothing needs installing locally.
+# Fires automatically when this branch is pushed, and can also be started
+# by hand from the Actions tab.
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/practical-knuth-2ozmlo]
+    paths:
+      - 'src/**'
+      - 'public/**'
+      - 'scripts/**'
+      - 'package.json'
+      - '.github/workflows/render-video.yml'
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      # Chromium's runtime libraries; Remotion renders through headless Chrome.
+      - name: Install system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libnss3 libdbus-1-3 libatk1.0-0 libasound2t64 libxrandr2 \
+            libxkbcommon-dev libxfixes3 libxcomposite1 libxdamage1 \
+            libgbm-dev libatk-bridge2.0-0 libcups2
+
+      - name: Install dependencies
+        run: npm ci || npm install --no-audit --no-fund
+
+      - name: Fetch the UGC clips
+        run: |
+          B=https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb
+          D=public/ugc/mac-list
+          mkdir -p "$D" out
+          curl -fsS -o "$D/video3-reference.png" "$B/hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png"
+          curl -fsS -o "$D/video3-list-a.mp4"    "$B/hf_20260919_212023_99a9d7c3-dd37-4e78-bcac-4d6ea977a3e9.mp4"
+          curl -fsS -o "$D/video3-list-b.mp4"    "$B/hf_20260919_212430_65828cac-cb24-46ab-9afb-ade24569860f.mp4"
+          ls -la "$D"
+
+      # Fails the run loudly if a download silently produced nothing, rather
+      # than rendering a creator-less video that looks fine until you watch it.
+      - name: Confirm the clips arrived
+        run: |
+          node scripts/check-assets.mjs
+          node -e "
+            const a = require('./src/assets.json');
+            const missing = Object.entries(a).filter(([,v]) => !v).map(([k]) => k);
+            if (missing.length) { console.error('MISSING:', missing.join(', ')); process.exit(1); }
+            console.log('all three assets present');
+          "
+
+      - name: Ensure Chrome for Remotion
+        run: npx remotion browser ensure
+
+      - name: Render thumbnail
+        run: npx remotion still src/index.ts Thumbnail out/noah-things-i-wont-do-thumbnail.png --log=error
+
+      - name: Render video
+        run: npx remotion render src/index.ts MacList out/noah-things-i-wont-do.mp4 --log=error
+
+      - name: Show what was produced
+        run: ls -la out/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: noah-things-i-wont-do
+          path: out/
+          retention-days: 30
