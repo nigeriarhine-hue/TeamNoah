@@ -43,7 +43,6 @@ export const assets = {
     checked: staticFile('noah/crop-checked.png'),
     planList: staticFile('noah/crop-plan-list.png'),
     cta: staticFile('noah/crop-cta.png'),
-    ctaHover: staticFile('noah/crop-cta-hover.png'),
     dialog: staticFile('noah/crop-dialog.png'),
     approved: staticFile('noah/crop-approved.png'),
     executing: staticFile('noah/crop-executing.png'),

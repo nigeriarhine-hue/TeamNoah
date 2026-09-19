@@ -55,6 +55,13 @@ group anchor, non-destructive crop, 2–3× Lanczos upscale (4× for small eleme
 crops) so the compositor always downsamples, then restrained unsharp and a
 slight contrast lift. Regions are in source-image pixels.
 
+`crop-cta` is the exception: the action button is **located by pixel**, not by a
+hand-measured box, so re-cutting it from a newer capture needs no measuring.
+Point `BUTTON_SOURCE` in that script at the new file and run `npm run assets` —
+the detector finds the blue-to-violet pill at whatever size, scale or DPI the
+capture happens to be, and the composition reads the resulting aspect ratio from
+`config/asset-sizes.ts`, so the layout follows.
+
 | Asset | Source | Crop region (x,y w×h) | Output |
 |---|---|---|---|
 | `app-full-plan` | IMG_0588.jpeg | 0,0 1170x966 | 2340x1932 |
@@ -72,8 +79,7 @@ slight contrast lift. Regions are in source-image pixels.
 | `crop-situation` | IMG_0588.jpeg | 378,108 762x168 | 2286x504 |
 | `crop-checked` | IMG_0588.jpeg | 386,280 744x162 | 2232x486 |
 | `crop-plan-list` | IMG_0588.jpeg | 386,452 744x294 | 2232x882 |
-| `crop-cta` | IMG_0588.jpeg | 386,757 728x70 | 2184x210 |
-| `crop-cta-hover` | IMG_0591.jpeg | 386,760 728x70 | 2184x210 |
+| `crop-cta` | IMG_0588.jpeg | 386,751 725x70 | 2175x210 |
 | `crop-dialog` | IMG_0593.jpeg | 330,375 514x270 | 1542x810 |
 | `crop-approved` | IMG_0594.jpeg | 372,713 520x54 | 2080x216 |
 | `crop-executing` | IMG_0594.jpeg | 378,796 756x108 | 2268x324 |
@@ -108,6 +114,10 @@ slight contrast lift. Regions are in source-image pixels.
   logo or forum is depicted, so no third party appears to endorse Noah.
 - **The wait spinner in the opening is an abstract symbol**, not any operating
   system's UI.
+- **The button label is whatever the capture says.** The film currently shows
+  "Trim startup & clear space →" from `IMG_0588.jpeg`. If that label has moved
+  on in shipping builds, re-cut it as described above rather than editing the
+  text — the point of the manifest is that nothing on screen is re-typed.
 - **The approval sequence is click-only.** The pointer moves to the plan's
   action button, waits, clicks; Noah then asks "Can Noah do this? / Noah needs
   your OK to continue."; the pointer moves to "Go ahead", waits, clicks. The

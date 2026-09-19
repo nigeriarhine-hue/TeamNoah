@@ -21,6 +21,17 @@ mkdirSync(OUT, { recursive: true });
 const SCALE = 2;                 // upscale factor
 const SIDEBAR_X = 331;           // x of the sidebar / conversation divider in source space
 
+/**
+ * Where the plan's action button is cut from.
+ *
+ * Point this at a newer capture when the button's label changes, then run
+ * `npm run assets`. The button is located by pixel, not by hand-measured
+ * coordinates, so a different window size, scale or DPI still lands — and the
+ * composition reads the resulting aspect ratio from config/asset-sizes.ts, so
+ * the layout adjusts on its own.
+ */
+const BUTTON_SOURCE = 'IMG_0588.jpeg';
+
 /** Mean-absolute-difference alignment of a narrow sidebar strip. */
 async function verticalOffset(refRaw, testPath, search = 18) {
   const strip = { left: 20, top: 180, width: 280, height: 420 };
@@ -41,6 +52,70 @@ async function verticalOffset(refRaw, testPath, search = 18) {
 
 async function refStrip(path) {
   return sharp(path).extract({ left: 20, top: 180, width: 280, height: 420 }).greyscale().raw().toBuffer();
+}
+
+/**
+ * Locate Noah's primary action button — the wide blue→violet gradient pill.
+ * Works on pixels so it survives a re-capture at a different size or scale.
+ */
+async function findActionButton(path) {
+  const { data, info } = await sharp(path).raw().toBuffer({ resolveWithObject: true });
+  const { width: W, height: H, channels: C } = info;
+
+  const isGradient = (i) => {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    return b > 130 && b > r + 25 && b > g + 10;
+  };
+
+  // rows where the gradient runs across a good part of the width
+  const counts = new Array(H).fill(0);
+  for (let y = 0; y < H; y++) {
+    let n = 0;
+    for (let x = 0; x < W; x++) if (isGradient((y * W + x) * C)) n++;
+    counts[y] = n;
+  }
+
+  let best = null, run = null;
+  const keep = (r) => {
+    const h = r.bottom - r.top + 1;
+    if (!best || h > best.bottom - best.top + 1) best = r;
+  };
+  for (let y = 0; y < H; y++) {
+    if (counts[y] >= W * 0.3) { run ??= { top: y }; run.bottom = y; }
+    else if (run) { keep(run); run = null; }
+  }
+  if (run) keep(run);
+
+  if (!best) {
+    throw new Error(
+      `No action button found in ${path}. Expected a wide blue-to-violet ` +
+      `gradient pill; check BUTTON_SOURCE points at a plan screen.`,
+    );
+  }
+
+  const mid = Math.round((best.top + best.bottom) / 2);
+  let x0 = W, x1 = 0;
+  for (let x = 0; x < W; x++) {
+    if (isGradient((mid * W + x) * C)) { if (x < x0) x0 = x; if (x > x1) x1 = x; }
+  }
+
+  const height = best.bottom - best.top + 1;
+  const width = x1 - x0 + 1;
+  if (width < W * 0.3 || height < 20 || height > 140) {
+    throw new Error(
+      `Implausible action button in ${path}: ${width}x${height}. ` +
+      `Adjust the detector or crop it by hand.`,
+    );
+  }
+
+  // a little room so the pill's rounded ends and glow are not clipped
+  const padX = 14, padY = 9;
+  return {
+    left: Math.max(0, x0 - padX),
+    top: Math.max(0, best.top - padY),
+    width: Math.min(W, width + padX * 2),
+    height: Math.min(H, height + padY * 2),
+  };
 }
 
 /** Crop + enhance + write. box is in SOURCE pixel space, before alignment shift. */
@@ -112,9 +187,11 @@ const dyPlan = offA['IMG_0588.jpeg'];
 manifest.push(await emit('crop-situation',  P('IMG_0588.jpeg'), { left: 378, top: 108, width: 762, height: 168 }, dyPlan, { scale: 3 }));
 manifest.push(await emit('crop-checked',    P('IMG_0588.jpeg'), { left: 386, top: 280, width: 744, height: 162 }, dyPlan, { scale: 3 }));
 manifest.push(await emit('crop-plan-list',  P('IMG_0588.jpeg'), { left: 386, top: 452, width: 744, height: 294 }, dyPlan, { scale: 3 }));
-manifest.push(await emit('crop-cta',        P('IMG_0588.jpeg'), { left: 386, top: 757, width: 728, height: 70  }, dyPlan, { scale: 3 }));
+const buttonBox = await findActionButton(P(BUTTON_SOURCE));
+console.log(`action button detected in ${BUTTON_SOURCE}:`, buttonBox);
+// the box is measured on BUTTON_SOURCE itself, so no alignment shift applies
+manifest.push(await emit('crop-cta', P(BUTTON_SOURCE), buttonBox, 0, { scale: 3 }));
 
-manifest.push(await emit('crop-cta-hover',  P('IMG_0591.jpeg'), { left: 386, top: 760, width: 728, height: 70  }, offB['IMG_0591.jpeg'], { scale: 3 }));
 manifest.push(await emit('crop-dialog',     P('IMG_0593.jpeg'), { left: 330, top: 375, width: 514, height: 270 }, 0, { scale: 3 }));
 manifest.push(await emit('crop-approved',   P('IMG_0594.jpeg'), { left: 372, top: 712, width: 520, height: 54  }, offB['IMG_0594.jpeg'], { scale: 4 }));
 manifest.push(await emit('crop-executing',  P('IMG_0594.jpeg'), { left: 378, top: 795, width: 756, height: 108 }, offB['IMG_0594.jpeg'], { scale: 3 }));

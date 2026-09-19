@@ -80,6 +80,21 @@ film picks it up. To re-cut from new screenshots, add a crop to
 `scripts/process-assets.mjs` and run `npm run assets` — it regenerates
 `config/asset-sizes.ts`, so panels keep their true aspect ratio automatically.
 
+### Re-cutting the action button
+
+The plan's action button carries a product label that changes as Noah ships.
+`scripts/process-assets.mjs` finds it by pixel rather than by coordinates, so:
+
+```bash
+# 1. drop the newer plan screenshot at the repository root
+# 2. point BUTTON_SOURCE at it in scripts/process-assets.mjs
+npm run assets && npm run render
+```
+
+The detector locates the blue-to-violet pill regardless of window size, scale or
+DPI, and fails loudly rather than cropping the wrong thing. Panel height follows
+the new aspect ratio automatically via `config/asset-sizes.ts`.
+
 ### Swapping the story
 
 `config/copy.ts` also exports `vsCodeGitStory`, the macOS / VS Code / Git script.
