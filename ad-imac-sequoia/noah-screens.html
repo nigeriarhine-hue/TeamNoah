@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Noah — iMac / Sequoia screens</title>
+<link rel="stylesheet" href="font.css">
+<style>
+  :root{
+    --chrome:#15151c;
+    --side:#121217;
+    --main:#1a1a23;
+    --card:#20202a;
+    --card-in:#1e1e27;
+    --line:#2b2b37;
+    --tile-line:#2e2e3a;
+    --txt:#e9e9f2;
+    --txt-dim:#8b8b9c;
+    --txt-dim2:#75758a;
+    --amber:#f2b134;
+    --green:#34d399;
+    --violet:#8b8ff8;
+    --indigo:#6366f1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#0b0b10;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+     -webkit-font-smoothing:antialiased;word-spacing:.055em}
+
+  .win{
+    width:1170px;height:980px;position:relative;overflow:hidden;
+    background:var(--main);display:flex;flex-direction:column;
+    margin:0 0 40px 0;
+  }
+
+  /* ---------- macOS title bar (this is an iMac) ---------- */
+  .bar{height:30px;flex:0 0 30px;background:var(--chrome);display:flex;align-items:center;
+       gap:8px;padding:0 12px;border-bottom:1px solid #0e0e14}
+  .lights{display:flex;gap:8px;align-items:center}
+  .lights i{width:12px;height:12px;border-radius:50%;display:block}
+  .l-r{background:#ff5f57}.l-y{background:#febc2e}.l-g{background:#28c840}
+  .bar .title{display:flex;align-items:center;gap:7px;margin-left:10px}
+  .bar .title span{color:#d6d6e4;font-size:13px;font-weight:600;letter-spacing:.2px}
+
+  .body{flex:1;display:flex;min-height:0}
+
+  /* ---------- sidebar ---------- */
+  .side{width:330px;flex:0 0 330px;background:var(--side);border-right:1px solid #1e1e28;
+        display:flex;flex-direction:column;padding:14px 0 0 0}
+  .side-top{padding:0 16px}
+  .srow{display:flex;align-items:center;gap:12px;padding:9px 8px;border-radius:7px}
+  .srow svg{opacity:.85}
+  .srow b{color:#e4e4ef;font-size:15.5px;font-weight:600}
+  .srow.new b{color:#ececf6}
+  .panel-ico{margin-left:auto;opacity:.5}
+  .sep{height:1px;background:#22222e;margin:12px 16px 4px}
+  .grp{color:var(--txt-dim2);font-size:11px;font-weight:700;letter-spacing:1.3px;
+       padding:14px 24px 8px}
+  .hist{padding:0 16px}
+  .item{padding:8px 8px 9px;border-radius:7px}
+  .item .t{color:#cfcfdd;font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item .d{color:#6f6f84;font-size:12px;margin-top:3px;font-weight:500}
+  .item.on{background:#23232f}
+  .item.on .t{color:#fff}
+  .side-foot{margin-top:auto;padding:16px 24px 18px;border-top:1px solid #1e1e28;
+             display:flex;align-items:center;gap:10px}
+  .side-foot span{color:#9a9aad;font-size:14.5px;font-weight:500}
+
+  /* ---------- main column ---------- */
+  .main{flex:1;display:flex;flex-direction:column;min-width:0;padding:14px 24px 0}
+  .scroll{flex:1;min-height:0;display:flex;flex-direction:column;gap:16px;overflow:hidden}
+
+  .bubble{align-self:flex-end;max-width:74%;background:#2b2b3a;color:#f0f0f8;
+          font-size:16.5px;line-height:1.5;font-weight:500;padding:13px 18px;border-radius:11px}
+
+  .didbar{display:flex;align-items:center;gap:10px;background:var(--card);
+          border:1px solid var(--line);border-radius:10px;padding:13px 18px}
+  .tick{width:17px;height:17px;border-radius:50%;background:rgba(52,211,153,.16);
+        display:grid;place-items:center;flex:0 0 17px}
+  .didbar b{color:#f2f2fa;font-size:15.5px;font-weight:700}
+  .didbar .el{color:#82829a;font-size:14px;font-weight:500}
+  .didbar .sw{margin-left:auto;color:#8e8ea4;font-size:14px;font-weight:500;display:flex;align-items:center;gap:6px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+        padding:22px 26px 24px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;
+                background:linear-gradient(90deg,#3b82f6 0%,#6366f1 48%,#8b5cf6 100%)}
+  .card.ok::before{background:linear-gradient(90deg,#10b981 0%,#34d399 55%,#5eead4 100%)}
+
+  .lbl{color:#8686a0;font-size:12px;font-weight:700;letter-spacing:1.6px;margin:2px 0 12px}
+  .lbl.mt{margin-top:22px}
+  .sit{color:#e8e8f2;font-size:19px;line-height:1.62;font-weight:500}
+  .sit + .sit{margin-top:13px}
+  .done{color:#fff;font-size:26px;font-weight:800;margin-bottom:10px;letter-spacing:-.2px}
+
+  .tiles{display:flex;border:1px solid var(--tile-line);border-radius:9px;overflow:hidden}
+  .tile{flex:1;padding:15px 17px 16px;border-right:1px solid var(--tile-line);min-width:0}
+  .tile:last-child{border-right:0}
+  .tile .k{color:#82829a;font-size:10.5px;font-weight:700;letter-spacing:1.25px;
+           white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tile .v{color:var(--amber);font-size:19.5px;font-weight:800;margin:9px 0 8px;letter-spacing:-.2px}
+  .tile.g .v{color:var(--green)}
+  .tile .s{color:#70708a;font-size:12.5px;font-weight:500;
+           white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  .step{display:flex;gap:14px;margin-bottom:15px}
+  .num{width:23px;height:23px;flex:0 0 23px;border-radius:50%;border:1.4px solid #5457c9;
+       color:#a3a6f7;font-size:12.5px;font-weight:700;display:grid;place-items:center;margin-top:1px}
+  .step .h{color:#f0f0f8;font-size:16.5px;font-weight:700;letter-spacing:-.1px}
+  .step .p{color:#8686a0;font-size:14px;font-weight:500;margin-top:4px;line-height:1.45}
+
+  .card .cta{margin-top:22px}
+  .cta{margin-top:18px;height:54px;border-radius:9px;display:grid;place-items:center;
+       background:linear-gradient(90deg,#5b8def 0%,#6d6ef0 45%,#7c3aed 100%);
+       color:#fff;font-size:17px;font-weight:700;letter-spacing:-.1px}
+  .cta.sent{background:#16302a;border:1px solid #2f6b57;color:var(--green);font-weight:700}
+
+  .who{display:flex;align-items:center;gap:9px;margin-bottom:-4px}
+  .who b{color:var(--violet);font-size:16px;font-weight:800}
+  .who span{color:#75758a;font-size:14px;font-weight:500}
+  .say{color:#e8e8f2;font-size:19px;line-height:1.6;font-weight:500}
+  .appr{border-left:2px solid #4a4a63;padding-left:16px;color:#d7d7e6;
+        font-size:17px;font-weight:500}
+
+  /* ---------- composer ---------- */
+  .foot{flex:0 0 auto;padding:14px 0 16px}
+  .input{height:60px;background:#1e1e28;border:1px solid #33334a;border-radius:11px;
+         display:flex;align-items:center;padding:0 10px 0 22px;gap:12px}
+  .input.glow{border-color:#5b5be0;box-shadow:0 0 0 3px rgba(99,102,241,.13)}
+  .input p{flex:1;color:#6c6c82;font-size:17px;font-weight:500}
+  .input p.typed{color:#ececf6}
+  .go{width:44px;height:40px;border-radius:8px;display:grid;place-items:center;
+      background:linear-gradient(135deg,#5b8def,#7c3aed)}
+  .go.stop{background:#3a2530;border:1px solid #5d3040}
+  .go.stop i{width:11px;height:11px;background:#e05a6b;border-radius:2px;display:block}
+  .hint{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:11px;
+        color:#7e7e94;font-size:13px;font-weight:500}
+
+  /* ---------- permission modal ---------- */
+  .veil{position:absolute;inset:0;background:rgba(6,6,11,.62);display:grid;place-items:center}
+  .blurred{filter:blur(7px) saturate(.55) brightness(.62)}
+  .modal{width:500px;background:#26262f;border:1px solid #363646;border-radius:13px;
+         box-shadow:0 26px 70px rgba(0,0,0,.66);overflow:hidden}
+  .modal .top{padding:26px 28px 22px}
+  .warn{width:44px;height:44px;border-radius:10px;background:#4a3a14;display:grid;place-items:center;
+        margin-bottom:0}
+  .mrow{display:flex;align-items:center;gap:16px}
+  .modal h3{color:#fff;font-size:19.5px;font-weight:800;letter-spacing:-.2px}
+  .modal .sub{color:#dcdce8;font-size:16.5px;font-weight:500;margin-top:20px}
+  .mfoot{border-top:1px solid #343444;padding:16px 22px;display:flex;justify-content:flex-end;gap:12px}
+  .btn{height:46px;padding:0 24px;border-radius:8px;display:grid;place-items:center;
+       font-size:15.5px;font-weight:600}
+  .b-no{background:#33333f;color:#c9c9d8}
+  .b-go{background:linear-gradient(135deg,#5b8def,#7c3aed);color:#fff;font-weight:700}
+  .b-all{background:transparent;border:1px solid #5b5be0;color:#a9a9f2;font-weight:600}
+
+  /* ---------- running list ---------- */
+  .looking{background:var(--card);border:1px solid var(--line);border-radius:11px;
+           padding:20px 24px;position:relative;overflow:hidden;display:flex;
+           align-items:center;gap:13px}
+  .looking::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;
+                background:linear-gradient(90deg,#3b82f6 0%,#6366f1 48%,#8b5cf6 100%)}
+  .looking b{color:#f2f2fa;font-size:16.5px;font-weight:700}
+  .dots{display:flex;gap:4px;align-items:center}
+  .dots i{width:5px;height:5px;border-radius:50%;background:#8b8ff8;display:block}
+  .dots i:nth-child(1){opacity:.45}.dots i:nth-child(2){opacity:.85}.dots i:nth-child(3){opacity:.3}
+
+  .run{display:flex;align-items:center;gap:11px;padding:3px 0}
+  .run b{color:#eaeaf4;font-size:16px;font-weight:600}
+  .run.pend b{color:#6a6a80}
+  .spin{width:16px;height:16px;border-radius:50%;border:2px solid #3a3a4e;
+        border-top-color:#8b8ff8;flex:0 0 16px}
+</style>
+</head>
+<body>
+
+<!-- ============ shared bits ============ -->
+<template id="tpl-bar">
+  <div class="bar">
+    <div class="lights"><i class="l-r"></i><i class="l-y"></i><i class="l-g"></i></div>
+    <div class="title">
+      <svg width="15" height="15" viewBox="0 0 100 100"><defs>
+        <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d1330"/><stop offset=".662" stop-color="#182154"/><stop offset="1" stop-color="#182154"/></linearGradient>
+        <radialGradient id="rg1" cx=".5" cy=".96" r=".95"><stop offset="0" stop-color="#8b8ff8"/><stop offset=".5" stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></radialGradient>
+        <clipPath id="sq1"><rect width="100" height="100" rx="23"/></clipPath>
+        <clipPath id="dc1"><circle cx="50" cy="50" r="34.5"/></clipPath></defs>
+        <g clip-path="url(#sq1)"><rect width="100" height="100" fill="url(#bg1)"/>
+          <g clip-path="url(#dc1)"><rect x="14.5" y="66.2" width="71" height="19.3" fill="url(#rg1)"/></g>
+          <circle cx="50" cy="50" r="34.5" fill="none" stroke="#C7CBFF" stroke-width="7.07"/>
+          <line x1="-4" y1="66.2" x2="104" y2="66.2" stroke="#C7CBFF" stroke-width="7.07"/></g>
+      </svg>
+      <span>Noah</span>
+    </div>
+  </div>
+</template>
+
+<script>
+const ICON_NEW = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#cfcfe0" stroke-width="2.1" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>`;
+const ICON_KNOW = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#cfcfe0" stroke-width="1.8"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5zM20 5.5A1.5 1.5 0 0 0 18.5 4H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5z"/></svg>`;
+const ICON_PANEL = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#8a8a9e" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></svg>`;
+const ICON_GEAR = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9a9aad" stroke-width="1.7"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>`;
+const ICON_TICK = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+const ICON_CHEV = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8e8ea4" stroke-width="2.2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>`;
+const ICON_ARR  = `<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+const ICON_CHAT = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7e7e94" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.5 9.5 0 0 1-2.8-.4L3 21l1.6-4.6A8.3 8.3 0 0 1 3.6 11.5a8.4 8.4 0 0 1 9-8.4 8.4 8.4 0 0 1 8.4 8.4z"/></svg>`;
+const ICON_WARN = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f0b429" stroke-width="2" stroke-linecap="round"><path d="M12 3.5 1.8 20.5h20.4z"/><path d="M12 9.5v5M12 17.8v.01"/></svg>`;
+
+/* The Mac's chat history — matches the tone of the real app's sidebar. */
+const HISTORY = [
+  ["OpenCore Legacy Patcher Update","Sep 16, 07:12 PM"],
+  ["Time Machine Backup Stalled","Sep 14, 09:40 AM"],
+  ["Mail Rebuilding Mailboxes","Sep 12, 06:55 PM"],
+  ["Free Up Startup Disk","Sep 11, 08:20 PM"],
+  ["Safari Slow to Open","Sep 9, 07:31 PM"],
+  ["Printer Status Check","Sep 5, 03:11 PM"]
+];
+
+function sidebar(todayItem){
+  const hist = HISTORY.map(([t,d]) =>
+    `<div class="item"><div class="t">${t}</div><div class="d">${d}</div></div>`).join("");
+  const today = todayItem ? `
+    <div class="grp">TODAY</div>
+    <div class="hist"><div class="item on"><div class="t">${todayItem[0]}</div>
+      <div class="d">${todayItem[1]}</div></div></div>` : "";
+  return `<div class="side">
+    <div class="side-top">
+      <div class="srow new">${ICON_NEW}<b>New chat</b><span class="panel-ico">${ICON_PANEL}</span></div>
+      <div class="srow">${ICON_KNOW}<b>Knowledge</b></div>
+    </div>
+    <div class="sep"></div>
+    ${today}
+    <div class="grp">EARLIER</div>
+    <div class="hist">${hist}</div>
+    <div class="side-foot">${ICON_GEAR}<span>Settings</span></div>
+  </div>`;
+}
+
+const didbar = (secs) => `<div class="didbar"><span class="tick">${ICON_TICK}</span>
+  <b>What Noah did</b><span class="el">· ${secs}</span>
+  <span class="sw">Show work ${ICON_CHEV}</span></div>`;
+
+const tiles = (rows, green) => `<div class="tiles">${rows.map(([k,v,s]) =>
+  `<div class="tile${green?' g':''}"><div class="k">${k}</div><div class="v">${v}</div>
+   <div class="s">${s}</div></div>`).join("")}</div>`;
+
+const steps = (rows) => rows.map(([h,p],i) =>
+  `<div class="step"><div class="num">${i+1}</div><div><div class="h">${h}</div>
+   <div class="p">${p}</div></div></div>`).join("");
+
+const composer = (text, opts={}) => `<div class="foot">
+  <div class="input${opts.glow?' glow':''}">
+    <p class="${opts.typed?'typed':''}">${text}</p>
+    ${opts.stop ? `<div class="go stop"><i></i></div>` : `<div class="go">${ICON_ARR}</div>`}
+  </div>
+  ${opts.hint ? `<div class="hint">${ICON_CHAT} You can always talk to Noah instead of clicking — change the plan, skip part, or ask a question.</div>` : ""}
+</div>`;
+
+/* ---- the plan body, reused by screen 2 and (blurred) screen 3 ---- */
+const PLAN_CARD = `
+  <div class="card">
+    <div class="lbl">— SITUATION</div>
+    <p class="sit">Your iMac isn't broken — it's busy. Spotlight has been rebuilding its
+      index ever since the Sequoia upgrade, and the startup disk is 98% full, so macOS has
+      nowhere left to put swap. The OpenCore patches aren't what's slowing it down.</p>
+    <div class="lbl mt">— WHAT NOAH CHECKED</div>
+    ${tiles([
+      ["SPOTLIGHT","Rebuilding","mds_stores — 41% CPU"],
+      ["MEMORY PRESSURE","Swapping","8 GB RAM — 2.1 GB on disk"],
+      ["STARTUP DISK","23 GB / 1 TB","98% full — very tight"],
+      ["LOGIN ITEMS","9 launch","Dropbox, Creative Cl…"]
+    ])}
+    <div class="lbl mt">— WHAT NOAH WOULD DO</div>
+    ${steps([
+      ["Trim 6 login items down to 3","Dropbox, Creative Cloud, Chrome helpers — reversible anytime"],
+      ["Clear 18 GB of caches and old installers","Safe; gives macOS room to swap again"],
+      ["Let Spotlight finish — about 25 min left","It started with the Sequoia upgrade. This is most of what you're feeling."],
+      ["Leave the OpenCore root patches alone","They're what makes Sequoia boot on 2015 hardware. Not touching them."]
+    ])}
+  </div>`;
+
+/* ================= the four screens ================= */
+const SCREENS = {
+
+/* 1 — the complaint just sent, Noah picking it up */
+s1: () => `${sidebar(null)}
+  <div class="main">
+    <div class="scroll">
+      <div class="bubble">This 2015 iMac boots into Sequoia via OpenCore now. I pulled the
+        SanDisk stick off the back. One problem remains — it seems slower than before?</div>
+      <div class="looking"><span class="dots"><i></i><i></i><i></i></span>
+        <b>Looking into it…</b></div>
+    </div>
+    ${composer("What's broken? Tell Noah and hit go.", {stop:true})}
+  </div>`,
+
+/* 2 — the plan */
+s2: () => `${sidebar(["iMac Slow After Sequoia Upgr…","08:41 PM"])}
+  <div class="main">
+    <div class="scroll">
+      ${didbar("2m 04s")}
+      ${PLAN_CARD}
+    </div>
+    ${composer("…or tell Noah to do it differently", {hint:true})}
+  </div>`,
+
+/* 3 — Noah asking before it touches anything */
+s3: () => `${sidebar(["iMac Slow After Sequoia Upgr…","08:41 PM"])}
+  <div class="main">
+    <div class="scroll">
+      ${didbar("2m 04s")}
+      ${PLAN_CARD}
+    </div>
+    ${composer("…or tell Noah to do it differently", {hint:true})}
+  </div>`,
+
+/* 4 — done */
+s4: () => `${sidebar(["iMac Slow After Sequoia Upgr…","08:41 PM"])}
+  <div class="main">
+    <div class="scroll" style="justify-content:flex-end">
+      <div class="appr">Approved: Action approved</div>
+      <div class="who"><b>Noah</b><span>· 08:47 PM</span></div>
+      ${didbar("48s")}
+      <div class="card ok">
+        <div class="lbl">— RESULT</div>
+        <div class="done">Done.</div>
+        <p class="sit">Six login items are off — they still open on demand — and I cleared
+          18 GB, so the startup disk has room to breathe again. Spotlight has about 25 minutes
+          left; it'll feel properly quicker once that finishes.</p>
+        <p class="sit">Your OpenCore patches are untouched. It won't feel like a new Mac —
+          it's 2015 hardware running a 2026 OS — but this is the part you can get back.</p>
+        <div class="lbl mt">— WHAT NOAH CHECKED</div>
+        ${tiles([
+          ["LOGIN ITEMS","9 → 3","Reversible anytime"],
+          ["SPACE FREED","18 GB","23 GB → 41 GB free"],
+          ["SPOTLIGHT","~25 min","Then it settles"]
+        ], true)}
+      </div>
+      <div class="who"><b>Noah</b><span>· 08:47 PM</span></div>
+      <p class="say">Noah's here whenever the Mac needs attention again — unlimited help,
+        all year round.</p>
+      <div class="cta">Keep Noah all year →</div>
+    </div>
+    ${composer("What's broken? Tell Noah and hit go.", {})}
+  </div>`
+};
+
+/* build the four windows */
+const bar = document.getElementById("tpl-bar").innerHTML;
+["s1","s2","s3","s4"].forEach(id => {
+  const win = document.createElement("div");
+  win.className = "win"; win.id = id;
+  win.innerHTML = bar + `<div class="body">${SCREENS[id]()}</div>`;
+
+  if (id === "s3") {                       // blur the page, float the permission modal
+    win.querySelector(".body").classList.add("blurred");
+    const veil = document.createElement("div");
+    veil.className = "veil";
+    veil.innerHTML = `<div class="modal">
+      <div class="top">
+        <div class="mrow"><div class="warn">${ICON_WARN}</div><h3>Can Noah do this?</h3></div>
+        <div class="sub">Noah needs your OK to continue.</div>
+      </div>
+      <div class="mfoot">
+        <div class="btn b-no">No thanks</div>
+        <div class="btn b-go">Go ahead</div>
+        <div class="btn b-all">Approve all</div>
+      </div></div>`;
+    win.appendChild(veil);
+  }
+  document.body.appendChild(win);
+});
+</script>
+</body>
+</html>
