@@ -1,0 +1,5 @@
+/* Noah ad — local brand typefaces (variable). Matches brand-kit.html --sans / --mono / --serif. */
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:200 800;font-display:block;src:url("./plus-jakarta-sans-var.woff2") format("woff2");}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:100 800;font-display:block;src:url("./jetbrains-mono-var.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:block;src:url("./instrument-serif-400.woff2") format("woff2");}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:block;src:url("./instrument-serif-400-italic.woff2") format("woff2");}

@@ -1,0 +1,31 @@
+{
+  "name": "noah-ad-video",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Noah cinematic product video — vertical short (1080x1920) built in Remotion",
+  "scripts": {
+    "dev": "remotion studio",
+    "assets": "node scripts/process-assets.mjs",
+    "audio": "node scripts/build-audio.mjs",
+    "build": "npm run assets && npm run audio",
+    "render": "node scripts/render.mjs",
+    "thumbnail": "node scripts/render.mjs thumbnails",
+    "qc": "node scripts/check-frames.mjs out/noah-pc-slowdown-short.mp4 1",
+    "qc:frames": "node scripts/qc-frames.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.373",
+    "@remotion/cli": "4.0.373",
+    "@remotion/renderer": "4.0.373",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.373"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "ffmpeg-static": "^5.3.0",
+    "sharp": "^0.35.4",
+    "typescript": "5.7.3"
+  }
+}
