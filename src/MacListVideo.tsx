@@ -17,12 +17,13 @@ import {CaptionScrim, UGCClip} from './components/UGCClip';
 
 /**
  * Timeline, 30fps. Cut points come from the word-level transcript of the
- * locked VO, not from guessed beats:
+ * delivered clips, not from guessed beats. Re-derived after the clips moved to
+ * Seedance 2.5 (native speech), whose delivery runs later than the TTS pass:
  *
- *   A  "Number one," 0.00-1.06 | "delete random files." 1.68-2.86
- *      "Number two," 3.66-4.92 | "install five cleaner apps." 5.36-7.04
- *   B  "Number three" 0.00-0.98 | "...Reddit command I don't understand." 1.62-4.66
- *      "I just tell Noah what's wrong." 5.28-6.66
+ *   A  "Number one," 0.00-1.52 | "delete random files." 2.26-3.28
+ *      "Number two," 4.12-4.86 | "install five cleaner apps." 5.40-7.06
+ *   B  "number three" 0.00-1.38 | "...reddit command I don't understand" 1.38-4.80
+ *      "I just tell Noah what's wrong" 4.80-6.92
  */
 export const T = {
   clipA: {from: 0, dur: 225},
@@ -50,8 +51,8 @@ export const MacListVideo: React.FC = () => {
 
       {/* ---------- CLIP A : items one and two ---------- */}
       <Sequence from={T.clipA.from} durationInFrames={T.clipA.dur} name="Clip A">
-        {/* beats: "Number one" 0.00s | "delete" 1.68s | "Number two" 3.66s | "install" 5.36s */}
-        <Punch beats={[0, 50, 110, 161]}>
+        {/* beats: "Number one" 0.00s | "delete" 2.26s | "Number two" 4.12s | "install" 5.40s */}
+        <Punch beats={[0, 68, 124, 162]}>
           <UGCClip
             src="ugc/mac-list/video3-list-a.mp4"
             fallbackStill={ref}
@@ -73,22 +74,22 @@ export const MacListVideo: React.FC = () => {
           </AbsoluteFill>
         </Sequence>
 
-        {/* item 1 — enters on "delete", struck as "files" lands */}
-        <Sequence from={45} durationInFrames={62} name="Item 1">
+        {/* item 1 — enters on "delete" (2.26s), struck as "files" lands (3.28s) */}
+        <Sequence from={68} durationInFrames={52} name="Item 1">
           <FingerCountOverlay count={1} />
           <SafeArea justify="flex-end">
-            <ListItem n={1} lines={['DELETE RANDOM', 'FILES']} strikeAt={42} />
+            <ListItem n={1} lines={['DELETE RANDOM', 'FILES']} strikeAt={30} />
           </SafeArea>
           <Audio src={staticFile('sfx/item1.wav')} startFrom={0} volume={0.5} />
         </Sequence>
 
-        {/* item 2 — enters on "Number two", struck as "apps" lands */}
-        <Sequence from={110} durationInFrames={115} name="Item 2">
+        {/* item 2 — enters on "Number two" (4.12s), struck as "apps" lands (7.06s) */}
+        <Sequence from={124} durationInFrames={101} name="Item 2">
           <FingerCountOverlay count={2} />
           <SafeArea justify="flex-end">
-            <ListItem n={2} lines={['INSTALL FIVE', 'CLEANER APPS']} strikeAt={101} />
+            <ListItem n={2} lines={['INSTALL FIVE', 'CLEANER APPS']} strikeAt={88} />
           </SafeArea>
-          <Sequence from={98}>
+          <Sequence from={85}>
             <Audio src={staticFile('sfx/item2.wav')} volume={0.55} />
           </Sequence>
         </Sequence>
@@ -96,8 +97,8 @@ export const MacListVideo: React.FC = () => {
 
       {/* ---------- CLIP B : item three, then the turn ---------- */}
       <Sequence from={T.clipB.from} durationInFrames={T.clipB.dur} name="Clip B">
-        {/* beats: "Number three" 0.00s | "Follow a seven-year-old" 1.62s | the turn 5.28s */}
-        <Punch beats={[0, 49, 158]} amount={0.06}>
+        {/* beats: "number three" 0.00s | "follow" 1.38s | the turn 4.80s */}
+        <Punch beats={[0, 41, 144]} amount={0.06}>
           <UGCClip
             src="ugc/mac-list/video3-list-b.mp4"
             fallbackStill={ref}
@@ -107,21 +108,21 @@ export const MacListVideo: React.FC = () => {
         </Punch>
         <CaptionScrim />
 
-        <Sequence durationInFrames={150} name="Item 3">
+        <Sequence durationInFrames={146} name="Item 3">
           <FingerCountOverlay count={3} />
           <SafeArea justify="flex-end">
             <ListItem
               n={3}
               lines={['FOLLOW A 7-YEAR-OLD', 'REDDIT COMMAND']}
-              strikeAt={140}
+              strikeAt={136}
               subtle="what could go wrong?"
             />
           </SafeArea>
           <Audio src={staticFile('sfx/item3.wav')} volume={0.5} />
         </Sequence>
 
-        {/* the turn — "I just tell Noah what's wrong." 5.28-6.66s */}
-        <Sequence from={156} durationInFrames={62} name="Turn">
+        {/* the turn — "I just tell Noah what's wrong" 4.80-6.92s */}
+        <Sequence from={144} durationInFrames={74} name="Turn">
           <SafeArea justify="flex-end">
             <AnimatedCaption
               parts={[
@@ -135,7 +136,7 @@ export const MacListVideo: React.FC = () => {
         </Sequence>
 
         {/* whoosh carries us into the product */}
-        <Sequence from={196}>
+        <Sequence from={200}>
           <Audio src={staticFile('sfx/whoosh.wav')} volume={0.42} />
         </Sequence>
       </Sequence>

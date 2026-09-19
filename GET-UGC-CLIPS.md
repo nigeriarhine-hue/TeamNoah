@@ -9,8 +9,8 @@ here. Any ONE of the options below fixes it.
 | Save as | URL |
 |---|---|
 | `public/ugc/mac-list/video3-reference.png` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png |
-| `public/ugc/mac-list/video3-list-a.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_205905_9a4d231d-d14b-48a1-bbbe-03bd558ffe02.mp4 |
-| `public/ugc/mac-list/video3-list-b.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_205906_f283e582-a2c2-4b7c-8d8c-5a40e8f52c97.mp4 |
+| `public/ugc/mac-list/video3-list-a.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_212023_99a9d7c3-dd37-4e78-bcac-4d6ea977a3e9.mp4 |
+| `public/ugc/mac-list/video3-list-b.mp4` | https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260919_212430_65828cac-cb24-46ab-9afb-ade24569860f.mp4 |
 
 The filenames matter — `scripts/check-assets.mjs` looks for exactly these.
 
@@ -25,8 +25,8 @@ cd TeamNoah && git checkout claude/practical-knuth-2ozmlo
 mkdir -p public/ugc/mac-list
 B=https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb
 curl -o public/ugc/mac-list/video3-reference.png "$B/hf_20260919_184301_8039bdff-0c5a-4340-93c7-a1ad74a275a5.png"
-curl -o public/ugc/mac-list/video3-list-a.mp4   "$B/hf_20260919_205905_9a4d231d-d14b-48a1-bbbe-03bd558ffe02.mp4"
-curl -o public/ugc/mac-list/video3-list-b.mp4   "$B/hf_20260919_205906_f283e582-a2c2-4b7c-8d8c-5a40e8f52c97.mp4"
+curl -o public/ugc/mac-list/video3-list-a.mp4   "$B/hf_20260919_212023_99a9d7c3-dd37-4e78-bcac-4d6ea977a3e9.mp4"
+curl -o public/ugc/mac-list/video3-list-b.mp4   "$B/hf_20260919_212430_65828cac-cb24-46ab-9afb-ade24569860f.mp4"
 
 npm install
 node scripts/check-assets.mjs          # should print all three true
