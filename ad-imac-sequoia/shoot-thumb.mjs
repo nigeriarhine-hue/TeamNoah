@@ -1,0 +1,10 @@
+import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import path from 'node:path';
+const b = await chromium.launch();
+const p = await b.newPage({ viewport:{width:1980,height:1140}, deviceScaleFactor:1 });
+await p.goto('file://' + path.resolve('thumbnail.html'));
+await p.waitForFunction(() => document.fonts.status === 'loaded');
+await p.waitForTimeout(300);
+await (await p.$('#thumb')).screenshot({ path: 'screens/06-thumbnail-LAYOUT.png' });
+console.log('layout proof shot');
+await b.close();

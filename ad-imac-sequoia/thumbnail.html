@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Noah thumbnail</title>
+<link rel="stylesheet" href="font.css">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#111;font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased}
+
+  .thumb{
+    width:1920px;height:1080px;position:relative;overflow:hidden;background:#05050A;
+  }
+
+  /* the video frame. --photo is swapped for the real still at render time */
+  .photo{
+    position:absolute;inset:0;
+    background:var(--photo, radial-gradient(ellipse at 44% 45%, #8a7258 0%, #3a3440 38%, #14141c 100%));
+    background-size:cover;background-position:center;
+    filter:brightness(.86) saturate(1.06) contrast(1.04);
+  }
+  /* scrim: guarantees type contrast whatever the frame is doing underneath */
+  .scrim{position:absolute;inset:0;
+    background:
+      linear-gradient(260deg, rgba(4,4,9,.97) 0%, rgba(4,4,9,.94) 24%,
+                              rgba(4,4,9,.78) 40%, rgba(4,4,9,.22) 58%, rgba(4,4,9,0) 74%),
+      linear-gradient(to top, rgba(4,4,9,.72) 0%, rgba(4,4,9,.20) 24%, rgba(4,4,9,0) 46%);}
+  .vig{position:absolute;inset:0;
+    background:radial-gradient(ellipse at 40% 46%, transparent 42%, rgba(0,0,0,.44) 100%)}
+
+  /* ---- brand lockup, top left ---- */
+  .brand{position:absolute;top:60px;right:72px;display:flex;align-items:center;gap:15px}
+  .brand span{color:#EDEDF6;font-size:33px;font-weight:800;letter-spacing:-.3px}
+
+  /* ---- headline block, bottom left ---- */
+  .copy{position:absolute;right:72px;bottom:84px;width:856px}
+  .eyebrow{color:#C7CBFF;font-size:21px;font-weight:700;letter-spacing:3px;
+           margin-bottom:22px;text-transform:uppercase}
+  h1{color:#fff;font-size:97px;font-weight:800;line-height:.96;letter-spacing:-2.4px;
+     text-wrap:balance;text-shadow:0 6px 40px rgba(0,0,0,.55)}
+  h1 em{font-style:normal;color:#F2B134}
+  .rule{width:84px;height:5px;border-radius:3px;background:#F2B134;margin:40px 0 22px}
+  .kicker{color:#C8C8D8;font-size:25px;font-weight:600;letter-spacing:-.2px}
+  .kicker b{color:#fff;font-weight:800}
+
+  /* ---- the one stat, echoing the app's own tile ---- */
+  .pill{display:inline-flex;align-items:center;gap:14px;margin-bottom:26px;
+        background:rgba(242,177,52,.12);border:1px solid rgba(242,177,52,.42);
+        border-radius:999px;padding:11px 22px 12px}
+  .pill .k{color:#C9A15A;font-size:17px;font-weight:700;letter-spacing:2px}
+  .pill .v{color:#F2B134;font-size:22px;font-weight:800;letter-spacing:-.3px}
+</style>
+</head>
+<body>
+<div class="thumb" id="thumb">
+  <div class="photo"></div>
+  <div class="scrim"></div>
+  <div class="vig"></div>
+
+  <div class="brand">
+    <svg width="52" height="52" viewBox="0 0 120 120" role="img" aria-label="Noah">
+      <defs>
+        <clipPath id="c1"><circle cx="60" cy="58" r="34"/></clipPath>
+        <radialGradient id="rg2" cx=".5" cy=".94" r=".9"><stop offset="0" stop-color="#8b8ff8"/><stop offset=".45" stop-color="#6366f1"/><stop offset="1" stop-color="#8b5cf6"/></radialGradient>
+        <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(43,53,122,0.140)"/><stop offset="1" stop-color="rgba(99,102,241,0.300)"/></linearGradient>
+        <linearGradient id="g4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(139,143,248,0.550)"/><stop offset="1" stop-color="rgba(139,143,248,0.000)"/></linearGradient>
+      </defs>
+      <g clip-path="url(#c1)"><rect x="24" y="22" width="72" height="52" fill="url(#g3)"/><rect x="24" y="74" width="72" height="20" fill="url(#rg2)"/></g>
+      <rect clip-path="url(#c1)" x="24" y="74" width="72" height="14" fill="url(#g4)"/>
+      <circle cx="60" cy="58" r="34" fill="none" stroke="#C7CBFF" stroke-width="7"/>
+      <line x1="16" y1="74" x2="104" y2="74" stroke="#C7CBFF" stroke-width="7"/>
+    </svg>
+    <span>Noah</span>
+  </div>
+
+  <div class="copy">
+    <div class="pill"><span class="k">STARTUP DISK</span><span class="v">98% full</span></div>
+    <div class="eyebrow">2015 iMac · Sequoia via OpenCore</div>
+    <h1>It's not broken.<br>It's <em>busy</em>.</h1>
+    <div class="rule"></div>
+    <div class="kicker">Found in <b>2 minutes</b>. Asked before it touched anything.</div>
+  </div>
+
+  </div>
+</div>
+</body>
+</html>
