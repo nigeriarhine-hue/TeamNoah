@@ -1,0 +1,83 @@
+{
+  "total": 20.0,
+  "fps": 30,
+  "durations_measured": false,
+  "tempo_applied": 1.033,
+  "lead_in": 0.1,
+  "gap": 0.06,
+  "tail": 0.22,
+  "speech_total": 19.4579,
+  "total_frames": 600,
+  "segments": [
+    {
+      "id": "s1",
+      "screen": "shot1-mac-warning",
+      "character": "full-frame",
+      "start_frame": 0,
+      "end_frame": 104,
+      "frames": 104,
+      "start": 0.0,
+      "end": 3.4667,
+      "duration": 3.4667,
+      "voice_start": 0.1,
+      "voice_duration": 3.3398,
+      "caption": "Vi \u00abStorage almost full\u00bb y pens\u00e9: mi Mac est\u00e1 lleno."
+    },
+    {
+      "id": "s2",
+      "screen": "shot2-589gb",
+      "character": "inset",
+      "start_frame": 104,
+      "end_frame": 232,
+      "frames": 128,
+      "start": 3.4667,
+      "end": 7.7333,
+      "duration": 4.2667,
+      "voice_start": 3.4998,
+      "voice_duration": 4.211,
+      "caption": "Pero Noah encontr\u00f3 casi 589 gigas libres."
+    },
+    {
+      "id": "s3",
+      "screen": "shot3-icloud",
+      "character": "inset",
+      "start_frame": 232,
+      "end_frame": 356,
+      "frames": 124,
+      "start": 7.7333,
+      "end": 11.8667,
+      "duration": 4.1333,
+      "voice_start": 7.7708,
+      "voice_duration": 4.0658,
+      "caption": "Mi Escritorio se sincronizaba con iCloud. Esa pod\u00eda ser la causa."
+    },
+    {
+      "id": "s4",
+      "screen": "shot4-choice",
+      "character": "inset",
+      "start_frame": 356,
+      "end_frame": 461,
+      "frames": 105,
+      "start": 11.8667,
+      "end": 15.3667,
+      "duration": 3.5,
+      "voice_start": 11.8967,
+      "voice_duration": 3.4366,
+      "caption": "Eleg\u00ed dejar mis archivos donde estaban. No cambi\u00f3 nada."
+    },
+    {
+      "id": "s5",
+      "screen": "shot5-splash",
+      "character": "inset-then-out",
+      "start_frame": 461,
+      "end_frame": 600,
+      "frames": 139,
+      "start": 15.3667,
+      "end": 20.0,
+      "duration": 4.6333,
+      "voice_start": 15.3932,
+      "voice_duration": 4.4046,
+      "caption": "Describe el problema. Aprueba cada paso. Descarga Noah y pru\u00e9balo hoy."
+    }
+  ]
+}

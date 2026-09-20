@@ -1,0 +1,71 @@
+{
+  "project": "Noah — Mac \"Storage almost full\" (es-419)",
+  "format": { "width": 1080, "height": 1920, "fps": 30, "duration_s": 20.0 },
+  "language": "es-419",
+  "voice_note": "Latin American Spanish, natural conversational delivery, one woman across all shots.",
+  "accuracy_rules": [
+    "The Mac warning stays in English: exactly 'Storage almost full.'",
+    "Every spoken line is Spanish. No English VO with Spanish subtitles.",
+    "Noah did NOT measure the iCloud quota - never claim iCloud was proven full.",
+    "Noah did NOT free storage, move files, change settings, or fix the warning.",
+    "Captions are generated from 'spoken' verbatim - never retyped by hand."
+  ],
+  "shots": [
+    {
+      "id": "s1",
+      "role": "hook",
+      "spoken": "Vi «Storage almost full» y pensé: mi Mac está lleno.",
+      "caption": "Vi «Storage almost full» y pensé: mi Mac está lleno.",
+      "tts_text": "Vi, Storage almost full, y pensé: mi Mac está lleno.",
+      "headline": "¿Mi Mac está lleno?",
+      "screen": "shot1-mac-warning",
+      "character": "full-frame",
+      "visual": "Woman reacts to the Mac warning. Warning text is exactly 'Storage almost full.'"
+    },
+    {
+      "id": "s2",
+      "role": "measurement",
+      "spoken": "Pero Noah encontró casi 589 gigas libres.",
+      "caption": "Pero Noah encontró casi 589 gigas libres.",
+      "tts_text": "Pero Noah encontró casi quinientos ochenta y nueve gigas libres.",
+      "headline": null,
+      "screen": "shot2-589gb",
+      "character": "inset",
+      "visual": "Noah light UI reports 589 GB libres on the Mac disk."
+    },
+    {
+      "id": "s3",
+      "role": "explanation",
+      "spoken": "Mi Escritorio se sincronizaba con iCloud. Esa podía ser la causa.",
+      "caption": "Mi Escritorio se sincronizaba con iCloud. Esa podía ser la causa.",
+      "tts_text": "Mi Escritorio se sincronizaba con iCloud. Esa podía ser la causa.",
+      "headline": null,
+      "screen": "shot3-icloud",
+      "character": "inset",
+      "visual": "Noah light UI: 'Escritorio sincronizado con iCloud' + 'El aviso podría estar relacionado con iCloud.'"
+    },
+    {
+      "id": "s4",
+      "role": "choice",
+      "spoken": "Elegí dejar mis archivos donde estaban. No cambió nada.",
+      "caption": "Elegí dejar mis archivos donde estaban. No cambió nada.",
+      "tts_text": "Elegí dejar mis archivos donde estaban. No cambió nada.",
+      "headline": null,
+      "screen": "shot4-choice",
+      "character": "inset",
+      "visual": "Choice 'Mantenerlo donde está' selected, then 'No se realizaron cambios.'"
+    },
+    {
+      "id": "s5",
+      "role": "cta",
+      "spoken": "Describe el problema. Aprueba cada paso. Descarga Noah y pruébalo hoy.",
+      "caption": "Describe el problema. Aprueba cada paso. Descarga Noah y pruébalo hoy.",
+      "tts_text": "Describe el problema. Aprueba cada paso. Descarga Noah y pruébalo hoy.",
+      "headline": null,
+      "screen": "shot5-splash",
+      "character": "inset-then-out",
+      "visual": "Noah splash, real icon, tagline 'Describe it. Approve it. Done.', 'Descarga Noah y pruébalo hoy', 'onnoah.app'"
+    }
+  ],
+  "thumbnail": { "headline": "¿Tu Mac dice que no hay espacio?", "screen": "thumbnail" }
+}

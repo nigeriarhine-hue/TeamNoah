@@ -1,0 +1,19 @@
+1
+00:00:00,000 --> 00:00:03,467
+Vi «Storage almost full» y pensé: mi Mac está lleno.
+
+2
+00:00:03,467 --> 00:00:07,733
+Pero Noah encontró casi 589 gigas libres.
+
+3
+00:00:07,733 --> 00:00:11,867
+Mi Escritorio se sincronizaba con iCloud. Esa podía ser la causa.
+
+4
+00:00:11,867 --> 00:00:15,367
+Elegí dejar mis archivos donde estaban. No cambió nada.
+
+5
+00:00:15,367 --> 00:00:20,000
+Describe el problema. Aprueba cada paso. Descarga Noah y pruébalo hoy.

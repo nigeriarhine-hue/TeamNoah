@@ -1,0 +1,220 @@
+/* Noah — vertical short design system (LIGHT theme)
+   Layout, typography, iconography and interaction language follow the real
+   Noah desktop app (see reference screenshots); colours are the light-theme
+   equivalent of the shipped dark UI. Brand palette from brand-pack/README.md. */
+@import url('fonts.css');
+
+:root{
+  /* Brand */
+  --navy:#1A1D61; --blue:#2563EB; --violet:#7C3AED;
+  --amber:#D97706; --amber-ink:#B45309;
+  --teal:#0D9488; --indigo:#6366F1;
+
+  /* Light surfaces */
+  --stage:#EEF1F7;          /* frame background behind the app window */
+  --app:#F7F8FB;            /* app canvas */
+  --side:#F0F2F7;           /* sidebar */
+  --card:#FFFFFF;
+  --tile:#F7F8FB;
+  --line:#E3E7EF;
+  --line-soft:#EDF0F5;
+
+  /* Ink */
+  --ink:#14171C;
+  --ink-2:#3C4450;
+  --muted:#5A6272;
+  --faint:#8A92A0;
+
+  --r-lg:28px; --r-md:20px; --r-sm:14px;
+  --shadow-card:0 24px 60px rgba(20,23,28,.10), 0 2px 8px rgba(20,23,28,.05);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px}
+body{
+  font-family:'Jakarta',system-ui,sans-serif;
+  color:var(--ink);
+  background:transparent;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:geometricPrecision;
+}
+.frame{position:relative;width:1080px;height:1920px;overflow:hidden}
+
+/* Opaque stage background used by the UI shots */
+.stage-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(1200px 760px at 50% 4%, #FFFFFF 0%, #F2F5FA 46%, #E7ECF5 100%);
+}
+.stage-bg::after{ /* faint brand tide at the bottom edge */
+  content:'';position:absolute;left:0;right:0;bottom:0;height:420px;
+  background:linear-gradient(180deg, rgba(37,99,235,0) 0%, rgba(37,99,235,.055) 60%, rgba(124,58,237,.085) 100%);
+}
+
+/* ---------- Eyebrow + headline ---------- */
+.eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-size:26px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);
+}
+.eyebrow .dot{width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(180deg,var(--blue),var(--violet))}
+.headline{
+  font-size:82px;line-height:1.04;font-weight:800;letter-spacing:-.022em;color:var(--navy);
+}
+.headline em{font-style:normal;background:linear-gradient(90deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Noah app window ---------- */
+.win{
+  position:relative;background:var(--app);border-radius:var(--r-lg);
+  border:1px solid var(--line);box-shadow:var(--shadow-card);overflow:hidden;
+}
+.win-bar{
+  height:78px;display:flex;align-items:center;gap:16px;padding:0 28px;
+  background:#FFFFFF;border-bottom:1px solid var(--line);
+}
+.win-bar .mark{width:36px;height:36px;flex:none}
+.win-bar .name{font-size:27px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.win-bar .win-dots{margin-left:auto;display:flex;gap:26px;align-items:center;opacity:.5}
+.win-bar .win-dots i{display:block;width:22px;height:2px;background:#6B7280;border-radius:2px}
+.win-bar .win-dots .sq{width:18px;height:18px;border:2px solid #6B7280;border-radius:4px;background:none}
+.win-bar .win-dots .x{width:20px;height:20px;position:relative}
+.win-bar .win-dots .x::before,.win-bar .win-dots .x::after{
+  content:'';position:absolute;top:9px;left:0;width:20px;height:2px;background:#6B7280;border-radius:2px}
+.win-bar .win-dots .x::before{transform:rotate(45deg)} .win-bar .win-dots .x::after{transform:rotate(-45deg)}
+
+/* Result card — mirrors "What Noah did" in the shipped app */
+.result{
+  margin:26px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-md);overflow:hidden;
+}
+.result-head{
+  display:flex;align-items:center;gap:16px;padding:22px 30px;
+  border-bottom:1px solid var(--line-soft);background:#FCFDFF;
+}
+.tick{width:34px;height:34px;border-radius:50%;background:rgba(13,148,136,.12);
+  display:grid;place-items:center;flex:none}
+.tick svg{width:19px;height:19px}
+.result-head .t{font-size:27px;font-weight:700;color:var(--ink)}
+.result-head .sub{font-size:24px;color:var(--faint);font-weight:500}
+.result-head .work{margin-left:auto;font-size:23px;color:var(--muted);font-weight:600;
+  display:flex;align-items:center;gap:9px}
+.accent{height:4px;background:linear-gradient(90deg,var(--blue),var(--violet))}
+.accent.ok{background:linear-gradient(90deg,var(--teal),#34D399)}
+.result-body{padding:34px 34px 36px}
+
+.sec{
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+  font-size:23px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);
+}
+.sec::before{content:'';width:22px;height:2px;background:#C3CAD6;border-radius:2px;flex:none}
+.say{font-size:42px;line-height:1.42;color:var(--ink-2);font-weight:500;letter-spacing:-.01em}
+.say b{font-weight:800;color:var(--ink)}
+
+/* Metric tiles */
+.tiles{display:flex;border:1px solid var(--line);border-radius:var(--r-sm);
+  overflow:hidden;background:var(--tile);margin-top:10px}
+.tile{flex:1;padding:24px 26px;border-right:1px solid var(--line)}
+.tile:last-child{border-right:0}
+.tile .k{font-size:21px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--faint);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .v{font-size:46px;font-weight:800;letter-spacing:-.02em;margin-top:10px;color:var(--amber-ink)}
+.tile .v.teal{color:var(--teal)} .tile .v.navy{color:var(--navy)}
+.tile .d{font-size:21px;color:var(--muted);margin-top:8px;font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Numbered plan rows */
+.rows{display:flex;flex-direction:column;gap:22px;margin-top:6px}
+.row{display:flex;gap:18px;align-items:flex-start}
+.row .n{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;
+  border:2px solid rgba(99,102,241,.4);color:var(--indigo);font-size:21px;font-weight:700}
+.row .tx .a{font-size:31px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+.row .tx .b{font-size:25px;color:var(--muted);margin-top:6px;font-weight:500}
+
+/* Choice buttons — the app's approval language */
+.choices{display:flex;flex-direction:column;gap:18px;margin-top:8px}
+.choice{
+  display:flex;align-items:center;gap:20px;padding:26px 28px;border-radius:18px;
+  border:2px solid var(--line);background:#FBFCFE;
+}
+.choice .rad{width:34px;height:34px;border-radius:50%;border:3px solid #C3CAD6;flex:none}
+.choice .lb{font-size:36px;font-weight:700;color:var(--ink-2);letter-spacing:-.01em}
+.choice .hint{font-size:23px;color:var(--faint);font-weight:500;margin-top:5px}
+.choice.sel{
+  border-color:transparent;background:linear-gradient(#FFF,#FFF) padding-box,
+    linear-gradient(90deg,var(--blue),var(--violet)) border-box;
+  border:2px solid transparent;box-shadow:0 10px 30px rgba(37,99,235,.15);
+}
+.choice.sel .rad{border-color:var(--blue);background:
+  radial-gradient(circle at 50% 50%, var(--violet) 0 42%, transparent 43%)}
+.choice.sel .lb{color:var(--navy)}
+
+/* Status strip — "No se realizaron cambios." */
+.status{
+  display:flex;align-items:center;gap:16px;margin-top:26px;padding:24px 28px;
+  border-radius:16px;background:rgba(13,148,136,.09);border:1px solid rgba(13,148,136,.25);
+}
+.status .lb{font-size:35px;font-weight:800;color:#0B7A70;letter-spacing:-.01em}
+
+.cta-btn{
+  margin-top:28px;height:88px;border-radius:18px;display:grid;place-items:center;
+  background:linear-gradient(90deg,var(--blue),var(--violet));
+  font-size:32px;font-weight:700;color:#fff;letter-spacing:-.01em;
+  box-shadow:0 14px 34px rgba(91,80,220,.28);
+}
+
+/* Composer + footer hint, as in the app */
+.composer{margin:0 26px 20px;height:84px;border-radius:18px;background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;padding:0 24px;color:#9AA2B0;font-size:26px;font-weight:500}
+.composer .go{margin-left:auto;width:52px;height:52px;border-radius:12px;background:#F0F2F7;
+  display:grid;place-items:center;color:#6B7280;font-size:26px}
+.hint{margin:0 26px 24px;font-size:22px;color:var(--faint);font-weight:500;display:flex;gap:10px;align-items:center}
+
+/* ---------- Character inset (transparent hole for the video) ---------- */
+.inset{position:absolute;border-radius:30px;overflow:hidden;
+  box-shadow:0 22px 54px rgba(20,23,28,.22);}
+.inset .hole{position:absolute;inset:0;background:transparent}
+.inset .ring{position:absolute;inset:0;border-radius:30px;border:5px solid #fff;
+  box-shadow:inset 0 0 0 1px rgba(20,23,28,.08)}
+.inset .tag{position:absolute;left:0;bottom:0;padding:9px 16px;border-radius:0 14px 0 26px;
+  background:linear-gradient(90deg,var(--blue),var(--violet));color:#fff;
+  font-size:19px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+/* ---------- Caption band ---------- */
+.cap{position:absolute;left:70px;right:70px;bottom:262px;text-align:center}
+.cap .t{
+  display:inline;
+  font-size:49px;line-height:1.33;font-weight:800;letter-spacing:-.012em;color:#fff;
+  background:rgba(16,19,26,.86);
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+  padding:12px 20px;border-radius:14px;
+}
+.cap .t .en{color:#FFD79A}
+
+/* ---------- macOS warning ---------- */
+.mac-alert{
+  width:760px;border-radius:24px;overflow:hidden;
+  background:rgba(247,248,250,.97);
+  box-shadow:0 40px 90px rgba(8,12,20,.42), 0 0 0 1px rgba(255,255,255,.7) inset;
+  backdrop-filter:blur(16px);
+}
+.mac-alert .body{padding:44px 48px 30px;text-align:center}
+.mac-alert .ico{width:104px;height:104px;margin:0 auto 24px}
+.mac-alert .t{font-size:40px;font-weight:700;color:#1D1D1F;letter-spacing:-.015em}
+.mac-alert .m{font-size:27px;color:#4B5058;margin-top:14px;line-height:1.42;font-weight:500}
+.mac-alert .btns{display:flex;border-top:1px solid rgba(20,23,28,.12)}
+.mac-alert .btn{flex:1;height:78px;display:grid;place-items:center;font-size:29px;font-weight:600;
+  color:#0A6CFF;border-right:1px solid rgba(20,23,28,.12)}
+.mac-alert .btn:last-child{border-right:0;font-weight:700}
+
+/* ---------- Splash ---------- */
+.splash-bg{position:absolute;inset:0;
+  background:radial-gradient(1100px 900px at 50% 34%, #FFFFFF 0%, #F1F4FB 45%, #E6EBF7 100%)}
+.splash-bg::after{content:'';position:absolute;left:0;right:0;bottom:0;height:560px;
+  background:linear-gradient(180deg, rgba(37,99,235,0), rgba(37,99,235,.07) 55%, rgba(124,58,237,.12))}
+.tagline{font-size:62px;font-weight:800;letter-spacing:-.02em;color:var(--navy);line-height:1.18}
+.sub-cta{font-size:44px;font-weight:700;color:var(--ink-2);letter-spacing:-.01em}
+.domain{font-size:52px;font-weight:800;letter-spacing:-.005em;
+  background:linear-gradient(90deg,var(--blue),var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent}

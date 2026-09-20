@@ -1,0 +1,123 @@
+{
+  "note": "Everything here runs server-side on Higgsfield: the TTS job_id is passed straight into the video job as audio_references, so the exact Spanish wording drives the lip sync and no media has to be downloaded to submit the jobs.",
+  "character_reference": {
+    "model": "gpt_image_2_5",
+    "aspect_ratio": "9:16",
+    "chosen_job_id": "361b8236-8920-4161-a939-7e91d3e5c5f3",
+    "alternates": [
+      "4349aa80-ed59-4082-af0b-93cc879e49bc",
+      "14865dfb-88e9-467a-aaef-fde2d846b831",
+      "a8fe83f3-543b-4c52-bb1c-a9c0c5c24a66"
+    ],
+    "look": "A Latina woman, 32 years old, warm medium-brown skin, dark brown wavy shoulder-length hair worn loose, minimal natural makeup, plain heather-grey crew-neck t-shirt, seated at a light oak desk in a bright modern home office with a soft-focus off-white wall, a small green potted plant and a closed silver laptop. Soft natural daylight from camera-left. Medium shot from mid-chest up, head in the upper third, generous headroom, 35mm lens look, neutral colour grade, natural skin texture. No text, no captions, no logos, no watermarks."
+  },
+  "voice": {
+    "model": "text2speech_v2",
+    "variant": "elevenlabs",
+    "language": "es-419 (Latin American Spanish)",
+    "requirement": "voice_id must be a female Latin-American Spanish voice; audition before use.",
+    "note": "Runway eleven_multilingual_v2 + languageCode 'es' also works but its MCP surface here exposes no task-fetch tool, so the mp3 cannot be retrieved."
+  },
+  "shots": [
+    {
+      "id": "s1",
+      "model": "wan2_7",
+      "aspect_ratio": "9:16",
+      "resolution": "1080p",
+      "duration_s": 5,
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "<character_reference job_id>"
+        },
+        {
+          "role": "audio_references",
+          "value": "<TTS job_id for s1>"
+        }
+      ],
+      "tts_text": "Vi, Storage almost full, y pensé: mi Mac está lleno.",
+      "prompt": "A Latina woman, 32 years old, warm medium-brown skin, dark brown wavy shoulder-length hair worn loose, minimal natural makeup, plain heather-grey crew-neck t-shirt, seated at a light oak desk in a bright modern home office with a soft-focus off-white wall, a small green potted plant and a closed silver laptop. Soft natural daylight from camera-left. Medium shot from mid-chest up, head in the upper third, generous headroom, 35mm lens look, neutral colour grade, natural skin texture. No text, no captions, no logos, no watermarks. She is speaking directly to camera in Spanish. She glances at her laptop screen, eyebrows lifting in mild worry, then looks back to camera and speaks. Small natural head movement, a single blink, slight shoulder shift. Her lips match the supplied audio exactly. Locked-off camera, no camera move, no zoom. Identical wardrobe, hair, lighting and background in every shot.",
+      "framing_use": "full-frame background"
+    },
+    {
+      "id": "s2",
+      "model": "wan2_7",
+      "aspect_ratio": "9:16",
+      "resolution": "1080p",
+      "duration_s": 5,
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "<character_reference job_id>"
+        },
+        {
+          "role": "audio_references",
+          "value": "<TTS job_id for s2>"
+        }
+      ],
+      "tts_text": "Pero Noah encontró casi quinientos ochenta y nueve gigas libres.",
+      "prompt": "A Latina woman, 32 years old, warm medium-brown skin, dark brown wavy shoulder-length hair worn loose, minimal natural makeup, plain heather-grey crew-neck t-shirt, seated at a light oak desk in a bright modern home office with a soft-focus off-white wall, a small green potted plant and a closed silver laptop. Soft natural daylight from camera-left. Medium shot from mid-chest up, head in the upper third, generous headroom, 35mm lens look, neutral colour grade, natural skin texture. No text, no captions, no logos, no watermarks. She is speaking directly to camera in Spanish. She speaks to camera with dawning relief, a small surprised headshake, eyebrows raised. Relaxed, conversational. Her lips match the supplied audio exactly. Locked-off camera, no camera move, no zoom. Identical wardrobe, hair, lighting and background in every shot.",
+      "framing_use": "cropped into the inset"
+    },
+    {
+      "id": "s3",
+      "model": "wan2_7",
+      "aspect_ratio": "9:16",
+      "resolution": "1080p",
+      "duration_s": 5,
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "<character_reference job_id>"
+        },
+        {
+          "role": "audio_references",
+          "value": "<TTS job_id for s3>"
+        }
+      ],
+      "tts_text": "Mi Escritorio se sincronizaba con iCloud. Esa podía ser la causa.",
+      "prompt": "A Latina woman, 32 years old, warm medium-brown skin, dark brown wavy shoulder-length hair worn loose, minimal natural makeup, plain heather-grey crew-neck t-shirt, seated at a light oak desk in a bright modern home office with a soft-focus off-white wall, a small green potted plant and a closed silver laptop. Soft natural daylight from camera-left. Medium shot from mid-chest up, head in the upper third, generous headroom, 35mm lens look, neutral colour grade, natural skin texture. No text, no captions, no logos, no watermarks. She is speaking directly to camera in Spanish. She speaks to camera explaining, one small clarifying nod, thoughtful expression settling into understanding. Her lips match the supplied audio exactly. Locked-off camera, no camera move, no zoom. Identical wardrobe, hair, lighting and background in every shot.",
+      "framing_use": "cropped into the inset"
+    },
+    {
+      "id": "s4",
+      "model": "wan2_7",
+      "aspect_ratio": "9:16",
+      "resolution": "1080p",
+      "duration_s": 5,
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "<character_reference job_id>"
+        },
+        {
+          "role": "audio_references",
+          "value": "<TTS job_id for s4>"
+        }
+      ],
+      "tts_text": "Elegí dejar mis archivos donde estaban. No cambió nada.",
+      "prompt": "A Latina woman, 32 years old, warm medium-brown skin, dark brown wavy shoulder-length hair worn loose, minimal natural makeup, plain heather-grey crew-neck t-shirt, seated at a light oak desk in a bright modern home office with a soft-focus off-white wall, a small green potted plant and a closed silver laptop. Soft natural daylight from camera-left. Medium shot from mid-chest up, head in the upper third, generous headroom, 35mm lens look, neutral colour grade, natural skin texture. No text, no captions, no logos, no watermarks. She is speaking directly to camera in Spanish. She speaks to camera calmly and decisively, a single small confirming nod, a faint reassured smile at the end. Her lips match the supplied audio exactly. Locked-off camera, no camera move, no zoom. Identical wardrobe, hair, lighting and background in every shot.",
+      "framing_use": "cropped into the inset"
+    },
+    {
+      "id": "s5",
+      "model": "wan2_7",
+      "aspect_ratio": "9:16",
+      "resolution": "1080p",
+      "duration_s": 5,
+      "medias": [
+        {
+          "role": "start_image",
+          "value": "<character_reference job_id>"
+        },
+        {
+          "role": "audio_references",
+          "value": "<TTS job_id for s5>"
+        }
+      ],
+      "tts_text": "Describe el problema. Aprueba cada paso. Descarga Noah y pruébalo hoy.",
+      "prompt": "A Latina woman, 32 years old, warm medium-brown skin, dark brown wavy shoulder-length hair worn loose, minimal natural makeup, plain heather-grey crew-neck t-shirt, seated at a light oak desk in a bright modern home office with a soft-focus off-white wall, a small green potted plant and a closed silver laptop. Soft natural daylight from camera-left. Medium shot from mid-chest up, head in the upper third, generous headroom, 35mm lens look, neutral colour grade, natural skin texture. No text, no captions, no logos, no watermarks. She is speaking directly to camera in Spanish. She speaks to camera warmly and directly, light friendly energy, a small open-handed gesture near the end. Her lips match the supplied audio exactly. Locked-off camera, no camera move, no zoom. Identical wardrobe, hair, lighting and background in every shot.",
+      "framing_use": "cropped into the inset"
+    }
+  ]
+}
