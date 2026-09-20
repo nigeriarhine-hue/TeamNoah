@@ -25,6 +25,10 @@ export type TextPatch = {
   letterSpacing?: string;
   /** left inset so the glyphs start where the originals did */
   inset?: number;
+  /** a public/ image stretched to fill the cover, for non-flat backgrounds */
+  bgImage?: string;
+  /** centre the replacement instead of left-aligning it */
+  center?: boolean;
 };
 
 const PANEL = '#1d2127';
@@ -98,6 +102,12 @@ export const PATCHES_02: TextPatch[] = [
   // row 8: temp cache -> cache
   {x: 445, y: 660, w: 204, h: 26, bg: PANEL, inset: 2,
    text: 'Safe, ~0.5 GB cache', size: 14.5, weight: 500, color: '#7a848c'},
+  // row 13: the approve button. Its background is a blue->violet gradient, so
+  // the cover is a glyph-free row lifted from the button itself (btn-strip.png)
+  // and stretched, rather than a flat colour or an approximated gradient.
+  {x: 400, y: 777, w: 697, h: 24, bg: 'transparent', bgImage: 'noah-ui/btn-strip.png',
+   center: true, text: 'Trim login items & clear space  \u2192',
+   size: 17.5, weight: 700, color: '#f4ffff'},
 ];
 
 // 03 — approval / action screen (1170x985); this view is dimmed, so the

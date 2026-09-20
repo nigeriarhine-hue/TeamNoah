@@ -82,9 +82,12 @@ export const FocusZoom: React.FC<{
               width: p.w * k,
               height: p.h * k,
               backgroundColor: p.bg,
+              backgroundImage: p.bgImage ? `url(${staticFile(p.bgImage)})` : undefined,
+              backgroundSize: '100% 100%',
               display: 'flex',
               alignItems: 'center',
-              paddingLeft: (p.inset ?? 0) * k,
+              justifyContent: p.center ? 'center' : 'flex-start',
+              paddingLeft: p.center ? 0 : (p.inset ?? 0) * k,
               boxSizing: 'border-box',
               overflow: 'hidden',
             }}

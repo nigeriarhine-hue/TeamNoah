@@ -48,15 +48,20 @@ fixes it. Resolved with option 1: the title bar is painted out
 (`chromeCover()`), and the Noah beats now fit the content column rather than
 covering the frame, which keeps the chrome out of shot anyway.
 
-## E. STILL OUTSTANDING — one string, not on the approved list
+## E. The approve button — APPROVED, APPLIED
 
-| Original | Proposed | Where |
+| Original | Replacement | Where |
 |---|---|---|
-| `Trim startup & clear space` | `Trim login items & clear space` | the approve button, 0:19.8-0:22.5 |
+| `Trim startup & clear space` | `Trim login items & clear space` | the approve button |
 
-This is the hero element of the approval beat and reads for ~2.7s at full size.
-It was **not** among the 12 rows, so per the brief it has not been touched. With
-`LOGIN ITEMS` now directly above it, leaving `startup` on the button is the last
-visible inconsistency.
+This one needed a different technique. Every other patch sits on a flat panel,
+so a sampled solid colour covers it invisibly. The approve button is a
+blue-to-violet gradient, where a flat cover would show as a block and a
+hand-approximated gradient drifts from the real one.
 
-Say the word and it is one more patch row plus a re-render.
+Instead the cover is **a glyph-free pixel row lifted from the button itself**
+(`scripts/` extracted row y=775 into `public/noah-ui/btn-strip.png`) and
+stretched over the label. The button is vertically uniform, so this reproduces
+its gradient exactly rather than approximating it.
+
+**No Windows-specific wording now appears anywhere on screen.**
