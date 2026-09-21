@@ -21,26 +21,31 @@ per brief — the only Noah branding on screen is the app's own UI.
 
    Re-render: `node render.js` (needs `npm i playwright`, fonts sit alongside).
 
-2. **Creator + footage** — Higgsfield: `soul_2` for the creator identity,
+2. **Beats** — vent → slump → mouse-jab macro → the idea → typing → slouched
+   scrolling his phone while he waits → looks up, sees Noah waiting on his
+   go-ahead, clicks → grin and settle. The approval step is the turn, so Noah's
+   permission model is on screen rather than implied.
+
+3. **Creator + footage** — Higgsfield: `soul_2` for the creator identity,
    `gpt_image_2` for an 8-slot 21:9 storyboard, `seedream_v5_pro` de-slop pass,
    then `seedance_2_5` (omni_reference, native audio) for the 15s clip — eight
    internal hard cuts at ~1.9s.
 
-3. **UI inserts** — the real screenshots are composited in post rather than
+4. **UI inserts** — the real screenshots are composited in post rather than
    generated, so the interface is pixel-accurate instead of AI-mangled. Crops are
    taken tight around the live elements so the text stays legible at card size:
 
-   | insert | source crop            | window        | position |
-   |--------|------------------------|---------------|----------|
-   | 1      | ask + "Looking into it…" | 7.7 – 9.4s  | top      |
-   | 2      | diagnosis stat tiles   | 9.6 – 11.3s   | bottom   |
-   | 3      | "Done." + result tiles | 11.5 – 14.2s  | top      |
+   | insert | source crop              | window       | lands on |
+   |--------|--------------------------|--------------|----------|
+   | 1      | ask + "Looking into it…" | 7.6 – 9.3s   | typing   |
+   | 2      | plan + approval CTA      | 9.9 – 11.7s  | scrolling |
+   | 3      | "Done." + result tiles   | 12.3 – 14.0s | after the click |
 
-   Insert 2 sits low so it clears the macro eyes beat; the last ~0.8s is left
-   clean for the closing line.
+   Insert 2 clears right as he snaps upright, leaving the click beat clean; the
+   last ~1s is left clean for the closing line.
 
 ## Script (33 words — the 15s density band)
 
 > *[incredulous scoff]* "—kept crashing the second I hit launch. Every single
-> time. Told Noah what was happening, went and got food. Came back — it already
-> found the driver and fixed it. Game's been CLEAN since."
+> time. Told Noah, went back to scrolling. Looked up and it already found the
+> driver — just needed my okay. Game's been CLEAN since."
