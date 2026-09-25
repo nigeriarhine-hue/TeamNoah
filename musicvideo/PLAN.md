@@ -30,3 +30,12 @@ Frames per shot at 30 fps: 300, 306, 246, 369, 267, 264, 180, 333, 210 (= 82.5 s
 Audio is the original MP3 from 0 s, padded under the end card, with a 1.5 s fade-out.
 
 To redo a shot, re-run that Wan job with the same start frame and audio piece, then re-run the assembly.
+
+## v2 (fixes)
+
+- End card: cut the first 12 frames, which still showed the old "It showed the proof / Done." card. It now opens on the Noah mark (4.4 s).
+- Shot 2 (0:10–0:20): redone as a waist-up shot, standing still, so his feet stay out of frame (start frame 345ce70f, clip 61b63d61).
+- Shot 7 (0:58–1:04): redone so the phone lies on the desk and his hands are empty (start frame e9c01a50, clip 768fa17a).
+
+Final v2 (86.9 s):
+https://d2ol7oe51mr4n9.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/fd4f7926-f2fd-4b37-829b-f76c02b137bb.mp4
