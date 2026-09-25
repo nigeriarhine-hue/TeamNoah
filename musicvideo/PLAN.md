@@ -18,3 +18,15 @@ No on-screen lyrics.
 | 8 | 64.4–75.5 | "Just download Noah… slow computer, Wi-Fi… storage…" | creative studio (77e9a98b) | rap performance, counts off issues |
 | 9 | 75.5–82.5 | "…download Noah and install today" | studio mark wall (70cee54e) | points at camera, big finish |
 | — | 82.5–end | end card | splash_endcard.mp4 | Noah mark → "Describe it. Approve it. Done." |
+
+## Rendered (2026-09-25)
+
+Final Short (1080×1920, 30 fps, 87.3 s, song + end card, no lyrics on screen), saved in the Higgsfield media library:
+https://d2ol7oe51mr4n9.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/f76c9ce7-1a26-4c42-ac85-0883ac2c7aaf.mp4
+
+Wan 2.7 clip jobs (shots 1–9), each trimmed to its section length:
+365b4285, 56232407, 79681f48, 6b65e5c0, 547c770f, 26b4cd77, 0a14f25c, 2e95280c, 9c21aee9.
+Frames per shot at 30 fps: 300, 306, 246, 369, 267, 264, 180, 333, 210 (= 82.5 s), then the 4.8 s end card.
+Audio is the original MP3 from 0 s, padded under the end card, with a 1.5 s fade-out.
+
+To redo a shot, re-run that Wan job with the same start frame and audio piece, then re-run the assembly.
