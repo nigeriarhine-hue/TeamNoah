@@ -1,6 +1,6 @@
 {
-  "clip1": false,
-  "clip2": false,
-  "voiceover": false,
+  "clip1": true,
+  "clip2": true,
+  "voiceover": true,
   "sfx": true
 }
