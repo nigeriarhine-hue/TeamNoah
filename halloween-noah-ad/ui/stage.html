@@ -474,16 +474,21 @@ function rel(el){const r=el.getBoundingClientRect(),w=W.win.getBoundingClientRec
   return [(r.left-w.left+r.width/2)/sc,(r.top-w.top+r.height/2)/sc];}
 function flow(t){
   resetWin(false);
-  const TYPE_END=0.34, SENT=0.38, CHECKS=0.45, CAUSE=0.95, PLAN=1.95, CLICK_CTA=3.05, DLG=3.2, GO=4.7, LOG=4.95;
+  // beat timings of the take (seconds from its start); window.FT overrides them per edit
+  const F=Object.assign({TYPE0:0.1,TYPE_END:0.34,SENT:0.38,CHECKS:0.45,TICK:0.09,CAUSE:0.95,PLAN:1.95,CLICK_CTA:3.05,DLG:3.2,GO:4.7,LOG:4.95,DONE:99},window.FT||{});
+  const {TYPE0,TYPE_END,SENT,CHECKS,TICK,CAUSE,PLAN,CLICK_CTA,DLG,GO,LOG,DONE}=F;
   // --- composer / bubble / checks / situation / log ---
-  if(t<SENT){const n=Math.floor(PROMPT.length*seg(t,0,TYPE_END));
-    W.txt.innerHTML=`<span class="typed">${PROMPT.slice(0,n)}</span><span class="caret"></span>`;
+  if(t<SENT){const n=Math.floor(PROMPT.length*seg(t,TYPE0,TYPE_END));
+    W.txt.innerHTML=n?`<span class="typed">${PROMPT.slice(0,n)}</span><span class="caret"></span>`:`What's broken? Tell Noah and hit go.<span class="caret"></span>`;
     W.send.className='sendbtn'+(n==PROMPT.length?' go':'');W.send.innerHTML=ARROW(n==PROMPT.length?'#fff':'#6f7480');
-    W.today.style.display='none';W.scroll.innerHTML='';}
+    W.today.style.display='none';
+    // Noah's home screen fills the window while the problem is typed
+    W.scroll.innerHTML=`<div style="height:300px"></div><div style="display:flex;flex-direction:column;align-items:center;gap:22px;opacity:${1-seg(t,SENT-.12,SENT)}">
+      <img src="${ICON}" style="width:150px;height:150px"><div style="font-size:26px;color:#c9ccd6;font-weight:600">What's broken? Tell Noah and hit go.</div></div>`;}
   else if(t<CAUSE){W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';
     const b=eo(seg(t,SENT,SENT+.15));
     const list=['Checking performance…','Checking active processes…','Checking memory…','Checking storage…','Checking system configuration…'].map((c,i)=>{
-      const on=t>=CHECKS+i*.09, done=t>=CHECKS+(i+1)*.09;
+      const on=t>=CHECKS+i*TICK, done=t>=CHECKS+(i+1)*TICK;
       return `<div class="p" style="opacity:${on?1:.3}">${done?CHK:(on?SPIN(t):'<span class="spinner" style="opacity:.4"></span>')}${done?c.replace('Checking','Checked').replace('…',''):c}</div>`;}).join('');
     W.scroll.innerHTML=`<div style="height:30px"></div>${userBubble(b)}<div style="height:30px"></div>
       <div class="card progress" style="padding:18px 26px 14px;opacity:${eo(seg(t,SENT+.05,SENT+.15))}"><div class="bar" style="width:${100*((t*1.2)%1)}%"></div>
@@ -492,16 +497,24 @@ function flow(t){
     W.hint.style.display='block';W.txt.innerHTML=t<DLG?'...or tell Noah to do it differently':"What's broken? Tell Noah and hit go.";
     if(t>=DLG){W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';} else W.send.innerHTML=ARROW('#8c919c');
     W.scroll.innerHTML='<div style="height:22px"></div>'+situationCard(t);
-    W.scroll.querySelectorAll('.rv').forEach(e=>{const k=+e.dataset.k;const a=eo(seg(t,CAUSE+k*.1,CAUSE+.3+k*.1));e.style.opacity=a;e.style.transform=`translateY(${(1-a)*16}px)`;});
-    const cta=W.scroll.querySelector('#ctaBtn'); if(cta&&t>2.75&&t<DLG) cta.style.filter=`brightness(${1.12})`;
+    const st=Math.min(.3,(PLAN-CAUSE)/8);  // stagger the card's rows
+    W.scroll.querySelectorAll('.rv').forEach(e=>{const k=+e.dataset.k;const a=eo(seg(t,CAUSE+k*st,CAUSE+.3+k*st));e.style.opacity=a;e.style.transform=`translateY(${(1-a)*16}px)`;});
+    const cta=W.scroll.querySelector('#ctaBtn'); if(cta&&t>CLICK_CTA-.3&&t<DLG) cta.style.filter=`brightness(${1.12})`;
     if(cta&&t>=CLICK_CTA&&t<CLICK_CTA+.12) cta.style.transform='scale(.97)';}
   else{
     W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';
-    const p1=t>LOG+.3,p2=t>LOG+.6;
+    const p1=t>LOG+.3,p2=t>LOG+.6,r=eo(seg(t,DONE,DONE+.35));
     W.scroll.innerHTML=`<div style="height:22px"></div><div class="approved" style="opacity:${eo(seg(t,LOG,LOG+.2))}">Approved: Action approved</div>
       <div class="card progress" style="padding:16px 26px;margin-top:22px;opacity:${eo(seg(t,LOG+.05,LOG+.25))}"><div class="bar" style="width:${Math.min(100,(t-LOG)*120)}%"></div>
       <div class="p">${p1?CHK:SPIN(t)}Stopping a stuck process — app updater</div>
-      <div class="p" style="opacity:${p1?1:.35}">${p2?CHK:SPIN(t)}Turning off a startup program — app updater</div></div>`;}
+      <div class="p" style="opacity:${p1?1:.35}">${p2?CHK:SPIN(t)}Turning off a startup program — app updater</div></div>`+
+      (r>0?`<div class="card res" style="margin-top:22px;padding:28px 26px 24px;opacity:${r};transform:translateY(${(1-r)*18}px)"><div class="bar" style="width:100%;background:linear-gradient(90deg,#34c9a3,#5eead4)"></div>
+      <div class="sec">RESULT</div><div class="big">Done.</div>
+      <div class="sit" style="margin-bottom:18px">The stuck updater is stopped and won't relaunch at startup — you can turn it back on anytime.</div>
+      <div class="stats" style="margin-bottom:0">
+        <div class="stat"><div class="k">UPDATER</div><div class="v good">Stopped</div><div class="s">Nothing deleted</div></div>
+        <div class="stat"><div class="k">AT STARTUP</div><div class="v good">Now off</div><div class="s">Reversible anytime</div></div>
+        <div class="stat"><div class="k">CHANGES</div><div class="v ok">2 logged</div><div class="s">See Show work</div></div></div></div>`:'');}
   // --- approval dialog ---
   const d=eo(seg(t,DLG,DLG+.22))*(1-eo(seg(t,GO+.12,GO+.3)));
   if(d>0){W.body.style.filter=`blur(${5*d}px) brightness(${1-0.35*d})`;
@@ -510,23 +523,25 @@ function flow(t){
       <div class="hd"><div class="warn"><svg viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg></div><div class="q">Can Noah do this?</div></div>
       <div class="m">Noah needs your OK to continue.</div>
       <div class="btns"><div class="btn no">No thanks</div>
-        <div class="btn go" style="transform:scale(${press?.95:1});box-shadow:${t>4.2?'0 0 0 3px rgba(139,143,248,.35),0 8px 26px rgba(99,102,241,.45)':'none'}">Go ahead</div>
+        <div class="btn go" style="transform:scale(${press?.95:1});box-shadow:${t>GO-.5?'0 0 0 3px rgba(139,143,248,.35),0 8px 26px rgba(99,102,241,.45)':'none'}">Go ahead</div>
         <div class="btn all">Approve all</div></div></div>`;}
-  // --- camera: full view -> cause -> plan -> dialog zoom -> log ---
-  const [cs,cfy,ccy]=fcam([[0,1.5,590,1060],[CAUSE,1.5,590,1060],[PLAN,1.5,590,1060],[PLAN+.55,1.5,700,1010],[DLG,1.5,700,1010],[DLG+.45,1.95,590,1000],[GO+.15,1.95,590,1000],[LOG+.25,1.5,590,1060],[9,1.5,590,1060]],t);
+  // --- camera: full view -> plan -> dialog zoom -> log ---
+  const [cs,cfy,ccy]=fcam([[0,1.5,590,1060],[PLAN,1.5,590,1060],[PLAN+.55,1.5,700,1010],[DLG,1.5,700,1010],[DLG+.45,1.95,590,1000],[GO+.15,1.95,590,1000],[LOG+.25,1.5,590,1060],[99,1.5,590,1060]],t);
   camera(cs,354,cfy,ccy);
   // --- cursor: to CTA, click, then to Go ahead, click ---
-  if(t>=2.4&&t<LOG+.1){
+  const CUR0=CLICK_CTA-Math.min(.65,(CLICK_CTA-PLAN)*.6);
+  if(t>=CUR0&&t<LOG+.1){
     let x,y;
     const cta=W.scroll.querySelector('#ctaBtn'), go=overlay.querySelector('.btn.go');
     const [cx,cy]=cta?rel(cta):[354,900];
-    if(t<DLG){const m=ease(seg(t,2.4,CLICK_CTA-.05));x=lerp(560,cx+40,m);y=lerp(1100,cy+6,m);}
+    if(t<DLG){const m=ease(seg(t,CUR0,CLICK_CTA-.05));x=lerp(560,cx+40,m);y=lerp(1100,cy+6,m);}
     else{const [gx,gy]=go?rel(go):[380,654];const m=ease(seg(t,DLG+.45,GO-.15));x=lerp(cx+40,gx+8,m);y=lerp(cy+6,gy+8,m);}
     cur(x,y,(t>=CLICK_CTA&&t<CLICK_CTA+.12)||(t>=GO&&t<GO+.12));}
-  // --- callout morphs in place ---
-  const lab=t<CAUSE?'':t<PLAN?'CAUSE <b>FOUND</b>':t<DLG?'RECOMMENDED <b>ACTION</b>':t<LOG?'YOU <b>APPROVE</b> THE FIX.':'';
-  const kin=t<CAUSE?0:eo(seg(t,[CAUSE,PLAN,DLG][t<PLAN?0:t<DLG?1:2],[CAUSE,PLAN,DLG][t<PLAN?0:t<DLG?1:2]+.18));
-  callout(lab,t>=LOG?0:kin);
+  // --- callout steps through the flow, changing in place ---
+  const steps=(window.FT&&window.FT.labels)?[[TYPE0,'DESCRIBE <b>IT.</b>'],[SENT,'NOAH GETS TO <b>WORK.</b>']]:[];
+  steps.push([CAUSE,'CAUSE <b>FOUND</b>'],[PLAN,'RECOMMENDED <b>ACTION</b>'],[DLG,'YOU <b>APPROVE</b> THE FIX.'],[LOG,'']);
+  let si=-1; steps.forEach(([a],i)=>{if(t>=a) si=i;});
+  callout(si<0?'':steps[si][1],si<0||!steps[si][1]?0:eo(seg(t,steps[si][0],steps[si][0]+.18)));
 }
 function ovBand(t,o){ // o: {lines:[[text,warm]],size,y,t0,t1}
   const k=eo(seg(t,o.t0||0,(o.t0||0)+.18))*(1-seg(t,o.t1||99,(o.t1||99)+.15));
@@ -549,7 +564,7 @@ const PC={freeze:pcFreeze,crash:pcCrash,wifi:pcWifi,loading:pcLoading,storage:pc
 function show(id){document.querySelectorAll('.scene').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');}
 window.render=function(name,t,opt={}){
   const vert=!!opt.vert;document.documentElement.classList.toggle('vert',vert);CX=vert?540:960;
-  window.PRESS_AT=opt.pressAt; if(opt.speed) t*=opt.speed;
+  window.PRESS_AT=opt.pressAt; window.FT=opt.ft; if(opt.speed) t*=opt.speed;
   _render(name,t,opt);
   if(opt.vcam&&UI[name]) camera(opt.vcam.s,opt.vcam.fx||812,opt.vcam.fy,opt.vcam.cy);
   if(opt.noLabel) $('#problem').innerHTML='';

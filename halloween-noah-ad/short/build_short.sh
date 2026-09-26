@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds NOAH_HALLOWEEN_SHORT_15SEC_1080x1920.mp4 from the finished ad's sources.
+# Builds the vertical Short (NOAH_HALLOWEEN_SHORT_<n>SEC_1080x1920.mp4) from the finished ad's sources.
 # Run in an empty work dir: SRC=/path/to/halloween-noah-ad bash $SRC/short/build_short.sh
 set -euo pipefail
 SRC=${SRC:-$(cd "$(dirname "$0")/.." && pwd)}
@@ -10,6 +10,8 @@ J() { python3 -c "import json;d=json.load(open('$1'));print($2)"; }
 mkdir -p src seg
 for k in w2 w6 k3 k8; do [ -s src/$k.mp4 ] || curl -sSfo src/$k.mp4 "$(J $SRC/build/sources.json "d['clips']['$k']")"; done
 [ -s src/mix.mp3 ] || curl -sSfo src/mix.mp3 "$(J $SRC/build/sources.json "d['vocal_mix']")"
+[ -s src/beat.mp3 ] || curl -sSfo src/beat.mp3 "$(J $SRC/build/sources.json "d['beat']")"
+DUR=$(J $SH/short.json "d['duration']"); OUT=NOAH_HALLOWEEN_SHORT_$(J $SH/short.json "int(d['duration'])")SEC_1080x1920.mp4
 
 node "$SH/render_short.mjs" "$(pwd)/r"
 
@@ -26,21 +28,22 @@ for j,s in enumerate(sg):
         cx,cy,w=b.get('crop',[960,540,1216]); w=w//2*2; h=min(1080,int(w/1.125+0.5)//2*2)
         x=min(max(cx-w//2,0),1920-w); y=min(max(cy-h//2,0),1080-h)
         bdir,bf=f"r/h/{s['id']}_bottom",f"crop={w}:{h}:{x}:{y},scale=1080:960:flags=lanczos"
-    print('\t'.join(map(str,[s['id'],s['layout'],n,top.get('clip','-'),top.get('in',0),top.get('comp') or '-',top.get('x0',0),bdir,bf])))
+    print('\t'.join(map(str,[s['id'],s['layout'],n,top.get('clip','-'),top.get('in',0),top.get('comp') or '-',top.get('x0',0),bdir,bf,R(top.get('delay',0)),top.get('delay',0)])))
 PY
-while IFS=$'\t' read -r -u 3 id layout n clip tin comp x0 bdir bf; do
+while IFS=$'\t' read -r -u 3 id layout n clip tin comp x0 bdir bf dn dly; do
   case $layout in
     stack)
       if [ "$comp" != "-" ]; then
-        python3 "$SRC/build/composite.py" src/$clip.mp4 $tin $n r/h/${id}_screen seg/${id}_topsrc.mp4 >/dev/null
+        python3 "$SRC/build/composite.py" src/$clip.mp4 $tin $((n - dn)) r/h/${id}_screen seg/${id}_topsrc.mp4 >/dev/null
         topin="-i seg/${id}_topsrc.mp4"
       else
         topin="-ss $tin -i src/$clip.mp4"
       fi
-      # top: native-resolution 1080x960 crop of the witch's side of the 16:9 frame
+      # top: native-resolution 1080x960 crop of the witch's side of the 16:9 frame; a delay holds the
+      # clip's first frame so a lip-synced shot starts exactly at its line
       # bottom: the PC / Noah screen she is reacting to, framed tightly on what matters in it
       ffmpeg -v error -y $topin -framerate $FPS -i $bdir/f%04d.jpg -filter_complex \
-        "[0:v]scale=1920:1080:flags=lanczos,fps=$FPS,crop=1080:960:$x0:60,$grade,tpad=stop_mode=clone:stop_duration=2[t];\
+        "[0:v]scale=1920:1080:flags=lanczos,fps=$FPS,crop=1080:960:$x0:60,$grade,tpad=start_mode=clone:start_duration=$dly:stop_mode=clone:stop_duration=2[t];\
          [1:v]$bf[b];\
          [t][b]vstack=inputs=2,drawbox=x=0:y=957:w=1080:h=6:color=0x0B1024@1:t=fill,setsar=1[v]" \
         -map "[v]" -frames:v $n $enc seg/$id.mp4 ;;
@@ -71,7 +74,7 @@ while IFS=$'\t' read -r k st; do
 done < <(python3 -c "import json;[print(i,b['start'],sep='\t') for i,b in enumerate(json.load(open('$SH/short.json'))['bands'])]")
 chain+="[$last]fade=in:st=0:d=0.12,setsar=1[vout]"
 
-python3 "$SH/short_audio.py" src/mix.mp3 "$SH/short.json" short.wav
+python3 "$SH/short_audio.py" src/mix.mp3 "$SH/short.json" short.wav src/beat.mp3
 ffmpeg -v error -y "${inputs[@]}" -i short.wav -filter_complex "$chain" -map "[vout]" -map $n:a \
-  $enc -profile:v high -level 4.2 -movflags +faststart -c:a aac -b:a 256k -ar 48000 -t 15 NOAH_HALLOWEEN_SHORT_15SEC_1080x1920.mp4
-ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,r_frame_rate,sample_aspect_ratio -of compact NOAH_HALLOWEEN_SHORT_15SEC_1080x1920.mp4
+  $enc -profile:v high -level 4.2 -movflags +faststart -c:a aac -b:a 256k -ar 48000 -t $DUR $OUT
+ffprobe -v error -show_entries format=duration:stream=codec_name,width,height,r_frame_rate,sample_aspect_ratio -of compact $OUT

@@ -46,7 +46,7 @@ for (const [j, s] of S.segments.entries()) {
   } else if (s.layout === 'ui') {
     const vcam = s.scene === 'flow' ? undefined : (s.vcam || S.vcam_default); // flow drives its own camera
     await seq(V, path.join(out, 'v', s.id), n, i => [s.scene, (s.t0 || 0) + (i / FPS) * (s.speed || 1),
-      { vert: true, vcam, pressAt: s.pressAt }]);
+      { vert: true, vcam, pressAt: s.pressAt, ft: s.ft }]);
   } else if (s.layout === 'splash') {
     await seq(V, path.join(out, 'v', s.id), n, i => ['vsplash', i / FPS, { vert: true, cue: s.cue, noFade: s.noFade }]);
   }

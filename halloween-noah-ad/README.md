@@ -63,21 +63,24 @@ talking shot, and the voice is 20% lower (×0.8 amplitude, −1.9 dB) with the m
 9. `onnoah.app` is spelled correctly. The tagline is exactly "Describe it. Approve it. Done."
 10. An automated scan checks every frame for leftover chroma green, and loudness is checked with ebur128.
 
-## YouTube Short (15 s, 1080×1920)
+## YouTube Short (20 s, 1080×1920)
 
-`short/` cuts `NOAH_HALLOWEEN_SHORT_15SEC_1080x1920.mp4` from the finished ad's own sources. Nothing is regenerated.
+`short/` cuts `NOAH_HALLOWEEN_SHORT_20SEC_1080x1920.mp4` from the finished ad's own sources. Nothing is regenerated.
+The Short follows the song instead of chopping it up. The audio is two long stretches of the finished mix:
+the hook line, then everything from "That's where Noah comes in" to "Go to onnoah.app". There is one cut, in the song's
+silence break, and it skips "no scary surprises". The instrumental beat, cross-correlated to the mix, then carries the
+end card so the voice isn't cut off mid-sentence.
 
 | Time | Layout | What's on screen | Audio from the ad |
 |---|---|---|---|
-| 0.00–3.95 | Stacked: witch (lip-synced) above tight crops of freeze → crash → Wi-Fi → storage → lag, hard cuts on the beat | WHAT'S SCARIER THAN / A PC ACTING POSSESSED? (second line lands on the next beat) | 7.35–11.30 "what's scarier than a PC…" |
-| 3.95–4.55 | Dissolve to: witch relaxes above the Noah app | NOAH FINDS THE CAUSE. | 28.20– "That's where Noah comes in." |
-| 4.55–10.45 | Slide up into one continuous 9:16 Noah take: typing → checks → cause card → plan → cursor clicks the action → approval dialog (zoom) → Go ahead at 9.25 → action log | Callout morphs CAUSE FOUND → RECOMMENDED ACTION → YOU APPROVE THE FIX.; then NO MYSTERY FIXES. | 34.20– "Finds the cause, shows you the fix, and waits for your approval. No mystery fixes," |
-| 10.45–11.05 | Dissolve: witch checks behind her above Noah's "Done." result | NO JUMP SCARES. | |
-| 11.05–15.00 | Dissolve to the vertical end card; tagline in by 12.85 | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 41.95– "Go to onnoah.app, download and install today." |
+| 0.00–4.16 | Stacked: witch (lip-synced) above a tight crop of the frozen app, then her reaction above the crash dialog; one hard cut on the beat | WHAT'S SCARIER THAN / A PC ACTING POSSESSED? (second line on the next beat) | 7.29–11.45 "what's scarier than a PC that isn't performing at its fullest potential?" |
+| 4.16–5.97 | Dissolve: witch relaxes (lip-synced) above the Noah home screen | NOAH FINDS THE CAUSE. | 27.77– "That's where Noah comes in." |
+| 5.97–16.29 | Slide up into one continuous 9:16 Noah take, timed to the voice: the problem is typed ("Describe the problem…"), checks tick ("…Noah gets to work"), cause card ("Finds the cause"), plan ("shows you the fix"), the cursor clicks the action, the approval dialog opens, Go ahead at 14.57 ("…waits for your approval"), then the action log and the Done result | Label changes in place: DESCRIBE IT. → NOAH GETS TO WORK. → CAUSE FOUND → RECOMMENDED ACTION → YOU APPROVE THE FIX.; then NO MYSTERY FIXES. | "…Describe the problem like you're talking to a friend, and Noah gets to work. Finds the cause, shows you the fix, and waits for your approval. No mystery fixes," |
+| 16.29–20.00 | Dissolve to the vertical end card | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 41.71– "Go to onnoah.app", then the instrumental beat, fading out |
 
 - **Framing:** witch shots use a native-resolution 1080×960 crop of her side of the frame, with no upscaling. The Noah UI is re-rendered in 9:16 with the collapsible sidebar hidden, so the conversation reflows to phone width at 1.5×.
 - **Transitions:** each segment is rendered past its cut by the next segment's dissolve length, and the joins use ffmpeg `xfade` at the exact cut time, so the edit timing (and lip sync) is unchanged.
-- **Audio splices:** they sit at beat-aligned offsets (within about 30 ms of the 99.4 BPM grid), with 30 ms crossfades.
+- **Audio splices:** each jump in the song is a whole number of beats (99.4 BPM), with 30 ms crossfades. The handoff to the instrumental is a 200 ms linear crossfade between the same aligned music.
 - **Lip sync:** the lip-synced clips are cut in at the same source offsets as their audio.
 
 Build: `SRC=/path/to/halloween-noah-ad bash short/build_short.sh`
