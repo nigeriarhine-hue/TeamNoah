@@ -1,0 +1,60 @@
+[
+ {
+  "id": "c01",
+  "start": 0.4,
+  "end": 5.0,
+  "html": "“Six hundred years of spells… and this PC still takes <em>ten minutes</em> to boot.”"
+ },
+ {
+  "id": "c02",
+  "start": 5.3,
+  "end": 9.5,
+  "html": "“Fine. No potions tonight. Let’s try <em>Noah</em>.”"
+ },
+ {
+  "id": "c03",
+  "start": 9.9,
+  "end": 15.0,
+  "ui": true,
+  "html": "Describe it in your own words."
+ },
+ {
+  "id": "c04",
+  "start": 15.5,
+  "end": 21.6,
+  "ui": true,
+  "html": "Noah finds what’s <em>actually</em> wrong."
+ },
+ {
+  "id": "c05",
+  "start": 22.1,
+  "end": 25.7,
+  "html": "“Seven programs <em>haunting</em> my startup? Rude.”"
+ },
+ {
+  "id": "c06",
+  "start": 26.1,
+  "end": 30.5,
+  "ui": true,
+  "html": "Nothing runs until you <em>approve</em>."
+ },
+ {
+  "id": "c07",
+  "start": 30.8,
+  "end": 34.6,
+  "html": "“It actually asks first? …Go ahead.”"
+ },
+ {
+  "id": "c08",
+  "start": 35.2,
+  "end": 40.4,
+  "ui": true,
+  "html": "Done — and reversible anytime."
+ },
+ {
+  "id": "c09",
+  "start": 40.9,
+  "end": 44.3,
+  "html": "“Now <em>that’s</em> magic!”"
+ }
+]
