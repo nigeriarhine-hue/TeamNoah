@@ -63,20 +63,19 @@ talking shot, and the voice is 20% lower (×0.8 amplitude, −1.9 dB) with the m
 9. `onnoah.app` is spelled correctly. The tagline is exactly "Describe it. Approve it. Done."
 10. An automated scan checks every frame for leftover chroma green, and loudness is checked with ebur128.
 
-## YouTube Short (20 s, 1080×1920)
+## YouTube Short (14 s, 1080×1920)
 
-`short/` cuts `NOAH_HALLOWEEN_SHORT_20SEC_1080x1920.mp4` from the finished ad's own sources. Nothing is regenerated.
-The Short follows the song instead of chopping it up. The audio is two long stretches of the finished mix:
-the hook line, then everything from "That's where Noah comes in" to "Go to onnoah.app". There is one cut, in the song's
-silence break, and it skips "no scary surprises". The instrumental beat, cross-correlated to the mix, then carries the
-end card so the voice isn't cut off mid-sentence.
+`short/` cuts `NOAH_HALLOWEEN_SHORT_14SEC_1080x1920.mp4` from the finished ad's own sources. Nothing is regenerated.
+The voice is only these lines, taken from the finished mix in three stretches joined at beat-aligned points:
+"What's scarier than a PC that isn't performing at its fullest potential?" / "That's where Noah comes in. Describe the
+problem like you're talking to a friend, and Noah gets to work." / "…download and install today."
 
 | Time | Layout | What's on screen | Audio from the ad |
 |---|---|---|---|
-| 0.00–4.16 | Stacked: witch (lip-synced) above a tight crop of the frozen app, then her reaction above the crash dialog; one hard cut on the beat | WHAT'S SCARIER THAN / A PC ACTING POSSESSED? (second line on the next beat) | 7.29–11.45 "what's scarier than a PC that isn't performing at its fullest potential?" |
-| 4.16–5.97 | Dissolve: witch relaxes (lip-synced) above the Noah home screen | NOAH FINDS THE CAUSE. | 27.77– "That's where Noah comes in." |
-| 5.97–16.29 | Slide up into one continuous 9:16 Noah take, timed to the voice: the problem is typed ("Describe the problem…"), checks tick ("…Noah gets to work"), cause card ("Finds the cause"), plan ("shows you the fix"), the cursor clicks the action, the approval dialog opens, Go ahead at 14.57 ("…waits for your approval"), then the action log and the Done result | Label changes in place: DESCRIBE IT. → NOAH GETS TO WORK. → CAUSE FOUND → RECOMMENDED ACTION → YOU APPROVE THE FIX.; then NO MYSTERY FIXES. | "…Describe the problem like you're talking to a friend, and Noah gets to work. Finds the cause, shows you the fix, and waits for your approval. No mystery fixes," |
-| 16.29–20.00 | Dissolve to the vertical end card | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 41.71– "Go to onnoah.app", then the instrumental beat, fading out |
+| 0.00–4.16 | Stacked: witch (lip-synced) above a tight crop of the frozen app, then her reaction above the crash dialog; one hard cut on the beat | WHAT'S SCARIER THAN / A PC ACTING POSSESSED? (second line on the next beat) | 7.29–11.45 |
+| 4.16–5.97 | Dissolve: witch relaxes (lip-synced) above the Noah home screen | MEET NOAH. | 27.77– "That's where Noah comes in." |
+| 5.97–10.34 | Slide up into the 9:16 Noah app: the problem is typed, sent, and the checks tick off | Label: DESCRIBE IT. → NOAH GETS TO WORK. | "Describe the problem like you're talking to a friend, and Noah gets to work." |
+| 10.34–14.00 | Dissolve to the vertical end card | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 43.82– "download and install today.", then the music fades |
 
 - **Framing:** witch shots use a native-resolution 1080×960 crop of her side of the frame, with no upscaling. The Noah UI is re-rendered in 9:16 with the collapsible sidebar hidden, so the conversation reflows to phone width at 1.5×.
 - **Transitions:** each segment is rendered past its cut by the next segment's dissolve length, and the joins use ffmpeg `xfade` at the exact cut time, so the edit timing (and lip sync) is unchanged.

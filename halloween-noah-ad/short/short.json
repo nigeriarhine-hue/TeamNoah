@@ -1,7 +1,7 @@
 {
- "duration": 20.0,
+ "duration": 14.0,
  "fps": 30,
- "note": "20 s vertical cut of the finished 16:9 ad. Two continuous stretches of the finished mix (voice at 80%): the hook line, then 'That's where Noah comes in' through 'Go to onnoah.app' with one beat-aligned cut in the song's silence break, then the instrumental beat under the end card. Witch shots reuse the lip-synced Wan/Kling clips at the same source offsets; the Noah UI is re-rendered natively in 9:16 as one continuous take.",
+ "note": "14 s vertical cut of the finished 16:9 ad, voiced only by: 'what's scarier than a PC that isn't performing at its fullest potential?' / 'That's where Noah comes in. Describe the problem like you're talking to a friend, and Noah gets to work.' / 'download and install today.' Three stretches of the finished mix (voice at 80%) joined at beat-aligned points; witch shots reuse the lip-synced clips at the same source offsets; the Noah UI is re-rendered natively in 9:16 as one continuous take.",
  "audio": [
   [
    0.0,
@@ -10,19 +10,13 @@
   ],
   [
    4.156,
-   16.285,
+   10.335,
    27.771
   ],
   [
-   16.285,
-   18.2,
-   41.71
-  ],
-  [
-   18.2,
-   20.0,
-   43.625,
-   "beat"
+   10.335,
+   14.0,
+   43.819
   ]
  ],
  "segments": [
@@ -91,7 +85,7 @@
   {
    "id": "v04",
    "start": 5.967,
-   "end": 16.285,
+   "end": 10.335,
    "layout": "ui",
    "scene": "flow",
    "t0": 0,
@@ -101,13 +95,13 @@
     "SENT": 2.6,
     "CHECKS": 2.75,
     "TICK": 0.28,
-    "CAUSE": 4.6,
-    "PLAN": 5.9,
-    "CLICK_CTA": 7.0,
-    "DLG": 7.15,
-    "GO": 8.6,
-    "LOG": 8.85,
-    "DONE": 9.55,
+    "CAUSE": 99,
+    "PLAN": 99,
+    "CLICK_CTA": 99,
+    "DLG": 99,
+    "GO": 99,
+    "LOG": 99,
+    "DONE": 99,
     "labels": true
    },
    "xin": 0.4,
@@ -115,13 +109,13 @@
   },
   {
    "id": "v05",
-   "start": 16.285,
-   "end": 20.0,
+   "start": 10.335,
+   "end": 14.0,
    "layout": "splash",
    "cue": [
-    0.45,
-    0.95,
-    1.45
+    0.35,
+    0.85,
+    1.35
    ],
    "noFade": true,
    "xin": 0.35,
@@ -158,28 +152,16 @@
    "end": 5.95,
    "lines": [
     [
-     "NOAH FINDS",
+     "MEET",
      0
     ],
     [
-     "THE CAUSE.",
+     "NOAH.",
      0
     ]
    ],
-   "size": 92,
+   "size": 110,
    "y": 960
-  },
-  {
-   "start": 15.0,
-   "end": 16.3,
-   "lines": [
-    [
-     "NO MYSTERY FIXES.",
-     0
-    ]
-   ],
-   "size": 92,
-   "y": 1600
   }
  ],
  "sfx": {
@@ -204,24 +186,16 @@
    9.837,
    10.117
   ],
-  "soft_tone": [
-   10.567,
-   11.867
-  ],
-  "ui_click": [
-   12.967,
-   14.567
-  ],
-  "confirm": [
-   15.517
-  ],
+  "soft_tone": [],
+  "ui_click": [],
+  "confirm": [],
   "whoosh": [
    4.156,
    5.967,
-   16.285
+   10.335
   ],
   "end_hit": [
-   17.735
+   11.685
   ]
  },
  "fade_out": 0.9
