@@ -14,6 +14,29 @@ npm run thumb    # out/noah-ai-tech-support-thumbnail.png
 generated assets are present. The edit renders with neutral slates for anything
 missing, so the cut can be reviewed before any paid generation is spent.
 
+## Fetching the generated footage
+
+The two UGC clips and the voiceover are generated on Higgsfield and live at the
+URLs in `tools/fetch-generated-assets.sh`. Run it to pull them into `public/`
+and re-render:
+
+```bash
+./tools/fetch-generated-assets.sh
+```
+
+Some Claude Code environment network policies deny the Higgsfield result CDN, in
+which case curl returns 403 — raise the environment's Network access level, or
+download the three files by hand into the paths the script names. `src/assets.json`
+picks them up on the next `node tools/make-assets-manifest.mjs`.
+
+Voice takes, all Seed Audio 1.0 presets reading the locked script:
+
+| Voice | Length | |
+|---|---|---|
+| Dylan | 13.46s | the edit is cut to this one |
+| Evan | 12.85s | alternate |
+| Cody | 17.78s | too long for a 15s cut |
+
 ## The cut
 
 | Time | Shot | On screen |
