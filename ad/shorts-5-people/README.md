@@ -8,7 +8,7 @@ brand-related comes from this repo and is rendered locally:
   Nothing in them is mocked up.
 - **Logo** is the official `brand-pack` mark and app icon, used as shipped: no recolouring and no effects.
 - **Type** is Plus Jakarta Sans, pulled from `brand-kit.html`. Colours come from the Aurora dark tokens.
-- **Website** on the splash is `onnoah.app`, as referenced in `brand-kit.html`.
+- **Website** on the splash is `onnoah.app` (confirmed by the Noah team).
 
 ## Timeline (auto-computed from `timeline.json`)
 
