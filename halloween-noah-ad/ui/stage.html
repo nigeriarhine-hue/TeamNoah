@@ -464,15 +464,79 @@ function splash(t,cue){ // cue: seconds (relative) when Describe / Approve / Don
     return `<div class="particle" style="left:${x}px;top:${y}px;opacity:${.12+.3*rnd(i*9)};transform:scale(${.6+rnd(i*11)})"></div>`}).join('');}
 
 /* ======================= vertical (Shorts) additions ======================= */
+/* One continuous Noah take for the Short: describe -> checks -> cause -> plan -> approval -> log.
+   t in seconds from the start of the take. Camera moves are eased; nothing cuts. */
+function fcam(pts,t){ // pts: [[t,s,fy,cy],...] -> eased interpolation
+  let i=0; while(i<pts.length-1&&t>pts[i+1][0]) i++;
+  const a=pts[i],b=pts[Math.min(i+1,pts.length-1)]; const k=b[0]>a[0]?ease(seg(t,a[0],b[0])):1;
+  return [lerp(a[1],b[1],k),lerp(a[2],b[2],k),lerp(a[3],b[3],k)];}
+function rel(el){const r=el.getBoundingClientRect(),w=W.win.getBoundingClientRect(),sc=w.width/W.win.offsetWidth;
+  return [(r.left-w.left+r.width/2)/sc,(r.top-w.top+r.height/2)/sc];}
+function flow(t){
+  resetWin(false);
+  const TYPE_END=0.34, SENT=0.38, CHECKS=0.45, CAUSE=0.95, PLAN=1.95, CLICK_CTA=3.05, DLG=3.2, GO=4.7, LOG=4.95;
+  // --- composer / bubble / checks / situation / log ---
+  if(t<SENT){const n=Math.floor(PROMPT.length*seg(t,0,TYPE_END));
+    W.txt.innerHTML=`<span class="typed">${PROMPT.slice(0,n)}</span><span class="caret"></span>`;
+    W.send.className='sendbtn'+(n==PROMPT.length?' go':'');W.send.innerHTML=ARROW(n==PROMPT.length?'#fff':'#6f7480');
+    W.today.style.display='none';W.scroll.innerHTML='';}
+  else if(t<CAUSE){W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';
+    const b=eo(seg(t,SENT,SENT+.15));
+    const list=['Checking performance…','Checking active processes…','Checking memory…','Checking storage…','Checking system configuration…'].map((c,i)=>{
+      const on=t>=CHECKS+i*.09, done=t>=CHECKS+(i+1)*.09;
+      return `<div class="p" style="opacity:${on?1:.3}">${done?CHK:(on?SPIN(t):'<span class="spinner" style="opacity:.4"></span>')}${done?c.replace('Checking','Checked').replace('…',''):c}</div>`;}).join('');
+    W.scroll.innerHTML=`<div style="height:30px"></div>${userBubble(b)}<div style="height:30px"></div>
+      <div class="card progress" style="padding:18px 26px 14px;opacity:${eo(seg(t,SENT+.05,SENT+.15))}"><div class="bar" style="width:${100*((t*1.2)%1)}%"></div>
+      <div class="looking" style="height:auto;padding:0 0 10px 0">${dots(t)}<span>Looking into it…</span></div>${list}</div>`;}
+  else if(t<LOG){
+    W.hint.style.display='block';W.txt.innerHTML=t<DLG?'...or tell Noah to do it differently':"What's broken? Tell Noah and hit go.";
+    if(t>=DLG){W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';} else W.send.innerHTML=ARROW('#8c919c');
+    W.scroll.innerHTML='<div style="height:22px"></div>'+situationCard(t);
+    W.scroll.querySelectorAll('.rv').forEach(e=>{const k=+e.dataset.k;const a=eo(seg(t,CAUSE+k*.1,CAUSE+.3+k*.1));e.style.opacity=a;e.style.transform=`translateY(${(1-a)*16}px)`;});
+    const cta=W.scroll.querySelector('#ctaBtn'); if(cta&&t>2.75&&t<DLG) cta.style.filter=`brightness(${1.12})`;
+    if(cta&&t>=CLICK_CTA&&t<CLICK_CTA+.12) cta.style.transform='scale(.97)';}
+  else{
+    W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';
+    const p1=t>LOG+.3,p2=t>LOG+.6;
+    W.scroll.innerHTML=`<div style="height:22px"></div><div class="approved" style="opacity:${eo(seg(t,LOG,LOG+.2))}">Approved: Action approved</div>
+      <div class="card progress" style="padding:16px 26px;margin-top:22px;opacity:${eo(seg(t,LOG+.05,LOG+.25))}"><div class="bar" style="width:${Math.min(100,(t-LOG)*120)}%"></div>
+      <div class="p">${p1?CHK:SPIN(t)}Stopping a stuck process — app updater</div>
+      <div class="p" style="opacity:${p1?1:.35}">${p2?CHK:SPIN(t)}Turning off a startup program — app updater</div></div>`;}
+  // --- approval dialog ---
+  const d=eo(seg(t,DLG,DLG+.22))*(1-eo(seg(t,GO+.12,GO+.3)));
+  if(d>0){W.body.style.filter=`blur(${5*d}px) brightness(${1-0.35*d})`;
+    const press=t>=GO&&t<GO+.12;
+    overlay.innerHTML=`<div class="dlg" style="opacity:${d};transform:scale(${lerp(.94,1,d)})">
+      <div class="hd"><div class="warn"><svg viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg></div><div class="q">Can Noah do this?</div></div>
+      <div class="m">Noah needs your OK to continue.</div>
+      <div class="btns"><div class="btn no">No thanks</div>
+        <div class="btn go" style="transform:scale(${press?.95:1});box-shadow:${t>4.2?'0 0 0 3px rgba(139,143,248,.35),0 8px 26px rgba(99,102,241,.45)':'none'}">Go ahead</div>
+        <div class="btn all">Approve all</div></div></div>`;}
+  // --- camera: full view -> cause -> plan -> dialog zoom -> log ---
+  const [cs,cfy,ccy]=fcam([[0,1.5,590,1060],[CAUSE,1.5,590,1060],[PLAN,1.5,590,1060],[PLAN+.55,1.5,700,1010],[DLG,1.5,700,1010],[DLG+.45,1.95,590,1000],[GO+.15,1.95,590,1000],[LOG+.25,1.5,590,1060],[9,1.5,590,1060]],t);
+  camera(cs,354,cfy,ccy);
+  // --- cursor: to CTA, click, then to Go ahead, click ---
+  if(t>=2.4&&t<LOG+.1){
+    let x,y;
+    const cta=W.scroll.querySelector('#ctaBtn'), go=overlay.querySelector('.btn.go');
+    const [cx,cy]=cta?rel(cta):[354,900];
+    if(t<DLG){const m=ease(seg(t,2.4,CLICK_CTA-.05));x=lerp(560,cx+40,m);y=lerp(1100,cy+6,m);}
+    else{const [gx,gy]=go?rel(go):[380,654];const m=ease(seg(t,DLG+.45,GO-.15));x=lerp(cx+40,gx+8,m);y=lerp(cy+6,gy+8,m);}
+    cur(x,y,(t>=CLICK_CTA&&t<CLICK_CTA+.12)||(t>=GO&&t<GO+.12));}
+  // --- callout morphs in place ---
+  const lab=t<CAUSE?'':t<PLAN?'CAUSE <b>FOUND</b>':t<DLG?'RECOMMENDED <b>ACTION</b>':t<LOG?'YOU <b>APPROVE</b> THE FIX.':'';
+  const kin=t<CAUSE?0:eo(seg(t,[CAUSE,PLAN,DLG][t<PLAN?0:t<DLG?1:2],[CAUSE,PLAN,DLG][t<PLAN?0:t<DLG?1:2]+.18));
+  callout(lab,t>=LOG?0:kin);
+}
 function ovBand(t,o){ // o: {lines:[[text,warm]],size,y,t0,t1}
   const k=eo(seg(t,o.t0||0,(o.t0||0)+.18))*(1-seg(t,o.t1||99,(o.t1||99)+.15));
   const h=o.lines.length*o.size*1.12+70;
   return `<div style="position:absolute;left:0;right:0;top:${o.y-h/2}px;height:${h}px;background:linear-gradient(transparent,rgba(6,8,18,.82) 22%,rgba(6,8,18,.82) 78%,transparent);opacity:${k}"></div>`+
-    o.lines.map(([txt,warm],i)=>`<div class="headline${warm?' warm':''}" style="top:${o.y-h/2+35+i*o.size*1.12}px;font-size:${o.size}px;line-height:1.05;opacity:${k};transform:translateY(${(1-k)*14}px)">${txt}</div>`).join('');}
+    o.lines.map(([txt,warm,dl],i)=>{const kk=k*eo(seg(t,(o.t0||0)+(dl||0),(o.t0||0)+(dl||0)+.14)),sc=dl?lerp(1.18,1,kk):1;return `<div class="headline${warm?' warm':''}" style="top:${o.y-h/2+35+i*o.size*1.12}px;font-size:${o.size}px;line-height:1.05;opacity:${kk};transform:translateY(${(1-kk)*14}px) scale(${sc})">${txt}</div>`}).join('');}
 OVERLAYS.band=ovBand;
 function vsplash(t,cue){
   const el=$('#vsplash');
-  el.querySelector('.vfade').style.opacity=1-seg(t,0,.35);
+  el.querySelector('.vfade').style.opacity=window.NOFADE?0:1-seg(t,0,.35);
   const b=eo(seg(t,.05,.5));const br=el.querySelector('.vbrand');br.style.opacity=b;br.style.transform=`translateY(${(1-b)*20}px)`;
   const c=eo(seg(t,.2,.6));const cr=el.querySelector('.vcta');cr.style.opacity=c;cr.style.transform=`translateY(${(1-c)*16}px)`;
   ['.v1','.v2','.v3'].forEach((q,i)=>{const e=el.querySelector(q),k=eo(seg(t,cue[i]-.06,cue[i]+.22));e.style.opacity=k;e.style.transform=`scale(${lerp(1.08,1,k)})`;});
@@ -480,7 +544,7 @@ function vsplash(t,cue){
     return `<div class="particle" style="left:${x}px;top:${y}px;opacity:${.12+.3*rnd(i*9)}"></div>`}).join('');}
 
 /* ======================= dispatch ======================= */
-const UI={s01,s02,s03,s04,s05,s06,s07};
+const UI={s01,s02,s03,s04,s05,s06,s07,flow};
 const PC={freeze:pcFreeze,crash:pcCrash,wifi:pcWifi,loading:pcLoading,storage:pcStorage,lag:pcLag,haunt:pcHaunt};
 function show(id){document.querySelectorAll('.scene').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');}
 window.render=function(name,t,opt={}){
@@ -498,7 +562,7 @@ function _render(name,t,opt){
   if(PC[name]){show('#pcScene');PC[name](t);return;}
   if(name==='diag'){show('#diag');diag(t);return;}
   if(name==='splash'){show('#splash');splash(t,opt.cue||[3,4,5]);return;}
-  if(name==='vsplash'){show('#vsplash');vsplash(t,opt.cue||[1,1.5,2]);return;}
+  if(name==='vsplash'){window.NOFADE=!!opt.noFade;show('#vsplash');vsplash(t,opt.cue||[1,1.5,2]);return;}
   if(name.startsWith('ov:')){show('#ovScene');$('#ovl').innerHTML=OVERLAYS[name.slice(3)](t,opt);return;}
 }
 window.caption=function(html){document.documentElement.classList.add('clear');show('#capScene');$('#capText').innerHTML=html;};

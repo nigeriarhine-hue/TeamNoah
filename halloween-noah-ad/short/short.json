@@ -2,32 +2,313 @@
  "duration": 15.0,
  "fps": 30,
  "note": "15 s vertical cut of the finished 16:9 ad. Audio pieces are taken from the finished mix (voice at 80%) at beat-aligned splice points; witch shots reuse the same Wan/Kling clips (lip-synced shots cut in at the same source offsets); Noah UI is re-rendered natively in 9:16 from the same stage.html.",
- "audio": [[0.00, 3.95, 7.35], [3.95, 5.15, 28.20], [5.15, 11.05, 34.20], [11.05, 15.00, 41.95]],
+ "audio": [
+  [
+   0.0,
+   3.95,
+   7.35
+  ],
+  [
+   3.95,
+   5.15,
+   28.2
+  ],
+  [
+   5.15,
+   11.05,
+   34.2
+  ],
+  [
+   11.05,
+   15.0,
+   41.95
+  ]
+ ],
  "segments": [
-  {"id":"v01","start":0.00,"end":0.80,"layout":"stack","top":{"clip":"w2","in":1.45,"comp":"freeze","screen_t0":1.45,"x0":29},"bottom":{"pc":"freeze","t0":1.0}},
-  {"id":"v02","start":0.80,"end":1.55,"layout":"stack","top":{"clip":"w2","in":2.25,"comp":"freeze","screen_t0":2.25,"x0":29},"bottom":{"pc":"crash","t0":0.0}},
-  {"id":"v03","start":1.55,"end":2.35,"layout":"stack","top":{"clip":"w2","in":3.00,"comp":"freeze","screen_t0":3.00,"x0":29},"bottom":{"pc":"wifi","t0":0.0}},
-  {"id":"v04","start":2.35,"end":3.05,"layout":"stack","top":{"clip":"k3","in":2.35,"x0":840},"bottom":{"pc":"storage","t0":0.0}},
-  {"id":"v05","start":3.05,"end":3.95,"layout":"stack","top":{"clip":"k3","in":3.05,"x0":840},"bottom":{"pc":"lag","t0":0.0}},
-  {"id":"v06","start":3.95,"end":4.55,"layout":"stack","top":{"clip":"w6","in":0.0,"comp":"mon:launch","screen_t0":0.0,"x0":780},"bottom":{"pc":"mon:launch","t0":0.4}},
-  {"id":"v07","start":4.55,"end":5.05,"layout":"ui","scene":"s01","t0":0.0,"speed":4.6},
-  {"id":"v08","start":5.05,"end":5.45,"layout":"ui","scene":"s02","t0":1.3,"speed":3.0},
-  {"id":"v09","start":5.45,"end":6.50,"layout":"ui","scene":"s03","t0":0.0},
-  {"id":"v10","start":6.50,"end":7.80,"layout":"ui","scene":"s04","t0":0.0,"vcam":{"s":1.5,"fx":354,"fy":660,"cy":1010}},
-  {"id":"v11","start":7.80,"end":9.55,"layout":"ui","scene":"s05","t0":0.0,"pressAt":1.45,"vcam":{"s":1.95,"fx":354,"fy":590,"cy":1000}},
-  {"id":"v12","start":9.55,"end":10.45,"layout":"ui","scene":"s06","t0":0.3},
-  {"id":"v13","start":10.45,"end":11.05,"layout":"stack","top":{"clip":"k8","in":2.1,"x0":250},"bottom":{"pc":"mon:s07","t0":2.0}},
-  {"id":"v14","start":11.05,"end":15.00,"layout":"splash","cue":[1.2,1.8,2.4]}
+  {
+   "id": "v01",
+   "start": 0.0,
+   "end": 0.8,
+   "layout": "stack",
+   "top": {
+    "clip": "w2",
+    "in": 1.45,
+    "comp": "freeze",
+    "screen_t0": 1.45,
+    "x0": 29
+   },
+   "bottom": {
+    "pc": "freeze",
+    "t0": 1.0,
+    "crop": [
+     760,
+     520,
+     900
+    ]
+   }
+  },
+  {
+   "id": "v02",
+   "start": 0.8,
+   "end": 1.55,
+   "layout": "stack",
+   "top": {
+    "clip": "w2",
+    "in": 2.25,
+    "comp": "freeze",
+    "screen_t0": 2.25,
+    "x0": 29
+   },
+   "bottom": {
+    "pc": "crash",
+    "t0": 0.0,
+    "crop": [
+     960,
+     540,
+     800
+    ]
+   }
+  },
+  {
+   "id": "v03",
+   "start": 1.55,
+   "end": 2.35,
+   "layout": "stack",
+   "top": {
+    "clip": "w2",
+    "in": 3.0,
+    "comp": "freeze",
+    "screen_t0": 3.0,
+    "x0": 29
+   },
+   "bottom": {
+    "pc": "wifi",
+    "t0": 0.0,
+    "crop": [
+     960,
+     600,
+     800
+    ]
+   }
+  },
+  {
+   "id": "v04",
+   "start": 2.35,
+   "end": 3.05,
+   "layout": "stack",
+   "top": {
+    "clip": "k3",
+    "in": 2.35,
+    "x0": 840
+   },
+   "bottom": {
+    "pc": "storage",
+    "t0": 0.0,
+    "crop": [
+     960,
+     540,
+     950
+    ]
+   }
+  },
+  {
+   "id": "v05",
+   "start": 3.05,
+   "end": 3.95,
+   "layout": "stack",
+   "top": {
+    "clip": "k3",
+    "in": 3.05,
+    "x0": 840
+   },
+   "bottom": {
+    "pc": "lag",
+    "t0": 0.0,
+    "crop": [
+     900,
+     540,
+     1000
+    ]
+   }
+  },
+  {
+   "id": "v06",
+   "start": 3.95,
+   "end": 4.55,
+   "layout": "stack",
+   "top": {
+    "clip": "w6",
+    "in": 0.0,
+    "comp": "mon:launch",
+    "screen_t0": 0.0,
+    "x0": 780
+   },
+   "bottom": {
+    "pc": "mon:launch",
+    "t0": 0.4
+   },
+   "xin": 0.25,
+   "xt": "fade"
+  },
+  {
+   "id": "v07",
+   "start": 4.55,
+   "end": 10.45,
+   "layout": "ui",
+   "scene": "flow",
+   "t0": 0,
+   "xin": 0.3,
+   "xt": "smoothup"
+  },
+  {
+   "id": "v13",
+   "start": 10.45,
+   "end": 11.05,
+   "layout": "stack",
+   "top": {
+    "clip": "k8",
+    "in": 2.1,
+    "x0": 250
+   },
+   "bottom": {
+    "vpc": "s07",
+    "t0": 2.0,
+    "vcam": {
+     "s": 1.5,
+     "fx": 354,
+     "fy": 300,
+     "cy": 480
+    }
+   },
+   "xin": 0.2,
+   "xt": "fade"
+  },
+  {
+   "id": "v14",
+   "start": 11.05,
+   "end": 15.0,
+   "layout": "splash",
+   "cue": [
+    0.6,
+    1.2,
+    1.8
+   ],
+   "xin": 0.3,
+   "xt": "fade",
+   "noFade": true
+  }
  ],
- "vcam_default": {"s":1.5,"fx":354,"fy":590,"cy":1060},
+ "vcam_default": {
+  "s": 1.5,
+  "fx": 354,
+  "fy": 590,
+  "cy": 1060
+ },
  "bands": [
-  {"start":0.05,"end":3.90,"lines":[["WHAT&#39;S SCARIER THAN",0],["A PC ACTING POSSESSED?",1]],"size":76,"y":960},
-  {"start":3.95,"end":4.55,"lines":[["NOAH FINDS",0],["THE CAUSE.",0]],"size":92,"y":960},
-  {"start":4.55,"end":6.50,"lines":[["NOAH FINDS THE CAUSE.",0]],"size":78,"y":1730},
-  {"start":7.85,"end":9.55,"lines":[["YOU APPROVE THE FIX.",0]],"size":80,"y":1730},
-  {"start":9.60,"end":10.45,"lines":[["NO MYSTERY FIXES.",0]],"size":92,"y":1560},
-  {"start":10.45,"end":11.05,"lines":[["NO JUMP SCARES.",1]],"size":92,"y":960}
+  {
+   "start": 0.05,
+   "end": 3.9,
+   "lines": [
+    [
+     "WHAT&#39;S SCARIER THAN",
+     0,
+     0
+    ],
+    [
+     "A PC ACTING POSSESSED?",
+     1,
+     0.75
+    ]
+   ],
+   "size": 76,
+   "y": 960
+  },
+  {
+   "start": 3.95,
+   "end": 4.55,
+   "lines": [
+    [
+     "NOAH FINDS",
+     0
+    ],
+    [
+     "THE CAUSE.",
+     0
+    ]
+   ],
+   "size": 92,
+   "y": 960
+  },
+  {
+   "start": 9.6,
+   "end": 10.45,
+   "lines": [
+    [
+     "NO MYSTERY FIXES.",
+     0
+    ]
+   ],
+   "size": 92,
+   "y": 1560
+  },
+  {
+   "start": 10.45,
+   "end": 11.05,
+   "lines": [
+    [
+     "NO JUMP SCARES.",
+     1
+    ]
+   ],
+   "size": 92,
+   "y": 960
+  }
  ],
- "sfx": {"glitch":[0.0,0.8,1.55,2.35,3.05,3.5],"bass_hit":[0.0],"error_tone":[0.8,1.55,2.35],"calm_swell":[3.95],
-         "diag_tick":[5.1,5.25,5.4],"soft_tone":[5.45,6.5,7.8],"ui_click":[9.25],"confirm":[9.9],"whoosh":[10.45,11.0],"end_hit":[13.45]}
+ "sfx": {
+  "glitch": [
+   0.0,
+   0.8,
+   1.55,
+   2.35,
+   3.05,
+   3.5
+  ],
+  "bass_hit": [
+   0.0
+  ],
+  "error_tone": [
+   0.8,
+   1.55,
+   2.35
+  ],
+  "calm_swell": [
+   3.95
+  ],
+  "diag_tick": [
+   5.0,
+   5.09,
+   5.18,
+   5.27,
+   5.36
+  ],
+  "soft_tone": [
+   5.5,
+   6.5,
+   7.75
+  ],
+  "ui_click": [
+   7.6,
+   9.25
+  ],
+  "confirm": [
+   9.55
+  ],
+  "whoosh": [
+   10.45,
+   11.0
+  ],
+  "end_hit": [
+   12.85
+  ]
+ }
 }
