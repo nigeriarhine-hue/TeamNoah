@@ -1,0 +1,39 @@
+{
+  "fps": 30,
+  "size": [1080, 1920],
+  "target_duration": 20.0,
+  "xfade": 0.25,
+  "speech_speed": 1.06,
+  "highlight": ["chat", "diagnosed", "approval", "approved", "cpu", "lagging", "noah"],
+  "_note": "in/out are SOURCE seconds in each generated clip; caption t0 values are SOURCE seconds from faster-whisper word timings.",
+  "beats": [
+    {"id": "open", "clip": "clip0.mp4", "in": 0.0, "out": 2.0, "speed": 1.0, "transition": "smoothleft"},
+    {"id": "p1", "clip": "clip1.mp4", "in": 0.40, "out": 4.55, "kicker": "JUST DESCRIBE THE PROBLEM",
+     "ui": [{"png": "ui1.png", "t0": 0.55}], "transition": "smoothleft",
+     "captions": [
+       {"text": "I just typed in the chat", "t0": 0.50},
+       {"text": "like I was talking to a friend—", "t0": 1.58},
+       {"text": "and Noah went to work.", "t0": 2.96}]},
+    {"id": "p2", "clip": "clip2.mp4", "in": 1.28, "out": 3.85, "kicker": "DIAGNOSE. DON’T GUESS.",
+     "ui": [{"png": "ui2.png", "t0": 0.35}], "transition": "smoothright",
+     "captions": [
+       {"text": "Noah diagnosed my PC", "t0": 1.40},
+       {"text": "in just a few minutes.", "t0": 2.52}]},
+    {"id": "p3", "clip": "clip3.mp4", "in": 0.45, "out": 3.52, "kicker": "YOU STAY IN CONTROL",
+     "ui": [{"png": "ui3.png", "t0": 0.45, "click": 1.9}], "transition": "smoothleft",
+     "captions": [
+       {"text": "Noah didn’t execute any fixes", "t0": 0.56},
+       {"text": "without my approval.", "t0": 2.28}]},
+    {"id": "p4", "clip": "clip4.mp4", "in": 0.40, "out": 4.95, "kicker": "LESS LAG. REAL CAUSE FOUND.",
+     "ui": [{"png": "ui4.png", "t0": 0.55}], "transition": "smoothright",
+     "captions": [
+       {"text": "Noah found what was driving my CPU usage,", "t0": 0.50},
+       {"text": "and now my PC isn’t lagging anymore.", "t0": 2.95}]},
+    {"id": "p5", "clip": "clip5.mp4", "in": 0.33, "out": 3.82, "kicker": "SEE THE FIX BEFORE IT HAPPENS",
+     "ui": [{"png": "ui5a.png", "t0": 0.40}, {"png": "ui5b.png", "t0": 2.45, "click": 3.3}], "transition": "fade",
+     "captions": [
+       {"text": "I could actually see what Noah wanted to fix", "t0": 0.43},
+       {"text": "before I approved it.", "t0": 2.52}]},
+    {"id": "splash", "still": "splash.png"}
+  ]
+}

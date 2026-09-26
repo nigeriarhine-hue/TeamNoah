@@ -1,0 +1,21 @@
+{
+  "_note": "Higgsfield job IDs for every generated asset (Noah Marketing workspace). compose.py expects the clips saved as clip0.mp4..clip5.mp4 and the thumbnail background as thumb_bg.png.",
+  "master_room_still": {"job": "735f7a1c-d1a0-44ba-ab6d-76d7bd4af6c7", "model": "gpt_image_2_5"},
+  "speaker_stills": {
+    "p1": "e93ad0ec-1658-406e-91e1-7a701eaea22d",
+    "p2": "8b24c5e2-0a9b-45a0-bbc3-01393a226be8",
+    "p3": "b19a8c52-8669-4aae-8e65-17b618bcc214",
+    "p4": "a0217b5c-de5f-4f97-b7d7-163a621aa26d",
+    "p5": "d535e875-c80b-448c-8e31-8afdc1b594db"
+  },
+  "thumb_bg.png": "af58a121-e3cd-4470-877b-fa398a88d69b",
+  "clips": {
+    "clip0.mp4": {"job": "6c4f07c4-3014-43fb-9b05-f3c3abfde09e", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_004044_6c4f07c4-3014-43fb-9b05-f3c3abfde09e.mp4"},
+    "clip1.mp4": {"job": "4948ac3c-497e-49f7-bd56-f7d6db6dee80", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_004044_4948ac3c-497e-49f7-bd56-f7d6db6dee80.mp4"},
+    "clip2.mp4": {"job": "f99bc3ba-eec1-4225-83e5-08d480eb9530", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_004035_f99bc3ba-eec1-4225-83e5-08d480eb9530.mp4"},
+    "clip3.mp4": {"job": "17cbcfff-9461-4423-8853-fb42522f160e", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_004035_17cbcfff-9461-4423-8853-fb42522f160e.mp4"},
+    "clip4.mp4": {"job": "e865ce07-a99c-406a-917e-9ce453ffd39f", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_004035_e865ce07-a99c-406a-917e-9ce453ffd39f.mp4"},
+    "clip5.mp4": {"job": "49776472-21f5-4227-b848-c5fb0a758cbf", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_004035_49776472-21f5-4227-b848-c5fb0a758cbf.mp4"}
+  },
+  "thumb_bg_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_003946_af58a121-e3cd-4470-877b-fa398a88d69b.png"
+}
