@@ -83,7 +83,7 @@ def build(tempo):
     thr = env.max() * 10 ** (-40 / 20)
     plan, t_prev = [], 0.0
     for k, (text, place, ws) in enumerate(phrases):
-        a = ws[0][0] / tempo - 0.05
+        a = max(0.0, ws[0][0] / tempo - 0.05)
         b = ws[-1][1] / tempo
         nxt = phrases[k + 1][2][0][0] / tempo - 0.03 if k + 1 < len(phrases) else len(x) / SR
         j = int(b * SR)
