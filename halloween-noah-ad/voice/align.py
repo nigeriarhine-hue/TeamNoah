@@ -15,7 +15,7 @@ SR = 48000
 raw_path, words_path, beat_path, out = sys.argv[1:5]
 BEATS = json.load(open(beat_path))["beats"]
 LAST_WORD_END_MAX = 50.3
-TEMPOS = [1.0, 1.02, 1.04, 1.06, 1.08, 1.10]
+TEMPOS = [float(sys.argv[5])] if len(sys.argv) > 5 else [1.0, 1.02, 1.04, 1.06, 1.08, 1.10]
 
 # (phrase text as spoken, placement)
 #   ("at", word, t)    key word onset lands at t
@@ -90,6 +90,7 @@ def build(tempo):
         while j < min(len(x), int((b + 0.35) * SR)) and env[j] > thr:
             j += int(0.005 * SR)
         b = min(j / SR + 0.04, nxt)
+        b = max(b, ws[-1][1] / tempo + 0.03)
         if k:
             a = max(a, min(phrases[k - 1][2][-1][1] / tempo, ws[0][0] / tempo - 0.01))
         kind = place[0]
@@ -117,7 +118,7 @@ for tempo in TEMPOS:
     if end <= LAST_WORD_END_MAX:
         break
 
-y = np.zeros(int(51.0 * SR))
+y = np.zeros(int(56.0 * SR))
 timeline = []
 for start, a, b, text, ws in plan:
     seg = x[int(a * SR):int(b * SR)].copy()
