@@ -1,0 +1,6 @@
+audio/music/*.m4a
+audio/music/*.mp3
+*.wav
+*.mp4
+frames/
+node_modules
