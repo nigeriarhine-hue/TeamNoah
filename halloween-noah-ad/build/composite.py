@@ -67,7 +67,12 @@ def coeffs(dst, src):
 
 
 mattes = [matte(f) for f in frames[:n]]
-quads = np.array([corners(m) for m in mattes])
+quads, last = [], None
+for m in mattes:  # a frame with no visible green reuses the previous track
+    last = corners(m) if (m > 0.5).sum() > 200 else last
+    quads.append(last)
+first = next(q for q in quads if q is not None)
+quads = np.array([q if q is not None else first for q in quads])
 # temporal smoothing of the corners (median of +-2 frames) to kill single-frame jitter
 sm = np.array([np.median(quads[max(0, i - 2):i + 3], axis=0) for i in range(len(quads))])
 # grow the quad by 3 px so the warped screen fully covers the green edge
@@ -90,7 +95,7 @@ for i in range(len(mattes)):
     warped = warped * valid + edge * (1 - valid)
     # screens emit light: keep them slightly below full white so they sit in the dark room
     warped = warped * 0.9 + 6
-    y0, y1, x0, x1 = largest_blob(mattes[i])
+    y0, y1, x0, x1 = largest_blob(mattes[i]) if (mattes[i] > 0.5).sum() > 200 else (0, 0, 0, 0)
     region = np.zeros((H, W), np.float32)
     region[max(0, y0 - 24):y1 + 24, max(0, x0 - 24):x1 + 24] = 1  # key only on and around the monitor
     a = (mattes[i] * region)[..., None]

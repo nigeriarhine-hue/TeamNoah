@@ -1,5 +1,13 @@
 # Witch character: locked reference
 
+**Current (v3): a stylized 3D animated version** of the same design.
+- 3D character sheet: Higgsfield job 5890d1c4-5c67-4c40-a0b4-5691ac066d0e
+  https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_171533_5890d1c4-5c67-4c40-a0b4-5691ac066d0e.png
+- 3D room master: job 85c32330-f16c-4d9c-a83d-b544ca83d724
+  https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_171754_85c32330-f16c-4d9c-a83d-b544ca83d724.png
+
+## Earlier photoreal version (v1–v2)
+
 Original character: an American woman around 30, with warm light-olive skin, shoulder-length wavy espresso-brown hair and hazel eyes.
 She wears a wide-brim black witch hat with a thin deep-purple band, a cropped black blazer with deep-purple lapel lining, a black ribbed turtleneck,
 black straight-leg trousers, a belt with a silver crescent buckle, black ankle boots and silver crescent-moon earrings.

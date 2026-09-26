@@ -9,7 +9,7 @@ J() { python3 -c "import json,sys;d=json.load(open('$SRC/$1'));print($2)"; }
 
 # 1. sources (Higgsfield renders, narration, supplied beat)
 mkdir -p src
-for k in k1 k2 k3 k4 k5 k6 k7 k8 k9; do [ -s src/$k.mp4 ] || curl -sSfo src/$k.mp4 "$(J build/sources.json "d['clips']['$k']")" & done; wait
+for k in $(python3 -c "import json;print(' '.join(json.load(open('$SRC/build/sources.json'))['clips']))"); do [ -s src/$k.mp4 ] || curl -sSfo src/$k.mp4 "$(J build/sources.json "d['clips']['$k']")" & done; wait
 MODE=$(J timeline.json "d.get('audio','vo')")
 if [ "$MODE" = mix ]; then
   [ -s src/mix.mp3 ] || curl -sSfo src/mix.mp3 "$(J build/sources.json "d['vocal_mix']")"

@@ -3,11 +3,22 @@
 YouTube spot, 1920×1080 (16:9), 30 fps, 49.1 s. It's cut to the supplied vocal + music track
 (`audio/music/noah_music_halloween_nikki.mp3`), which is the length of that track.
 
+**v3 (current):** the witch is a stylized 3D animated character, lip-synced to the vocal on every
+talking shot, and the voice is 20% lower (×0.8 amplitude, −1.9 dB) with the music unchanged.
+
+- **Vocal isolation:** the supplied beat file is sample-aligned to the music in the mix (lag 1201 samples at 44.1 kHz,
+  gain 0.78). Subtracting it leaves the vocal alone, with the music cancelled to about 28 dB below the mix.
+  The remix is `mix − 0.2 × vocal`, so the music stays unchanged and the voice sits at 80%.
+- **Lip sync:** the talking shots (w1, w2, w4, w5, w6, w9) are Wan 2.7 renders. Each gets the 3D key frame plus
+  that shot's slice of the isolated vocal, starting at the scene's start time. Each clip is cut in at `in = 0`,
+  so the mouth matches the soundtrack frame for frame. The embedded audio was checked to align at 0 ms offset.
+- **Silent shots:** the reaction (k3), the mouse click (k7) and the look-back (k8) are Kling 3.0 Pro.
+
 ## Folder map
 
 | Path | Contents |
 |---|---|
-| `character/` | Links to the locked witch reference sheet, the expression sheet, and the room master (`character/README.md`) |
+| `character/` | Links to the locked 3D witch reference sheet and 3D room master (plus the earlier photoreal versions) (`character/README.md`) |
 | `voice/` | `nikki_vocal_words.json`: word-level timings of the supplied vocal (faster-whisper). `align.py` and `final_voiceover_words.json` are from the earlier generated-voice version, kept for reference |
 | `audio/beat_map.json` | Beat analysis: 99.4 BPM, drop at 9.68 s, strong kicks, silence break 39.9–40.9 s, ending about 49 s |
 | `audio/music/` | Supplied tracks (git-ignored) |

@@ -2,40 +2,39 @@
  "duration": 49.1,
  "fps": 30,
  "audio": "mix",
- "note": "Cut to the supplied vocal+music mix (audio/music/noah_music_halloween_nikki.mp3): word times in voice/nikki_vocal_words.json, beat grid in audio/beat_map.json.",
+ "note": "Cut to the supplied vocal+music mix (audio/music/noah_music_halloween_nikki.mp3): word times in voice/nikki_vocal_words.json, beat grid in audio/beat_map.json. Talking shots (w*) are Wan 2.7 lip-sync renders driven by the isolated vocal, cut in at in=0 so the mouth matches the mix.",
  "segments": [
   {
    "id": "scene_01",
    "start": 0.0,
    "end": 5.9,
    "type": "clip",
-   "clip": "k1",
+   "clip": "w1",
    "in": 0.0,
    "overlays": [
     [
      "treats",
      0.0
     ]
-   ],
-   "speed": 0.85
+   ]
   },
   {
    "id": "scene_02a",
    "start": 5.9,
-   "end": 10.3,
+   "end": 9.7,
    "type": "comp",
-   "clip": "k2",
-   "in": 0.2,
+   "clip": "w2",
+   "in": 0.0,
    "screen": "freeze",
    "screen_t0": 0.0
   },
   {
    "id": "scene_02b",
-   "start": 10.3,
+   "start": 9.7,
    "end": 11.86,
    "type": "html",
    "scene": "freeze",
-   "t0": 0.9
+   "t0": 0.3
   },
   {
    "id": "scene_03a",
@@ -65,7 +64,7 @@
    "end": 17.1,
    "type": "clip",
    "clip": "k3",
-   "in": 0.95
+   "in": 2.35
   },
   {
    "id": "scene_05a",
@@ -79,8 +78,8 @@
    "start": 18.4,
    "end": 20.0,
    "type": "comp",
-   "clip": "k4",
-   "in": 2.6,
+   "clip": "w4",
+   "in": 0.0,
    "screen": "freeze",
    "screen_t0": 2.2,
    "overlays": [
@@ -95,8 +94,8 @@
    "start": 20.0,
    "end": 22.6,
    "type": "comp",
-   "clip": "k5",
-   "in": 1.5,
+   "clip": "w5",
+   "in": 0.0,
    "screen": "haunt",
    "screen_t0": 0.0,
    "push_in": 0.5
@@ -113,8 +112,8 @@
    "start": 28.2,
    "end": 29.9,
    "type": "comp",
-   "clip": "k6",
-   "in": 0.3,
+   "clip": "w6",
+   "in": 0.0,
    "screen": "mon:launch",
    "screen_t0": 0.0,
    "overlays": [
@@ -166,7 +165,7 @@
    "end": 38.72,
    "type": "clip",
    "clip": "k7",
-   "in": 1.45
+   "in": 1.0
   },
   {
    "id": "scene_10a",
@@ -187,7 +186,7 @@
    "end": 41.0,
    "type": "clip",
    "clip": "k8",
-   "in": 1.6,
+   "in": 2.1,
    "overlays": [
     [
      "nosurprise",
@@ -207,8 +206,8 @@
    "start": 41.95,
    "end": 43.9,
    "type": "comp",
-   "clip": "k9",
-   "in": 0.4,
+   "clip": "w9",
+   "in": 0.0,
    "screen": "mon:s07",
    "screen_t0": 2.0,
    "overlays": [
