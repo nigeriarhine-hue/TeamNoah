@@ -14,8 +14,10 @@ files where they were, and **Noah changed nothing**.
 | Spanish captions (SRT + VTT + burned-in) | **Done** — `script/` |
 | Frame-exact 20.000 s timeline | **Done** — `render/timeline.json` |
 | Timed cut with burned captions, no face/voice | **Done** — `out/noah-mac-espacio-20s-ANIMATIC.mp4` |
-| Character footage + voice-over | **Blocked** — see below |
-| Final composited video | **Blocked** — needs the footage |
+| Spanish voice-over, 5 lines | **Generated** — `render/generated_assets.json` |
+| Character clips, lip-synced to those lines | **Generated** (shot 5 was still rendering) |
+| Pulling those files into this repo | **Blocked** — see below |
+| Final composited video | **Blocked** — needs the files locally |
 
 ### What is blocked, and why
 
@@ -34,19 +36,19 @@ Uploads are fine (a test PUT to the presigned S3 URL returned HTTP 200) — it i
 only the download direction that is refused. The agent proxy's own guidance is to
 report a policy denial rather than route around it.
 
-Consequence: the character clips can still be **generated** (see *Finishing*),
-but they cannot be composited, trimmed to exactly 20 s, caption-checked or
-verified from inside this session.
+The voice lines and character clips **have been generated** — their job ids and
+result URLs are in `render/generated_assets.json`. They just cannot be pulled
+into this container, so they cannot be composited, trimmed to exactly 20 s or
+verified from here.
 
 ## Finishing the video
 
 Both paths end in the same command.
 
-**A — generate on Higgsfield, download in a browser.** Run the jobs in
-`render/character_shots.json`. The TTS job_id feeds the video job as
-`audio_references`, so the exact Spanish wording drives the lip sync and nothing
-has to round-trip through a local disk. Then download from your Higgsfield
-library into:
+**A — download the already-generated files from your Higgsfield library** into
+the paths below. `render/character_shots.json` holds the prompts if anything
+needs regenerating; the TTS job_id feeds the video job as `audio_references`, so
+the exact Spanish wording drives the lip sync.
 
 ```
 assets/audio/s1.mp3 … s5.mp3         the five voice lines
@@ -54,8 +56,8 @@ assets/character/s1.mp4 … s5.mp4     the five 9:16 clips
 assets/audio/music.mp3               optional bed, ducked to 10 %
 ```
 
-**B — allow the CDN hosts above** for a session and the same scripts do the whole
-job unattended.
+**B — allow the CDN hosts above**, then `./render/fetch_assets.sh` pulls all ten
+files automatically.
 
 Then:
 

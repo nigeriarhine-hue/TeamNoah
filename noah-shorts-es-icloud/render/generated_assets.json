@@ -1,0 +1,23 @@
+{
+  "note": "Real Higgsfield job results for this short. Voice is Spanish TTS (text2speech_v2/elevenlabs, voice 'Marisol'); each video was generated with that TTS job as audio_references, so the lip sync is driven by the exact script wording.",
+  "generated": "2026-09-26",
+  "character_reference": {
+    "job_id": "361b8236-8920-4161-a939-7e91d3e5c5f3",
+    "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260920_231633_361b8236-8920-4161-a939-7e91d3e5c5f3.png"
+  },
+  "audio": {
+    "s1": {"job_id": "86119b4c-1812-4a8f-9303-d9ab766346a9", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164341_86119b4c-1812-4a8f-9303-d9ab766346a9.mp3"},
+    "s2": {"job_id": "a3c3a145-0e77-4a4e-befc-01bdf39c2a10", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164340_a3c3a145-0e77-4a4e-befc-01bdf39c2a10.mp3"},
+    "s3": {"job_id": "ee5ffe18-2f0c-4ec8-ae6d-8cd6a0bb0e24", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164340_ee5ffe18-2f0c-4ec8-ae6d-8cd6a0bb0e24.mp3"},
+    "s4": {"job_id": "65dfa0c8-0d52-4819-8f53-c287cac6cb27", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164340_65dfa0c8-0d52-4819-8f53-c287cac6cb27.mp3"},
+    "s5": {"job_id": "16daefa9-4803-43ff-afc2-3addf6a33baf", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164341_16daefa9-4803-43ff-afc2-3addf6a33baf.mp3"}
+  },
+  "character": {
+    "s1": {"job_id": "224fc7ec-f376-4d7f-8e4a-c94dd203d232", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164444_224fc7ec-f376-4d7f-8e4a-c94dd203d232.mp4"},
+    "s2": {"job_id": "50d88b10-1538-46aa-857d-1bd03d17b446", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164443_50d88b10-1538-46aa-857d-1bd03d17b446.mp4"},
+    "s3": {"job_id": "6db2180e-5bd1-4325-a12c-e9d954dc4cef", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164444_6db2180e-5bd1-4325-a12c-e9d954dc4cef.mp4"},
+    "s4": {"job_id": "bc70997c-8f14-48ff-b7a2-b5bedbbbb9ad", "url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_164443_bc70997c-8f14-48ff-b7a2-b5bedbbbb9ad.mp4"},
+    "s5": {"job_id": "b0432619-87ba-4a6a-aabb-8ea99b24ee82", "url": "PENDING - still rendering at time of writing; take the url from the Higgsfield library"}
+  },
+  "clip_native_size": "768x1344 (upscaled to 1080x1920 for the full-frame shot 1; the inset crop only needs 392x432)"
+}
