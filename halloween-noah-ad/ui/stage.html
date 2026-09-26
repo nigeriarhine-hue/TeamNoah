@@ -14,6 +14,11 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{width:1920px;height:1080px;overflow:hidden;background:var(--desk);font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
 html.clear,html.clear body{background:transparent}
+html.vert,html.vert body{width:1080px;height:1920px}
+html.vert .callout{top:56px;padding:0 40px}
+html.vert .callout span{font-size:46px;text-align:center;line-height:1.25;letter-spacing:.1em}
+html.vert .side{display:none}
+.win.vwin{left:6px;top:40px;width:708px;height:1180px}
 .scene{position:absolute;inset:0;display:none;overflow:hidden}
 .scene.on{display:block}
 
@@ -193,6 +198,22 @@ html.clear,html.clear body{background:transparent}
   <div id="pcFx"></div><div class="scan" id="scan"></div><div id="problem"></div></div>
 <div id="diag" class="scene"><canvas id="dc" width="1920" height="1080"></canvas><div id="dlabels"></div><div class="black" id="dflash" style="background:#fff;opacity:0"></div></div>
 <div id="ovScene" class="scene"><div class="ovl" id="ovl"></div></div>
+<div id="vsplash" class="scene" style="background:radial-gradient(900px 1100px at 50% 40%,#151b46 0%,#0B1024 72%)">
+  <div style="position:absolute;left:-200px;bottom:-200px;width:700px;height:640px;background:radial-gradient(closest-side,rgba(245,158,11,.20),transparent)"></div>
+  <div style="position:absolute;right:-240px;top:-200px;width:760px;height:700px;background:radial-gradient(closest-side,rgba(139,92,246,.22),transparent)"></div>
+  <div class="vparts"></div>
+  <div class="fog" style="bottom:-40px;height:420px"></div>
+  <div class="vbrand" style="position:absolute;left:0;right:0;top:250px;display:flex;flex-direction:column;align-items:center">
+    <img src="../../brand-pack/svg/noah-appicon-dark.svg" style="width:260px;height:260px" alt="Noah">
+    <div style="margin-top:34px;font-size:104px;font-weight:800;letter-spacing:.2em;padding-left:.2em;color:#fff">NOAH</div></div>
+  <div style="position:absolute;left:0;right:0;top:790px;text-align:center;font-weight:800;font-size:112px;line-height:1.12">
+    <div class="v1">DESCRIBE IT.</div><div class="v2">APPROVE IT.</div>
+    <div class="v3" style="background:linear-gradient(90deg,#8b8ff8,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent">DONE.</div></div>
+  <div class="vcta" style="position:absolute;left:0;right:0;top:1270px;display:flex;flex-direction:column;align-items:center;gap:34px">
+    <div class="dl" style="height:104px;font-size:40px;padding:0 64px">DOWNLOAD NOAH</div>
+    <div class="url" style="font-size:60px">onnoah.app</div></div>
+  <div class="black vfade"></div>
+</div>
 <div id="capScene" class="scene"><div class="capwrap"><div class="cap" id="capText"></div></div></div>
 <div id="splash" class="scene"><div class="edgeL"></div><div class="edgeR"></div><div id="parts"></div><div class="fog" id="fog"></div>
   <div class="brand" id="brand"><img src="../../brand-pack/svg/noah-appicon-dark.svg" alt="Noah"><div class="wm">NOAH</div></div>
@@ -217,8 +238,8 @@ const W={win:cam.querySelector('.win'),scroll:cam.querySelector('.scroll'),txt:c
   hint:cam.querySelector('.hint'),today:cam.querySelector('.today'),body:cam.querySelector('.body')};
 const overlay=document.createElement('div');W.win.appendChild(overlay);
 const cursor=document.createElementNS('http://www.w3.org/2000/svg','svg');cursor.setAttribute('class','cursor');cursor.setAttribute('viewBox','0 0 26 36');cursor.innerHTML='<use href="#cursorS"/>';cam.appendChild(cursor);
-let WX=320,WY=60;
-function camera(s,fx,fy,cy=450){cam.style.transform=`translate(${960-(WX+fx)*s}px,${cy-(WY+fy)*s}px) scale(${s})`;}
+let WX=320,WY=60,CX=960;
+function camera(s,fx,fy,cy=450){cam.style.transform=`translate(${CX-(WX+fx)*s}px,${cy-(WY+fy)*s}px) scale(${s})`;}
 function cur(x,y,down){cursor.style.display='block';cursor.style.transform=`translate(${WX+x}px,${WY+y}px) scale(${down?0.88:1})`;}
 const CHK='<span class="check"><svg viewBox="0 0 12 12"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg></span>';
 const SPIN=t=>`<span class="spinner" style="transform:rotate(${t*400}deg)"></span>`;
@@ -226,8 +247,8 @@ const dots=t=>'<span class="dots">'+[0,1,2].map(i=>`<i style="opacity:${0.35+0.6
 const ARROW=c=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
 const PROMPT='My PC keeps lagging and some apps keep freezing.';
 
-function resetWin(max){if(max)cam.style.transform='';overlay.innerHTML='';cursor.style.display='none';W.hint.style.display='none';W.today.style.display='block';W.scroll.style.transform='';
-  W.body.style.filter='';W.win.classList.toggle('max',!!max);WX=max?0:320;WY=max?0:60;$('#callout').innerHTML='';$('#uiblack').style.opacity=0;
+function resetWin(max){const v=document.documentElement.classList.contains('vert')&&!max;W.win.classList.toggle('vwin',v);if(max)cam.style.transform='';overlay.innerHTML='';cursor.style.display='none';W.hint.style.display='none';W.today.style.display='block';W.scroll.style.transform='';
+  W.body.style.filter='';W.win.classList.toggle('max',!!max);WX=max?0:(v?6:320);WY=max?0:(v?40:60);$('#callout').innerHTML='';$('#uiblack').style.opacity=0;
   W.txt.innerHTML="What's broken? Tell Noah and hit go.";W.send.className='sendbtn';W.send.innerHTML=ARROW('#6f7480');}
 function callout(html,k){$('#callout').innerHTML=k>0?`<span style="opacity:${k};transform:translateY(${(1-k)*-12}px);display:inline-block">${html}</span>`:'';}
 
@@ -289,7 +310,7 @@ function s04(t,max){resetWin(max);W.hint.style.display='block';W.txt.innerHTML='
 function s05(t,max){resetWin(max);W.send.className='sendbtn stop';W.send.innerHTML='<i></i>';
   W.scroll.innerHTML='<div style="height:22px"></div>'+situationCard(9);
   const d=eo(seg(t,0.0,0.3));W.body.style.filter=`blur(${5*d}px) brightness(${1-0.35*d})`;
-  const hover=t>0.9, press=t>=9;
+  const hover=t>0.9, press=t>=(window.PRESS_AT||9);
   overlay.innerHTML=`<div class="dlg" style="opacity:${d};transform:scale(${lerp(.94,1,d)})">
     <div class="hd"><div class="warn"><svg viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></svg></div><div class="q">Can Noah do this?</div></div>
     <div class="m">Noah needs your OK to continue.</div>
@@ -442,11 +463,34 @@ function splash(t,cue){ // cue: seconds (relative) when Describe / Approve / Don
   $('#parts').innerHTML=Array.from({length:40},(_,i)=>{const x=(rnd(i)*1920+t*(10+rnd(i*3)*20))%1920,y=1080-((rnd(i*5)*1080+t*(14+rnd(i*7)*26))%1080);
     return `<div class="particle" style="left:${x}px;top:${y}px;opacity:${.12+.3*rnd(i*9)};transform:scale(${.6+rnd(i*11)})"></div>`}).join('');}
 
+/* ======================= vertical (Shorts) additions ======================= */
+function ovBand(t,o){ // o: {lines:[[text,warm]],size,y,t0,t1}
+  const k=eo(seg(t,o.t0||0,(o.t0||0)+.18))*(1-seg(t,o.t1||99,(o.t1||99)+.15));
+  const h=o.lines.length*o.size*1.12+70;
+  return `<div style="position:absolute;left:0;right:0;top:${o.y-h/2}px;height:${h}px;background:linear-gradient(transparent,rgba(6,8,18,.82) 22%,rgba(6,8,18,.82) 78%,transparent);opacity:${k}"></div>`+
+    o.lines.map(([txt,warm],i)=>`<div class="headline${warm?' warm':''}" style="top:${o.y-h/2+35+i*o.size*1.12}px;font-size:${o.size}px;line-height:1.05;opacity:${k};transform:translateY(${(1-k)*14}px)">${txt}</div>`).join('');}
+OVERLAYS.band=ovBand;
+function vsplash(t,cue){
+  const el=$('#vsplash');
+  el.querySelector('.vfade').style.opacity=1-seg(t,0,.35);
+  const b=eo(seg(t,.05,.5));const br=el.querySelector('.vbrand');br.style.opacity=b;br.style.transform=`translateY(${(1-b)*20}px)`;
+  const c=eo(seg(t,.2,.6));const cr=el.querySelector('.vcta');cr.style.opacity=c;cr.style.transform=`translateY(${(1-c)*16}px)`;
+  ['.v1','.v2','.v3'].forEach((q,i)=>{const e=el.querySelector(q),k=eo(seg(t,cue[i]-.06,cue[i]+.22));e.style.opacity=k;e.style.transform=`scale(${lerp(1.08,1,k)})`;});
+  el.querySelector('.vparts').innerHTML=Array.from({length:34},(_,i)=>{const x=(rnd(i)*1080+t*(10+rnd(i*3)*20))%1080,y=1920-((rnd(i*5)*1920+t*(20+rnd(i*7)*30))%1920);
+    return `<div class="particle" style="left:${x}px;top:${y}px;opacity:${.12+.3*rnd(i*9)}"></div>`}).join('');}
+
 /* ======================= dispatch ======================= */
 const UI={s01,s02,s03,s04,s05,s06,s07};
 const PC={freeze:pcFreeze,crash:pcCrash,wifi:pcWifi,loading:pcLoading,storage:pcStorage,lag:pcLag,haunt:pcHaunt};
 function show(id){document.querySelectorAll('.scene').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');}
 window.render=function(name,t,opt={}){
+  const vert=!!opt.vert;document.documentElement.classList.toggle('vert',vert);CX=vert?540:960;
+  window.PRESS_AT=opt.pressAt; if(opt.speed) t*=opt.speed;
+  _render(name,t,opt);
+  if(opt.vcam&&UI[name]) camera(opt.vcam.s,opt.vcam.fx||812,opt.vcam.fy,opt.vcam.cy);
+  if(opt.noLabel) $('#problem').innerHTML='';
+};
+function _render(name,t,opt){
   document.documentElement.classList.toggle('clear',name.startsWith('ov:')||name==='cap');
   if(UI[name]){show('#ui');UI[name](t,!!opt.max);return;}
   if(name==='mon:launch'){show('#ui');sLaunch(t);return;}
@@ -454,8 +498,9 @@ window.render=function(name,t,opt={}){
   if(PC[name]){show('#pcScene');PC[name](t);return;}
   if(name==='diag'){show('#diag');diag(t);return;}
   if(name==='splash'){show('#splash');splash(t,opt.cue||[3,4,5]);return;}
-  if(name.startsWith('ov:')){show('#ovScene');$('#ovl').innerHTML=OVERLAYS[name.slice(3)](t);return;}
-};
+  if(name==='vsplash'){show('#vsplash');vsplash(t,opt.cue||[1,1.5,2]);return;}
+  if(name.startsWith('ov:')){show('#ovScene');$('#ovl').innerHTML=OVERLAYS[name.slice(3)](t,opt);return;}
+}
 window.caption=function(html){document.documentElement.classList.add('clear');show('#capScene');$('#capText').innerHTML=html;};
 const q=new URLSearchParams(location.search);if(q.get('s'))render(q.get('s'),+(q.get('t')||0),{max:q.get('max')==='1'});
 </script>

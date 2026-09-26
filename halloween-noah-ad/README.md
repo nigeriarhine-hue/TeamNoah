@@ -62,3 +62,22 @@ talking shot, and the voice is 20% lower (×0.8 amplitude, −1.9 dB) with the m
 8. No hardware repair and no performance claims. The result card says only what was changed and that it's reversible.
 9. `onnoah.app` is spelled correctly. The tagline is exactly "Describe it. Approve it. Done."
 10. An automated scan checks every frame for leftover chroma green, and loudness is checked with ebur128.
+
+## YouTube Short (15 s, 1080×1920)
+
+`short/` cuts `NOAH_HALLOWEEN_SHORT_15SEC_1080x1920.mp4` from the finished ad's own sources. Nothing is regenerated.
+
+| Time | Layout | What's on screen | Audio from the ad |
+|---|---|---|---|
+| 0.00–3.95 | Stacked: witch (lip-synced) above freeze → crash → Wi-Fi → storage → lag | WHAT'S SCARIER THAN A PC ACTING POSSESSED? | 7.35–11.30 "what's scarier than a PC…" |
+| 3.95–4.55 | Stacked: witch relaxes above the Noah app | NOAH FINDS THE CAUSE. | 28.20– "That's where Noah comes in." |
+| 4.55–7.80 | Native 9:16 Noah UI: typing → checks → CAUSE FOUND → RECOMMENDED ACTION | NOAH FINDS THE CAUSE. | 34.20– "Finds the cause, shows you the fix…" |
+| 7.80–9.55 | Approval dialog at 1.95× zoom; Go ahead clicked at 9.25 | YOU APPROVE THE FIX. | "…and waits for your approval." |
+| 9.55–11.05 | Action log, then the witch checking behind her | NO MYSTERY FIXES. / NO JUMP SCARES. | "No mystery fixes," |
+| 11.05–15.00 | Vertical end card | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 41.95– "Go to onnoah.app, download and install today." |
+
+- **Framing:** witch shots use a native-resolution 1080×960 crop of her side of the frame, with no upscaling. The Noah UI is re-rendered in 9:16 with the collapsible sidebar hidden, so the conversation reflows to phone width at 1.5×.
+- **Audio splices:** they sit at beat-aligned offsets (within about 30 ms of the 99.4 BPM grid), with 30 ms crossfades.
+- **Lip sync:** the lip-synced clips are cut in at the same source offsets as their audio.
+
+Build: `SRC=/path/to/halloween-noah-ad bash short/build_short.sh`
