@@ -14,8 +14,8 @@ import numpy as np
 SR = 48000
 raw_path, words_path, beat_path, out = sys.argv[1:5]
 BEATS = json.load(open(beat_path))["beats"]
-LAST_WORD_END_MAX = 50.2
-TEMPOS = [1.0, 1.02, 1.04, 1.06, 1.08]
+LAST_WORD_END_MAX = 50.3
+TEMPOS = [1.0, 1.02, 1.04, 1.06, 1.08, 1.10]
 
 # (phrase text as spoken, placement)
 #   ("at", word, t)    key word onset lands at t
@@ -31,7 +31,7 @@ SPEC = [
     ("storage warnings creeping up on you.", ("at", "storage", 13.31)),
     ("And that lag?", ("beat", "and", 0.25)),
     ("Yeah,", ("beat", "yeah", 0.35)),
-    ("that's nightmare fuel.", ("at", "nightmare", 18.13)),
+    ("that's nightmare fuel.", ("at", "nightmare", 17.53)),
     ("Maybe something in your software is haunting performance.", ("gap", 0.30)),
     ("Maybe an outdated driver is casting a spell on your graphics.", ("gap", 0.26)),
     ("Or maybe your system just needs the real cause uncovered.", ("gap", 0.26)),
@@ -42,15 +42,15 @@ SPEC = [
     ("finds the cause,", ("gap", 0.14)),
     ("shows you the fix,", ("gap", 0.14)),
     ("and waits for your approval before making changes.", ("gap", 0.14)),
-    ("No jump scares,", ("at", "no", 40.00)),
-    ("no mystery fixes,", ("beat", "no", 0.20)),
-    ("no scary surprises.", ("gap", 0.20)),
-    ("So this Halloween, don't let bad software haunt your PC.", ("gap", 0.34)),
-    ("Go to OnNoah.app, download Noah, and see what it can do.", ("gap", 0.26)),
-    ("Noah,", ("gap", 0.40)),
-    ("describe it,", ("gap", 0.22)),
-    ("approve it,", ("gap", 0.22)),
-    ("done.", ("gap", 0.24)),
+    ("No jump scares,", ("gap", 0.22)),
+    ("no mystery fixes,", ("gap", 0.16)),
+    ("no scary surprises.", ("gap", 0.16)),
+    ("So this Halloween, don't let bad software haunt your PC.", ("gap", 0.28)),
+    ("Go to OnNoah.app, download Noah, and see what it can do.", ("gap", 0.22)),
+    ("Noah,", ("gap", 0.32)),
+    ("describe it,", ("gap", 0.18)),
+    ("approve it,", ("gap", 0.18)),
+    ("done.", ("gap", 0.20)),
 ]
 
 norm = lambda s: re.sub(r"[^a-z]", "", s.lower())
@@ -91,7 +91,7 @@ def build(tempo):
             j += int(0.005 * SR)
         b = min(j / SR + 0.04, nxt)
         if k:
-            a = max(a, phrases[k - 1][2][-1][1] / tempo)
+            a = max(a, min(phrases[k - 1][2][-1][1] / tempo, ws[0][0] / tempo - 0.01))
         kind = place[0]
         if kind == "gap" or k == 0 and kind != "at":
             start = t_prev + place[1]
@@ -106,7 +106,7 @@ def build(tempo):
                 start = t_prev + 0.08
         start = max(start, 0.0)
         plan.append((start, a, b, text, ws))
-        t_prev = start + (b - a)
+        t_prev = start + (ws[-1][1] / tempo - a)  # pauses are measured from the last word, not its decay
     last_word_end = plan[-1][0] + (plan[-1][4][-1][1] / tempo - plan[-1][1])
     return x, plan, last_word_end
 
