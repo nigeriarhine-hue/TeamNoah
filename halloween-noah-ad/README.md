@@ -69,14 +69,14 @@ talking shot, and the voice is 20% lower (×0.8 amplitude, −1.9 dB) with the m
 
 | Time | Layout | What's on screen | Audio from the ad |
 |---|---|---|---|
-| 0.00–3.95 | Stacked: witch (lip-synced) above freeze → crash → Wi-Fi → storage → lag | WHAT'S SCARIER THAN A PC ACTING POSSESSED? | 7.35–11.30 "what's scarier than a PC…" |
-| 3.95–4.55 | Stacked: witch relaxes above the Noah app | NOAH FINDS THE CAUSE. | 28.20– "That's where Noah comes in." |
-| 4.55–7.80 | Native 9:16 Noah UI: typing → checks → CAUSE FOUND → RECOMMENDED ACTION | NOAH FINDS THE CAUSE. | 34.20– "Finds the cause, shows you the fix…" |
-| 7.80–9.55 | Approval dialog at 1.95× zoom; Go ahead clicked at 9.25 | YOU APPROVE THE FIX. | "…and waits for your approval." |
-| 9.55–11.05 | Action log, then the witch checking behind her | NO MYSTERY FIXES. / NO JUMP SCARES. | "No mystery fixes," |
-| 11.05–15.00 | Vertical end card | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 41.95– "Go to onnoah.app, download and install today." |
+| 0.00–3.95 | Stacked: witch (lip-synced) above tight crops of freeze → crash → Wi-Fi → storage → lag, hard cuts on the beat | WHAT'S SCARIER THAN / A PC ACTING POSSESSED? (second line lands on the next beat) | 7.35–11.30 "what's scarier than a PC…" |
+| 3.95–4.55 | Dissolve to: witch relaxes above the Noah app | NOAH FINDS THE CAUSE. | 28.20– "That's where Noah comes in." |
+| 4.55–10.45 | Slide up into one continuous 9:16 Noah take: typing → checks → cause card → plan → cursor clicks the action → approval dialog (zoom) → Go ahead at 9.25 → action log | Callout morphs CAUSE FOUND → RECOMMENDED ACTION → YOU APPROVE THE FIX.; then NO MYSTERY FIXES. | 34.20– "Finds the cause, shows you the fix, and waits for your approval. No mystery fixes," |
+| 10.45–11.05 | Dissolve: witch checks behind her above Noah's "Done." result | NO JUMP SCARES. | |
+| 11.05–15.00 | Dissolve to the vertical end card; tagline in by 12.85 | Icon, NOAH, DESCRIBE IT. APPROVE IT. DONE., DOWNLOAD NOAH, onnoah.app | 41.95– "Go to onnoah.app, download and install today." |
 
 - **Framing:** witch shots use a native-resolution 1080×960 crop of her side of the frame, with no upscaling. The Noah UI is re-rendered in 9:16 with the collapsible sidebar hidden, so the conversation reflows to phone width at 1.5×.
+- **Transitions:** each segment is rendered past its cut by the next segment's dissolve length, and the joins use ffmpeg `xfade` at the exact cut time, so the edit timing (and lip sync) is unchanged.
 - **Audio splices:** they sit at beat-aligned offsets (within about 30 ms of the 99.4 BPM grid), with 30 ms crossfades.
 - **Lip sync:** the lip-synced clips are cut in at the same source offsets as their audio.
 
