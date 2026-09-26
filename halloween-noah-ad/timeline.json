@@ -1,0 +1,344 @@
+{
+ "duration": 49.1,
+ "fps": 30,
+ "audio": "mix",
+ "note": "Cut to the supplied vocal+music mix (audio/music/noah_music_halloween_nikki.mp3): word times in voice/nikki_vocal_words.json, beat grid in audio/beat_map.json.",
+ "segments": [
+  {
+   "id": "scene_01",
+   "start": 0.0,
+   "end": 5.9,
+   "type": "clip",
+   "clip": "k1",
+   "in": 0.0,
+   "overlays": [
+    [
+     "treats",
+     0.0
+    ]
+   ],
+   "speed": 0.85
+  },
+  {
+   "id": "scene_02a",
+   "start": 5.9,
+   "end": 10.3,
+   "type": "comp",
+   "clip": "k2",
+   "in": 0.2,
+   "screen": "freeze",
+   "screen_t0": 0.0
+  },
+  {
+   "id": "scene_02b",
+   "start": 10.3,
+   "end": 11.86,
+   "type": "html",
+   "scene": "freeze",
+   "t0": 0.9
+  },
+  {
+   "id": "scene_03a",
+   "start": 11.86,
+   "end": 13.98,
+   "type": "html",
+   "scene": "crash",
+   "t0": -0.55
+  },
+  {
+   "id": "scene_03b",
+   "start": 13.98,
+   "end": 15.04,
+   "type": "html",
+   "scene": "wifi"
+  },
+  {
+   "id": "scene_03c",
+   "start": 15.04,
+   "end": 16.4,
+   "type": "html",
+   "scene": "storage"
+  },
+  {
+   "id": "scene_04",
+   "start": 16.4,
+   "end": 17.1,
+   "type": "clip",
+   "clip": "k3",
+   "in": 0.95
+  },
+  {
+   "id": "scene_05a",
+   "start": 17.1,
+   "end": 18.4,
+   "type": "html",
+   "scene": "lag"
+  },
+  {
+   "id": "scene_05b",
+   "start": 18.4,
+   "end": 20.0,
+   "type": "comp",
+   "clip": "k4",
+   "in": 2.6,
+   "screen": "freeze",
+   "screen_t0": 2.2,
+   "overlays": [
+    [
+     "nightmare",
+     18.86
+    ]
+   ]
+  },
+  {
+   "id": "scene_06a",
+   "start": 20.0,
+   "end": 22.6,
+   "type": "comp",
+   "clip": "k5",
+   "in": 1.5,
+   "screen": "haunt",
+   "screen_t0": 0.0,
+   "push_in": 0.5
+  },
+  {
+   "id": "scene_06b",
+   "start": 22.6,
+   "end": 28.2,
+   "type": "html",
+   "scene": "diag"
+  },
+  {
+   "id": "scene_07",
+   "start": 28.2,
+   "end": 29.9,
+   "type": "comp",
+   "clip": "k6",
+   "in": 0.3,
+   "screen": "mon:launch",
+   "screen_t0": 0.0,
+   "overlays": [
+    [
+     "meet",
+     28.2
+    ]
+   ]
+  },
+  {
+   "id": "scene_08a",
+   "start": 29.9,
+   "end": 32.6,
+   "type": "html",
+   "scene": "s01"
+  },
+  {
+   "id": "scene_08b",
+   "start": 32.6,
+   "end": 34.3,
+   "type": "html",
+   "scene": "s02",
+   "t0": 1.0
+  },
+  {
+   "id": "scene_08c",
+   "start": 34.3,
+   "end": 35.56,
+   "type": "html",
+   "scene": "s03"
+  },
+  {
+   "id": "scene_08d",
+   "start": 35.56,
+   "end": 36.9,
+   "type": "html",
+   "scene": "s04"
+  },
+  {
+   "id": "scene_09a",
+   "start": 36.9,
+   "end": 38.3,
+   "type": "html",
+   "scene": "s05"
+  },
+  {
+   "id": "scene_09b",
+   "start": 38.3,
+   "end": 38.72,
+   "type": "clip",
+   "clip": "k7",
+   "in": 1.45
+  },
+  {
+   "id": "scene_10a",
+   "start": 38.72,
+   "end": 40.1,
+   "type": "html",
+   "scene": "s06",
+   "overlays": [
+    [
+     "nomystery",
+     38.72
+    ]
+   ]
+  },
+  {
+   "id": "scene_10b",
+   "start": 40.1,
+   "end": 41.0,
+   "type": "clip",
+   "clip": "k8",
+   "in": 1.6,
+   "overlays": [
+    [
+     "nosurprise",
+     40.1
+    ]
+   ]
+  },
+  {
+   "id": "scene_10c",
+   "start": 41.0,
+   "end": 41.95,
+   "type": "html",
+   "scene": "s07"
+  },
+  {
+   "id": "scene_11",
+   "start": 41.95,
+   "end": 43.9,
+   "type": "comp",
+   "clip": "k9",
+   "in": 0.4,
+   "screen": "mon:s07",
+   "screen_t0": 2.0,
+   "overlays": [
+    [
+     "haunt",
+     41.95
+    ]
+   ]
+  },
+  {
+   "id": "scene_12",
+   "start": 43.9,
+   "end": 49.1,
+   "type": "html",
+   "scene": "splash",
+   "cue": [
+    2.0,
+    2.61,
+    3.21
+   ]
+  }
+ ],
+ "stills": [
+  [
+   "01_noah_problem_input",
+   "s01",
+   1.85
+  ],
+  [
+   "02_noah_diagnosing",
+   "s02",
+   2.1
+  ],
+  [
+   "03_noah_cause_found",
+   "s03",
+   0.9
+  ],
+  [
+   "04_noah_recommended_action",
+   "s04",
+   0.8
+  ],
+  [
+   "05_noah_approval",
+   "s05",
+   1.2
+  ],
+  [
+   "06_noah_action_log",
+   "s06",
+   1.0
+  ],
+  [
+   "07_noah_success",
+   "s07",
+   1.2
+  ],
+  [
+   "08_noah_halloween_splash",
+   "splash",
+   5.0
+  ]
+ ],
+ "sfx": {
+  "opening_hit": 0.0,
+  "glitch": [
+   7.9,
+   9.7,
+   10.3,
+   11.0,
+   12.46,
+   13.98,
+   15.04,
+   17.1,
+   17.7,
+   22.6,
+   23.8,
+   25.2
+  ],
+  "error_tone": [
+   12.46,
+   13.98,
+   15.04
+  ],
+  "bass_hit": [
+   18.86
+  ],
+  "whoosh_dark": [
+   20.0,
+   22.3
+  ],
+  "magic_shimmer": [
+   20.4
+  ],
+  "calm_swell": [
+   28.2
+  ],
+  "ui_click": [
+   32.35,
+   38.5
+  ],
+  "keys": [
+   30.15,
+   31.9
+  ],
+  "diag_tick": [
+   32.85,
+   33.35,
+   33.85
+  ],
+  "soft_tone": [
+   34.3,
+   35.56,
+   36.9
+  ],
+  "confirm": [
+   41.05
+  ],
+  "log_tick": [
+   39.1,
+   39.5
+  ],
+  "transition_soft": [
+   29.9,
+   41.95,
+   43.9
+  ],
+  "end_hit": [
+   47.11
+  ]
+ }
+}
