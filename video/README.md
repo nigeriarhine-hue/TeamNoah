@@ -18,7 +18,12 @@ In a sandbox without Remotion's Chrome download, pass a local Chromium:
 - `src/noah/` – light Noah UI: window shell + screens for scenes 4–11 (one continuous window)
 - `src/components/` – KineticText, GamerCharacterScene (2.5D parallax), MetricCard, CursorClick, FocusZoom, SafeArea, Audio
 - `public/` – gamer still + cut-out, brand marks, bundled Plus Jakarta Sans, VO + SFX
-- `scripts/` – regenerate voiceover (Kokoro TTS) and procedural SFX/music (numpy)
+- `scripts/` – regenerate voiceover (Kokoro TTS), procedural SFX/music (numpy), cut-out + clean plate, and lip-sync patches (Wav2Lip)
+
+## Lip sync
+The gamer speaks on camera in scenes 1, 2, 13 and 15. Wav2Lip (run locally, CPU) generates the mouth
+motion from each VO clip; only a feathered mouth/jaw patch (`public/lipsync/*.mp4`) is overlaid on the
+cut-out layer, so the eyes and hair stay at full source sharpness and the patch follows every camera move.
 
 ## Script & timestamps
 | Time | Scene | Voiceover |

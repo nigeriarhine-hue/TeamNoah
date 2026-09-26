@@ -46,3 +46,18 @@ export const VO: { file: string; at: number; dur: number; text: string }[] = [
   { file: 'vo12', at: 40.25, dur: 1.16, text: 'Free PC Check.' },
   { file: 'vo13', at: 41.6, dur: 3.47, text: 'Download Noah, and try it today at onnoah.app.' },
 ];
+
+// Lip-sync mouth patches (Wav2Lip, generated locally). Each clip has 0.3 s of
+// silence padding before the line, so it starts 0.3 s before the VO.
+export const LIPSYNC: Record<string, { at: number; frames: number }> = {
+  vo01: { at: 0.3 - 0.3, frames: 157 },
+  vo02: { at: 5.2 - 0.3, frames: 68 },
+  vo11: { at: 36.4 - 0.3, frames: 118 },
+  vo13: { at: 41.6 - 0.3, frames: 118 },
+};
+/** Lip clip placement relative to a scene's local frame 0. */
+export const lipFor = (file: string, sceneStart: number) => ({
+  file,
+  from: f(LIPSYNC[file].at) - f(vis(sceneStart)),
+  frames: LIPSYNC[file].frames,
+});

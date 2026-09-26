@@ -5,6 +5,7 @@ import { KineticText } from '../components/KineticText';
 import { clamp, easeOut, Finish, LightSweep, NoahMark, Particles, SafeArea } from '../components/primitives';
 import { IconCheck } from '../components/Icons';
 import { C, FONT } from '../theme';
+import { lipFor, SCENES } from '../timeline';
 
 const LeftShade: React.FC<{ strength?: number }> = ({ strength = 0.85 }) => (
   <AbsoluteFill
@@ -16,6 +17,7 @@ const LeftShade: React.FC<{ strength?: number }> = ({ strength = 0.85 }) => (
 export const S01Hook: React.FC = () => (
   <AbsoluteFill>
     <GamerCharacterScene
+        lipsync={[lipFor('vo01', SCENES.s01Hook)]}
       cam={[
         { f: 0, s: 1.0, x: 0, y: 0 },
         { f: 160, s: 1.13, x: -70, y: 30 },
@@ -45,6 +47,7 @@ export const S01Hook: React.FC = () => (
 export const S02Question: React.FC = () => (
   <AbsoluteFill>
     <GamerCharacterScene
+        lipsync={[lipFor('vo02', SCENES.s02Question)]}
       cam={[
         { f: 0, s: 1.5, x: 0, y: 330 },
         { f: 72, s: 1.62, x: -20, y: 368 },
@@ -121,6 +124,7 @@ export const S12Reaction: React.FC = () => {
 export const S13BackToGaming: React.FC = () => (
   <AbsoluteFill>
     <GamerCharacterScene
+        lipsync={[lipFor('vo11', SCENES.s13BackToGaming)]}
       cam={[
         { f: 0, s: 1.3, x: 280, y: 60 },
         { f: 118, s: 1.14, x: -80, y: 10 },
@@ -150,6 +154,7 @@ export const S15End: React.FC = () => {
   return (
     <AbsoluteFill style={{ opacity: out, background: '#000' }}>
       <GamerCharacterScene
+        lipsync={[lipFor('vo13', SCENES.s15End)]}
         cam={[
           { f: 0, s: 1.12, x: 20, y: 40 },
           { f: 70, s: 1.18, x: 0, y: 50 },
