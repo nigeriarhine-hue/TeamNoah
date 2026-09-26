@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Noah UI — Mac / AI tech support</title>
+<link rel="stylesheet" href="../../public/fonts/PlusJakartaSans.css">
+<link rel="stylesheet" href="../../public/fonts/JetBrainsMono.css">
+<link rel="stylesheet" href="noah-ui.css">
+</head><body>
+
+<!-- reusable bits ------------------------------------------------------->
+<template id="tpl-side">
+  <aside class="side">
+    <div class="side-top">
+      <div class="side-row">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4.2v11.6M4.2 10h11.6" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg></span>
+        <span>New chat</span>
+        <span class="spacer"></span>
+        <span class="panel-ic"><svg width="21" height="19" viewBox="0 0 21 19" fill="none"><rect x="1.1" y="1.1" width="18.8" height="16.8" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M8 1.4v16.2" stroke="currentColor" stroke-width="1.7"/></svg></span>
+      </div>
+      <div class="side-row">
+        <span class="ic"><svg width="21" height="19" viewBox="0 0 21 19" fill="none"><path d="M10.5 4.6C8.7 3.1 6.4 2.6 3.4 2.9c-.7.1-1.2.7-1.2 1.4v10c0 .8.7 1.5 1.5 1.4 2.6-.2 4.9.2 6.8 1.6 1.9-1.4 4.2-1.8 6.8-1.6.8.1 1.5-.6 1.5-1.4v-10c0-.7-.5-1.3-1.2-1.4-3-.3-5.3.2-7.1 1.7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M10.5 4.6v12.7" stroke="currentColor" stroke-width="1.7"/></svg></span>
+        <span>Knowledge</span>
+      </div>
+    </div>
+    <div class="side-rule"></div>
+    <div class="side-group" data-today>
+      <div class="side-label">TODAY</div>
+      <div class="thread active"><div class="t">Game Lag Troubleshooting</div><div class="d">09:02 PM</div></div>
+    </div>
+    <div class="side-group">
+      <div class="side-label">EARLIER</div>
+      <div class="thread"><div class="t">Steam Installation and Login It…</div><div class="d">Mar 7, 03:32 PM</div></div>
+      <div class="thread"><div class="t">System Information Details Requ…</div><div class="d">Mar 7, 03:19 PM</div></div>
+      <div class="thread"><div class="t">Mac Performance Analysis …</div><div class="d">Mar 5, 08:04 PM</div></div>
+      <div class="thread"><div class="t">Checking System Updates</div><div class="d">Mar 5, 07:59 PM</div></div>
+      <div class="thread"><div class="t">Empty the Trash</div><div class="d">Mar 5, 07:46 PM</div></div>
+      <div class="thread"><div class="t">Printer Status Check</div><div class="d">Mar 5, 03:11 PM</div></div>
+    </div>
+    <div class="side-foot">
+      <span class="ic"><svg width="21" height="21" viewBox="0 0 21 21" fill="none"><circle cx="10.5" cy="10.5" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M10.5 1.7v2.4M10.5 16.9v2.4M19.3 10.5h-2.4M4.1 10.5H1.7M16.7 4.3l-1.7 1.7M6 15l-1.7 1.7M16.7 16.7L15 15M6 6 4.3 4.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+      <span>Settings</span>
+    </div>
+  </aside>
+</template>
+
+<template id="tpl-chrome">
+  <div class="chrome">
+    <div class="lights"><i class="light r"></i><i class="light y"></i><i class="light g"></i></div>
+    <div class="chrome-title">Noah</div>
+  </div>
+</template>
+
+<template id="tpl-tick">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4.8 12.6 9.5 17.2 19.2 7" stroke="#2FD9B4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</template>
+<template id="tpl-spin">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2.6a9.4 9.4 0 1 1-6.6 2.7" stroke="#8B8FF8" stroke-width="2.4" stroke-linecap="round"/></svg>
+</template>
+<template id="tpl-arrow">
+  <svg width="26" height="20" viewBox="0 0 26 20" fill="none"><path d="M2 10h21M16.4 3.2 23.2 10l-6.8 6.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</template>
+
+<!-- ===================== 01 — PROBLEM ===================== -->
+<section class="frame" id="s01">
+  <div data-chrome></div>
+  <div class="body">
+    <div data-side data-no-today></div>
+    <div class="main">
+      <div class="stream"><div data-spot="ask">
+        <div class="bubble">My Mac starts lagging when I open my game.</div>
+        <div class="card"><div class="log">
+          <div class="log-row"><span class="tick" data-tick></span><span class="lbl">Searching knowledge</span></div>
+          <div class="log-row"><span class="tick" data-tick></span><span class="lbl">Running diagnostics</span></div>
+          <div class="log-row"><span class="tick" data-tick></span><span class="lbl">Listing processes</span></div>
+          <div class="log-row"><span class="tick" data-tick></span><span class="lbl">Checking login items</span></div>
+          <div class="log-row now"><span class="tick" data-spin></span><span class="lbl">Measuring free storage</span><span class="ms">1s</span></div>
+        </div></div></div>
+      </div>
+      <div class="composer">
+        <div class="cbox"><div class="ph">What's broken? Tell Noah and hit go.</div><div class="go stop"><i></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 02 — DIAGNOSIS ===================== -->
+<section class="frame" id="s02">
+  <div data-chrome></div>
+  <div class="body">
+    <div data-side></div>
+    <div class="main">
+      <div class="stream bottom">
+        <div class="didbar" style="margin-top:4px">
+          <span class="tick" data-tick></span><span>What Noah did</span>
+          <span class="sep">·</span><span class="time">1m 47s</span>
+          <span class="show">Show work <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1.6 1.6 8.5 8.5l6.9-6.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card"><div class="card-pad">
+          <div class="sec"><i class="dash"></i>SITUATION</div>
+          <div class="situation">When your game opens, extra background activity and login items are contributing to the lag. I also found limited free storage and unnecessary background processes affecting performance.</div>
+
+          <div class="sec" style="margin-top:30px"><i class="dash"></i>WHAT NOAH CHECKED</div>
+          <div class="metrics" data-spot="checked">
+            <div class="metric"><div class="k">LOGIN ITEMS</div><div class="v">7 launch</div><div class="s">Steam, Discord, Drop…</div></div>
+            <div class="metric"><div class="k">BACKGROUND APPS</div><div class="v">~30 apps</div><div class="s">Discord, Creative Clo…</div></div>
+            <div class="metric"><div class="k">STORAGE FREE</div><div class="v">58 GB</div><div class="s">of 494 GB — 88% full</div></div>
+            <div class="metric"><div class="k">SYSTEM LOAD</div><div class="v">High</div><div class="s">Sustained while the g…</div></div>
+          </div>
+
+          <div class="sec" style="margin-top:30px"><i class="dash"></i>WHAT NOAH WOULD DO</div>
+          <div data-spot="would">
+            <div class="step"><div class="n">1</div><div><div class="h">Stop unnecessary apps from opening at login</div><div class="p">Steam, Discord, Creative Cloud — reversible anytime</div></div></div>
+            <div class="step"><div class="n">2</div><div><div class="h">Reduce background activity affecting performance</div><div class="p">Quits what isn't in use — nothing is uninstalled</div></div></div>
+            <div class="step"><div class="n">3</div><div><div class="h">Clear temporary/cache data</div><div class="p">Safe, ~0.5 GB temp cache</div></div></div>
+            <div class="step"><div class="n">4</div><div><div class="h">Reclaim some storage space</div><div class="p">Moves old installers to Trash — keeps the newest one</div></div></div>
+          </div>
+          <div class="cta">Trim login items &amp; clear space <span data-arrow></span></div>
+        </div></div>
+      </div>
+      <div class="composer">
+        <div class="cbox"><div class="ph">…or tell Noah to do it differently</div><div class="go"><span data-arrow></span></div></div>
+        <div class="chint"><svg width="19" height="17" viewBox="0 0 19 17" fill="none"><path d="M1.9 1.5h15.2v11H8.1L3.8 15.7V12.5H1.9v-11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> You can always talk to Noah instead of clicking — change the plan, skip part, or ask a question.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 03 — APPROVAL ===================== -->
+<section class="frame" id="s03">
+  <div data-chrome></div>
+  <div class="body">
+    <div data-side></div>
+    <div class="main">
+      <div class="stream bottom">
+        <div class="didbar" style="margin-top:4px">
+          <span class="tick" data-tick></span><span>What Noah did</span>
+          <span class="sep">·</span><span class="time">1m 47s</span>
+          <span class="show">Show work <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1.6 1.6 8.5 8.5l6.9-6.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card"><div class="card-pad">
+          <div class="sec"><i class="dash"></i>SITUATION</div>
+          <div class="situation">When your game opens, extra background activity and login items are contributing to the lag. I also found limited free storage and unnecessary background processes affecting performance.</div>
+          <div class="sec" style="margin-top:30px"><i class="dash"></i>WHAT NOAH CHECKED</div>
+          <div class="metrics">
+            <div class="metric"><div class="k">LOGIN ITEMS</div><div class="v">7 launch</div><div class="s">Steam, Discord, Drop…</div></div>
+            <div class="metric"><div class="k">BACKGROUND APPS</div><div class="v">~30 apps</div><div class="s">Discord, Creative Clo…</div></div>
+            <div class="metric"><div class="k">STORAGE FREE</div><div class="v">58 GB</div><div class="s">of 494 GB — 88% full</div></div>
+            <div class="metric"><div class="k">SYSTEM LOAD</div><div class="v">High</div><div class="s">Sustained while the g…</div></div>
+          </div>
+          <div class="sec" style="margin-top:30px"><i class="dash"></i>WHAT NOAH WOULD DO</div>
+          <div class="step"><div class="n">1</div><div><div class="h">Stop unnecessary apps from opening at login</div><div class="p">Steam, Discord, Creative Cloud — reversible anytime</div></div></div>
+          <div class="step"><div class="n">2</div><div><div class="h">Reduce background activity affecting performance</div><div class="p">Quits what isn't in use — nothing is uninstalled</div></div></div>
+          <div class="cta">Trim login items &amp; clear space <span data-arrow></span></div>
+        </div></div>
+      </div>
+      <div class="composer">
+        <div class="cbox"><div class="ph">…or tell Noah to do it differently</div><div class="go"><span data-arrow></span></div></div>
+        <div class="chint"><svg width="19" height="17" viewBox="0 0 19 17" fill="none"><path d="M1.9 1.5h15.2v11H8.1L3.8 15.7V12.5H1.9v-11Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> You can always talk to Noah instead of clicking — change the plan, skip part, or ask a question.</div>
+      </div>
+    </div>
+  </div>
+  <div class="scrim"></div>
+  <div class="modal" data-spot="modal">
+    <div class="modal-body">
+      <div class="modal-head">
+        <div class="warn"><svg width="30" height="27" viewBox="0 0 30 27" fill="none"><path d="M15 2.6 28.4 24.4H1.6L15 2.6Z" stroke="#F0A32C" stroke-width="2.2" stroke-linejoin="round"/><path d="M15 10.4v5.6" stroke="#F0A32C" stroke-width="2.4" stroke-linecap="round"/><circle cx="15" cy="20" r="1.5" fill="#F0A32C"/></svg></div>
+        <div class="modal-title">Can Noah do this?</div>
+      </div>
+      <div class="modal-sub">Noah needs your OK to continue.</div>
+    </div>
+    <div class="modal-foot">
+      <div class="btn ghost">No thanks</div>
+      <div class="btn primary" data-spot="goahead">Go ahead</div>
+      <div class="btn outline">Approve all</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 04 — ACTION ===================== -->
+<section class="frame" id="s04">
+  <div data-chrome></div>
+  <div class="body">
+    <div data-side></div>
+    <div class="main">
+      <div class="stream bottom">
+        <div class="card" style="margin-top:0"><div class="card-pad" style="padding-bottom:34px">
+          <div class="sec"><i class="dash"></i>WHAT NOAH WOULD DO</div>
+          <div class="step"><div class="n">1</div><div><div class="h">Stop unnecessary apps from opening at login</div><div class="p">Steam, Discord, Creative Cloud — reversible anytime</div></div></div>
+          <div class="step"><div class="n">2</div><div><div class="h">Reduce background activity affecting performance</div><div class="p">Quits what isn't in use — nothing is uninstalled</div></div></div>
+          <div class="step"><div class="n">3</div><div><div class="h">Clear temporary/cache data</div><div class="p">Safe, ~0.5 GB temp cache</div></div></div>
+          <div class="cta sent"><span data-tick></span> Sent</div>
+        </div></div>
+
+        <div class="rail" style="margin:38px 0 0 4px">Approved: Action approved</div>
+
+        <div class="card" data-spot="working"><div class="log" style="padding:32px 38px 34px">
+          <div class="log-row"><span class="tick" data-tick></span><span class="lbl">Turning off a login item — Steam</span></div>
+          <div class="log-row"><span class="tick" data-tick></span><span class="lbl">Quitting background apps not in use</span></div>
+          <div class="log-row now"><span class="tick" data-spin></span><span class="lbl">Clearing caches</span><span class="ms">1s</span></div>
+        </div></div>
+      </div>
+      <div class="composer">
+        <div class="cbox"><div class="ph">What's broken? Tell Noah and hit go.</div><div class="go stop"><i></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== 05 — RESULT ===================== -->
+<section class="frame" id="s05">
+  <div data-chrome></div>
+  <div class="body">
+    <div data-side></div>
+    <div class="main">
+      <div class="stream bottom">
+        <div class="card" style="margin-top:0"><div class="card-pad" style="padding-bottom:30px">
+          <div class="sec"><i class="dash"></i>WHAT NOAH WOULD DO</div>
+          <div class="step"><div class="n">1</div><div><div class="h">Stop unnecessary apps from opening at login</div><div class="p">Steam, Discord, Creative Cloud — reversible anytime</div></div></div>
+          <div class="step"><div class="n">2</div><div><div class="h">Reduce background activity affecting performance</div><div class="p">Quits what isn't in use — nothing is uninstalled</div></div></div>
+          <div class="step"><div class="n">3</div><div><div class="h">Clear temporary/cache data</div><div class="p">Safe, ~0.5 GB temp cache</div></div></div>
+          <div class="cta sent"><span data-tick></span> Sent</div>
+        </div></div>
+        <div class="rail" style="margin:34px 0 34px 4px">Approved: Action approved</div>
+        <div class="who" style="margin-bottom:18px">Noah <span class="t">· 09:06 PM</span></div>
+        <div class="didbar">
+          <span class="tick" data-tick></span><span>What Noah did</span>
+          <span class="sep">·</span><span class="time">36s</span>
+          <span class="show">Show work <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><path d="M1.6 1.6 8.5 8.5l6.9-6.9" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+        <div class="card done"><div class="card-pad">
+          <div class="sec"><i class="dash"></i>RESULT</div>
+          <div class="result-h">Done.</div>
+          <div class="situation">Noah reduced unnecessary background activity, adjusted selected login items, and cleared temporary data that was contributing to the lag.</div>
+          <div class="sec" style="margin-top:30px"><i class="dash"></i>WHAT NOAH CHECKED</div>
+          <div class="metrics" data-spot="result">
+            <div class="metric ok"><div class="k">LOGIN ITEMS</div><div class="v">3 off</div><div class="s">Reversible anytime</div></div>
+            <div class="metric ok"><div class="k">BACKGROUND APPS</div><div class="v">11 quit</div><div class="s">Nothing uninstalled</div></div>
+            <div class="metric ok"><div class="k">STORAGE</div><div class="v">+1.2 GB</div><div class="s">Temp cache + old inst…</div></div>
+            <div class="metric ok"><div class="k">SYSTEM LOAD</div><div class="v">Lower</div><div class="s">Measured after the ch…</div></div>
+          </div>
+        </div></div>
+      </div>
+      <div class="composer">
+        <div class="cbox"><div class="ph">What's broken? Tell Noah and hit go.</div><div class="go"><span data-arrow></span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const T = id => document.getElementById(id).content;
+document.querySelectorAll('[data-chrome]').forEach(n => n.replaceWith(T('tpl-chrome').cloneNode(true)));
+document.querySelectorAll('[data-side]').forEach(n => {
+  const side = T('tpl-side').cloneNode(true);
+  if (n.hasAttribute('data-no-today')) side.querySelector('[data-today]').remove();
+  n.replaceWith(side);
+});
+document.querySelectorAll('[data-tick]').forEach(n => n.appendChild(T('tpl-tick').cloneNode(true)));
+document.querySelectorAll('[data-spin]').forEach(n => n.appendChild(T('tpl-spin').cloneNode(true)));
+document.querySelectorAll('[data-arrow]').forEach(n => n.appendChild(T('tpl-arrow').cloneNode(true)));
+document.documentElement.setAttribute('data-ready','1');
+</script>
+</body></html>

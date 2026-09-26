@@ -1,0 +1,26 @@
+{
+  "name": "noah-ai-tech-support-ad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "15s vertical UGC/cinematic ad — AI Tech Support for Your Mac",
+  "scripts": {
+    "ui": "node tools/render-noah-ui.mjs",
+    "studio": "remotion studio",
+    "render": "remotion render NoahAiTechSupport out/noah-ai-tech-support.mp4",
+    "thumb": "remotion still ShortsThumbnail out/noah-ai-tech-support-thumbnail.png"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.526",
+    "@remotion/google-fonts": "^4.0.526",
+    "@remotion/media": "^4.0.526",
+    "playwright": "^1.56.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "remotion": "^4.0.526"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^5.9.3"
+  }
+}
