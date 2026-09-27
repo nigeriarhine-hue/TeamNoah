@@ -40,14 +40,20 @@
   },
   "thumb_bg_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/hf_20260926_003946_af58a121-e3cd-4470-877b-fa398a88d69b.png",
   "final": {
-    "video": {
+    "thumbnail": {
+      "media_id": "5963f3be-60aa-43f6-b76c-81283fd67acf",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/5963f3be-60aa-43f6-b76c-81283fd67acf.png"
+    },
+    "video_v1_5people_opener": {
       "media_id": "4f00310b-c906-4533-9328-c606fb96c1c8",
       "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/4f00310b-c906-4533-9328-c606fb96c1c8.mp4",
       "spec": "1080x1920, 30fps, H.264/AAC, 20.00s, -14.8 LUFS"
     },
-    "thumbnail": {
-      "media_id": "5963f3be-60aa-43f6-b76c-81283fd67acf",
-      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/5963f3be-60aa-43f6-b76c-81283fd67acf.png"
+    "video": {
+      "media_id": "86e0d259-93e2-4c58-b166-ee0c0a7bbd37",
+      "url": "https://d2ol7oe51mr4n9.cloudfront.net/user_3JA3Cf9f9t4L7C7zPSqBOLYIbCb/86e0d259-93e2-4c58-b166-ee0c0a7bbd37.mp4",
+      "spec": "1080x1920, 30fps, H.264/AAC, 20.00s, -14 LUFS",
+      "opener": "PC ACTING UP? JUST TELL NOAH."
     }
   }
 }
