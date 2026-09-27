@@ -92,9 +92,13 @@ def title():
         sd.line((0, y, W, y), fill=int(175 * (1 - y / 900) ** 1.6))
     img.paste(Image.new("RGBA", (W, 900), DEEP + (255,)), (0, 0), scrim)
     d = ImageDraw.Draw(img)
-    lines = [("5 PEOPLE.", INK), ("5 PC WINS.", INK), ("ONE NOAH.", None)]
-    f = font(800, 118)
-    y = 250
+    # relatable hook; "Tell Noah" mirrors the app's own prompt ("What's broken? Tell Noah and hit go.")
+    lines = [("PC ACTING UP?", INK), ("JUST TELL NOAH.", None)]
+    size = 118
+    while max(font(800, size).getlength(t) for t, _ in lines) > W - 120:
+        size -= 2
+    f = font(800, size)
+    y = 280
     for text, col in lines:
         if col:
             d.text((W // 2, y), text, font=f, fill=col, anchor="mt")
@@ -105,7 +109,7 @@ def title():
             ImageDraw.Draw(m).text((0, 0), text, font=f, fill=255)
             g = gradient(tw, th + 10, [(140, 190, 255), LAV, (180, 150, 255)]).convert("RGBA")
             img.paste(g, ((W - tw) // 2, y), m)
-        y += 140
+        y += int(size * 1.2)
     # small official mark under the title
     mark = Image.open(os.path.join(REPO, "brand-pack/png/noah-mark-dark-512.png")).convert("RGBA")
     mark = mark.resize((150, 150), Image.LANCZOS)

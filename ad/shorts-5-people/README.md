@@ -14,7 +14,7 @@ brand-related comes from this repo and is rendered locally:
 
 | t (s) | Beat | On-screen |
 |---|---|---|
-| 0.00 | Wide room shot, push-in | 5 PEOPLE. 5 PC WINS. ONE NOAH. |
+| 0.00 | Wide room shot, push-in | PC ACTING UP? JUST TELL NOAH. |
 | 1.75 | Person 1: "…typed in the chat like I was talking to a friend…" | JUST DESCRIBE THE PROBLEM + "My PC feels slow → Looking into it…" |
 | 5.42 | Person 2: "Noah diagnosed my PC in just a few minutes." | DIAGNOSE. DON'T GUESS. + live checklist |
 | 7.59 | Person 3: "Noah didn't execute any fixes without my approval." | YOU STAY IN CONTROL + "Can Noah do this?" dialog |
