@@ -21,7 +21,8 @@ export const GameCard: React.FC<{
   progress?: number; // 0..1 optional pre-load bar
   ready?: number; // 0..1 "Ready to play" state
   play?: number; // 0..1 play-button pulse
-}> = ({ variant, chip, line, w = 330, progress, ready = 0, play = 0 }) => {
+  art?: string; // official cover art (has its own logo), replaces the generic art
+}> = ({ variant, chip, line, w = 330, progress, ready = 0, play = 0, art }) => {
   const h = w * 1.36;
   return (
     <div
@@ -37,8 +38,17 @@ export const GameCard: React.FC<{
         background: '#111',
       }}
     >
-      <Img src={staticFile('img/game-art.jpg')} style={{ width: '100%', height: '100%', objectFit: 'cover', filter: ART_VARIANTS[variant % 3] }} />
-      <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 30%, rgba(5,5,20,0.92) 100%)' }} />
+      <Img
+        src={staticFile(art ?? 'img/game-art.jpg')}
+        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: art ? undefined : ART_VARIANTS[variant % 3] }}
+      />
+      <AbsoluteFill
+        style={{
+          background: art
+            ? 'linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 18%, transparent 85%, rgba(5,5,20,0.6) 100%)'
+            : 'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 30%, rgba(5,5,20,0.92) 100%)',
+        }}
+      />
       <div
         style={{
           position: 'absolute',
@@ -246,9 +256,10 @@ const LeftShade: React.FC = () => (
 /* ------------------------------------------------------------------ */
 /* Scene 1 — Opening hook: next big releases                           */
 /* ------------------------------------------------------------------ */
-const RELEASES = [
-  { chip: 'COMING SOON', line: 'Open-world epic' },
-  { chip: 'NEW RELEASE', line: 'Next-gen shooter' },
+// Official cover art (Wikipedia non-free cover images) for the titles named in the VO.
+const RELEASES: { chip: string; line: string; art?: string }[] = [
+  { chip: 'NEW RELEASE', line: '', art: 'img/games/cod-bo7.png' },
+  { chip: 'COMING SOON', line: '', art: 'img/games/gta6.png' },
   { chip: 'PRE-LOAD', line: 'Launch day is near' },
 ];
 
@@ -282,7 +293,7 @@ export const S01Hook: React.FC = () => {
                 zIndex: i === 1 ? 2 : 1,
               }}
             >
-              <GameCard variant={i} chip={r.chip} line={r.line} progress={prog} />
+              <GameCard variant={i} chip={r.chip} line={r.line} art={r.art} progress={prog} />
             </div>
           );
         })}

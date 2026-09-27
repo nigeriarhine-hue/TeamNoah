@@ -17,7 +17,7 @@ In a sandbox without Remotion's Chrome download, pass a local Chromium:
 - `src/scenes/` – graphic hero scenes (1 releases, 2 readiness gauge, 12 PC ready, 13 ready to play, 15 end frame), issues (3), CTA (14). No on-screen character.
 - `src/noah/` – light Noah UI: window shell + screens for scenes 4–11 (one continuous window)
 - `src/components/` – KineticText, StageBackdrop, MetricCard, CursorClick, FocusZoom, SafeArea, Audio
-- `public/` – game-card art, brand marks, bundled Plus Jakarta Sans, VO + SFX
+- `public/` – game-card art (`img/games/`: official GTA VI and Call of Duty: Black Ops 7 cover art from their Wikipedia pages — third-party copyrighted/trademarked, used at the owner's request; clear rights before paid use), brand marks, bundled Plus Jakarta Sans, VO + SFX
 - `scripts/` – regenerate voiceover (Kokoro TTS) and procedural SFX/music (numpy)
 
 
