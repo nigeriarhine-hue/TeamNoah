@@ -14,16 +14,12 @@ In a sandbox without Remotion's Chrome download, pass a local Chromium:
 ## Structure
 - `src/timeline.ts` – scene boundaries + voiceover placement (single source of truth)
 - `src/NoahGamingAd.tsx` – master timeline (scene cross-dissolves, VO, sound)
-- `src/scenes/` – character scenes (1, 2, 12, 13, 15), issues (3), CTA (14)
+- `src/scenes/` – graphic hero scenes (1 releases, 2 readiness gauge, 12 PC ready, 13 ready to play, 15 end frame), issues (3), CTA (14). No on-screen character.
 - `src/noah/` – light Noah UI: window shell + screens for scenes 4–11 (one continuous window)
-- `src/components/` – KineticText, GamerCharacterScene (2.5D parallax), MetricCard, CursorClick, FocusZoom, SafeArea, Audio
-- `public/` – gamer still + cut-out, brand marks, bundled Plus Jakarta Sans, VO + SFX
-- `scripts/` – regenerate voiceover (Kokoro TTS), procedural SFX/music (numpy), cut-out + clean plate, and lip-sync patches (Wav2Lip)
+- `src/components/` – KineticText, StageBackdrop, MetricCard, CursorClick, FocusZoom, SafeArea, Audio
+- `public/` – game-card art, brand marks, bundled Plus Jakarta Sans, VO + SFX
+- `scripts/` – regenerate voiceover (Kokoro TTS) and procedural SFX/music (numpy)
 
-## Lip sync
-The gamer speaks on camera in scenes 1, 2, 13 and 15. Wav2Lip (run locally, CPU) generates the mouth
-motion from each VO clip; only a feathered mouth/jaw patch (`public/lipsync/*.mp4`) is overlaid on the
-cut-out layer, so the eyes and hair stay at full source sharpness and the patch follows every camera move.
 
 ## Script & timestamps
 | Time | Scene | Voiceover |
@@ -39,7 +35,7 @@ cut-out layer, so the eyes and hair stay at full source sharpness and the patch 
 | 0:27.2 | 9 Approval | and nothing changes until you approve it. |
 | 0:30.3 | 10 Taking action | Then Noah gets to work, |
 | 0:32.3 | 11 Results | and shows you what changed. |
-| 0:35.0 | 12 Gamer reaction | (music) |
+| 0:35.0 | 12 PC ready | (music) |
 | 0:36.4 | 13 Back to gaming | So before your next big download, check your PC first. |
 | 0:40.3 | 14 CTA | Free PC Check. |
 | 0:41.6 | 14→15 CTA / end | Download Noah, and try it today at onnoah.app. |

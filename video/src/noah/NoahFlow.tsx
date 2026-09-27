@@ -1,7 +1,8 @@
 import React from 'react';
-import { AbsoluteFill, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from 'remotion';
+import { AbsoluteFill, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig } from 'remotion';
+import { StageBackdrop } from '../components/StageBackdrop';
 import { f, SCENES } from '../timeline';
-import { clamp, easeOut, FocusZoom, LightSweep, Particles, Scene } from '../components/primitives';
+import { clamp, easeOut, FocusZoom, LightSweep, Scene } from '../components/primitives';
 import { KineticText, KLine } from '../components/KineticText';
 import { CONTENT_H, CONTENT_W, NoahScreen, WIN } from './NoahScreen';
 import { NoahAction, NoahApproval, NoahChecked, NoahChecking, NoahDiagnosis, NoahPlan, NoahResult, NoahTell } from './screens';
@@ -60,32 +61,12 @@ const WindowCamera = [
   { f: L.end, s: 1.05, x: 0, y: -24 },
 ];
 
-export const AmbientBackdrop: React.FC<{ strength?: number }> = ({ strength = 1 }) => {
-  const frame = useCurrentFrame();
-  return (
-    <AbsoluteFill style={{ background: '#05060D', overflow: 'hidden' }}>
-      <Img
-        src={staticFile('img/gamer-bg-blur.jpg')}
-        style={{
-          position: 'absolute',
-          width: 1920,
-          height: 1280,
-          top: -100,
-          transform: `scale(${1.08 + frame * 0.0002}) translateX(${-frame * 0.08}px)`,
-          filter: 'brightness(0.55) saturate(1.2)',
-          opacity: strength,
-        }}
-      />
-      <AbsoluteFill
-        style={{
-          background:
-            'linear-gradient(90deg, rgba(5,6,18,0.92) 0%, rgba(8,8,30,0.7) 38%, rgba(12,10,44,0.45) 100%), radial-gradient(circle at 68% 50%, rgba(99,102,241,0.35), transparent 55%)',
-        }}
-      />
-      <Particles seed="flow" count={28} opacity={0.35} />
-    </AbsoluteFill>
-  );
-};
+export const AmbientBackdrop: React.FC<{ strength?: number }> = ({ strength = 1 }) => (
+  <AbsoluteFill>
+    <StageBackdrop seed="flow" gridOpacity={0.3 * strength} />
+    <AbsoluteFill style={{ background: 'linear-gradient(90deg, rgba(5,6,18,0.7) 0%, rgba(8,8,30,0.35) 38%, transparent 70%)' }} />
+  </AbsoluteFill>
+);
 
 export const NoahFlow: React.FC = () => {
   const frame = useCurrentFrame();

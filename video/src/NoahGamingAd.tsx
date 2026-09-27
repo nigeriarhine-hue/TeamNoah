@@ -2,7 +2,7 @@ import React from 'react';
 import { AbsoluteFill, Sequence } from 'remotion';
 import { f, OVERLAP, SCENES } from './timeline';
 import { Scene } from './components/primitives';
-import { S01Hook, S02Question, S12Reaction, S13BackToGaming, S15End } from './scenes/CharacterScenes';
+import { S01Hook, S02Question, S12Ready, S13BackToGaming, S15End } from './scenes/HeroScenes';
 import { S03Issues } from './scenes/S03Issues';
 import { CTAEndCard } from './scenes/CTAEndCard';
 import { NoahFlow } from './noah/NoahFlow';
@@ -16,7 +16,7 @@ const TRACK: { at: number; to: number; el: React.ReactNode; fadeIn?: number }[] 
   { at: SCENES.s03Issues, to: SCENES.s04Tell, el: <S03Issues /> },
   // scenes 4–11: one continuous Noah window
   { at: SCENES.s04Tell, to: SCENES.s12Reaction, el: <NoahFlow /> },
-  { at: SCENES.s12Reaction, to: SCENES.s13BackToGaming, el: <S12Reaction /> },
+  { at: SCENES.s12Reaction, to: SCENES.s13BackToGaming, el: <S12Ready /> },
   { at: SCENES.s13BackToGaming, to: SCENES.s14CTA, el: <S13BackToGaming /> },
   { at: SCENES.s14CTA, to: SCENES.s15End, el: <CTAEndCard /> },
   { at: SCENES.s15End, to: SCENES.end, el: <S15End /> },
