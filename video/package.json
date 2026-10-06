@@ -5,7 +5,8 @@
   "scripts": {
     "studio": "remotion studio src/index.ts",
     "render": "remotion render src/index.ts NoahGamingPCReady out/noah-gaming-pc-ready.mp4 --codec=h264 --crf=18",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "render:short": "remotion render src/index.ts NoahGamingShort out/noah-gaming-short.mp4 --codec=h264 --crf=18"
   },
   "devDependencies": {
     "@types/react": "^18.3.31",

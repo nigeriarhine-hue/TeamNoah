@@ -50,6 +50,7 @@ export const GameCard: React.FC<{
             : 'linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 30%, rgba(5,5,20,0.92) 100%)',
         }}
       />
+      {chip && (
       <div
         style={{
           position: 'absolute',
@@ -65,6 +66,7 @@ export const GameCard: React.FC<{
       >
         {chip}
       </div>
+      )}
       <div style={{ position: 'absolute', left: w * 0.07, right: w * 0.07, bottom: w * 0.07 }}>
         <div style={{ fontSize: w * 0.075, fontWeight: 800, fontStyle: 'italic', lineHeight: 1.05, textTransform: 'uppercase' }}>{line}</div>
         {progress !== undefined && (
@@ -107,7 +109,7 @@ const GAUGE_LABELS = [
 ];
 
 /** PC readiness gauge: scanning "?" (scene 2) or filled "READY" (scene 12). */
-const ReadinessGauge: React.FC<{ mode: 'scan' | 'ready'; cx: number; cy: number; r?: number }> = ({ mode, cx, cy, r = 280 }) => {
+export const ReadinessGauge: React.FC<{ mode: 'scan' | 'ready'; cx: number; cy: number; r?: number }> = ({ mode, cx, cy, r = 280 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const inP = spring({ frame, fps, config: { damping: 18, stiffness: 120 } });

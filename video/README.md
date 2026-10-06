@@ -7,9 +7,16 @@ Output: `out/noah-gaming-pc-ready.mp4`
 npm install
 npm run studio        # live preview
 npm run render        # -> out/noah-gaming-pc-ready.mp4
+npm run render:short  # -> out/noah-gaming-short.mp4 (1080x1920, ~16 s)
 ```
 In a sandbox without Remotion's Chrome download, pass a local Chromium:
 `npx remotion render src/index.ts NoahGamingPCReady out/noah-gaming-pc-ready.mp4 --codec=h264 --crf=18 --timeout=120000 --browser-executable=/path/to/chrome`
+
+## Short (9:16)
+`src/short/NoahShort.tsx` – vertical cut for Shorts / Reels / TikTok, reusing the main ad's scenes and VO
+clips: game cards (0–5 s), readiness gauge (5–7 s), fast Noah montage: tell, check, findings, approve,
+done (7–11 s), CTA with the game covers (11–16 s). Key content stays above the bottom ~400 px that
+platform UI covers.
 
 ## Structure
 - `src/timeline.ts` – scene boundaries + voiceover placement (single source of truth)
