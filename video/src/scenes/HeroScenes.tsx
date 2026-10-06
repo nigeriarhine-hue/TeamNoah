@@ -22,7 +22,8 @@ export const GameCard: React.FC<{
   ready?: number; // 0..1 "Ready to play" state
   play?: number; // 0..1 play-button pulse
   art?: string; // official cover art (has its own logo), replaces the generic art
-}> = ({ variant, chip, line, w = 330, progress, ready = 0, play = 0, art }) => {
+  chipAt?: 'top' | 'bottom'; // bottom-right when the cover's logo sits at the top
+}> = ({ variant, chip, line, w = 330, progress, ready = 0, play = 0, art, chipAt = 'top' }) => {
   const h = w * 1.36;
   return (
     <div
@@ -52,8 +53,7 @@ export const GameCard: React.FC<{
       <div
         style={{
           position: 'absolute',
-          left: w * 0.06,
-          top: w * 0.06,
+          ...(chipAt === 'top' ? { left: w * 0.06, top: w * 0.06 } : { right: w * 0.06, bottom: w * 0.06 }),
           padding: `${w * 0.02}px ${w * 0.04}px`,
           borderRadius: 999,
           background: 'rgba(255,255,255,0.16)',
@@ -257,10 +257,10 @@ const LeftShade: React.FC = () => (
 /* Scene 1 — Opening hook: next big releases                           */
 /* ------------------------------------------------------------------ */
 // Official cover art (Wikipedia non-free cover images) for the titles named in the VO.
-const RELEASES: { chip: string; line: string; art?: string }[] = [
+const RELEASES: { chip: string; line: string; art: string; chipAt?: 'top' | 'bottom' }[] = [
   { chip: 'NEW RELEASE', line: '', art: 'img/games/cod-bo7.png' },
   { chip: 'COMING SOON', line: '', art: 'img/games/gta6.png' },
-  { chip: 'PRE-LOAD', line: 'Launch day is near' },
+  { chip: 'UPCOMING', line: '', art: 'img/games/wolverine.jpg', chipAt: 'bottom' },
 ];
 
 export const S01Hook: React.FC = () => {
@@ -276,7 +276,7 @@ export const S01Hook: React.FC = () => {
       <AbsoluteFill style={{ perspective: 1800, transform: `translateX(${-40 * drift}px) scale(${1 + 0.06 * drift})`, transformOrigin: '70% 50%' }}>
         {RELEASES.map((r, i) => {
           const p = spring({ frame: frame - 6 - i * 7, fps, config: { damping: 18, stiffness: 90 } });
-          const x = [1130, 1420, 1710][i];
+          const x = [1085, 1405, 1725][i];
           const z = i === 1 ? 120 : 0;
           const bob = Math.sin(frame / 28 + i * 1.3) * 10;
           const prog = i === 1 ? interpolate(frame, [30, 160], [0.05, 0.62], clamp) : undefined;
@@ -285,7 +285,7 @@ export const S01Hook: React.FC = () => {
               key={r.chip}
               style={{
                 position: 'absolute',
-                left: x - 165,
+                left: x - 150,
                 top: 300 + bob,
                 opacity: Math.min(1, p * 1.3),
                 transform: `translateY(${(1 - p) * 200}px) translateZ(${z}px) rotateY(${-16 + i * 8}deg) rotateZ(${(i - 1) * 2}deg)`,
@@ -293,7 +293,7 @@ export const S01Hook: React.FC = () => {
                 zIndex: i === 1 ? 2 : 1,
               }}
             >
-              <GameCard variant={i} chip={r.chip} line={r.line} art={r.art} progress={prog} />
+              <GameCard variant={i} chip={r.chip} line={r.line} art={r.art} chipAt={r.chipAt} progress={prog} w={300} />
             </div>
           );
         })}
