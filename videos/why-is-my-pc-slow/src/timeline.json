@@ -1,0 +1,973 @@
+{
+ "total": 53.857,
+ "segments": {
+  "hook1": {
+   "scene": "hook",
+   "text": "If your PC feels slow, don't start deleting random files.",
+   "start": 0.3,
+   "end": 3.98
+  },
+  "hook2": {
+   "scene": "hook",
+   "text": "Check these five things first.",
+   "start": 4.1,
+   "end": 5.579
+  },
+  "t1a": {
+   "scene": "tip1",
+   "text": "Number one: startup apps.",
+   "start": 6.079,
+   "end": 7.533
+  },
+  "t1b": {
+   "scene": "tip1",
+   "text": "If too many programs launch when Windows starts, your PC can feel slow before you even do anything.",
+   "start": 7.753,
+   "end": 13.751
+  },
+  "t2a": {
+   "scene": "tip2",
+   "text": "Number two: background apps.",
+   "start": 14.301,
+   "end": 15.808
+  },
+  "t2b": {
+   "scene": "tip2",
+   "text": "Something you aren't even using could still be taking up resources.",
+   "start": 16.028,
+   "end": 19.53
+  },
+  "t3a": {
+   "scene": "tip3",
+   "text": "Number three: free storage.",
+   "start": 20.08,
+   "end": 21.57
+  },
+  "t3b": {
+   "scene": "tip3",
+   "text": "If your drive is almost full, check what's actually taking up the space.",
+   "start": 21.79,
+   "end": 25.639
+  },
+  "t4a": {
+   "scene": "tip4",
+   "text": "Number four: CPU and memory.",
+   "start": 26.189,
+   "end": 28.073
+  },
+  "t4b": {
+   "scene": "tip4",
+   "text": "Look for apps or processes that keep using an unusually large amount.",
+   "start": 28.293,
+   "end": 32.551
+  },
+  "t5a": {
+   "scene": "tip5",
+   "text": "And number five: figure out whether the slowdown affects your whole PC or just one app.",
+   "start": 33.101,
+   "end": 38.288
+  },
+  "t5b": {
+   "scene": "tip5",
+   "text": "That tells you where to troubleshoot next.",
+   "start": 38.538,
+   "end": 40.33
+  },
+  "n1": {
+   "scene": "bridge",
+   "text": "If you don't want to check all of that manually,",
+   "start": 40.93,
+   "end": 43.037
+  },
+  "n2": {
+   "scene": "checks",
+   "text": "Noah can inspect your PC,",
+   "start": 43.117,
+   "end": 44.657
+  },
+  "n3": {
+   "scene": "checks",
+   "text": "explain what it finds,",
+   "start": 44.757,
+   "end": 46.014
+  },
+  "n4": {
+   "scene": "plan",
+   "text": "and show you what it recommends before you approve any changes.",
+   "start": 46.114,
+   "end": 49.382
+  },
+  "n5": {
+   "scene": "cta",
+   "text": "Free PC Check at onnoah.app.",
+   "start": 49.832,
+   "end": 51.957
+  }
+ },
+ "words": [
+  {
+   "seg": "hook1",
+   "w": "If",
+   "start": 0.3,
+   "end": 0.44
+  },
+  {
+   "seg": "hook1",
+   "w": "your",
+   "start": 0.44,
+   "end": 0.58
+  },
+  {
+   "seg": "hook1",
+   "w": "PC",
+   "start": 0.58,
+   "end": 0.92
+  },
+  {
+   "seg": "hook1",
+   "w": "feels",
+   "start": 0.92,
+   "end": 1.26
+  },
+  {
+   "seg": "hook1",
+   "w": "slow,",
+   "start": 1.26,
+   "end": 1.7
+  },
+  {
+   "seg": "hook1",
+   "w": "don't",
+   "start": 2.08,
+   "end": 2.3
+  },
+  {
+   "seg": "hook1",
+   "w": "start",
+   "start": 2.3,
+   "end": 2.48
+  },
+  {
+   "seg": "hook1",
+   "w": "deleting",
+   "start": 2.48,
+   "end": 2.82
+  },
+  {
+   "seg": "hook1",
+   "w": "random",
+   "start": 2.82,
+   "end": 3.22
+  },
+  {
+   "seg": "hook1",
+   "w": "files.",
+   "start": 3.22,
+   "end": 3.72
+  },
+  {
+   "seg": "hook2",
+   "w": "Check",
+   "start": 4.1,
+   "end": 4.28
+  },
+  {
+   "seg": "hook2",
+   "w": "these",
+   "start": 4.28,
+   "end": 4.52
+  },
+  {
+   "seg": "hook2",
+   "w": "five",
+   "start": 4.52,
+   "end": 4.78
+  },
+  {
+   "seg": "hook2",
+   "w": "things",
+   "start": 4.78,
+   "end": 5.04
+  },
+  {
+   "seg": "hook2",
+   "w": "first.",
+   "start": 5.04,
+   "end": 5.32
+  },
+  {
+   "seg": "t1a",
+   "w": "Number",
+   "start": 6.079,
+   "end": 6.47
+  },
+  {
+   "seg": "t1a",
+   "w": "one:",
+   "start": 6.47,
+   "end": 6.75
+  },
+  {
+   "seg": "t1a",
+   "w": "startup",
+   "start": 6.75,
+   "end": 7.197
+  },
+  {
+   "seg": "t1a",
+   "w": "apps.",
+   "start": 7.197,
+   "end": 7.533
+  },
+  {
+   "seg": "t1b",
+   "w": "If",
+   "start": 7.753,
+   "end": 7.893
+  },
+  {
+   "seg": "t1b",
+   "w": "too",
+   "start": 7.893,
+   "end": 8.073
+  },
+  {
+   "seg": "t1b",
+   "w": "many",
+   "start": 8.073,
+   "end": 8.293
+  },
+  {
+   "seg": "t1b",
+   "w": "programs",
+   "start": 8.293,
+   "end": 8.713
+  },
+  {
+   "seg": "t1b",
+   "w": "launch",
+   "start": 8.713,
+   "end": 9.113
+  },
+  {
+   "seg": "t1b",
+   "w": "when",
+   "start": 9.113,
+   "end": 9.393
+  },
+  {
+   "seg": "t1b",
+   "w": "Windows",
+   "start": 9.393,
+   "end": 9.733
+  },
+  {
+   "seg": "t1b",
+   "w": "starts,",
+   "start": 9.733,
+   "end": 10.153
+  },
+  {
+   "seg": "t1b",
+   "w": "your",
+   "start": 10.673,
+   "end": 10.733
+  },
+  {
+   "seg": "t1b",
+   "w": "PC",
+   "start": 10.733,
+   "end": 11.093
+  },
+  {
+   "seg": "t1b",
+   "w": "can",
+   "start": 11.093,
+   "end": 11.473
+  },
+  {
+   "seg": "t1b",
+   "w": "feel",
+   "start": 11.473,
+   "end": 11.713
+  },
+  {
+   "seg": "t1b",
+   "w": "slow",
+   "start": 11.713,
+   "end": 12.133
+  },
+  {
+   "seg": "t1b",
+   "w": "before",
+   "start": 12.133,
+   "end": 12.473
+  },
+  {
+   "seg": "t1b",
+   "w": "you",
+   "start": 12.473,
+   "end": 12.673
+  },
+  {
+   "seg": "t1b",
+   "w": "even",
+   "start": 12.673,
+   "end": 12.953
+  },
+  {
+   "seg": "t1b",
+   "w": "do",
+   "start": 12.953,
+   "end": 13.153
+  },
+  {
+   "seg": "t1b",
+   "w": "anything.",
+   "start": 13.153,
+   "end": 13.533
+  },
+  {
+   "seg": "t2a",
+   "w": "Number",
+   "start": 14.301,
+   "end": 14.481
+  },
+  {
+   "seg": "t2a",
+   "w": "two:",
+   "start": 14.481,
+   "end": 14.781
+  },
+  {
+   "seg": "t2a",
+   "w": "background",
+   "start": 14.781,
+   "end": 15.201
+  },
+  {
+   "seg": "t2a",
+   "w": "apps.",
+   "start": 15.201,
+   "end": 15.581
+  },
+  {
+   "seg": "t2b",
+   "w": "Something",
+   "start": 16.028,
+   "end": 16.348
+  },
+  {
+   "seg": "t2b",
+   "w": "you",
+   "start": 16.348,
+   "end": 16.588
+  },
+  {
+   "seg": "t2b",
+   "w": "aren't",
+   "start": 16.588,
+   "end": 16.788
+  },
+  {
+   "seg": "t2b",
+   "w": "even",
+   "start": 16.788,
+   "end": 17.028
+  },
+  {
+   "seg": "t2b",
+   "w": "using",
+   "start": 17.028,
+   "end": 17.468
+  },
+  {
+   "seg": "t2b",
+   "w": "could",
+   "start": 17.468,
+   "end": 17.768
+  },
+  {
+   "seg": "t2b",
+   "w": "still",
+   "start": 17.768,
+   "end": 18.048
+  },
+  {
+   "seg": "t2b",
+   "w": "be",
+   "start": 18.048,
+   "end": 18.228
+  },
+  {
+   "seg": "t2b",
+   "w": "taking",
+   "start": 18.228,
+   "end": 18.488
+  },
+  {
+   "seg": "t2b",
+   "w": "up",
+   "start": 18.488,
+   "end": 18.708
+  },
+  {
+   "seg": "t2b",
+   "w": "resources.",
+   "start": 18.708,
+   "end": 19.108
+  },
+  {
+   "seg": "t3a",
+   "w": "Number",
+   "start": 20.08,
+   "end": 20.26
+  },
+  {
+   "seg": "t3a",
+   "w": "three:",
+   "start": 20.26,
+   "end": 20.64
+  },
+  {
+   "seg": "t3a",
+   "w": "free",
+   "start": 20.84,
+   "end": 20.88
+  },
+  {
+   "seg": "t3a",
+   "w": "storage.",
+   "start": 20.88,
+   "end": 21.3
+  },
+  {
+   "seg": "t3b",
+   "w": "If",
+   "start": 21.79,
+   "end": 21.91
+  },
+  {
+   "seg": "t3b",
+   "w": "your",
+   "start": 21.91,
+   "end": 22.03
+  },
+  {
+   "seg": "t3b",
+   "w": "drive",
+   "start": 22.03,
+   "end": 22.35
+  },
+  {
+   "seg": "t3b",
+   "w": "is",
+   "start": 22.35,
+   "end": 22.53
+  },
+  {
+   "seg": "t3b",
+   "w": "almost",
+   "start": 22.53,
+   "end": 22.85
+  },
+  {
+   "seg": "t3b",
+   "w": "full,",
+   "start": 22.85,
+   "end": 23.29
+  },
+  {
+   "seg": "t3b",
+   "w": "check",
+   "start": 23.59,
+   "end": 23.81
+  },
+  {
+   "seg": "t3b",
+   "w": "what's",
+   "start": 23.81,
+   "end": 24.11
+  },
+  {
+   "seg": "t3b",
+   "w": "actually",
+   "start": 24.11,
+   "end": 24.47
+  },
+  {
+   "seg": "t3b",
+   "w": "taking",
+   "start": 24.47,
+   "end": 24.79
+  },
+  {
+   "seg": "t3b",
+   "w": "up",
+   "start": 24.79,
+   "end": 24.99
+  },
+  {
+   "seg": "t3b",
+   "w": "the",
+   "start": 24.99,
+   "end": 25.09
+  },
+  {
+   "seg": "t3b",
+   "w": "space.",
+   "start": 25.09,
+   "end": 25.35
+  },
+  {
+   "seg": "t4a",
+   "w": "Number",
+   "start": 26.189,
+   "end": 26.369
+  },
+  {
+   "seg": "t4a",
+   "w": "four:",
+   "start": 26.369,
+   "end": 26.729
+  },
+  {
+   "seg": "t4a",
+   "w": "CPU",
+   "start": 26.969,
+   "end": 27.229
+  },
+  {
+   "seg": "t4a",
+   "w": "and",
+   "start": 27.229,
+   "end": 27.589
+  },
+  {
+   "seg": "t4a",
+   "w": "memory.",
+   "start": 27.589,
+   "end": 27.789
+  },
+  {
+   "seg": "t4b",
+   "w": "Look",
+   "start": 28.293,
+   "end": 28.433
+  },
+  {
+   "seg": "t4b",
+   "w": "for",
+   "start": 28.433,
+   "end": 28.673
+  },
+  {
+   "seg": "t4b",
+   "w": "apps",
+   "start": 28.673,
+   "end": 28.933
+  },
+  {
+   "seg": "t4b",
+   "w": "or",
+   "start": 28.933,
+   "end": 29.193
+  },
+  {
+   "seg": "t4b",
+   "w": "processes",
+   "start": 29.193,
+   "end": 29.633
+  },
+  {
+   "seg": "t4b",
+   "w": "that",
+   "start": 29.633,
+   "end": 30.133
+  },
+  {
+   "seg": "t4b",
+   "w": "keep",
+   "start": 30.133,
+   "end": 30.313
+  },
+  {
+   "seg": "t4b",
+   "w": "using",
+   "start": 30.313,
+   "end": 30.633
+  },
+  {
+   "seg": "t4b",
+   "w": "an",
+   "start": 30.633,
+   "end": 30.773
+  },
+  {
+   "seg": "t4b",
+   "w": "unusually",
+   "start": 30.773,
+   "end": 31.293
+  },
+  {
+   "seg": "t4b",
+   "w": "large",
+   "start": 31.293,
+   "end": 31.913
+  },
+  {
+   "seg": "t4b",
+   "w": "amount.",
+   "start": 31.913,
+   "end": 32.313
+  },
+  {
+   "seg": "t5a",
+   "w": "And",
+   "start": 33.101,
+   "end": 33.241
+  },
+  {
+   "seg": "t5a",
+   "w": "number",
+   "start": 33.241,
+   "end": 33.381
+  },
+  {
+   "seg": "t5a",
+   "w": "five:",
+   "start": 33.381,
+   "end": 33.841
+  },
+  {
+   "seg": "t5a",
+   "w": "figure",
+   "start": 34.201,
+   "end": 34.261
+  },
+  {
+   "seg": "t5a",
+   "w": "out",
+   "start": 34.261,
+   "end": 34.601
+  },
+  {
+   "seg": "t5a",
+   "w": "whether",
+   "start": 34.601,
+   "end": 34.821
+  },
+  {
+   "seg": "t5a",
+   "w": "the",
+   "start": 34.821,
+   "end": 35.021
+  },
+  {
+   "seg": "t5a",
+   "w": "slowdown",
+   "start": 35.021,
+   "end": 35.361
+  },
+  {
+   "seg": "t5a",
+   "w": "affects",
+   "start": 35.361,
+   "end": 35.821
+  },
+  {
+   "seg": "t5a",
+   "w": "your",
+   "start": 35.821,
+   "end": 36.021
+  },
+  {
+   "seg": "t5a",
+   "w": "whole",
+   "start": 36.021,
+   "end": 36.241
+  },
+  {
+   "seg": "t5a",
+   "w": "PC",
+   "start": 36.241,
+   "end": 36.681
+  },
+  {
+   "seg": "t5a",
+   "w": "or",
+   "start": 36.681,
+   "end": 37.321
+  },
+  {
+   "seg": "t5a",
+   "w": "just",
+   "start": 37.321,
+   "end": 37.601
+  },
+  {
+   "seg": "t5a",
+   "w": "one",
+   "start": 37.601,
+   "end": 37.881
+  },
+  {
+   "seg": "t5a",
+   "w": "app.",
+   "start": 37.881,
+   "end": 38.141
+  },
+  {
+   "seg": "t5b",
+   "w": "That",
+   "start": 38.538,
+   "end": 38.698
+  },
+  {
+   "seg": "t5b",
+   "w": "tells",
+   "start": 38.698,
+   "end": 38.918
+  },
+  {
+   "seg": "t5b",
+   "w": "you",
+   "start": 38.918,
+   "end": 39.098
+  },
+  {
+   "seg": "t5b",
+   "w": "where",
+   "start": 39.098,
+   "end": 39.198
+  },
+  {
+   "seg": "t5b",
+   "w": "to",
+   "start": 39.198,
+   "end": 39.318
+  },
+  {
+   "seg": "t5b",
+   "w": "troubleshoot",
+   "start": 39.318,
+   "end": 39.818
+  },
+  {
+   "seg": "t5b",
+   "w": "next.",
+   "start": 39.818,
+   "end": 40.078
+  },
+  {
+   "seg": "n1",
+   "w": "If",
+   "start": 40.93,
+   "end": 41.05
+  },
+  {
+   "seg": "n1",
+   "w": "you",
+   "start": 41.05,
+   "end": 41.15
+  },
+  {
+   "seg": "n1",
+   "w": "don't",
+   "start": 41.15,
+   "end": 41.33
+  },
+  {
+   "seg": "n1",
+   "w": "want",
+   "start": 41.33,
+   "end": 41.45
+  },
+  {
+   "seg": "n1",
+   "w": "to",
+   "start": 41.45,
+   "end": 41.57
+  },
+  {
+   "seg": "n1",
+   "w": "check",
+   "start": 41.57,
+   "end": 41.79
+  },
+  {
+   "seg": "n1",
+   "w": "all",
+   "start": 41.79,
+   "end": 42.09
+  },
+  {
+   "seg": "n1",
+   "w": "of",
+   "start": 42.09,
+   "end": 42.23
+  },
+  {
+   "seg": "n1",
+   "w": "that",
+   "start": 42.23,
+   "end": 42.41
+  },
+  {
+   "seg": "n1",
+   "w": "manually,",
+   "start": 42.41,
+   "end": 42.81
+  },
+  {
+   "seg": "n2",
+   "w": "Noah",
+   "start": 43.117,
+   "end": 43.397
+  },
+  {
+   "seg": "n2",
+   "w": "can",
+   "start": 43.397,
+   "end": 43.597
+  },
+  {
+   "seg": "n2",
+   "w": "inspect",
+   "start": 43.597,
+   "end": 43.857
+  },
+  {
+   "seg": "n2",
+   "w": "your",
+   "start": 43.857,
+   "end": 44.057
+  },
+  {
+   "seg": "n2",
+   "w": "PC,",
+   "start": 44.057,
+   "end": 44.297
+  },
+  {
+   "seg": "n3",
+   "w": "explain",
+   "start": 44.757,
+   "end": 45.137
+  },
+  {
+   "seg": "n3",
+   "w": "what",
+   "start": 45.137,
+   "end": 45.357
+  },
+  {
+   "seg": "n3",
+   "w": "it",
+   "start": 45.357,
+   "end": 45.477
+  },
+  {
+   "seg": "n3",
+   "w": "finds,",
+   "start": 45.477,
+   "end": 45.737
+  },
+  {
+   "seg": "n4",
+   "w": "and",
+   "start": 46.114,
+   "end": 46.234
+  },
+  {
+   "seg": "n4",
+   "w": "show",
+   "start": 46.234,
+   "end": 46.474
+  },
+  {
+   "seg": "n4",
+   "w": "you",
+   "start": 46.474,
+   "end": 46.714
+  },
+  {
+   "seg": "n4",
+   "w": "what",
+   "start": 46.714,
+   "end": 46.874
+  },
+  {
+   "seg": "n4",
+   "w": "it",
+   "start": 46.874,
+   "end": 46.974
+  },
+  {
+   "seg": "n4",
+   "w": "recommends",
+   "start": 46.974,
+   "end": 47.414
+  },
+  {
+   "seg": "n4",
+   "w": "before",
+   "start": 47.414,
+   "end": 47.894
+  },
+  {
+   "seg": "n4",
+   "w": "you",
+   "start": 47.894,
+   "end": 48.054
+  },
+  {
+   "seg": "n4",
+   "w": "approve",
+   "start": 48.054,
+   "end": 48.354
+  },
+  {
+   "seg": "n4",
+   "w": "any",
+   "start": 48.354,
+   "end": 48.614
+  },
+  {
+   "seg": "n4",
+   "w": "changes.",
+   "start": 48.614,
+   "end": 49.054
+  },
+  {
+   "seg": "n5",
+   "w": "Free",
+   "start": 49.832,
+   "end": 50.198
+  },
+  {
+   "seg": "n5",
+   "w": "PC",
+   "start": 50.198,
+   "end": 50.418
+  },
+  {
+   "seg": "n5",
+   "w": "Check",
+   "start": 50.418,
+   "end": 50.858
+  },
+  {
+   "seg": "n5",
+   "w": "at",
+   "start": 50.858,
+   "end": 51.078
+  },
+  {
+   "seg": "n5",
+   "w": "onnoah.app.",
+   "start": 51.078,
+   "end": 51.957
+  }
+ ]
+}
