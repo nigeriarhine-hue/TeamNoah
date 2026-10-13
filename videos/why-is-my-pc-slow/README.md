@@ -27,13 +27,13 @@ Every boundary is computed from the measured voice-over (`src/timeline.json`).
 
 | Time | Scene | On screen |
 | --- | --- | --- |
-| 0:00–0:05.7 | Hook | Host, full-bleed. `WHY IS YOUR PC / SO SLOW?`, "Deleting random files" struck out, `5 THINGS TO CHECK FIRST` and the five chapter icons |
+| 0:00–0:05.7 | Hook | Illustrated slow PC (app stuck loading, CPU pegged). `WHY IS YOUR PC / SO SLOW?`, "Deleting random files" struck out, `5 THINGS TO CHECK FIRST` and the five chapter icons |
 | 0:05.7–0:14 | 01 Startup apps | `WINDOWS STARTS → five apps launching` with load bars, then `TOO MUCH AT ONCE.` |
 | 0:14–0:19.7 | 02 Background apps | "On your screen: just your browser" vs. "Still running in the background" with live CPU/memory, then `NOT OPEN / DOESN'T ALWAYS MEAN / NOT RUNNING.` |
 | 0:19.7–0:25.8 | 03 Free storage | C: gauge fills to 93%, `WHAT'S USING YOUR STORAGE?`, breakdown of Apps / Downloads / Old installers / Temporary files, and "Review it first, not everything should go." |
 | 0:25.8–0:32.8 | 04 CPU + memory | Live CPU graph and memory meter, a process table where one process climbs to the top, "A quick spike is normal…", then `LOOK FOR THE OUTLIER.` |
 | 0:32.8–0:40.6 | 05 One app or whole PC? | Split diagnostic: ONE APP → *Troubleshoot that app*; WHOLE PC → *Investigate the system* (links back to 01–04) |
-| 0:40.6–0:43 | Bridge | Host at desk, `DON'T WANT TO / CHECK ALL 5 / MANUALLY?` over the five-item checklist. **This is the first time Noah appears.** |
+| 0:40.6–0:43 | Bridge | `DON'T WANT TO / CHECK ALL 5 / MANUALLY?` over the five-item checklist. **This is the first time Noah appears.** |
 | 0:43–0:46 | Noah checks | Real UI: "My PC feels slow" plus live diagnostics, then Noah's own step list. Steps are tagged with the chapter numbers 04, 01 and 03. `WHAT NOAH CHECKED` result tiles are tagged 01, 03 and 02 |
 | 0:46–0:49.5 | Plan + approval | `WHAT NOAH WOULD DO` (real plan), `YOU SEE THE PLAN.`, then the real *Can Noah do this?* modal, cursor → Go ahead, `YOU DECIDE.` |
 | 0:49.5–0:53.9 | End card | Noah mark (its only branded use), `FREE PC CHECK`, *See what's slowing your PC.*, `onnoah.app`, *Describe it. Approve it. Done.* |
@@ -74,12 +74,7 @@ license:
 
 ## Assets reused
 
-- **Host:** the recurring young Black creator. These are the same stills as
-  `ads/cleaner-vs-diagnosis/public/char/` (`grin.png` → `host/to-camera.jpg`,
-  `unsure.png` → `host/at-desk.jpg`), with square crops for the chapter bubble.
-  They are graded brighter and more neutral (lifted exposure, less saturation, a
-  slight cool tint) so the desk reads as a clean tech workspace rather than an
-  RGB setup.
+- **No on-screen character.** The video and thumbnail use illustrations and real UI only.
 - **Noah UI:** the real product screenshots `IMG_0585`, `0586`, `0588` and
   `0593` from the repo root, upscaled 2× with Lanczos into `public/noah-ui/`.
   Nothing in the UI
@@ -105,9 +100,9 @@ the CPU / system-load link goes through Noah's own "Listing processes" step.
 | `theme.ts` | PC CHECK 101 tokens: light "publication" surfaces, ink, accent gradient, phone safe area |
 | `motion.ts` | `ramp`, `pop`, `inOut`, `lerp`: second-based easing helpers |
 | `Series.tsx` | `SeriesTag` (small editorial identifier), `ChapterRail` (01–05 progress), `ChapterHeader` (gradient numeral + icon + title) |
-| `TipLayout.tsx` | A full numbered-chapter layout. You supply `n`, `title`, `icon`, `host` and a diagram |
+| `TipLayout.tsx` | A full numbered-chapter layout. You supply `n`, `title`, `icon` and a diagram |
 | `Kinetic.tsx` | `KineticLines` (masked line reveals), `Takeaway` (end-of-chapter lesson stamp), `Label` |
-| `Host.tsx` | `HostPlate` (full-bleed host with graded push-in and parallax), `HostCard` (picture-in-picture) |
+| `SlowPC.tsx` | Animated monitor illustration: an app stuck loading, busy cursor, pegged CPU meter |
 | `Captions.tsx` | Phrase captions. The words always come from the script and the timing from the VO |
 | `Stage.tsx` | Light or dark stage with a blueprint grid, drifting glow and camera push, plus a diagram `Card` |
 | `icons.tsx` | Generic line icons (startup, layers, drive, chip, split, …) and app glyphs. No vendor logos |

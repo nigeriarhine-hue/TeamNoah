@@ -3,7 +3,6 @@ import { edu, FONT, SAFE } from '../edu/theme';
 import { Stage } from '../edu/Stage';
 import { KineticLines } from '../edu/Kinetic';
 import { SeriesTag } from '../edu/Series';
-import { HOST, HostPlate } from '../edu/Host';
 import { inOut, pop, ramp } from '../edu/motion';
 import { Key, Shot, toView } from '../noah/Shot';
 import { FIVE } from './Hook';
@@ -140,13 +139,6 @@ export const NoahSection: React.FC<{ t: number; dur: number; t0: number }> = ({ 
 
   return (
     <Stage t={t} dur={dur} dark glow="rgba(111,106,230,0.22)">
-      {/* host at his desk behind the bridge question, handing over to the product */}
-      {t < ph('ask').a + 0.4 && (
-        <div style={{ position: 'absolute', inset: 0, opacity: 1 - ramp(t, ph('ask').a - 0.3, ph('ask').a + 0.3) }}>
-          <HostPlate src={HOST.atDesk} t={t} dur={ph('ask').a + 0.4} fx={60} fy={40} zoomFrom={1.05} zoomTo={1.12} drift={-20} />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(11,12,18,0.78) 0%, rgba(11,12,18,0.7) 45%, rgba(11,12,18,0.9) 100%)' }} />
-        </div>
-      )}
       <div style={{ position: 'absolute', left: SAFE.left, top: 196 }}>
         <SeriesTag dark t={t} />
       </div>

@@ -4,7 +4,6 @@ import { edu, FONT } from '../edu/theme';
 import { TipLayout } from '../edu/TipLayout';
 import { Card } from '../edu/Stage';
 import { KineticLines, Label, Takeaway } from '../edu/Kinetic';
-import { HOST } from '../edu/Host';
 import { lerp, pop, ramp } from '../edu/motion';
 import {
   AppGlyph,
@@ -47,7 +46,7 @@ export const Tip1: React.FC<SceneProps> = ({ t, dur, t0 }) => {
   const arrow = ramp(t, b + 0.2, b + 0.5);
   const stampAt = E('t1b') - t0 - 1.3;
   return (
-    <TipLayout n={1} title={['STARTUP APPS']} icon={<IconStartup size={60} />} t={t} dur={dur} host={{ src: HOST.toCameraFace }}>
+    <TipLayout n={1} title={['STARTUP APPS']} icon={<IconStartup size={60} />} t={t} dur={dur}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div
           style={{
@@ -121,7 +120,7 @@ export const Tip2: React.FC<SceneProps> = ({ t, dur, t0 }) => {
   const behind = pop(t, b + 0.25, 15);
   const stampAt = E('t2b') - t0 - 0.6;
   return (
-    <TipLayout n={2} title={['BACKGROUND APPS']} titleSize={88} icon={<IconLayers size={60} />} t={t} dur={dur} host={{ src: HOST.atDeskFace }}>
+    <TipLayout n={2} title={['BACKGROUND APPS']} titleSize={88} icon={<IconLayers size={60} />} t={t} dur={dur}>
       {/* what you see */}
       <Card style={{ padding: '20px 26px', display: 'flex', alignItems: 'center', gap: 20, opacity: screen, transform: `translateY(${(1 - screen) * 20}px)` }}>
         <span style={{ color: edu.accent }}>
@@ -202,7 +201,7 @@ export const Tip3: React.FC<SceneProps> = ({ t, dur, t0 }) => {
   const breakdown = pop(t, b + 0.85, 15);
   const segOther = USED_GB - STORAGE.reduce((s, x) => s + x.gb, 0);
   return (
-    <TipLayout n={3} title={['FREE STORAGE']} icon={<IconDrive size={60} />} t={t} dur={dur} host={{ src: HOST.toCameraFace }}>
+    <TipLayout n={3} title={['FREE STORAGE']} icon={<IconDrive size={60} />} t={t} dur={dur}>
       <Card style={{ padding: '24px 28px', opacity: drive, transform: `translateY(${(1 - drive) * 20}px)` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <span style={{ color: edu.ink2 }}>
@@ -301,7 +300,7 @@ export const Tip4: React.FC<SceneProps> = ({ t, dur, t0 }) => {
   const order = [...rows].sort((x, y) => y.c - x.c);
 
   return (
-    <TipLayout n={4} title={['CPU + MEMORY']} icon={<IconChip size={60} />} t={t} dur={dur} host={{ src: HOST.atDeskFace }}>
+    <TipLayout n={4} title={['CPU + MEMORY']} icon={<IconChip size={60} />} t={t} dur={dur}>
       <div style={{ display: 'flex', gap: 18, opacity: graphs, transform: `translateY(${(1 - graphs) * 20}px)` }}>
         <Card style={{ flex: 1.45, padding: '18px 22px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -479,7 +478,7 @@ export const Tip5: React.FC<SceneProps> = ({ t, dur, t0 }) => {
     );
   };
   return (
-    <TipLayout n={5} title={['ONE APP', 'OR THE WHOLE PC?']} titleSize={84} icon={<IconSplit size={60} />} t={t} dur={dur} host={{ src: HOST.toCameraFace }} diagramTop={772}>
+    <TipLayout n={5} title={['ONE APP', 'OR THE WHOLE PC?']} titleSize={84} icon={<IconSplit size={60} />} t={t} dur={dur} diagramTop={772}>
       <div style={{ display: 'flex', gap: 22, height: '100%' }}>
         {col('one', left, lRes)}
         {col('all', right, rRes)}

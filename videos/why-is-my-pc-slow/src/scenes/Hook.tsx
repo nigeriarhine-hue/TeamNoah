@@ -1,6 +1,7 @@
 import React from 'react';
 import { edu, FONT, SAFE } from '../edu/theme';
-import { HOST, HostPlate } from '../edu/Host';
+import { Stage } from '../edu/Stage';
+import { SlowPC } from '../edu/SlowPC';
 import { KineticLines } from '../edu/Kinetic';
 import { SeriesTag } from '../edu/Series';
 import { pop, ramp } from '../edu/motion';
@@ -15,7 +16,7 @@ export const FIVE = [
   { n: 5, label: 'App or PC', Icon: IconSplit },
 ];
 
-/** 0:00 — host first, the question, the promise. No Noah anywhere. */
+/** 0:00 — the slow PC, the question, the promise. No Noah anywhere. */
 export const Hook: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
   const strikeAt = S('hook1') + 1.55; // "...don't start deleting random files"
   const fiveAt = S('hook2') - 0.05;
@@ -23,10 +24,11 @@ export const Hook: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
   const strike = ramp(t, strikeAt + 0.35, strikeAt + 0.75);
   const chipOut = ramp(t, fiveAt - 0.25, fiveAt);
   return (
-    <div style={{ position: 'absolute', inset: 0 }}>
-      <HostPlate src={HOST.toCamera} t={t} dur={dur} fx={48} fy={22} zoomFrom={1.08} zoomTo={1.2} drift={-14} />
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(11,12,18,0.55) 0%, rgba(11,12,18,0) 18%, rgba(11,12,18,0) 42%, rgba(11,12,18,0.82) 62%, rgba(11,12,18,0.94) 100%)' }} />
-
+    <Stage t={t} dur={dur} dark glow="rgba(111,106,230,0.26)">
+      {/* the problem, shown: an app stuck loading, CPU pegged */}
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 268, display: 'flex', justifyContent: 'center', transform: `scale(${1 + 0.04 * Math.min(1, t / dur)})` }}>
+        <SlowPC t={t} width={770} />
+      </div>
       <div style={{ position: 'absolute', left: SAFE.left, top: 196 }}>
         <SeriesTag dark t={t} />
       </div>
@@ -101,6 +103,6 @@ export const Hook: React.FC<{ t: number; dur: number }> = ({ t, dur }) => {
           })}
         </div>
       </div>
-    </div>
+    </Stage>
   );
 };

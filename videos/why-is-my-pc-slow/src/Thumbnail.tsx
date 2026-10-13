@@ -1,36 +1,21 @@
 import React from 'react';
-import { AbsoluteFill, Img, staticFile } from 'remotion';
+import { AbsoluteFill } from 'remotion';
 import { Fonts } from './edu/Fonts';
 import { edu, FONT } from './edu/theme';
 import { SeriesTag } from './edu/Series';
-import { HOST } from './edu/Host';
+import { SlowPC } from './edu/SlowPC';
 import { FIVE } from './scenes/Hook';
 
 /**
- * Shorts thumbnail. The topic dominates; the host and his desk sell "real tech
- * channel"; the five chapter icons promise a checklist. No Noah branding.
+ * Shorts thumbnail. The topic dominates; a slow-loading PC shows the problem; the five chapter icons promise a checklist. No Noah branding.
  */
 export const Thumbnail: React.FC = () => (
   <AbsoluteFill style={{ background: edu.dark, fontFamily: FONT }}>
     <Fonts />
-    <Img
-      src={staticFile(HOST.toCamera)}
-      style={{
-        position: 'absolute',
-        left: -60,
-        top: 330,
-        width: 1200,
-        height: 2133,
-        objectFit: 'cover',
-        filter: 'brightness(1.12) contrast(1.06) saturate(0.8)',
-      }}
-    />
-    <AbsoluteFill
-      style={{
-        background:
-          'linear-gradient(180deg, #0B0C12 0%, #0B0C12 22%, rgba(11,12,18,0.5) 34%, rgba(11,12,18,0) 44%, rgba(11,12,18,0) 64%, rgba(11,12,18,0.85) 76%, #0B0C12 88%)',
-      }}
-    />
+    <AbsoluteFill style={{ background: 'radial-gradient(70% 45% at 50% 58%, rgba(111,106,230,0.38) 0%, rgba(11,12,18,0) 70%)' }} />
+    <div style={{ position: 'absolute', left: 0, right: 0, top: 690, display: 'flex', justifyContent: 'center' }}>
+      <SlowPC t={1.6} width={940} />
+    </div>
     <div style={{ position: 'absolute', left: 64, top: 150 }}>
       <SeriesTag dark />
     </div>
