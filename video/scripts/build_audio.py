@@ -80,6 +80,7 @@ def build_voice(src: Path) -> None:
     l2 = load(src / "l2.wav")
     l7 = load(src / "l7.wav")
     l3 = load(src / "l3.wav")
+    l6 = load(src / "l6.wav")
     l8 = load(src / "l8.wav")
 
     # Opening line exactly as lip-synced in the creator clip.
@@ -94,7 +95,8 @@ def build_voice(src: Path) -> None:
     save("vo-03-checked.wav", norm_speech(cut(l3, 0.0, 2.36)))
     save("vo-04-explained.wav", norm_speech(cut(l8, a, b)))
     save("vo-05-recommended.wav", norm_speech(cut(l8, b, c)))
-    save("vo-06-approval.wav", norm_speech(cut(l8, c, 9.10)))
+    # The l8 read drags "approval" out to ~1.1 s; its standalone read is clean.
+    save("vo-06-approval.wav", norm_speech(cut(l6, 0.28, 2.80)))
 
     # Close: "One question. No guessing." / "Free PC Check at onnoah.app."
     save("vo-07-no-guessing.wav", norm_speech(cut(l7, 0.14, 2.20)))

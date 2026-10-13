@@ -65,8 +65,8 @@ export const CAPTIONS: { from: number; to: number; text: string; hi?: string }[]
   { from: 6.2, to: 8.75, text: 'Noah checked what was actually happening,', hi: 'what was actually happening' },
   { from: 9.05, to: 10.6, text: 'explained what it found,' },
   { from: 11.15, to: 12.85, text: 'showed me what it recommended,', hi: 'what it recommended' },
-  { from: 13.3, to: 15.15, text: 'and still waited for my approval', hi: 'my approval' },
-  { from: 15.15, to: 16.95, text: 'before changing anything.' },
+  { from: 13.3, to: 14.5, text: 'and still waited for my approval', hi: 'my approval' },
+  { from: 14.5, to: 16.2, text: 'before changing anything.' },
   // 18.4–24: the big on-screen type *is* the caption (identical words).
 ];
 
