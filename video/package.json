@@ -1,0 +1,23 @@
+{
+  "name": "noah-shorts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Noah short-form video compositions (Remotion)",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render:one-question": "remotion render src/index.ts NoahOneQuestion ../out/noah-one-question-short.premaster.mp4 --codec=h264 --crf=16 --audio-bitrate=320k && bash scripts/master_audio.sh ../out/noah-one-question-short.premaster.mp4 ../out/noah-one-question-short.mp4",
+    "still:one-question-thumb": "remotion still src/index.ts NoahOneQuestionThumbnail ../out/noah-one-question-thumbnail.png --frame=0"
+  },
+  "dependencies": {
+    "@fontsource-variable/plus-jakarta-sans": "^5.1.1",
+    "@remotion/cli": "4.0.290",
+    "@remotion/google-fonts": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
