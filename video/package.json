@@ -1,0 +1,22 @@
+{
+  "name": "noah-video",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts WhatHappens ../out/.raw-what-happens.mp4 --codec=h264 --crf=18 --audio-bitrate=256k && ffmpeg -y -v error -i ../out/.raw-what-happens.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 256k -ar 48000 ../out/noah-what-happens-when-noah-checks-pc.mp4 && rm ../out/.raw-what-happens.mp4",
+    "thumb": "remotion still src/index.ts ThumbnailShorts ../out/noah-what-happens-thumbnail.png && remotion still src/index.ts Thumbnail16x9 ../out/noah-what-happens-thumbnail-16x9.png",
+    "typecheck": "tsc --noEmit",
+    "audio": "python3 scripts/make-audio.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "remotion": "4.0.535",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
