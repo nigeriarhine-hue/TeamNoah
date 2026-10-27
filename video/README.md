@@ -9,7 +9,7 @@ npm install
 npm run audio      # regenerate SFX + music bed (scripts/make-audio.py, deterministic)
 npm run studio     # preview
 npm run render     # → ../out/noah-what-happens-when-noah-checks-pc.mp4 (loudness-normalised to -14 LUFS)
-npm run thumb      # → ../out/noah-what-happens-thumbnail.png, ../out/noah-what-happens-thumbnail-16x9.png
+npm run thumb      # → ../out/noah-what-happens-thumbnail.png, ../out/noah-what-happens-thumbnail-16x9.png (alt Shorts frame: ThumbnailShortsCurious)
 ```
 
 In the cloud container, add `--browser-executable=/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell` to the `remotion` commands.

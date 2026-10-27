@@ -29,11 +29,11 @@ const DiagnosisCard: React.FC<{ width: number; cardW: number }> = ({ width, card
   </AuroraCard>
 );
 
-export const ThumbnailShorts: React.FC = () => (
+export const ThumbnailShorts: React.FC<{ host?: string }> = ({ host = "host/thumb-host-calm.png" }) => (
   <AbsoluteFill style={{ background: C.page, fontFamily: FONT, overflow: "hidden" }}>
     {/* host, upper half */}
     <AbsoluteFill style={{ height: 1300 }}>
-      <Img src={staticFile("host/thumb-host.png")} style={{ width: 1080, height: 1920, objectFit: "cover", transform: "translateY(150px) scale(1.06)" }} />
+      <Img src={staticFile(host)} style={{ width: 1080, height: 1920, objectFit: "cover", transform: "translateY(150px) scale(1.06)" }} />
     </AbsoluteFill>
     <AbsoluteFill style={{ background: "linear-gradient(to bottom, rgba(10,12,32,.92) 0%, rgba(10,12,32,.7) 16%, rgba(10,12,32,0) 30%)" }} />
     <AbsoluteFill style={{ background: "linear-gradient(to top, #ECE8DF 0%, #ECE8DF 36%, rgba(236,232,223,.0) 58%)" }} />
@@ -102,7 +102,7 @@ export const Thumbnail16x9: React.FC = () => (
     />
     {/* host on the right */}
     <div style={{ position: "absolute", right: 0, top: 0, width: 560, height: 720, overflow: "hidden" }}>
-      <Img src={staticFile("host/thumb-host.png")} style={{ width: 560, height: 996, objectFit: "cover", transform: "translateY(-120px)" }} />
+      <Img src={staticFile("host/thumb-host-calm.png")} style={{ width: 560, height: 996, objectFit: "cover", transform: "translateY(-120px)" }} />
       <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, #ECE8DF 0%, rgba(236,232,223,0) 28%)" }} />
     </div>
     {/* headline */}
