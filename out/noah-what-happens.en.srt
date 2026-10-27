@@ -1,0 +1,43 @@
+1
+00:00:00,380 --> 00:00:02,230
+When you tell Noah your PC is slow,
+
+2
+00:00:02,590 --> 00:00:04,960
+it doesn't immediately start changing things.
+
+3
+00:00:08,600 --> 00:00:11,030
+First, Noah checks what's actually happening.
+
+4
+00:00:15,500 --> 00:00:17,230
+Then it explains what it found…
+
+5
+00:00:20,400 --> 00:00:22,360
+…and shows you what it recommends.
+
+6
+00:00:25,400 --> 00:00:28,800
+Before anything changes, Noah asks for your approval.
+
+7
+00:00:29,200 --> 00:00:30,850
+You decide what happens next.
+
+8
+00:00:31,300 --> 00:00:34,380
+If you approve it, Noah performs the supported actions…
+
+9
+00:00:34,600 --> 00:00:36,480
+…and then shows you what changed.
+
+10
+00:00:37,000 --> 00:00:40,630
+That's the idea behind Noah: describe it, approve it, done.
+
+11
+00:00:41,710 --> 00:00:44,710
+Free PC Check at onnoah.app

@@ -17,9 +17,10 @@ export const SCENES = {
 export const UI_FROM = SCENES.describe.from;
 export const UI_TO = SCENES.recap.from;
 
-// Voiceover cues. hostA/hostB are the exact padded tracks the host clips were lip-synced to.
+// Voiceover cues. The host-*-synced tracks are the Dylan VO warped onto each clip's own
+// mouth timing (scripts/align-vo-to-clip.py) so the lips match.
 export const VO = [
-  { file: "audio/vo/hostA-audio.mp3", from: 0, dur: 151 },
+  { file: "audio/vo/host-open-synced.wav", from: 0, dur: 151 },
   { file: "audio/vo/vo1.mp3", from: 258, dur: 73 },
   { file: "audio/vo/vo2.mp3", from: 465, dur: 52 },
   { file: "audio/vo/vo3.mp3", from: 612, dur: 59 },
@@ -28,12 +29,12 @@ export const VO = [
   { file: "audio/vo/vo6.mp3", from: 939, dur: 92 },
   { file: "audio/vo/vo7.mp3", from: 1038, dur: 56 },
   { file: "audio/vo/vo8.mp3", from: 1110, dur: 109 },
-  { file: "audio/vo/hostB-audio.mp3", from: 1240, dur: 110 },
+  { file: "audio/vo/host-close-synced.wav", from: 1240, dur: 110 },
 ];
 
 // Spoken ranges (for music ducking) — tighter than the files (which include padding).
 export const SPEECH: Array<[number, number]> = [
-  [7, 136],
+  [11, 149],
   [258, 331],
   [465, 517],
   [612, 671],
@@ -42,13 +43,13 @@ export const SPEECH: Array<[number, number]> = [
   [939, 1031],
   [1038, 1094],
   [1110, 1219],
-  [1249, 1318],
+  [1251, 1342],
 ];
 
 // Phrase captions (spoken words). `em` = emphasised phrase inside `text`.
 export type Cue = { from: number; to: number; text: string; em?: string; dark?: boolean };
 export const CAPTIONS: Cue[] = [
-  { from: 7, to: 64, text: "When you tell Noah your PC is slow,", dark: true },
+  { from: 11, to: 70, text: "When you tell Noah your PC is slow,", dark: true },
   { from: 258, to: 334, text: "First, Noah checks what's actually happening.", em: "checks what's actually happening" },
   { from: 465, to: 522, text: "Then it explains what it found…", em: "explains what it found" },
   { from: 612, to: 676, text: "…and shows you what it recommends.", em: "what it recommends" },
