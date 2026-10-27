@@ -268,7 +268,7 @@ def build(name, w_in, h_in, fonts_dir, out_dir):
     # ---- subtitle ----
     ssize = round(W * 0.052)
     sfont = ImageFont.truetype(lobster, ssize)
-    d.text((cx, y), SUBTITLE, font=sfont, anchor="mt", fill=(255, 246, 225, 255))
+    d.text((cx, y), SUBTITLE, font=sfont, anchor="mt", fill=(244, 200, 96, 255))
     y += round(ssize * 1.35)
 
     # ---- body: largest size that fits ----
@@ -293,14 +293,14 @@ def build(name, w_in, h_in, fonts_dir, out_dir):
             hi = mid - 1
     bfont, lh, gap, blocks, total = layout(lo)
     y += max(0, (avail - total) // 2)
-    body_fill = (252, 244, 226, 255)
+    body_fill = (244, 200, 96, 255)
     for b in blocks:
         for line in b:
             d.text((cx, y), line, font=bfont, anchor="mt", fill=body_fill)
             y += lh
         y += gap
     afont = ImageFont.truetype(lobster, round(lo * 1.25))
-    d.text((cx, y - round(lh * 0.2)), CLOSING, font=afont, anchor="mt", fill=(245, 205, 105, 255))
+    d.text((cx, y - round(lh * 0.2)), CLOSING, font=afont, anchor="mt", fill=(255, 226, 140, 255))
 
     # ---- signature ----
     gfont = ImageFont.truetype(lobster, sig_size)
