@@ -50,9 +50,9 @@ Your PC is slow, or full, or something broke after an update. You tell Noah what
 #PCTips #SlowPC #TechTips
 ```
 
-**Tags (434 of YouTube's 500-char limit, paste as-is; includes gaming tags):**
+**Tags (456 of YouTube's 500-char limit, paste as-is; includes gaming and AI-app tags):**
 ```
-why restarting your pc helps, does restarting your computer help, pc slow after restart, computer keeps slowing down, slow pc fix, why is my pc slow, startup apps slowing pc, background programs slowing computer, low storage slow pc, what does restarting a pc do, pc running slow, tech tips, pc tips, gaming pc slow, gaming pc tips, pc gaming, pc lag fix, game launcher startup, gaming setup, Noah PC check, onnoah
+why restarting your pc helps, pc slow after restart, computer keeps slowing down, slow pc fix, why is my pc slow, startup apps slowing pc, background programs slowing computer, low storage slow pc, what does restarting a pc do, pc running slow, pc tips, gaming pc slow, gaming pc tips, pc gaming, pc lag fix, game launcher startup, ai app for pc, ai pc assistant, ai computer help, ai troubleshooting, ai pc fix, Noah PC check, onnoah
 ```
 
 **Upload settings:**
@@ -72,7 +72,7 @@ why restarting your pc helps, does restarting your computer help, pc slow after 
 **Caption (front-load the keywords; TikTok search reads the caption and on-screen text):**
 ```
 Why restarting your PC helps, and why the slowdown keeps coming back 🔁 Startup apps launch again, background programs return, low storage stays low. Find the cause, not just the symptom. Free PC Check at onnoah.app
-#pctips #slowpc #techtips #gamingpc #pcgaming #computertips #learnontiktok
+#pctips #slowpc #techtips #gamingpc #pcgaming #aiapp #aitools #learnontiktok
 ```
 - Cover: use the 9:16 thumbnail, or pick the 0:01 frame (host + "RESTARTING YOUR PC CAN HELP").
 - Turn on auto-captions. Burned-in captions are already in the video, and auto-captions add searchable text.
