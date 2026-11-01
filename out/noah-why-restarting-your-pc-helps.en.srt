@@ -1,0 +1,95 @@
+1
+00:00:00,238 --> 00:00:02,343
+Restarting your PC can actually help.
+
+2
+00:00:02,343 --> 00:00:03,015
+But if the same
+
+3
+00:00:03,015 --> 00:00:04,295
+problem keeps coming back,
+
+4
+00:00:04,295 --> 00:00:05,734
+restarting probably isn't fixing
+
+5
+00:00:05,734 --> 00:00:07,152
+the reason it started.
+
+6
+00:00:07,152 --> 00:00:09,467
+A restart can stop stuck processes,
+
+7
+00:00:09,467 --> 00:00:11,000
+clear temporary activity,
+
+8
+00:00:11,000 --> 00:00:13,019
+and reload system services.
+
+9
+00:00:13,019 --> 00:00:14,733
+But startup apps can launch again,
+
+10
+00:00:14,733 --> 00:00:16,686
+background programs can come back,
+
+11
+00:00:16,686 --> 00:00:18,590
+low storage is still low storage,
+
+12
+00:00:18,590 --> 00:00:19,743
+and a problem inside one
+
+13
+00:00:19,743 --> 00:00:21,324
+app may still be there.
+
+14
+00:00:21,324 --> 00:00:22,853
+So if you keep restarting your PC
+
+15
+00:00:22,853 --> 00:00:24,543
+just to make it feel normal again,
+
+16
+00:00:24,543 --> 00:00:25,619
+it may be time to figure
+
+17
+00:00:25,619 --> 00:00:27,933
+out what's actually causing the slowdown.
+
+18
+00:00:27,933 --> 00:00:29,343
+Noah can check what's happening,
+
+19
+00:00:29,343 --> 00:00:30,790
+explain what it finds,
+
+20
+00:00:30,790 --> 00:00:32,157
+and show you what it recommends
+
+21
+00:00:32,157 --> 00:00:33,952
+before you approve any changes.
+
+22
+00:00:33,952 --> 00:00:35,429
+Don't just restart it again.
+
+23
+00:00:35,429 --> 00:00:37,152
+Check what keeps coming back.
+
+24
+00:00:37,152 --> 00:00:39,571
+Free PC Check at onnoah.app.
