@@ -1,0 +1,95 @@
+{
+ "duration": 39.87140873015873,
+ "segments": [
+  {
+   "start": 0.23809523809523808,
+   "end": 2.0571230158730156,
+   "text": "Restarting your PC can actually help."
+  },
+  {
+   "start": 2.342837301587301,
+   "end": 4.180932539682539,
+   "text": "But if the same problem keeps coming back,"
+  },
+  {
+   "start": 4.295218253968254,
+   "end": 6.723789682539682,
+   "text": "restarting probably isn't fixing the reason it started."
+  },
+  {
+   "start": 7.1523611111111105,
+   "end": 9.323789682539683,
+   "text": "A restart can stop stuck processes,"
+  },
+  {
+   "start": 9.466646825396825,
+   "end": 10.857142857142858,
+   "text": "clear temporary activity,"
+  },
+  {
+   "start": 11.0,
+   "end": 12.63809523809524,
+   "text": "and reload system services."
+  },
+  {
+   "start": 13.01904761904762,
+   "end": 14.590476190476192,
+   "text": "But startup apps can launch again,"
+  },
+  {
+   "start": 14.733333333333334,
+   "end": 16.542876984126984,
+   "text": "background programs can come back,"
+  },
+  {
+   "start": 16.685734126984126,
+   "end": 18.44763888888889,
+   "text": "low storage is still low storage,"
+  },
+  {
+   "start": 18.59049603174603,
+   "end": 20.847638888888888,
+   "text": "and a problem inside one app may still be there."
+  },
+  {
+   "start": 21.323829365079366,
+   "end": 24.42859126984127,
+   "text": "So if you keep restarting your PC just to make it feel normal again,"
+  },
+  {
+   "start": 24.542876984126988,
+   "end": 27.4571626984127,
+   "text": "it may be time to figure out what's actually causing the slowdown."
+  },
+  {
+   "start": 27.933353174603177,
+   "end": 29.200019841269842,
+   "text": "Noah can check what's happening,"
+  },
+  {
+   "start": 29.34287698412698,
+   "end": 30.676210317460313,
+   "text": "explain what it finds,"
+  },
+  {
+   "start": 30.790496031746027,
+   "end": 33.52380952380952,
+   "text": "and show you what it recommends before you approve any changes."
+  },
+  {
+   "start": 33.95238095238095,
+   "end": 35.14285714285714,
+   "text": "Don't just restart it again."
+  },
+  {
+   "start": 35.42857142857142,
+   "end": 36.723809523809514,
+   "text": "Check what keeps coming back."
+  },
+  {
+   "start": 37.15238095238095,
+   "end": 39.57140873015873,
+   "text": "Free PC Check at onnoah.app."
+  }
+ ]
+}
