@@ -43,6 +43,10 @@ If you keep restarting just to make your computer feel normal, it may be time to
 
 Free PC Check: https://onnoah.app
 
+Noah is an app that diagnoses and fixes real problems on your PC. You describe the symptom in plain language ("my fan won't stop"), Noah finds what's actually wrong with your PC — and shows you before it touches anything.
+
+Your PC is slow, or full, or something broke after an update. You tell Noah what's wrong in your own words. It investigates like a technician, names the actual cause, and proposes a one-sentence fix. Nothing runs until you approve. Then it's fixed, logged, and reversible. Also, the client is open source.
+
 #PCTips #SlowPC #TechTips
 ```
 
