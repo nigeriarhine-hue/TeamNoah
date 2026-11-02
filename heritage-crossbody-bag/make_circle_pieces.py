@@ -13,7 +13,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-from make_circle_pattern import (BG, CREAM, GOLD, GREEN, LINE, RED, SS, around, big_medallion, circle,
+from make_circle_pattern import (BG, CREAM, GOLD, GREEN, LINE, RED, SS, around, circle,
                                  mockup, ring, small_medallion, star4)
 from make_flow_labels import gold_fill
 from make_flow_pieces import crop, overview
@@ -106,29 +106,21 @@ def details(w=3000, h=1200):
     return finish_any(im, w, h)
 
 
-def emblem_slots(px, R):
-    S = px * SS
-    im = Image.new("L", (S, S), BG)
-    big_medallion(ImageDraw.Draw(im), S / 2, S / 2, R * SS)
-    return im
-
-
 def label_outside(fonts, px=900):
     S = px * SS
     base = Image.new("L", (S, S), BG)
     d = ImageDraw.Draw(base)
     lattice(d, S, S, 150 * SS)
-    big_medallion(d, S / 2, S * 0.33, S * 0.17)
     img = finish_any(base, px, px).convert("RGBA").resize((S, S), Image.LANCZOS)
     m = Image.new("L", (S, S), 0)
     md = ImageDraw.Draw(m)
     md.rectangle((S * 0.04, S * 0.04, S * 0.96, S * 0.96), outline=255, width=SS * 7)
     md.rectangle((S * 0.065, S * 0.065, S * 0.935, S * 0.935), outline=255, width=SS * 3)
-    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.17))
-    md.text((S / 2, S * 0.70), "Falasha", font=f, anchor="mm", fill=255)
+    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.20))
+    md.text((S / 2, S * 0.48), "Falasha", font=f, anchor="mm", fill=255)
     img.alpha_composite(gold_fill(m))
     d = ImageDraw.Draw(img)
-    y = S * 0.82
+    y = S * 0.63
     d.line((S * 0.32, y, S * 0.47, y), fill=(176, 30, 38), width=SS * 4)
     d.line((S * 0.53, y, S * 0.68, y), fill=(10, 122, 74), width=SS * 4)
     return img.convert("RGB").resize((px, px), Image.LANCZOS)
@@ -151,17 +143,9 @@ def label_inside(fonts, strip, px=900):
     m2 = m + S * 0.018
     gd.rectangle((m2, band_h + m * 0.8 + S * 0.018, S - m2, S - m2), outline=255, width=SS * 2)
     im.alpha_composite(gold_fill(gm))
-    # small medallion emblem + name in the logo zone
-    em = finish_any(emblem_slots(260, 120), 260, 260, bg=np.array([246, 236, 212], np.float32))
-    em = em.resize((round(S * 0.17), round(S * 0.17)), Image.LANCZOS)
-    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.15))
+    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.16))
     d = ImageDraw.Draw(im)
-    tw = d.textlength("Falasha", font=f)
-    gap = S * 0.03
-    x0 = (S - (em.size[0] + gap + tw)) / 2
-    cy = S * 0.335
-    im.paste(em, (round(x0), round(cy - em.size[1] / 2)))
-    d.text((x0 + em.size[0] + gap, cy), "Falasha", font=f, anchor="lm", fill=(18, 15, 14))
+    d.text((S / 2, S * 0.335), "Falasha", font=f, anchor="mm", fill=(18, 15, 14))
     y = S * 0.47
     d.line((S * 0.29, y, S * 0.475, y), fill=(176, 30, 38), width=SS * 3)
     d.line((S * 0.525, y, S * 0.71, y), fill=(10, 122, 74), width=SS * 3)
