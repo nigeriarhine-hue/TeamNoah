@@ -48,7 +48,12 @@ def gold_at(t):
 
 
 def tile(size=2400):
-    u, v, f = field(size)
+    return render(*field(size))
+
+
+def render(u, v, f):
+    """Turn a wave field into silk ribbons with gold edges."""
+    size_h, size_w = f.shape
     s = f * 2.9                       # bands; 2.9 keeps wave peaks from starting a tiny new band
     band = np.floor(s).astype(int)
     t = s - band                      # position inside a band, 0..1
@@ -58,7 +63,7 @@ def tile(size=2400):
     sheen = 0.5 + 0.5 * np.sin(TAU * (u * 2 + v * 3))
 
     kind = band % 6
-    out = np.zeros((size, size, 3), np.float32)
+    out = np.zeros((size_h, size_w, 3), np.float32)
     fills = {
         0: BLACK + 0 * satin[..., None],
         1: RED_DEEP + (RED - RED_DEEP) * (0.35 + 0.65 * satin)[..., None],
@@ -90,7 +95,7 @@ def tile(size=2400):
     a2 = line(hair, 1.1) * in_black * 0.85 * flat
     out = out * (1 - a2) + gold_line * a2
 
-    grain = np.random.default_rng(9).normal(0, 1.6, (size, size, 1)).astype(np.float32)
+    grain = np.random.default_rng(9).normal(0, 1.6, (size_h, size_w, 1)).astype(np.float32)
     return Image.fromarray(np.clip(out + grain, 0, 255).astype(np.uint8))
 
 
