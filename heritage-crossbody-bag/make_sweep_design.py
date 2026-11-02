@@ -115,22 +115,30 @@ def compose(W, H):
     ribbon(D2, 1.44 * px * sw2, 1.54 * px * sw2, GOLD, along2)
     folds(D2, 1.62 * px * sw2, RUBY, along2, 0.55 * px)
 
-    # scattered gold sparkles in the open black
-    rng = np.random.default_rng(3)
+    # ---- center: fine gold line lattice across the whole open area, fading toward the ribbons ----
+    open_area = (np.clip((-D1 - 0.12 * px) / (0.35 * px), 0, 1) *
+                 np.clip((-D2 - 0.12 * px) / (0.35 * px), 0, 1))
+    xp, yp = u * W, v * H
+    step = 0.62 * px
+    a1 = (xp + yp) % step
+    a2 = (xp - yp) % step
+    d_line = np.minimum(np.minimum(a1, step - a1), np.minimum(a2, step - a2))
+    lat = np.clip(1.2 - d_line + 0.5, 0, 1) * 0.55
+    # gold dots where lines cross
+    i1, i2 = np.round((xp + yp) / step), np.round((xp - yp) / step)
+    cx_, cy_ = (i1 + i2) * step / 2, (i1 - i2) * step / 2
+    d_dot = np.hypot(xp - cx_, yp - cy_)
+    dots = np.clip(5.5 - d_dot + 0.5, 0, 1)
+    # small four-point stars in the middle of every other diamond
+    j1, j2 = np.floor((xp + yp) / step), np.floor((xp - yp) / step)
+    mx, my = (j1 + j2 + 1) * step / 2, (j1 - j2) * step / 2
+    dx, dy = np.abs(xp - mx), np.abs(yp - my)
+    star_r = 0.085 * step
+    star = np.clip(star_r - (np.sqrt(dx) + np.sqrt(dy)) ** 2 / 1.0 * 0.5 + 0.5, 0, 1) * ((j1 + j2) % 2 == 0)
+
+    pattern_a = np.clip(lat + dots * 0.85 + star * 0.9, 0, 1) * open_area
+    over(gold_at(0.35 + 0.45 * sheen), pattern_a[..., None])
     img = np.clip(out, 0, 255)
-    for _ in range(40):
-        sx, sy = rng.uniform(0.1, 0.9) * W, rng.uniform(0.2, 0.8) * H
-        uu, vv = sx / W, sy / H
-        d1 = sweep_distance(np.float32(uu), np.float32(vv), W, H, -0.16, 0.80, 0.045, 0.8, 0.6)
-        d2 = -sweep_distance(np.float32(uu), np.float32(vv), W, H, 0.52, 0.66, 0.04, 0.7, 2.2)
-        if d1 > -0.6 * px or d2 > -0.6 * px:
-            continue
-        rr = rng.uniform(3, 7)
-        yy0, yy1, xx0, xx1 = int(sy - 12), int(sy + 13), int(sx - 12), int(sx + 13)
-        gy, gx = np.mgrid[yy0:yy1, xx0:xx1].astype(np.float32)
-        a = np.clip(rr - np.hypot(gx - sx, gy - sy) + 0.5, 0, 1)[..., None]
-        patch = img[yy0:yy1, xx0:xx1]
-        img[yy0:yy1, xx0:xx1] = patch * (1 - a) + gold_at(np.full(a.shape[:2], 0.7)) * a
     return Image.fromarray(img.astype(np.uint8))
 
 
