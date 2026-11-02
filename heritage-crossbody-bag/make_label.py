@@ -43,8 +43,47 @@ def label(fonts, px=900):
     return im.resize((px, px), Image.LANCZOS)
 
 
+CREAM = (246, 236, 212)
+
+
+def inside_label(fonts, px=900):
+    """Cream label: logo in the top band (Printful's logo area is about 3" x 1.13"),
+    lower area kept plain. Printful adds size, material and origin itself."""
+    S = px * SS
+    im = Image.new("RGB", (S, S), CREAM)
+    d = ImageDraw.Draw(im)
+    # thin tricolor stripe at the very top
+    y = 0
+    for col, h in ((GOLD, 0.012), (RED, 0.03), (GOLD, 0.012), (GREEN, 0.03), (GOLD, 0.012)):
+        d.rectangle((0, y, S, y + h * S), fill=col)
+        y += h * S
+    # double gold frame
+    m = S * 0.04
+    d.rectangle((m, y + m * 0.6, S - m, S - m), outline=GOLD, width=SS * 4)
+    m2 = m + S * 0.018
+    d.rectangle((m2, y + m * 0.6 + S * 0.018, S - m2, S - m2), outline=GOLD, width=SS * 2)
+    # logo row: diamond + Falasha, inside the top 1.13" band
+    cx, cy = S / 2, S * 0.27
+    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.17))
+    tw = d.textlength("Falasha", font=f)
+    hh = S * 0.06
+    gap = S * 0.04
+    dx = cx - (tw + hh * 1.6 + gap) / 2 + hh * 0.8
+    for sc, col in ((1.0, BLACK), (0.68, GOLD), (0.45, GREEN), (0.18, CREAM)):
+        d.polygon([(dx, cy - hh * sc), (dx + hh * 0.8 * sc, cy), (dx, cy + hh * sc), (dx - hh * 0.8 * sc, cy)], fill=col)
+    d.text((dx + hh * 0.8 + gap, cy), "Falasha", font=f, anchor="lm", fill=BLACK)
+    # small divider under the logo
+    yy = S * 0.42
+    d.line((cx - S * 0.22, yy, cx - S * 0.025, yy), fill=RED, width=SS * 3)
+    d.line((cx + S * 0.025, yy, cx + S * 0.22, yy), fill=RED, width=SS * 3)
+    r = S * 0.012
+    d.polygon([(cx, yy - r), (cx + r, yy), (cx, yy + r), (cx - r, yy)], fill=RED)
+    return im.resize((px, px), Image.LANCZOS)
+
+
 if __name__ == "__main__":
     fonts, out = Path(sys.argv[1]), Path(sys.argv[2])
     out.mkdir(parents=True, exist_ok=True)
     label(fonts).save(out / "outside-label_900x900.png", dpi=(300, 300), optimize=True)
+    inside_label(fonts).save(out / "inside-label_900x900.png", dpi=(300, 300), optimize=True)
     print("done")
