@@ -1,13 +1,14 @@
-"""Flowing abstract "liquid silk" pattern (seamless) for the heritage crossbody bag.
+"""Flowing abstract "silk ribbons" pattern (seamless) for the heritage crossbody bag.
 
 Usage: python3 make_flow_pattern.py <out_dir>
 Outputs (300 DPI):
-  flow-pattern-tile_2400.png   8"x8" seamless tile (use with Printful's Pattern fill)
+  flow-pattern-tile_2400.png   8"x8" seamless tile
   flow-pattern-sheet_6000.png  20"x20" sheet of the tile
-  flow-preview-mockup.png      product-style preview of the bag (not a print file)
 
-The waves come from sine waves with whole-number frequencies over the tile,
-bent by more such waves, so every edge meets its opposite edge exactly.
+A wave "phase" runs diagonally across the tile; it is bent by sine waves with
+whole-number frequencies, so every edge meets its opposite edge exactly.
+Ribbons and gold lines sit at fixed places along that phase, so each one
+appears once per wave and flows unbroken.
 """
 import math
 import sys
@@ -16,29 +17,31 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-from make_circle_pattern import mockup
-
 DPI = 300
 TAU = 2 * math.pi
 
-BLACK = np.array([18, 15, 14])
-RED = np.array([168, 26, 36])
-RED_DEEP = np.array([92, 10, 18])
-GREEN = np.array([12, 120, 74])
-GREEN_DEEP = np.array([3, 58, 36])
-GOLD_DEEP = np.array([150, 102, 30])
-GOLD_MID = np.array([214, 163, 66])
-GOLD_HI = np.array([255, 230, 156])
+BLACK = np.array([16, 13, 12], np.float32)
+EMERALD_D = np.array([2, 48, 32], np.float32)
+EMERALD = np.array([8, 110, 72], np.float32)
+EMERALD_HI = np.array([70, 180, 128], np.float32)
+RUBY_D = np.array([70, 6, 16], np.float32)
+RUBY = np.array([160, 20, 36], np.float32)
+RUBY_HI = np.array([226, 84, 88], np.float32)
+GOLD_DEEP = np.array([140, 94, 28], np.float32)
+GOLD_MID = np.array([212, 162, 70], np.float32)
+GOLD_HI = np.array([255, 232, 166], np.float32)
 
 
-def field(size):
-    v, u = np.mgrid[0:size, 0:size].astype(np.float32) / size
-    # periodic warps (whole-number frequencies keep the tile seamless)
-    wu = u + 0.11 * np.sin(TAU * (v + 0.15)) + 0.035 * np.sin(TAU * (2 * u + 3 * v) + 1.7)
-    wv = v + 0.07 * np.sin(TAU * (u + 0.4)) + 0.03 * np.sin(TAU * (u - 2 * v) + 0.6)
-    # one main diagonal wave gives long ribbons; a light second wave makes them swell
-    f = 0.85 * np.sin(TAU * (wu + 2 * wv)) + 0.15 * np.sin(TAU * (2 * wu - wv) + 1.3)
-    return u, v, f
+def field(w, h, periods=(1, 2)):
+    """Seamless wave phase over a w x h tile (in pixels)."""
+    v, x = np.mgrid[0:h, 0:w].astype(np.float32)
+    u, v = x / w, v / h
+    wu = u + 0.09 * np.sin(TAU * (v + 0.15)) + 0.025 * np.sin(TAU * (2 * u + 3 * v) + 1.7)
+    wv = v + 0.06 * np.sin(TAU * (u + 0.4)) + 0.02 * np.sin(TAU * (u - 2 * v) + 0.6)
+    phi = periods[0] * wu + periods[1] * wv
+    # slow swelling so ribbons widen and taper as they travel
+    swell = 1 + 0.38 * np.sin(TAU * (u - v) + 0.7) + 0.12 * np.sin(TAU * (2 * u + v) + 2.0)
+    return u, v, phi, swell
 
 
 def gold_at(t):
@@ -47,56 +50,92 @@ def gold_at(t):
                     GOLD_MID + (GOLD_HI - GOLD_MID) * ((t - 0.55) / 0.45))
 
 
-def tile(size=2400):
-    return render(*field(size))
+def silk(t, deep, mid, hi):
+    """Satin shading across a ribbon: dark edges, soft highlight off-center."""
+    t = np.clip(t, 0, 1)
+    body = np.clip(np.sin(math.pi * t), 0, 1) ** 0.8
+    spec = np.exp(-((t - 0.38) / 0.12) ** 2)
+    c = deep + (mid - deep) * body[..., None]
+    return c + (hi - mid) * (0.7 * spec)[..., None]
 
 
-def render(u, v, f):
-    """Turn a wave field into silk ribbons with gold edges."""
-    size_h, size_w = f.shape
-    s = f * 2.9                       # bands; 2.9 keeps wave peaks from starting a tiny new band
-    band = np.floor(s).astype(int)
-    t = s - band                      # position inside a band, 0..1
-
-    # rounded "satin" shading across each ribbon
-    satin = np.sin(math.pi * t)
+def render(u, v, phi, swell, style="ribbons"):
+    """Paint ribbons and gold lines along the phase field."""
+    h, w = phi.shape
+    gy, gx = np.gradient(phi)
+    g = np.maximum(np.hypot(gx, gy), 1e-6)            # phase units per pixel
+    p = phi - np.floor(phi)                           # 0..1 within each wave
     sheen = 0.5 + 0.5 * np.sin(TAU * (u * 2 + v * 3))
 
-    kind = band % 6
-    out = np.zeros((size_h, size_w, 3), np.float32)
-    fills = {
-        0: BLACK + 0 * satin[..., None],
-        1: RED_DEEP + (RED - RED_DEEP) * (0.35 + 0.65 * satin)[..., None],
-        2: BLACK * (0.9 + 0.3 * satin)[..., None],
-        3: GREEN_DEEP + (GREEN - GREEN_DEEP) * (0.35 + 0.65 * satin)[..., None],
-        4: BLACK + 0 * satin[..., None],
-        5: gold_at(0.15 + 0.55 * satin + 0.3 * sheen),
-    }
-    for k, col in fills.items():
-        out += col * (kind == k)[..., None]
+    # very soft background light so the black isn't flat
+    out = BLACK * (0.9 + 0.25 * (0.5 + 0.5 * np.sin(TAU * (u + v) + 0.4)))[..., None]
+    out = np.broadcast_to(out, (h, w, 3)).copy()
 
-    # anti-aliased gold lines along every band edge, plus hairlines in black bands
-    gy = (np.roll(s, -1, 0) - np.roll(s, 1, 0)) / 2
-    gx = (np.roll(s, -1, 1) - np.roll(s, 1, 1)) / 2
-    g = np.maximum(np.hypot(gx, gy), 1e-4)        # band units per pixel
+    def dist_px(center, half):
+        """Signed distance in pixels from a ribbon edge (negative = inside)."""
+        d = np.abs(((p - center + 0.5) % 1.0) - 0.5)
+        return (d - half) / g
 
-    def line(dist_units, half_px):
-        return np.clip(half_px - dist_units / g + 0.5, 0, 1)[..., None]
+    def cover(dpx, soft=0.8):
+        return np.clip(0.5 - dpx / soft, 0, 1)[..., None]
 
-    edge = np.minimum(t, 1 - t)
-    gold_line = gold_at(0.25 + 0.5 * sheen + 0.25 * np.sin(TAU * (u * 5 - v * 2)))
-    a = line(edge, 3.2) * np.clip(g / (np.median(g) * 0.25), 0, 1)[..., None]
-    out = out * (1 - a) + gold_line * a
+    def over(col, a):
+        nonlocal out
+        out = out * (1 - a) + col * a
 
-    hair = np.abs(t - 0.5)
-    in_black = ((kind == 0) | (kind == 2) | (kind == 4))[..., None]
-    # fade hairlines where the waves flatten out, so no tiny loops or dots appear
-    flat = np.clip(g / (np.median(g) * 0.6), 0, 1)[..., None]
-    a2 = line(hair, 1.1) * in_black * 0.85 * flat
-    out = out * (1 - a2) + gold_line * a2
+    def gold_line(center, half_px, alpha=1.0, light=0.0):
+        d = np.abs(((p - center + 0.5) % 1.0) - 0.5) / g
+        a = np.clip(half_px - d + 0.5, 0, 1)[..., None] * alpha
+        over(gold_at(0.25 + 0.5 * sheen + light), a)
 
-    grain = np.random.default_rng(9).normal(0, 1.6, (size_h, size_w, 1)).astype(np.float32)
+    def ribbon(center, half, deep, mid, hi):
+        hw = half * swell
+        dpx = dist_px(center, hw)
+        # soft colored glow around the ribbon
+        glow = np.exp(-np.maximum(dpx, 0) / 55.0)[..., None] * 0.22
+        over(mid, glow * (dpx > 0)[..., None])
+        # silk body
+        t = (((p - center + 0.5) % 1.0) - 0.5) / (2 * hw) + 0.5
+        over(silk(t, deep, mid, hi), cover(dpx))
+        # fine gold edges
+        for side in (-1, 1):
+            gold_line((center + side * hw) % 1.0, 1.6, 1.0, 0.1)
+
+    if style == "lines":
+        for k in range(12):
+            gold_line(k / 12, 1.0, 0.55 + 0.25 * (k % 3 == 0))
+        return finish(out, h, w)
+
+    # fine gold line bundles in the open black
+    for k in range(7):
+        c = 0.22 + k * 0.018
+        gold_line(c, 0.9, 0.35 + 0.55 * math.sin(math.pi * (k + 0.5) / 7))
+    for k in range(5):
+        c = 0.78 + k * 0.022
+        gold_line(c, 0.9, 0.3 + 0.5 * math.sin(math.pi * (k + 0.5) / 5))
+
+    ribbon(0.06, 0.070, EMERALD_D, EMERALD, EMERALD_HI)     # wide emerald silk
+    ribbon(0.43, 0.020, GOLD_DEEP, GOLD_MID, GOLD_HI)       # slim gold ribbon
+    ribbon(0.60, 0.050, RUBY_D, RUBY, RUBY_HI)              # ruby silk
+    return finish(out, h, w)
+
+
+def finish(out, h, w):
+    grain = np.random.default_rng(9).normal(0, 1.4, (h, w, 1)).astype(np.float32)
     return Image.fromarray(np.clip(out + grain, 0, 255).astype(np.uint8))
+
+
+def tile(size=2400, style="ribbons"):
+    return render(*field(size, size), style=style)
+
+
+def sheet(t, inches=20):
+    n = inches * DPI
+    s = Image.new("RGB", (n, n))
+    for x in range(0, n, t.size[0]):
+        for y in range(0, n, t.size[1]):
+            s.paste(t, (x, y))
+    return s
 
 
 if __name__ == "__main__":
@@ -104,10 +143,5 @@ if __name__ == "__main__":
     out.mkdir(parents=True, exist_ok=True)
     t = tile()
     t.save(out / "flow-pattern-tile_2400.png", dpi=(DPI, DPI), optimize=True)
-    sheet = Image.new("RGB", (6000, 6000))
-    for x in range(0, 6000, 2400):
-        for y in range(0, 6000, 2400):
-            sheet.paste(t, (x, y))
-    sheet.save(out / "flow-pattern-sheet_6000.png", dpi=(DPI, DPI), optimize=True)
-    mockup(t, repeat_in=6.0).save(out / "flow-preview-mockup.png")
+    sheet(t).save(out / "flow-pattern-sheet_6000.png", dpi=(DPI, DPI), optimize=True)
     print("done")
