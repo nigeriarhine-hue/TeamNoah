@@ -27,13 +27,13 @@ def crop(sheet_img, w, h, x, y):
     return sheet_img.crop((round(x * IN), round(y * IN), round((x + w) * IN), round((y + h) * IN)))
 
 
-def overview(files, mock, fonts):
+def overview(files, mock, fonts, title_text="Falasha \u2014 Silk Flow crossbody bag"):
     W, H = 3000, 2200
     im = Image.new("RGB", (W, H), (236, 228, 214))
     d = ImageDraw.Draw(im)
     title = ImageFont.truetype(str(fonts / "Lobster.ttf"), 90)
     lab = ImageFont.truetype(str(fonts / "Lora-SemiBoldItalic.ttf"), 38)
-    d.text((80, 50), "Falasha — Silk Flow crossbody bag", font=title, fill=(30, 25, 22))
+    d.text((80, 50), title_text, font=title, fill=(30, 25, 22))
     m = mock.resize((1050, 1050), Image.LANCZOS)
     im.paste(m, (60, 220))
     d.text((60 + 525, 1290), "Preview", font=lab, fill=(60, 50, 44), anchor="mt")
