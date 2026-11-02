@@ -202,7 +202,7 @@ def tile(size=2400):
 
 # ---------------- product mockup ----------------
 
-def mockup(t, size=1600):
+def mockup(t, size=1600, repeat_in=4.0):
     W = H = size
     v, u = np.mgrid[0:H, 0:W].astype(np.float32)
     # warm studio backdrop
@@ -214,8 +214,8 @@ def mockup(t, size=1600):
     rad = 110
     bw, bh = body[2] - body[0], body[3] - body[1]
 
-    # pattern at real scale: bag is 5.7" wide -> 4" repeat
-    rep = round(bw / 5.7 * 4)
+    # pattern at real scale: bag is 5.7" wide
+    rep = round(bw / 5.7 * repeat_in)
     small = t.resize((rep, rep), Image.LANCZOS)
 
     def tiled(dx, dy):
