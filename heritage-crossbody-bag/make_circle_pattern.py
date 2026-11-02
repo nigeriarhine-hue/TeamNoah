@@ -153,30 +153,38 @@ def slots(S):
     return im
 
 
-def finish(idx, size):
-    """Paint each slot with its finish and anti-alias down to final size."""
+def finish(idx, size, lighting="radial"):
+    """Paint each slot with its finish and anti-alias down to final size.
+
+    lighting="radial" shades round motifs around their centers;
+    "linear" lights each motif evenly from the upper left (for non-round shapes).
+    """
     S = idx.size[0]
     arr = np.asarray(idx)
     yy, xx = np.mgrid[0:size, 0:size].astype(np.float32) / size
 
     # angle to the nearest big medallion center (they sit on a half-drop grid)
-    def nearest_angle():
-        best_d = np.full((size, size), 9.0, np.float32)
-        ang = np.zeros((size, size), np.float32)
-        for cx, cy in [(0, 0), (1, 0), (0, 1), (1, 1), (0.5, 0.5)]:
-            dx, dy = xx - cx, yy - cy
-            dd = dx * dx + dy * dy
-            m = dd < best_d
-            best_d = np.where(m, dd, best_d)
-            ang = np.where(m, np.arctan2(dy, dx), ang)
-        return ang, np.sqrt(best_d)
-
-    ang, dist = nearest_angle()
+    centers = [(0, 0), (1, 0), (0, 1), (1, 1), (0.5, 0.5)]
+    if lighting == "linear":
+        centers += [(0.5, 0), (0.5, 1), (0, 0.5), (1, 0.5)]
+    best_d = np.full((size, size), 9.0, np.float32)
+    ndx = np.zeros((size, size), np.float32)
+    ndy = np.zeros((size, size), np.float32)
+    for cx, cy in centers:
+        dx, dy = xx - cx, yy - cy
+        dd = dx * dx + dy * dy
+        m = dd < best_d
+        best_d = np.where(m, dd, best_d)
+        ndx = np.where(m, dx, ndx)
+        ndy = np.where(m, dy, ndy)
     rng = np.random.default_rng(3)
     grain = rng.normal(0, 1, (size, size)).astype(np.float32)
 
     # metallic gold: light from the upper left, plus a soft diagonal sheen
-    light = 0.5 + 0.5 * np.cos(ang + 3 * math.pi / 4)
+    if lighting == "linear":
+        light = np.clip(0.55 - (ndx + ndy) * 2.2, 0, 1)
+    else:
+        light = 0.5 + 0.5 * np.cos(np.arctan2(ndy, ndx) + 3 * math.pi / 4)
     sheen = 0.5 + 0.5 * np.sin((xx + yy) * math.pi * 6)
     t = np.clip(0.15 + 0.6 * light + 0.25 * sheen + grain * 0.02, 0, 1)[..., None]
     gold = np.where(t < 0.55, GOLD_DEEP + (GOLD_MID - GOLD_DEEP) * (t / 0.55),
