@@ -123,6 +123,7 @@ def label_outside(fonts, px=900):
     y = S * 0.63
     d.line((S * 0.32, y, S * 0.47, y), fill=(176, 30, 38), width=SS * 4)
     d.line((S * 0.53, y, S * 0.68, y), fill=(10, 122, 74), width=SS * 4)
+    star4(d, S / 2, y, S * 0.026, (232, 184, 84))
     return img.convert("RGB").resize((px, px), Image.LANCZOS)
 
 
@@ -149,6 +150,7 @@ def label_inside(fonts, strip, px=900):
     y = S * 0.47
     d.line((S * 0.29, y, S * 0.475, y), fill=(176, 30, 38), width=SS * 3)
     d.line((S * 0.525, y, S * 0.71, y), fill=(10, 122, 74), width=SS * 3)
+    star4(d, S / 2, y, S * 0.022, (214, 163, 66))
     return im.convert("RGB").resize((px, px), Image.LANCZOS)
 
 
