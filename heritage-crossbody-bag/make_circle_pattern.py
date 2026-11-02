@@ -210,7 +210,17 @@ def tile(size=2400):
 
 # ---------------- product mockup ----------------
 
-def mockup(t, size=1600, repeat_in=4.0):
+def cover(img, w, h):
+    """Scale and center-crop img to exactly w x h."""
+    sc = max(w / img.size[0], h / img.size[1])
+    r = img.resize((round(img.size[0] * sc), round(img.size[1] * sc)), Image.LANCZOS)
+    x, y = (r.size[0] - w) // 2, (r.size[1] - h) // 2
+    return r.crop((x, y, x + w, y + h))
+
+
+def mockup(t, size=1600, repeat_in=4.0, front=None, pocket_art=None, bleed_px=150):
+    """Bag preview. t is a repeating tile; or pass placed artwork as front/pocket
+    (print files with bleed_px of bleed on each side) as front / pocket_art."""
     W = H = size
     v, u = np.mgrid[0:H, 0:W].astype(np.float32)
     # warm studio backdrop
@@ -250,7 +260,11 @@ def mockup(t, size=1600, repeat_in=4.0):
     img.alpha_composite(Image.merge("RGBA", (*[Image.new("L", (W, H), 30)] * 3, sh)))
 
     # body fabric with pillow shading
-    fab = np.asarray(tiled(rep // 3, rep // 5), np.float32)
+    if front is not None:
+        art = front.crop((bleed_px, bleed_px, front.size[0] - bleed_px, front.size[1] - bleed_px))
+        fab = np.asarray(cover(art.convert("RGB"), bw, bh), np.float32)
+    else:
+        fab = np.asarray(tiled(rep // 3, rep // 5), np.float32)
     yy, xx = np.mgrid[0:bh, 0:bw].astype(np.float32)
     ex = np.minimum(xx, bw - xx) / bw
     ey = np.minimum(yy, bh - yy) / bh
@@ -315,7 +329,11 @@ def mockup(t, size=1600, repeat_in=4.0):
     psh = Image.new("L", (W, H), 0)
     ImageDraw.Draw(psh).rounded_rectangle((pocket[0], pocket[1] + 10, pocket[2], pocket[3] + 14), 60, fill=140)
     img.alpha_composite(Image.merge("RGBA", (*[Image.new("L", (W, H), 10)] * 3, psh.filter(ImageFilter.GaussianBlur(14)))))
-    pf = np.asarray(tiled(rep // 2 + 40, rep // 2 + 60).crop((0, 0, pw, ph)), np.float32)
+    if pocket_art is not None:
+        art = pocket_art.crop((bleed_px, bleed_px, pocket_art.size[0] - bleed_px, pocket_art.size[1] - bleed_px))
+        pf = np.asarray(cover(art.convert("RGB"), pw, ph), np.float32)
+    else:
+        pf = np.asarray(tiled(rep // 2 + 40, rep // 2 + 60).crop((0, 0, pw, ph)), np.float32)
     py, px = np.mgrid[0:ph, 0:pw].astype(np.float32)
     pe = np.clip(np.minimum(np.minimum(px, pw - px) / pw * 7, np.minimum(py, ph - py) / ph * 6), 0, 1)
     pf = pf * (0.7 + 0.3 * pe)[..., None] * (1.05 - 0.15 * py / ph)[..., None]
