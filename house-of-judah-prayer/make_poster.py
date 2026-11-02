@@ -24,7 +24,7 @@ GOLD_LIGHT = np.array([255, 214, 110]) / 255
 CREAM = np.array([246, 226, 180]) / 255
 
 TITLE = ["The House of Judah", "Prayer"]
-SUBTITLE = "“Here O’ Israel”"
+SUBTITLE = "“Hear O’ Israel”"
 PARAGRAPHS = [
     "Lord our God as one. God of Abraham, God of Isaac, God of Jacob. "
     "God of the living but not the dead.",
