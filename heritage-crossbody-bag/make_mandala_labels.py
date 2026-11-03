@@ -46,15 +46,9 @@ def outside(fonts):
     im = Image.new("RGB", (S, S), BLACK)
     d = ImageDraw.Draw(im)
     dot_border(d, S, S * 0.06, S * 0.022, ["red", "gold", "green", "gold"])
-    # small dot mandala above the name
-    cx, cy = S / 2, S * 0.33
-    dot(d, cx, cy, S * 0.03, "redgold")
-    dot_ring(d, cx, cy, S * 0.065, 8, S * 0.014, ["gold"])
-    dot_ring(d, cx, cy, S * 0.105, 12, S * 0.017, ["green", "red"], math.pi / 12)
-    dot_ring(d, cx, cy, S * 0.148, 16, S * 0.016, ["gold"])
-    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.17))
-    d.text((S / 2, S * 0.64), "Falasha", font=f, anchor="mm", fill=GOLD)
-    divider(d, S, S * 0.78, S * 0.022)
+    f = ImageFont.truetype(str(fonts / "Lobster.ttf"), round(S * 0.19))
+    d.text((S / 2, S * 0.47), "Falasha", font=f, anchor="mm", fill=GOLD)
+    divider(d, S, S * 0.63, S * 0.022)
     return im.resize((PX, PX), Image.LANCZOS)
 
 
