@@ -1,58 +1,67 @@
 import React from 'react';
 import {Easing, interpolate, useCurrentFrame} from 'remotion';
-import {AURORA, CARD_SHADOW, C, MONO, SANS} from '../theme';
-import type {Evidence} from '../episodes/ep1.data';
-import {clamp, NoahMark, useSpring} from './ui';
+import type {Evidence, EpisodeData} from '../series/types';
+import {AURORA, CARD_SHADOW, C, SANS} from '../theme';
+import {AppGlyph} from './PcGraphics';
+import {clamp, Icon, NoahMark, useSpring} from './ui';
 
-// Enhanced light recreation of the Noah desktop app's result view
-// ("What Noah checked" tiles + situation), sized for a 9:16 frame.
+// Enhanced light recreation of the Noah desktop app's result view.
+// Noah visibly checks each possibility (one card per answer option), then the one that
+// stands out is highlighted while the others settle into a secondary "checked" state.
 
 const SectionLabel: React.FC<{children: React.ReactNode; at: number}> = ({children, at}) => {
   const frame = useCurrentFrame();
   const o = interpolate(frame, [at, at + 8], [0, 1], clamp);
   return (
-    <div
-      style={{
-        fontFamily: SANS,
-        fontSize: 22,
-        fontWeight: 700,
-        letterSpacing: 3,
-        color: C.mute,
-        opacity: o,
-        margin: '0 0 10px',
-      }}
-    >
+    <div style={{fontFamily: SANS, fontSize: 21, fontWeight: 700, letterSpacing: 3, color: C.mute, opacity: o, margin: '0 0 10px'}}>
       — {children}
     </div>
   );
 };
 
-const EvidenceRow: React.FC<{e: Evidence; letter: string; highlight: boolean}> = ({e, letter, highlight}) => {
+const ICON_FOR: Record<string, 'ram' | 'storage' | 'startup'> = {A: 'ram', B: 'storage', C: 'startup'};
+
+const EvidenceCard: React.FC<{
+  e: Evidence;
+  isAnswer: boolean;
+  answerAt: number;
+  scanFrom: number;
+  ep: EpisodeData;
+}> = ({e, isAnswer, answerAt, scanFrom, ep}) => {
   const frame = useCurrentFrame();
-  const p = useSpring(e.at, {damping: 15, stiffness: 170, mass: 0.6});
-  // scanning shimmer before the value lands
-  const scanning = frame >= e.at - 9 && frame < e.at;
-  const scanP = interpolate(frame, [e.at - 9, e.at], [0, 1], clamp);
+  const checkStart = Math.max(scanFrom, e.at - 22);
+  const checking = frame >= checkStart && frame < e.at;
+  const scanP = interpolate(frame, [checkStart, e.at], [0, 1], clamp);
+  const done = useSpring(e.at, {damping: 15, stiffness: 170, mass: 0.6});
+  const settled = interpolate(frame, [answerAt, answerAt + 10], [0, 1], clamp);
   const warn = e.tone === 'warn';
-  const hi = highlight && warn ? interpolate(frame, [e.at + 2, e.at + 10], [0, 1], clamp) : 0;
-  const visible = frame >= e.at - 9;
+  const hi = isAnswer ? interpolate(frame, [answerAt - 2, answerAt + 8], [0, 1], clamp) : 0;
+  const dim = !isAnswer ? settled : 0;
+  const appear = interpolate(frame, [scanFrom + 2, scanFrom + 10], [0, 1], clamp);
+
+  // startup animation (only on the startup card): "Windows starts" then app icons pop in fast
+  const anim = isAnswer && warn;
+  const animFrom = ep.startupAnimFrom;
+  const appsShown = anim ? Math.max(0, Math.min(ep.startupApps.length, Math.floor((frame - animFrom - 6) / 2.4) + 1)) : 0;
+  const booting = anim ? interpolate(frame, [animFrom - 2, animFrom + 4, animFrom + 8], [0, 1, 0], clamp) : 0;
+
+  const statusLabel = frame >= answerAt ? e.settled : e.verdict;
+
   return (
     <div
       style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 22,
-        padding: '13px 22px',
-        borderRadius: 22,
-        background: warn ? `rgba(217,119,6,${0.1 * hi})` : C.page2,
-        border: `2px solid ${warn && hi > 0 ? `rgba(217,119,6,${0.55 * hi})` : C.line}`,
-        opacity: visible ? 1 : 0,
-        transform: `translateY(${visible ? 0 : 20}px)`,
         position: 'relative',
+        borderRadius: 26,
+        padding: anim && frame >= animFrom ? '16px 22px 16px' : '16px 22px',
+        background: hi > 0 ? `rgba(217,119,6,${0.08 * hi})` : C.page2,
+        border: `${2 + 2 * hi}px solid ${hi > 0 ? `rgba(217,119,6,${0.25 + 0.6 * hi})` : C.line}`,
+        boxShadow: hi > 0 ? `0 0 0 ${8 * hi}px rgba(217,119,6,${0.1 * hi})` : undefined,
+        opacity: appear * (1 - 0.45 * dim),
+        transform: `scale(${1 - 0.03 * dim + 0.015 * hi})`,
         overflow: 'hidden',
       }}
     >
-      {scanning && (
+      {checking && (
         <div
           style={{
             position: 'absolute',
@@ -64,126 +73,111 @@ const EvidenceRow: React.FC<{e: Evidence; letter: string; highlight: boolean}> =
           }}
         />
       )}
-      <div
-        style={{
-          width: 54,
-          height: 54,
-          borderRadius: 16,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontFamily: SANS,
-          fontWeight: 800,
-          fontSize: 28,
-          color: warn ? 'white' : C.mute,
-          background: warn ? C.amber : 'rgba(60,50,40,.08)',
-        }}
-      >
-        {letter}
-      </div>
-      <div style={{flex: 1, fontFamily: SANS}}>
-        <div style={{fontSize: 22, fontWeight: 700, letterSpacing: 2.4, color: C.mute, textTransform: 'uppercase'}}>
-          {e.title}
+      <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
+        <div
+          style={{
+            width: 58,
+            height: 58,
+            borderRadius: 18,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: hi > 0.5 ? C.amber : 'white',
+            border: `1.5px solid ${C.line2}`,
+            flexShrink: 0,
+          }}
+        >
+          <Icon name={ICON_FOR[e.key]} color={hi > 0.5 ? 'white' : C.indigo} size={38} />
         </div>
-        <div style={{display: 'flex', alignItems: 'baseline', gap: 14, opacity: p}}>
-          <span
+        <div style={{flex: 1, fontFamily: SANS, minWidth: 0}}>
+          <div style={{fontSize: 21, fontWeight: 800, letterSpacing: 2.6, color: C.mute, textTransform: 'uppercase'}}>
+            {e.key} · {e.title}
+          </div>
+          <div style={{display: 'flex', alignItems: 'baseline', gap: 14, flexWrap: 'wrap'}}>
+            {frame < checkStart ? (
+              <span style={{fontSize: 38, fontWeight: 800, color: 'rgba(60,50,40,.25)', letterSpacing: 4}}>···</span>
+            ) : (
+              <span style={{fontSize: 38, fontWeight: 800, letterSpacing: -0.6, color: warn && done > 0.5 ? C.amber : C.ink}}>
+                {/* the finding itself only lands once the check completes */}
+                {warn && frame < e.at ? 'Counting…' : e.primary}
+              </span>
+            )}
+            <span style={{fontSize: 25, fontWeight: 600, color: C.ink2, opacity: done}}>{e.secondary}</span>
+          </div>
+        </div>
+        <div
+          style={{
+            fontFamily: SANS,
+            fontSize: 23,
+            fontWeight: 800,
+            padding: '10px 16px',
+            borderRadius: 999,
+            whiteSpace: 'nowrap',
+            color: warn ? C.amber : C.commit,
+            background: warn ? C.amberSoft : C.commitSoft,
+            opacity: checking ? 1 : done,
+            transform: `scale(${checking ? 1 : 0.7 + 0.3 * done})`,
+            textTransform: frame >= answerAt ? 'uppercase' : undefined,
+          }}
+        >
+          {checking ? (
+            <span style={{color: C.indigo}}>Checking…</span>
+          ) : (
+            <>
+              {warn ? '▲ ' : '✓ '}
+              {statusLabel}
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* startup animation row */}
+      {anim && frame >= animFrom - 2 && (
+        <div style={{marginTop: 12, display: 'flex', alignItems: 'center', gap: 12}}>
+          <div
             style={{
-              fontSize: 40,
+              fontFamily: SANS,
+              fontSize: 19,
               fontWeight: 800,
-              letterSpacing: -0.8,
-              color: warn ? C.amber : C.ink,
+              letterSpacing: 1.6,
+              color: 'white',
+              background: `rgba(26,29,97,${0.85})`,
+              borderRadius: 10,
+              padding: '8px 10px',
+              whiteSpace: 'nowrap',
+              opacity: interpolate(frame, [animFrom - 2, animFrom + 3], [0, 1], clamp),
+              boxShadow: booting > 0 ? `0 0 0 ${4 * booting}px rgba(96,165,250,.35)` : undefined,
             }}
           >
-            {e.value}
-          </span>
-          <span style={{fontSize: 24, fontWeight: 500, color: C.mute}}>{e.detail}</span>
+            WINDOWS STARTS →
+          </div>
+          <div style={{display: 'flex', gap: 7}}>
+            {ep.startupApps.map((a, i) => {
+              const shown = i < appsShown;
+              const t = animFrom + 6 + i * 2.4;
+              const s = interpolate(frame, [t, t + 5], [0.4, 1], {...clamp, easing: Easing.out(Easing.back(2))});
+              return (
+                <div key={a.label} style={{opacity: shown ? 1 : 0, transform: `scale(${shown ? s : 0.4})`}}>
+                  <AppGlyph name={a.icon} size={44} />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div
-        style={{
-          fontFamily: SANS,
-          fontSize: 24,
-          fontWeight: 800,
-          padding: '10px 18px',
-          borderRadius: 999,
-          color: warn ? C.amber : C.commit,
-          background: warn ? C.amberSoft : C.commitSoft,
-          opacity: p,
-          transform: `scale(${0.7 + 0.3 * p})`,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-        }}
-      >
-        <span>{warn ? '▲' : '✓'}</span>
-        {e.verdict}
-      </div>
+      )}
     </div>
   );
 };
 
-const AppChip: React.FC<{name: string; i: number; at: number}> = ({name, i, at}) => {
-  const t = at + i * 5;
-  const p = useSpring(t, {damping: 13, stiffness: 220, mass: 0.5});
-  const hue = [222, 243, 262, 210, 250, 232, 270, 200, 255][i % 9];
-  return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 10,
-        padding: '10px 16px 10px 10px',
-        borderRadius: 16,
-        background: 'white',
-        border: `1.5px solid ${C.line2}`,
-        fontFamily: SANS,
-        fontSize: 24,
-        fontWeight: 700,
-        color: C.ink,
-        opacity: p,
-        transform: `translateY(${(1 - p) * 24}px) scale(${0.8 + 0.2 * p})`,
-      }}
-    >
-      <span
-        style={{
-          width: 30,
-          height: 30,
-          borderRadius: 9,
-          background: `hsl(${hue} 70% 58%)`,
-          color: 'white',
-          fontSize: 17,
-          fontWeight: 800,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {i + 1}
-      </span>
-      {name}
-    </div>
-  );
-};
-
-export const NoahWindow: React.FC<{
-  from: number;
-  evidence: Evidence[];
-  answer: string;
-  apps: string[];
-  listFrom: number;
-  footnote: string;
-  answerAt: number;
-  answerLabel: string;
-}> = ({from, evidence, answer, apps, listFrom, footnote, answerAt, answerLabel}) => {
+export const NoahWindow: React.FC<{ep: EpisodeData}> = ({ep}) => {
   const frame = useCurrentFrame();
+  const from = ep.revealFrom;
   const enter = useSpring(from, {damping: 16, stiffness: 140, mass: 0.8});
-    const bar = interpolate(frame, [from + 4, evidence[evidence.length - 1].at], [0, 1], {
-    ...clamp,
-    easing: Easing.inOut(Easing.quad),
-  });
-  const count = Math.min(apps.length, Math.max(0, Math.floor((frame - listFrom) / 5) + 1));
-  const ans = useSpring(answerAt, {damping: 10, stiffness: 210, mass: 0.6});
-  const footO = interpolate(frame, [listFrom + 30, listFrom + 40], [0, 1], clamp);
+  const lastCheck = ep.evidence[ep.evidence.length - 1].at;
+  const bar = interpolate(frame, [from + 4, lastCheck], [0, 1], {...clamp, easing: Easing.inOut(Easing.quad)});
+  const ans = useSpring(ep.answerAt, {damping: 16, stiffness: 210, mass: 0.6});
+  const answerLabel = ep.options.find((o) => o.key === ep.answer)!.label;
+  const footO = interpolate(frame, [ep.answerAt + 8, ep.answerAt + 16], [0, 1], clamp);
 
   return (
     <div
@@ -199,74 +193,45 @@ export const NoahWindow: React.FC<{
       }}
     >
       {/* window chrome */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 14,
-          padding: '14px 26px',
-          borderBottom: `1px solid ${C.line}`,
-          background: C.page2,
-        }}
-      >
-        <NoahMark size={40} />
-        <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 28, color: C.ink}}>Noah</span>
+      <div style={{display: 'flex', alignItems: 'center', gap: 14, padding: '14px 26px', borderBottom: `1px solid ${C.line}`, background: C.page2}}>
+        <NoahMark size={38} />
+        <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 27, color: C.ink}}>Noah</span>
         <div style={{flex: 1}} />
         <div
           style={{
             fontFamily: SANS,
-            fontSize: 24,
+            fontSize: 23,
             fontWeight: 600,
             color: C.ink2,
             background: 'white',
             border: `1px solid ${C.line2}`,
             borderRadius: 18,
-            padding: '10px 18px',
+            padding: '9px 16px',
           }}
         >
-          My PC feels slow
+          My PC is slow every time it starts
         </div>
       </div>
-
-      {/* progress / status line */}
       <div style={{position: 'relative', height: 5, background: C.line}}>
         <div style={{position: 'absolute', left: 0, top: 0, bottom: 0, width: `${bar * 100}%`, background: AURORA}} />
       </div>
 
-      <div style={{padding: '18px 28px 22px'}}>
-        <div style={{height: 82, marginBottom: 12, position: 'relative'}}>
-          {frame < answerAt ? (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                height: '100%',
-                fontFamily: SANS,
-                fontSize: 30,
-                fontWeight: 700,
-                color: C.indigo,
-              }}
-            >
-              <span
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: 8,
-                  background: C.indigo,
-                  opacity: 0.5 + 0.5 * Math.sin(frame / 2.5),
-                }}
-              />
-              Checking this PC…
+      <div style={{padding: '16px 26px 20px'}}>
+        {/* status → answer banner */}
+        <div style={{height: 84, marginBottom: 12, position: 'relative'}}>
+          {frame < ep.answerAt ? (
+            <div style={{display: 'flex', alignItems: 'center', gap: 12, height: '100%', fontFamily: SANS, fontSize: 30, fontWeight: 700, color: C.indigo}}>
+              <span style={{width: 16, height: 16, borderRadius: 8, background: C.indigo, opacity: 0.5 + 0.5 * Math.sin(frame / 2.5)}} />
+              Checking memory, storage and startup…
             </div>
           ) : (
             <div
               style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
-                gap: 18,
+                gap: 16,
                 height: '100%',
-                padding: '0 28px 0 14px',
+                padding: '0 26px 0 22px',
                 borderRadius: 28,
                 backgroundImage: AURORA,
                 boxShadow: '0 18px 40px -14px rgba(79,70,229,.75)',
@@ -277,70 +242,67 @@ export const NoahWindow: React.FC<{
                 opacity: Math.min(1, ans * 1.5),
               }}
             >
+              <span style={{fontSize: 22, fontWeight: 800, letterSpacing: 3, opacity: 0.9, whiteSpace: 'nowrap'}}>THE ANSWER</span>
               <span
                 style={{
-                  width: 66,
-                  height: 66,
+                  width: 62,
+                  height: 62,
                   borderRadius: 20,
                   background: 'white',
                   color: C.indigo,
-                  fontSize: 40,
+                  fontSize: 38,
                   fontWeight: 800,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  flexShrink: 0,
                 }}
               >
-                {answer}
+                {ep.answer}
               </span>
-              <span style={{fontSize: 24, fontWeight: 700, letterSpacing: 3, opacity: 0.85}}>DIAGNOSIS</span>
-              <span style={{fontSize: 50, fontWeight: 800, letterSpacing: -1}}>{answerLabel}</span>
+              <span style={{fontSize: 44, fontWeight: 800, letterSpacing: -0.6, textTransform: 'uppercase', whiteSpace: 'nowrap'}}>
+                {answerLabel}
+              </span>
             </div>
           )}
         </div>
 
-        <SectionLabel at={from + 6}>WHAT NOAH CHECKED</SectionLabel>
+        <SectionLabel at={from + 6}>WHAT NOAH CHECKED ON THIS PC</SectionLabel>
         <div style={{display: 'flex', flexDirection: 'column', gap: 10}}>
-          {evidence.map((e) => (
-            <EvidenceRow key={e.key} e={e} letter={e.key} highlight={e.key === answer} />
+          {ep.evidence.map((e) => (
+            <EvidenceCard key={e.key} e={e} isAnswer={e.key === ep.answer} answerAt={ep.answerAt} scanFrom={from} ep={ep} />
           ))}
         </div>
 
-        {frame >= listFrom - 4 && (
-          <div style={{marginTop: 16}}>
-            <div style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-between'}}>
-              <SectionLabel at={listFrom - 4}>LAUNCHING AT STARTUP</SectionLabel>
-              <span
-                style={{
-                  fontFamily: MONO,
-                  fontSize: 30,
-                  fontWeight: 700,
-                  color: C.amber,
-                  fontVariantNumeric: 'tabular-nums',
-                }}
-              >
-                {count}/{apps.length}
-              </span>
-            </div>
-            <div style={{display: 'flex', flexWrap: 'wrap', gap: 10}}>
-              {apps.map((a, i) => (
-                <AppChip key={a} name={a} i={i} at={listFrom} />
-              ))}
-            </div>
-            <div
-              style={{
-                marginTop: 12,
-                fontFamily: SANS,
-                fontSize: 21,
-                fontWeight: 500,
-                color: C.mute,
-                opacity: footO,
-              }}
-            >
-              {footnote}
-            </div>
-          </div>
-        )}
+        <div
+          style={{
+            marginTop: 14,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            gap: 10,
+            opacity: footO,
+            transform: `translateY(${(1 - footO) * 8}px)`,
+          }}
+        >
+          <span
+            style={{
+              fontFamily: SANS,
+              fontSize: 26,
+              fontWeight: 800,
+              letterSpacing: 1.6,
+              color: C.amber,
+              background: C.amberSoft,
+              borderRadius: 10,
+              padding: '7px 12px',
+              whiteSpace: 'nowrap',
+              textTransform: 'uppercase',
+            }}
+          >
+            {ep.finding}
+          </span>
+          <span style={{fontFamily: SANS, fontSize: 23, fontWeight: 600, color: C.ink2, lineHeight: 1.3}}>{ep.footnote}</span>
+        </div>
       </div>
     </div>
   );

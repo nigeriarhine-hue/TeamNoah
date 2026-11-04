@@ -1,0 +1,43 @@
+{
+  "tempo": 1.12,
+  "countdownEnd": 8.49,
+  "clipBStart": 8.44,
+  "total": 15.982771,
+  "lines": [
+    {
+      "file": "t0.mp3",
+      "start": 0.1,
+      "end": 2.759,
+      "startFrame": 3,
+      "endFrame": 83
+    },
+    {
+      "file": "t5.mp3",
+      "start": 2.939,
+      "end": 6.991,
+      "startFrame": 88,
+      "endFrame": 210
+    },
+    {
+      "file": "t2.mp3",
+      "start": 8.49,
+      "end": 9.389,
+      "startFrame": 255,
+      "endFrame": 282
+    },
+    {
+      "file": "t3.mp3",
+      "start": 9.589,
+      "end": 14.878,
+      "startFrame": 288,
+      "endFrame": 446
+    },
+    {
+      "file": "t4.mp3",
+      "start": 14.998,
+      "end": 15.933,
+      "startFrame": 450,
+      "endFrame": 478
+    }
+  ]
+}

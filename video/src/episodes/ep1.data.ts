@@ -1,110 +1,117 @@
-// "Can You Diagnose This PC?" — Episode 1 data.
-// Future episodes: copy this file, change the case, options, evidence and timings.
-// All times are in frames at 30 fps.
+// "Can You Diagnose This PC?" — Episode 1: the slow-startup Windows PC.
+// Template for future episodes: copy this file and change the case, specs, options,
+// evidence, answer and timings. Times are frames at 30 fps; VO line timings come from
+// public/vo/timing.json (written by tools/build_vo.py).
+import type {EpisodeData} from '../series/types';
 
-export type Option = {key: 'A' | 'B' | 'C'; label: string; icon: 'ram' | 'storage' | 'startup'; at: number};
-
-export type Evidence = {
-  key: 'A' | 'B' | 'C';
-  title: string;
-  value: string;
-  detail: string;
-  verdict: string;
-  tone: 'ok' | 'warn';
-  at: number;
-};
-
-export type CaptionLine = {text: string; from: number; to: number; emphasis?: string[]};
-
-export const ep1 = {
+export const ep1: EpisodeData = {
   episode: 1,
   caseNo: '001',
-  symptom: 'Everything feels slow',
 
-  hostClipA: 'host/ep1-host-a.mp4', // hook + waiting through the countdown
-  hostClipB: 'host/ep1-host-b.mp4', // "Got your answer?" + reveal
-  // Seedance re-paces speech slightly. Each clip is time-mapped in segments so the lips line up
-  // with the VO track (fit from pause positions). `startFrom` is in source frames at 30 fps.
-  hostSegmentsA: [
-    {from: 0, dur: 162, startFrom: 2, rate: 1.146}, // speech
-    {from: 162, dur: 117, startFrom: 188, rate: 0.96}, // silent waiting through the countdown
+  pcName: 'Windows PC',
+  symptomLines: ['THIS WINDOWS PC', 'FEELS SLOW', 'EVERY TIME IT STARTS.'],
+  symptomShort: 'Slow every time it starts',
+  specs: [
+    {label: 'OS', value: 'Windows 11'},
+    {label: 'Memory', value: '16 GB RAM'},
+    {label: 'Drive', value: '512 GB SSD'},
   ],
-  hostSegmentsB: [{from: 0, dur: 171, startFrom: 0, rate: 1.093}],
-  voA: 'vo/vo_a.wav',
-  voB: 'vo/vo_b.wav',
+  hookLineAt: [4, 26, 47],
+  diagnosePromptAt: 84,
 
-  voBStart: 279,
-  quizFrom: 86, // host shrinks into the card, options appear
-  countdownFrom: 126, // 5 x 30 frames
-  countdownTo: 276,
-  revealFrom: 300, // Noah starts checking
-  answerAt: 334, // "it's startup apps"
-  listFrom: 366, // "Nine of them launch..."
-  endFrom: 432,
-  total: 450,
+  hostClipA: 'host/ep1-host-a.mp4', // symptom + question + waiting through the countdown
+  hostClipB: 'host/ep1-host-b.mp4', // "Got your answer?" + Noah's findings + "Did you get it right?"
+  // Seedance re-paces speech slightly; segments re-time each clip so the lips match the VO.
+  // Fit from pause positions (clip vs VO); each boundary sits in a pause so cuts are invisible.
+  hostSegmentsA: [
+    {from: 0, dur: 89, startFrom: 0, rate: 1.093}, // symptom line
+    {from: 89, dur: 117, startFrom: 97, rate: 1.082}, // "You've got five seconds… startup apps?"
+    {from: 206, dur: 47, startFrom: 224, rate: 1.0}, // arms folded, waiting
+  ],
+  hostSegmentsB: [
+    {from: 0, dur: 124, startFrom: 3, rate: 1.0}, // "Got your answer? Noah checked it. Memory…"
+    {from: 124, dur: 74, startFrom: 127, rate: 1.085}, // "…storage had room, but nine apps…"
+    {from: 198, dur: 29, startFrom: 208, rate: 1.0}, // "Did you get it right?"
+  ],
+  vo: 'vo/vo_full.wav',
+  hostStill: 'host/host-still.png',
+
+  quizFrom: 100,
+  caseFrom: 104,
+  countdownFrom: 145, // 5 digits x 22 frames
+  countdownTo: 255,
+  answerPromptAt: 255,
+  voBStart: 253,
+  revealFrom: 289,
+  answerAt: 418,
+  endFrom: 446,
+  total: 480,
 
   options: [
-    {key: 'A', label: 'RAM', icon: 'ram', at: 89},
-    {key: 'B', label: 'Low storage', icon: 'storage', at: 107},
-    {key: 'C', label: 'Startup apps', icon: 'startup', at: 132},
-  ] as Option[],
-
-  answer: 'C' as const,
+    {key: 'A', label: 'RAM', icon: 'ram', at: 145},
+    {key: 'B', label: 'Low storage', icon: 'storage', at: 161},
+    {key: 'C', label: 'Startup apps', icon: 'startup', at: 180},
+  ],
+  answer: 'C',
 
   evidence: [
     {
       key: 'A',
       title: 'Memory',
-      value: '46% in use',
-      detail: '7.4 of 16 GB',
+      primary: '16 GB installed',
+      secondary: 'Usage: Normal',
       verdict: 'Normal',
+      settled: 'RAM · Normal',
       tone: 'ok',
-      at: 308,
+      at: 336,
     },
     {
       key: 'B',
-      title: 'C: drive',
-      value: '214 GB free',
-      detail: 'of 476 GB',
-      verdict: 'Plenty',
+      title: 'Storage',
+      primary: '512 GB SSD',
+      secondary: 'Free space: Adequate',
+      verdict: 'Has room',
+      settled: 'Storage · Room available',
       tone: 'ok',
-      at: 320,
+      at: 368,
     },
     {
       key: 'C',
-      title: 'Startup items',
-      value: '9 launch at boot',
-      detail: 'all at once, every start',
-      verdict: 'Heavy here',
+      title: 'Startup apps',
+      primary: '9 apps',
+      secondary: 'Launching at startup',
+      verdict: 'Stands out',
+      settled: '9 launching',
       tone: 'warn',
-      at: 334,
+      at: 388,
     },
-  ] as Evidence[],
-
-  startupApps: [
-    'Teams',
-    'OneDrive',
-    'Spotify',
-    'Steam',
-    'Discord',
-    'Zoom',
-    'Adobe Updater',
-    'Epic Games',
-    'Dropbox',
   ],
 
-  footnote: 'Diagnosis for this PC’s scan. The count alone isn’t the rule — the load at boot is.',
+  // Generic semantic icons only — no third-party logos.
+  startupApps: [
+    {icon: 'browser', label: 'Browser'},
+    {icon: 'music', label: 'Music'},
+    {icon: 'chat', label: 'Chat'},
+    {icon: 'games', label: 'Game launcher'},
+    {icon: 'cloud', label: 'Cloud sync'},
+    {icon: 'office', label: 'Office'},
+    {icon: 'meeting', label: 'Meetings'},
+    {icon: 'updater', label: 'Updater'},
+    {icon: 'utility', label: 'Utility'},
+  ],
+  startupAnimFrom: 384,
+  finding: '9 apps launching at startup',
+  footnote: 'Finding for this PC’s scan only — not a rule that 9 startup apps always slows a PC.',
 
   captions: [
-    {text: 'You’ve got five seconds.', from: 0, to: 38, emphasis: ['five', 'seconds.']},
-    {text: 'What’s slowing this PC down?', from: 40, to: 86, emphasis: ['slowing']},
-    {text: 'RAM, low storage,', from: 89, to: 130},
-    {text: 'or startup apps?', from: 132, to: 166},
-    {text: 'Got your answer?', from: 279, to: 306, emphasis: ['answer?']},
-    {text: 'Noah checked:', from: 309, to: 332},
-    {text: 'it’s startup apps.', from: 334, to: 364, emphasis: ['startup', 'apps.']},
-    {text: 'Nine of them launch every time this PC starts.', from: 366, to: 436, emphasis: ['Nine']},
-  ] as CaptionLine[],
+    {text: 'You’ve got five seconds —', from: 104, to: 118, emphasis: ['five', 'seconds']},
+    {text: 'what’s causing it?', from: 120, to: 141, emphasis: ['causing']},
+    {text: 'RAM, low storage,', from: 145, to: 178},
+    {text: 'or startup apps?', from: 180, to: 212},
+    {text: 'Got your answer?', from: 255, to: 286, emphasis: ['answer?']},
+    {text: 'Noah checked it.', from: 289, to: 314},
+    {text: 'Memory looked normal,', from: 317, to: 348, emphasis: ['normal,']},
+    {text: 'storage had room,', from: 350, to: 381, emphasis: ['room,']},
+    {text: 'but nine apps were launching at startup.', from: 384, to: 444, emphasis: ['nine', 'apps']},
+  ],
 };
-
-export type EpisodeData = typeof ep1;

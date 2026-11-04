@@ -97,7 +97,7 @@ export const SeriesBadge: React.FC<{episode: number; at?: number}> = ({episode, 
             letterSpacing: 1,
           }}
         >
-          EP {episode}
+          EP. {String(episode).padStart(2, '0')}
         </span>
       </div>
     </div>
@@ -209,7 +209,9 @@ export const OptionCard: React.FC<{
   at: number;
   state: 'idle' | 'ruled-out' | 'correct';
   stateAt: number;
-}> = ({letter, label, icon, at, state, stateAt}) => {
+  pulseAt?: number;
+  height?: number;
+}> = ({letter, label, icon, at, state, stateAt, pulseAt = -999, height = 168}) => {
   const frame = useCurrentFrame();
   const p = useSpring(at);
   const s = useSpring(stateAt, {damping: 12, stiffness: 180, mass: 0.6});
@@ -217,11 +219,12 @@ export const OptionCard: React.FC<{
   const win = state === 'correct' ? s : 0;
   // gentle idle "breathing" while the viewer thinks
   const breathe = 1 + 0.008 * Math.sin((frame - at) / 7);
+  const pulse = interpolate(frame, [pulseAt, pulseAt + 4, pulseAt + 12], [0, 1, 0], clamp);
   return (
     <div
       style={{
         position: 'relative',
-        height: 168,
+        height,
         borderRadius: 36,
         background: win > 0.01 ? undefined : C.card,
         backgroundImage: win > 0.01 ? AURORA : undefined,
@@ -232,7 +235,8 @@ export const OptionCard: React.FC<{
         padding: '0 34px',
         gap: 28,
         opacity: p * (1 - 0.55 * out),
-        transform: `translateX(${(1 - p) * 120}px) scale(${(0.94 + 0.06 * p) * breathe * (1 + 0.04 * win) * (1 - 0.04 * out)})`,
+        transform: `translateX(${(1 - p) * 120}px) scale(${(0.94 + 0.06 * p) * breathe * (1 + 0.04 * win) * (1 - 0.04 * out) * (1 + 0.06 * pulse)})`,
+        outline: pulse > 0.01 ? `${6 * pulse}px solid rgba(79,70,229,${0.35 * pulse})` : undefined,
         fontFamily: SANS,
       }}
     >
@@ -289,8 +293,9 @@ export const Countdown: React.FC<{from: number; to: number}> = ({from, to}) => {
   const appear = useSpring(from - 8);
   if (t < -10 || t > total + 26) return null;
   const progress = interpolate(t, [0, total], [0, 1], clamp);
-  const remaining = Math.max(1, 5 - Math.floor(t / 30));
-  const inSec = ((t % 30) + 30) % 30;
+  const step = total / 5;
+  const remaining = Math.max(1, 5 - Math.floor(t / step));
+  const inSec = ((t % step) + step) % step;
   const pulse = t >= 0 && t < total ? interpolate(inSec, [0, 4, 14], [1.14, 1.04, 1], clamp) : 1;
   const done = t >= total;
   const doneP = interpolate(t, [total, total + 6], [0, 1], clamp);
