@@ -1,43 +1,43 @@
 {
-  "tempo": 1.12,
-  "countdownEnd": 8.49,
-  "clipBStart": 8.44,
-  "total": 15.982771,
+  "tempo": 1.0,
+  "countdownEnd": 10.13,
+  "clipBStart": 10.08,
+  "total": 18.435688000000003,
   "lines": [
     {
       "file": "t0.mp3",
       "start": 0.1,
-      "end": 2.759,
+      "end": 3.138,
       "startFrame": 3,
-      "endFrame": 83
+      "endFrame": 94
     },
     {
       "file": "t5.mp3",
-      "start": 2.939,
-      "end": 6.991,
-      "startFrame": 88,
-      "endFrame": 210
+      "start": 3.318,
+      "end": 8.115,
+      "startFrame": 100,
+      "endFrame": 243
     },
     {
       "file": "t2.mp3",
-      "start": 8.49,
-      "end": 9.389,
-      "startFrame": 255,
-      "endFrame": 282
+      "start": 10.13,
+      "end": 11.124,
+      "startFrame": 304,
+      "endFrame": 334
     },
     {
       "file": "t3.mp3",
-      "start": 9.589,
-      "end": 14.878,
-      "startFrame": 288,
-      "endFrame": 446
+      "start": 11.324,
+      "end": 17.236,
+      "startFrame": 340,
+      "endFrame": 517
     },
     {
       "file": "t4.mp3",
-      "start": 14.998,
-      "end": 15.933,
-      "startFrame": 450,
-      "endFrame": 478
+      "start": 17.356,
+      "end": 18.386,
+      "startFrame": 521,
+      "endFrame": 552
     }
   ]
 }

@@ -11,7 +11,7 @@ import json, subprocess, sys
 from pathlib import Path
 
 VO = Path(__file__).resolve().parent.parent / 'public' / 'vo'
-TEMPO = 1.12
+TEMPO = 1.0
 # (file, gap before this line in seconds). Lines run back to back with these gaps.
 # Countdown sits inside the gap before "Got your answer?".
 LINES = [
@@ -21,7 +21,7 @@ LINES = [
     ('t3.mp3', 0.20),   # Noah checked it. Memory looked normal, storage had room, but nine apps...
     ('t4.mp3', 0.12),   # Did you get it right?
 ]
-COUNTDOWN_END = float(sys.argv[1]) if len(sys.argv) > 1 else 8.85
+COUNTDOWN_END = float(sys.argv[1]) if len(sys.argv) > 1 else 10.13
 CLIP_B_START = COUNTDOWN_END - 0.05
 
 def run(*a):
@@ -64,8 +64,11 @@ def mix(out, items, length, offset=0.0, codec=None):
 mix(VO / 'vo_full.wav', parts, total)
 a_items = [(s, st) for s, st in parts if st < CLIP_B_START]
 b_items = [(s, st) for s, st in parts if st >= CLIP_B_START]
-mix(VO / 'lipsync_a.mp3', a_items, 9.0, 0.0, ['-b:a', '192k'])
-mix(VO / 'lipsync_b.mp3', b_items, 8.0, CLIP_B_START, ['-b:a', '192k'])
+import math
+LEN_A = math.ceil(CLIP_B_START)
+LEN_B = math.ceil(total - CLIP_B_START + 0.3)
+mix(VO / 'lipsync_a.mp3', a_items, LEN_A, 0.0, ['-b:a', '192k'])
+mix(VO / 'lipsync_b.mp3', b_items, LEN_B, CLIP_B_START, ['-b:a', '192k'])
 for i in range(len(LINES)):
     (VO / f'_seg{i}.wav').unlink()
 json.dump({'tempo': TEMPO, 'countdownEnd': COUNTDOWN_END, 'clipBStart': CLIP_B_START, 'total': total, 'lines': timing},
