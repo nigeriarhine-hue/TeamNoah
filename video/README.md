@@ -9,7 +9,7 @@ to guess, then Noah checks the PC and reveals the answer.
 
 | Episode | Case | Answer | Output |
 |---|---|---|---|
-| 1 | Windows 11 PC, 16 GB RAM, 512 GB SSD — slow every time it starts | C: Startup apps (9 launching at startup in this scenario) | `out/noah-can-you-diagnose-this-pc-ep1.mp4`, `out/noah-can-you-diagnose-this-pc-ep1-thumbnail.png` |
+| 1 | Windows 11 PC, 16 GB RAM, 512 GB SSD — slow every time it starts | C: Startup apps (9 launching at startup in this scenario) | `out/noah-can-you-diagnose-this-pc-ep1.mp4`, `out/noah-can-you-diagnose-this-pc-ep1-thumbnail.png`, `out/noah-can-you-diagnose-this-pc-ep1-thumbnail-16x9.png` |
 
 ### Render
 
@@ -18,6 +18,7 @@ npm install
 npm run vo:ep1      # only when VO lines change: rebuilds public/vo/vo_full.wav + lip-sync tracks
 npm run render:ep1  # video (Remotion render + loudness master to -14 LUFS)
 npm run thumb:ep1   # 9:16 thumbnail
+npm run thumb:ep1:16x9  # 16:9 thumbnail
 ```
 
 `npm run studio` opens the Remotion editor for live previews.
@@ -30,7 +31,7 @@ npm run thumb:ep1   # 9:16 thumbnail
   symptom hook on the real PC ("THIS PC" tag + big symptom text) → "CAN YOU DIAGNOSE IT?" →
   case file (PC + specs + symptom) with A/B/C and countdown → "Got your answer?" (A/B/C pulse) →
   Noah checks each option on this PC → "The answer" + why → "Did you get it right? Comment A, B or C".
-- `src/series/Thumbnail.tsx`: 9:16 thumbnail (host + the actual PC + question + A/B/C, never the answer).
+- `src/series/Thumbnail.tsx` / `Thumbnail16x9.tsx`: 9:16 and 16:9 thumbnails (host + the actual PC + question + A/B/C, never the answer).
 - `src/components/PcGraphics.tsx`: drawn Windows 11-style PC (generic, no logos), case-file panel, generic app icons.
 - `src/components/NoahWindow.tsx`: light-theme Noah result view with per-option evidence cards.
 - `src/components/ui.tsx`: series badge, captions, option cards, countdown ring, icons.
