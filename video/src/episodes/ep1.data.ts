@@ -36,6 +36,7 @@ export const ep1: EpisodeData = {
   ],
   vo: 'vo/vo_full.wav',
   hostStill: 'host/host-still.png',
+  thumbStill: 'host/thumb-still.png', // same host, puzzled raised-eyebrow look, thumb at the PC
 
   quizFrom: 112,
   caseFrom: 116,

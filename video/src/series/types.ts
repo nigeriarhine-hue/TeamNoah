@@ -51,6 +51,7 @@ export type EpisodeData = {
   hostSegmentsB: {from: number; dur: number; startFrom: number; rate: number}[];
   vo: string;
   hostStill: string;
+  thumbStill?: string; // optional thumbnail-specific host still (e.g. a punchier expression)
 
   // Timeline
   quizFrom: number;

@@ -21,7 +21,7 @@ export const Thumbnail: React.FC<{ep: EpisodeData}> = ({ep}) => {
   return (
     <AbsoluteFill style={{background: '#111'}}>
       <Img
-        src={staticFile(ep.hostStill)}
+        src={staticFile(ep.thumbStill ?? ep.hostStill)}
         style={{position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 30%'}}
       />
       {/* readability */}
@@ -58,7 +58,7 @@ export const Thumbnail: React.FC<{ep: EpisodeData}> = ({ep}) => {
       </div>
 
       {/* point at the actual PC */}
-      <div style={{position: 'absolute', left: 650, top: 230, width: 220, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{position: 'absolute', left: 770, top: 372, width: 220, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div
           style={{
             fontFamily: SANS,
