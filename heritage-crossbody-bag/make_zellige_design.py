@@ -70,8 +70,8 @@ def rosette(d, cx, cy, R, n, petal, accent, g):
                   polar(cx, cy, R * 1.0, t), polar(cx, cy, R * 0.62, t + w * 0.82)], petal, g)
         # small accent drop between petal tips
         u = t + w
-        piece(d, [polar(cx, cy, R * 0.80, u), polar(cx, cy, R * 0.90, u - w * 0.35),
-                  polar(cx, cy, R * 0.99, u), polar(cx, cy, R * 0.90, u + w * 0.35)], accent, g)
+        piece(d, [polar(cx, cy, R * 0.74, u), polar(cx, cy, R * 0.88, u - w * 0.55),
+                  polar(cx, cy, R * 1.0, u), polar(cx, cy, R * 0.88, u + w * 0.55)], accent, g)
     # center: black ring of small gold petals around a red/gold core
     d.ellipse((cx - R * 0.30, cy - R * 0.30, cx + R * 0.30, cy + R * 0.30), fill=BLACK)
     m = 12
@@ -79,7 +79,7 @@ def rosette(d, cx, cy, R, n, petal, accent, g):
         t = TAU * i / m
         piece(d, [polar(cx, cy, R * 0.12, t), polar(cx, cy, R * 0.20, t - math.pi / m * 0.8),
                   polar(cx, cy, R * 0.28, t), polar(cx, cy, R * 0.20, t + math.pi / m * 0.8)], GOLD, max(1, g // 2))
-    d.ellipse((cx - R * 0.12, cy - R * 0.12, cx + R * 0.12, cy + R * 0.12), fill=accent, outline=BLACK, width=g)
+    d.ellipse((cx - R * 0.15, cy - R * 0.15, cx + R * 0.15, cy + R * 0.15), fill=accent, outline=BLACK, width=g)
     d.ellipse((cx - R * 0.05, cy - R * 0.05, cx + R * 0.05, cy + R * 0.05), fill=GOLD)
 
 
@@ -103,7 +103,7 @@ def field(W, H, a, ox=0.0, oy=0.0, swap=False):
     im = Image.new("RGB", (W, H), GOLD)
     d = ImageDraw.Draw(im)
     g = max(2, round(a * 0.008))
-    star_and_cross(d, W, H, a / 8, ox + a / 16, oy + a / 16, [main, main, BLACK], g)
+    star_and_cross(d, W, H, a / 8, ox + a / 16, oy + a / 16, [main, alt, BLACK], g)
     i0, j0 = -int(ox / a) - 2, -int(oy / a) - 2
     i1, j1 = int((W - ox) / a) + 2, int((H - oy) / a) + 2
     for j in range(j0, j1):
@@ -115,7 +115,7 @@ def field(W, H, a, ox=0.0, oy=0.0, swap=False):
     for j in range(j0, j1):
         for i in range(i0, i1):
             x, y = ox + i * a, oy + j * a
-            rosette(d, x + a / 2, y + a / 2, a * 0.29, 16, main, alt, g)   # medium
+            rosette(d, x + a / 2, y + a / 2, a * 0.29, 16, alt, main, g)   # medium: red petals
             rosette(d, x, y, a * 0.37, 24, main, alt, g)                   # large
     return im
 
