@@ -18,7 +18,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 from make_flow_pieces import overview
-from make_zellige_design import (BLACK, GOLD, GREEN, RED, gild, polar, rosette, star_and_cross)
+from make_zellige_design import BLACK, GOLD, GREEN, RED, gild, rosette, star_and_cross
 
 DPI = 300
 SS = 2
@@ -40,32 +40,34 @@ def mosaic_band(d, W, y0, y1, colors, g):
     d.rectangle((0, y1, W, y1 + g * 4), fill=GOLD, outline=BLACK, width=g)
 
 
+def mini(d, cx, cy, r, k, g):
+    """Small 12-petal rosette; k alternates green and red petals."""
+    petal, accent = (GREEN, RED) if k % 2 == 0 else (RED, GREEN)
+    rosette(d, cx, cy, r, 12, petal, accent, g)
+
+
 def details(w=3000, h=1200):
     """Row of rosettes (6 across, so it repeats end to end) between mosaic bands."""
     W, H = w * SS, h * SS
     im = Image.new("RGB", (W, H), BLACK)
     d = ImageDraw.Draw(im)
     g = max(2, SS * 2)
-    # top and bottom mosaic bands (band height divides the width: 3000 / 125 = 24)
-    for y0 in (0.06, 0.835):
-        top = H * y0
-        band = Image.new("RGB", (W, int(125 * SS)), GOLD)
-        bd = ImageDraw.Draw(band)
-        star_and_cross(bd, W, band.size[1], 125 * SS, 62.5 * SS, 62.5 * SS, [GREEN, RED, BLACK], g)
-        im.paste(band, (0, int(top)))
-        d.rectangle((0, top - 6 * SS, W, top), fill=GOLD)
-        d.rectangle((0, top + band.size[1], W, top + band.size[1] + 6 * SS), fill=GOLD)
+    # top and bottom rows of small rosettes on gold bands (24 across, repeats end to end)
+    for yc in (0.112, 0.888):
+        cy = H * yc
+        d.rectangle((-g * 4, cy - H * 0.07, W + g * 4, cy + H * 0.07), fill=GOLD, outline=BLACK, width=g)
+        step_s = W / 24
+        for i in range(-1, 25):
+            mini(d, (i + 0.5) * step_s, cy, H * 0.05, i, g)
     # center row of rosettes on gold discs, alternating red and green
     n = 6
     step = W / n
     for i in range(-1, n + 1):
         petal, accent = (GREEN, RED) if i % 2 == 0 else (RED, GREEN)
         rosette(d, (i + 0.5) * step, H / 2, H * 0.205, 24, petal, accent, g)
-    # small gold 8-point stars between rosettes
+    # small rosettes between the big ones
     for i in range(n + 1):
-        cx = i * step
-        pts = [polar(cx, H / 2, H * 0.06 if k % 2 == 0 else H * 0.03, math.tau * k / 16) for k in range(16)]
-        d.polygon(pts, fill=GOLD, outline=BLACK, width=g)
+        mini(d, i * step, H / 2, H * 0.055, i + 1, g)
     return gild(im, period=step).resize((w, h), Image.LANCZOS)
 
 
@@ -73,9 +75,7 @@ def divider(d, S, y, color_line=True):
     w = SS * 4
     d.line((S * 0.30, y, S * 0.465, y), fill=RED, width=w)
     d.line((S * 0.535, y, S * 0.70, y), fill=GREEN, width=w)
-    r = S * 0.025
-    pts = [polar(S / 2, y, r if k % 2 == 0 else r * 0.45, math.tau * k / 16) for k in range(16)]
-    d.polygon(pts, fill=GOLD, outline=BLACK, width=SS)
+    mini(d, S / 2, y, S * 0.03, 0, max(1, SS))
 
 
 def outside_label(fonts, px=900):
@@ -83,8 +83,18 @@ def outside_label(fonts, px=900):
     im = Image.new("RGB", (S, S), GOLD)
     d = ImageDraw.Draw(im)
     g = max(2, SS * 2)
-    # mosaic border all around, black center panel
-    star_and_cross(d, S, S, S / 12, S / 24, S / 24, [GREEN, RED, BLACK], g)
+    # border of small rosettes all around, black center panel
+    n = 12
+    step = S / n
+    k = 0
+    for i in range(n):
+        c = (i + 0.5) * step
+        for cx, cy in ((c, step / 2), (c, S - step / 2)):
+            mini(d, cx, cy, step * 0.44, k, g); k += 1
+    for i in range(1, n - 1):
+        c = (i + 0.5) * step
+        for cx, cy in ((step / 2, c), (S - step / 2, c)):
+            mini(d, cx, cy, step * 0.44, k, g); k += 1
     m = S * 0.12
     d.rectangle((m - 6 * SS, m - 6 * SS, S - m + 6 * SS, S - m + 6 * SS), fill=GOLD, outline=BLACK, width=g)
     d.rectangle((m, m, S - m, S - m), fill=BLACK)
@@ -102,7 +112,9 @@ def inside_label(fonts, px=900):
     g = max(2, SS * 2)
     bh = S * 0.16
     band = Image.new("RGB", (S, int(bh)), GOLD)
-    star_and_cross(ImageDraw.Draw(band), S, int(bh), bh / 2, bh / 4, bh / 4, [GREEN, RED, BLACK], g)
+    bd = ImageDraw.Draw(band)
+    for i in range(9):
+        mini(bd, (i + 0.5) * S / 9, bh / 2, bh * 0.4, i, g)
     im.paste(gild(band), (0, 0))
     d.rectangle((0, bh, S, bh + S * 0.01), fill=BLACK)
     m = S * 0.05
