@@ -25,10 +25,16 @@ SS = 2
 
 
 def inside_pocket(w=2010, h=1500):
+    """Calm lining: offset rows of small rosettes on black."""
     W, H = w * SS, h * SS
-    im = Image.new("RGB", (W, H), GOLD)
+    im = Image.new("RGB", (W, H), BLACK)
     d = ImageDraw.Draw(im)
-    star_and_cross(d, W, H, 100 * SS, 50 * SS, 50 * SS, [BLACK], max(2, SS * 2))
+    g = max(2, SS * 2)
+    step = 200 * SS
+    for j in range(-1, int(H / step) + 2):
+        off = step / 2 if j % 2 else 0
+        for i in range(-1, int(W / step) + 2):
+            mini(d, i * step + off + step / 4, j * step * 0.87 + step / 2, step * 0.32, i + j, g)
     return gild(im).resize((w, h), Image.LANCZOS)
 
 
