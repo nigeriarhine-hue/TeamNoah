@@ -53,7 +53,7 @@ def mini(d, cx, cy, r, k, g):
 
 
 def details(w=3000, h=1200):
-    """Row of rosettes (6 across, so it repeats end to end) between mosaic bands."""
+    """Row of rosettes (10 across, so it repeats end to end) between mosaic bands."""
     W, H = w * SS, h * SS
     im = Image.new("RGB", (W, H), BLACK)
     d = ImageDraw.Draw(im)
@@ -66,14 +66,14 @@ def details(w=3000, h=1200):
         for i in range(-1, 25):
             mini(d, (i + 0.5) * step_s, cy, H * 0.05, i, g)
     # center row of rosettes on gold discs, alternating red and green
-    n = 6
+    n = 10
     step = W / n
     for i in range(-1, n + 1):
         petal, accent = (GREEN, RED) if i % 2 == 0 else (RED, GREEN)
-        rosette(d, (i + 0.5) * step, H / 2, H * 0.205, 24, petal, accent, g)
+        rosette(d, (i + 0.5) * step, H / 2, H * 0.125, 24, petal, accent, g)
     # small rosettes between the big ones
     for i in range(n + 1):
-        mini(d, i * step, H / 2, H * 0.055, i + 1, g)
+        mini(d, i * step, H / 2, H * 0.04, i + 1, g)
     return gild(im, period=step).resize((w, h), Image.LANCZOS)
 
 
