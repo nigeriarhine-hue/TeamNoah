@@ -16,6 +16,7 @@ import math
 import sys
 from pathlib import Path
 
+import numpy as np
 from PIL import Image, ImageDraw
 
 from make_circle_pattern import mockup
@@ -25,7 +26,24 @@ SS = 2
 TAU = 2 * math.pi
 
 BLACK = (10, 10, 10)
-GOLD = (232, 178, 40)
+GOLD = (201, 152, 52)   # placeholder while drawing; painted as metallic gold after
+GOLD_DEEP = np.array([150, 104, 30], np.float32)
+GOLD_MID = np.array([204, 156, 60], np.float32)
+GOLD_HI = np.array([242, 210, 128], np.float32)
+
+
+def gild(im):
+    """Replace flat gold with a metallic gold: soft diagonal sheen, deeper shadows."""
+    arr = np.asarray(im, np.float32)
+    w, h = im.size
+    mask = np.all(np.abs(arr - np.array(GOLD, np.float32)) < 1, axis=-1)
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    t = (0.5 + 0.35 * np.sin((xx + yy) / (w * 0.09)) + 0.15 * np.sin((xx - 0.7 * yy) / (w * 0.05) + 1.0))
+    t = np.clip(t, 0, 1)[..., None]
+    col = np.where(t < 0.5, GOLD_DEEP + (GOLD_MID - GOLD_DEEP) * (t / 0.5),
+                   GOLD_MID + (GOLD_HI - GOLD_MID) * ((t - 0.5) / 0.5))
+    arr[mask] = col[mask]
+    return Image.fromarray(arr.astype(np.uint8))
 GREEN = (0, 122, 61)
 RED = (196, 18, 36)
 
@@ -138,7 +156,7 @@ def compose(W, H, top_y=0.56, flip_schemes=False):
     # gold-red-gold band along the border
     for width, col in ((int(h * 0.016), BLACK), (int(h * 0.012), GOLD), (int(h * 0.005), RED)):
         d.line(border, fill=col, width=width, joint="curve")
-    return im.resize((W, H), Image.LANCZOS)
+    return gild(im).resize((W, H), Image.LANCZOS)
 
 
 if __name__ == "__main__":
@@ -152,7 +170,7 @@ if __name__ == "__main__":
     pocket = front.crop((0, H - 1500, W, H))
     pocket.save(out / "zellige-pocket_2010x1500.png", dpi=(DPI, DPI), optimize=True)
     # plain repeating tile: 8" holds a whole number of cells (300 px spacing)
-    tile = field(2400 * SS, 2400 * SS, 300 * SS).resize((2400, 2400), Image.LANCZOS)
+    tile = gild(field(2400 * SS, 2400 * SS, 300 * SS)).resize((2400, 2400), Image.LANCZOS)
     tile.save(out / "zellige-tile_2400.png", dpi=(DPI, DPI), optimize=True)
     mockup(front, front=front, pocket_art=pocket).save(out / "zellige-preview-mockup.png")
     print("done")
