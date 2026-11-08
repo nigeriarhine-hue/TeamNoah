@@ -53,28 +53,21 @@ def mini(d, cx, cy, r, k, g):
 
 
 def details(w=3000, h=1200):
-    """Row of rosettes (10 across, so it repeats end to end) between mosaic bands."""
+    """Gold band of small rosettes, filling the whole strip.
+    24 across (125 px each), 8 rows: repeats end to end and top to bottom."""
     W, H = w * SS, h * SS
-    im = Image.new("RGB", (W, H), BLACK)
+    im = Image.new("RGB", (W, H), GOLD)
     d = ImageDraw.Draw(im)
     g = max(2, SS * 2)
-    # top and bottom rows of small rosettes on gold bands (24 across, repeats end to end)
-    for yc in (0.112, 0.888):
-        cy = H * yc
-        d.rectangle((-g * 4, cy - H * 0.07, W + g * 4, cy + H * 0.07), fill=GOLD, outline=BLACK, width=g)
-        step_s = W / 24
+    step = W / 24
+    rows = 8
+    rh = H / rows
+    for j in range(rows):
+        cy = (j + 0.5) * rh
+        off = step / 2 if j % 2 else 0
         for i in range(-1, 25):
-            mini(d, (i + 0.5) * step_s, cy, H * 0.05, i, g)
-    # center row of rosettes on gold discs, alternating red and green
-    n = 10
-    step = W / n
-    for i in range(-1, n + 1):
-        petal, accent = (GREEN, RED) if i % 2 == 0 else (RED, GREEN)
-        rosette(d, (i + 0.5) * step, H / 2, H * 0.125, 24, petal, accent, g)
-    # small rosettes between the big ones
-    for i in range(n + 1):
-        mini(d, i * step, H / 2, H * 0.04, i + 1, g)
-    return gild(im, period=step).resize((w, h), Image.LANCZOS)
+            mini(d, (i + 0.5) * step + off, cy, step * 0.42, i + j, g)
+    return gild(im, period=step * 4).resize((w, h), Image.LANCZOS)
 
 
 def divider(d, S, y, color_line=True):
