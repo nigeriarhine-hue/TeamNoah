@@ -11,7 +11,7 @@ import {
 import {MacWindow} from '../components/MacWindow';
 import {ToonRoom} from '../components/Toon';
 import {Caption, clamp, NoahMark, useSpring} from '../components/ui';
-import {AURORA, C, MONO, SANS} from '../theme';
+import {AURORA, C, MONO, SANS, SERIF} from '../theme';
 
 // Short: "I Asked AI Why My Mac Is Slow. It Gave Me Homework."
 // Script: drafts/noah-mac-shorts-scripts.md, video 3. 30s at 30 fps.
@@ -597,93 +597,158 @@ export const MacAiHomework: React.FC = () => (
   </AbsoluteFill>
 );
 
-/* ---------- 9:16 thumbnail ---------- */
-// Render with: remotion still src/index.ts MacAiHomeworkThumb <out.png>
+/* ---------- 9:16 thumbnail: messy AI homework vs. Noah's one answer ---------- */
+// Render with: npm run thumb:mac-ai
+const THUMB_CMDS = [
+  {cmd: 'top -o cpu', x: 0, r: -4},
+  {cmd: 'vm_stat | grep free', x: 70, r: 3},
+  {cmd: 'du -sh ~/Library/Caches', x: 10, r: -2},
+  {cmd: 'launchctl list', x: 90, r: 5},
+  {cmd: 'log show --last 1h', x: 30, r: -3},
+];
+
 export const MacAiHomeworkThumb: React.FC = () => {
-  const head: React.CSSProperties = {
-    fontFamily: SANS,
-    fontWeight: 800,
-    color: 'white',
-    letterSpacing: -3,
-    lineHeight: 0.98,
-    textShadow: '0 8px 34px rgba(10,12,40,.6)',
-  };
+  const head: React.CSSProperties = {fontFamily: SANS, fontWeight: 800, color: 'white', letterSpacing: -3, lineHeight: 0.95};
   return (
-    <AbsoluteFill style={{background: C.page}}>
-      {/* the slow Mac */}
-      <MacScene zoomFrom={-10} zoomTo={0} spinning />
-      <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '62%', background: 'linear-gradient(180deg, rgba(14,16,48,0) 0%, rgba(14,16,48,.82) 38%, rgba(14,16,48,.95) 100%)'}} />
-
-      {/* the question */}
-      <div style={{position: 'absolute', top: 120, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
-        <div
-          style={{
-            fontFamily: SANS,
-            fontWeight: 800,
-            fontSize: 58,
-            color: 'white',
-            background: '#3B82F6',
-            borderRadius: 40,
-            borderBottomRightRadius: 10,
-            padding: '20px 36px',
-            boxShadow: '0 18px 40px -14px rgba(37,99,235,.8)',
-          }}
-        >
-          Why is my Mac slow?
-        </div>
-      </div>
-
-      {/* the "homework" */}
-      <div style={{position: 'absolute', left: 70, right: 70, top: 930, transform: 'rotate(-3deg)'}}>
-        <div style={{background: '#FAF9F6', borderRadius: 30, padding: '22px 24px', boxShadow: '0 30px 70px -20px rgba(0,0,0,.6)'}}>
-          {['top -o cpu', 'vm_stat', 'du -sh ~/Library/Caches'].map((cmd) => (
-            <div
-              key={cmd}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                fontFamily: MONO,
-                fontSize: 36,
-                color: '#E5E7EB',
-                background: '#1F2430',
-                borderRadius: 16,
-                padding: '16px 20px',
-                marginBottom: 12,
-              }}
-            >
-              <span>$ {cmd}</span>
-              <span style={{fontFamily: SANS, fontSize: 22, color: '#9CA3AF', border: '1px solid #4B5563', borderRadius: 8, padding: '3px 10px'}}>Copy</span>
-            </div>
-          ))}
-          <div style={{fontFamily: SANS, fontSize: 30, fontWeight: 600, color: C.ink2}}>…then paste the output here!</div>
-        </div>
-      </div>
+    <AbsoluteFill style={{backgroundImage: 'linear-gradient(160deg,#2563EB 0%,#4F46E5 45%,#7C3AED 100%)'}}>
+      {/* soft light blobs for depth */}
+      <div style={{position: 'absolute', width: 900, height: 900, borderRadius: 450, left: -300, top: -200, background: 'radial-gradient(circle, rgba(255,255,255,.22), rgba(255,255,255,0) 65%)'}} />
+      <div style={{position: 'absolute', width: 900, height: 900, borderRadius: 450, right: -350, bottom: -250, background: 'radial-gradient(circle, rgba(236,72,153,.35), rgba(236,72,153,0) 65%)'}} />
 
       {/* headline */}
-      <div style={{position: 'absolute', left: 40, right: 40, top: 1350, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16}}>
-        <span style={{...head, fontSize: 120}}>AI GAVE ME</span>
-        <span
+      <div style={{position: 'absolute', top: 90, left: 0, right: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6}}>
+        <span style={{...head, fontSize: 112}}>AI GAVE ME</span>
+        <span style={{...head, fontSize: 148, color: '#FDE047', textShadow: '0 10px 30px rgba(0,0,0,.25)'}}>HOMEWORK</span>
+      </div>
+
+      {/* the mess */}
+      <div style={{position: 'absolute', left: 60, top: 420, width: 960, height: 560}}>
+        <div style={{position: 'absolute', inset: 0, borderRadius: 36, background: 'rgba(255,255,255,.96)', boxShadow: '0 30px 70px -24px rgba(0,0,0,.55)', transform: 'rotate(-2deg)'}} />
+        <div style={{position: 'absolute', left: 34, top: 26, transform: 'rotate(-2deg)', ...{fontFamily: SANS, fontWeight: 800, fontSize: 30, letterSpacing: 3, color: '#374151', background: '#E5E7EB', borderRadius: 12, padding: '8px 16px'}}}>AI CHATBOT</div>
+        {/* red marker circle (behind the commands) */}
+        <svg style={{position: 'absolute', left: -20, top: 60}} width={1000} height={520} viewBox="0 0 1000 520">
+          <path
+            d="M120 60 C 420 -10, 860 20, 930 160 C 990 300, 850 470, 520 480 C 230 490, 40 420, 50 260 C 58 130, 160 70, 300 52"
+            stroke="#EF4444"
+            strokeWidth={14}
+            fill="none"
+            strokeLinecap="round"
+          />
+        </svg>
+        {THUMB_CMDS.map((c, i) => (
+          <div
+            key={c.cmd}
+            style={{
+              position: 'absolute',
+              left: 40 + c.x,
+              top: 100 + i * 86,
+              transform: `rotate(${c.r}deg)`,
+              fontFamily: MONO,
+              fontSize: 40,
+              color: '#E5E7EB',
+              background: '#1F2430',
+              borderRadius: 16,
+              padding: '14px 22px',
+              boxShadow: '0 10px 20px -10px rgba(0,0,0,.5)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            $ {c.cmd}
+          </div>
+        ))}
+        <div
           style={{
-            ...head,
-            fontSize: 150,
-            backgroundImage: AURORA,
-            borderRadius: 30,
-            padding: '0 32px 12px',
-            textShadow: 'none',
-            boxShadow: '0 18px 44px -12px rgba(79,70,229,.85)',
-            transform: 'rotate(-2deg)',
+            position: 'absolute',
+            right: 34,
+            top: 6,
+            fontFamily: SERIF,
+            fontStyle: 'italic',
+            fontSize: 104,
+            color: '#EF4444',
+            transform: 'rotate(-8deg)',
+            textShadow: '0 4px 0 rgba(255,255,255,.9), 0 -4px 0 rgba(255,255,255,.9), 4px 0 0 rgba(255,255,255,.9), -4px 0 0 rgba(255,255,255,.9)',
           }}
         >
-          HOMEWORK
-        </span>
+          homework??
+        </div>
+      </div>
+
+      {/* VS */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 440,
+          top: 1010,
+          width: 200,
+          height: 200,
+          borderRadius: 100,
+          background: '#FDE047',
+          border: '10px solid white',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: SANS,
+          fontWeight: 800,
+          fontSize: 92,
+          color: '#1A1D61',
+          boxShadow: '0 20px 40px -12px rgba(0,0,0,.5)',
+          zIndex: 2,
+        }}
+      >
+        VS
+      </div>
+
+      {/* Noah's one answer */}
+      <div style={{position: 'absolute', left: 60, top: 1150, transform: 'rotate(1.5deg)'}}>
+        <MacWindow title="Noah" noah width={960}>
+          <div style={{padding: '30px 34px 34px', fontFamily: SANS}}>
+            <div style={{fontSize: 26, fontWeight: 800, letterSpacing: 3, color: C.mute}}>FOUND IT ON THIS MAC</div>
+            <div style={{fontSize: 66, fontWeight: 800, letterSpacing: -1.5, color: C.ink, lineHeight: 1.05, margin: '10px 0 30px', maxWidth: 600}}>
+              8 apps opening
+              <br />
+              at login
+            </div>
+            <div style={{display: 'flex', gap: 18}}>
+              <div style={{flex: 1, textAlign: 'center', fontSize: 34, fontWeight: 700, color: C.ink2, border: `2px solid ${C.line2}`, borderRadius: 20, padding: '20px 0'}}>No thanks</div>
+              <div style={{flex: 1, textAlign: 'center', fontSize: 34, fontWeight: 800, color: 'white', backgroundImage: AURORA, borderRadius: 20, padding: '20px 0', boxShadow: '0 12px 30px -10px rgba(79,70,229,.8)'}}>
+                ✓ Go ahead
+              </div>
+            </div>
+          </div>
+        </MacWindow>
+      </div>
+
+      {/* ONE FIX sticker */}
+      <div
+        style={{
+          position: 'absolute',
+          left: 790,
+          top: 1170,
+          width: 220,
+          height: 220,
+          borderRadius: 110,
+          background: '#16A34A',
+          border: '8px solid white',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transform: 'rotate(10deg)',
+          boxShadow: '0 18px 36px -12px rgba(0,0,0,.45)',
+          fontFamily: SANS,
+          color: 'white',
+        }}
+      >
+        <span style={{fontSize: 60, fontWeight: 800, lineHeight: 1}}>✓</span>
+        <span style={{fontSize: 38, fontWeight: 800, letterSpacing: 1}}>ONE FIX</span>
+        <span style={{fontSize: 20, fontWeight: 700, opacity: 0.9}}>NO TERMINAL</span>
       </div>
 
       {/* small branding */}
-      <div style={{position: 'absolute', left: 0, right: 0, top: 1745, display: 'flex', justifyContent: 'center'}}>
+      <div style={{position: 'absolute', left: 0, right: 0, top: 1775, display: 'flex', justifyContent: 'center'}}>
         <div style={{display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,.95)', borderRadius: 999, padding: '10px 22px 10px 14px'}}>
-          <NoahMark size={40} />
-          <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 30, color: C.ink}}>Noah for Mac</span>
+          <NoahMark size={42} />
+          <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 32, color: C.ink}}>Noah for Mac</span>
         </div>
       </div>
     </AbsoluteFill>
