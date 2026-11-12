@@ -16,7 +16,7 @@ import {AURORA, C, MONO, SANS} from '../theme';
 // Short: "I Asked AI Why My Mac Is Slow. It Gave Me Homework."
 // Script: drafts/noah-mac-shorts-scripts.md, video 3. 30s at 30 fps.
 //
-// No on-screen host. Voice: Piper en_GB-cori-high (public domain), built with tools/build_short_vo.py.
+// No on-screen host. Voice: Clipchamp TTS recording (public/vo/mac-ai/clipchamp-full.m4a), split into lines and placed with tools/build_short_vo.py.
 
 import timing from '../../public/vo/mac-ai/timing.json';
 
