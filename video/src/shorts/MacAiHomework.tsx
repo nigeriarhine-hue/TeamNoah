@@ -3,96 +3,79 @@ import {
   AbsoluteFill,
   Audio,
   Easing,
-  getStaticFiles,
   interpolate,
-  OffthreadVideo,
   Sequence,
   staticFile,
   useCurrentFrame,
 } from 'remotion';
 import {MacWindow} from '../components/MacWindow';
+import {Toon, ToonRoom} from '../components/Toon';
 import {Caption, clamp, NoahMark, useSpring} from '../components/ui';
 import {AURORA, C, MONO, SANS} from '../theme';
 
 // Short: "I Asked AI Why My Mac Is Slow. It Gave Me Homework."
 // Script: drafts/noah-mac-shorts-scripts.md, video 3. 30s at 30 fps.
 //
-// Host footage and voice-over come from Higgsfield. Until they exist, the host slots render a
-// clearly marked placeholder and the captions carry the script, so the edit can be reviewed.
+// Host: the animated Toon presenter. Voice: Piper (en_US-joe-medium), built with tools/build_short_vo.py.
 
-export const MAC_AI_HOMEWORK_FRAMES = 900;
+import timing from '../../public/vo/mac-ai/timing.json';
+
+// All beats are placed on the voice-over (public/vo/mac-ai/timing.json, from tools/build_short_vo.py).
+const L = timing.lines; // L[0] = line 1 ...
+const f = (sec: number) => Math.round(sec * 30);
+
+export const MAC_AI_HOMEWORK_FRAMES = timing.totalFrames;
 
 const S = {
-  hostClipHook: 'host/mac-ai-hook.mp4', // 0:00–0:02.3
-  hostClipEnd: 'host/mac-ai-end.mp4', // 0:26–0:30
-  vo: 'vo/mac-ai-homework.wav',
-  hookLine1At: 4,
-  hookLine2At: 48,
-  chatFrom: 66,
-  commandsAt: [100, 114, 128, 142, 156, 170],
+  vo: 'vo/mac-ai/vo.wav',
+  hookLine1At: L[0].startFrame,
+  hookLine2At: L[1].startFrame,
+  chatFrom: L[1].endFrame,
+  commandsAt: [0, 10, 20, 30, 40, 50].map((d) => L[2].startFrame - 2 + d),
   stamps: [
-    {text: 'RUN THIS.', at: 122},
-    {text: 'PASTE THAT.', at: 152},
-    {text: 'TELL ME WHAT IT SAYS.', at: 180},
+    {text: 'RUN THIS.', at: L[2].startFrame},
+    {text: 'PASTE THAT.', at: f(L[2].pauses[0])},
+    {text: 'TELL ME WHAT IT SAYS.', at: f(L[2].pauses[1])},
   ],
-  splitFrom: 210,
-  noahFrom: 330,
-  checksAt: [392, 418, 444, 470, 496],
-  findingAt: 515,
-  approveAt: 600,
-  clickAt: 648,
-  doneAt: 660,
-  noHomeworkFrom: 690,
-  endFrom: 780,
-  total: MAC_AI_HOMEWORK_FRAMES,
+  splitFrom: L[3].startFrame - 3,
+  noahFrom: L[4].startFrame - 4,
+  // "Memory and swap. Disk. Login items. Crash logs."
+  checksAt: [L[5].startFrame + 12, f(L[5].pauses[0]) - 2, f(L[5].pauses[1]) - 2, f(L[5].pauses[2]) - 6, L[5].endFrame - 6],
+  findingAt: f(L[6].pauses[0]) - 6,
+  approveAt: L[7].startFrame,
+  clickAt: f(L[7].pauses[1]) + 6,
+  doneAt: f(L[7].pauses[1]) + 18,
+  noHomeworkFrom: L[8].startFrame - 4,
+  endFrom: L[9].startFrame - 4,
+  total: timing.totalFrames,
 };
 
 const CAPTIONS: {text: string; from: number; to: number; emphasis?: string[]}[] = [
-  {text: 'Because a chatbot can’t see your Mac.', from: 214, to: 270, emphasis: ['can’t', 'see']},
-  {text: 'It answers the average Mac.', from: 272, to: 328, emphasis: ['average']},
-  {text: 'Noah’s different. It actually looks.', from: 334, to: 388, emphasis: ['looks.']},
-  {text: 'Memory and swap. Disk. Login items. Crash logs.', from: 392, to: 510},
-  {text: 'Then it names the cause — on my Mac, not a guess.', from: 515, to: 598, emphasis: ['my', 'Mac,']},
-  {text: 'One fix. Shown first. I approve it.', from: 602, to: 688, emphasis: ['approve']},
-  {text: 'Noah for Mac. Free to start.', from: 790, to: 890, emphasis: ['Noah']},
+  {text: 'Because a chatbot can’t see your Mac.', from: L[3].startFrame, to: f(L[3].pauses[0]), emphasis: ['can’t', 'see']},
+  {text: 'It answers the average Mac.', from: f(L[3].pauses[0]), to: L[3].endFrame + 6, emphasis: ['average']},
+  {text: 'Noah’s different. It actually looks.', from: L[4].startFrame, to: L[4].endFrame + 3, emphasis: ['looks.']},
+  {text: 'Memory and swap. Disk. Login items. Crash logs.', from: L[5].startFrame, to: L[5].endFrame + 6},
+  {text: 'Then it names the cause, on my Mac, not a guess.', from: L[6].startFrame, to: L[6].endFrame + 4, emphasis: ['my', 'Mac,']},
+  {text: 'One fix. Shown first. I approve it.', from: L[7].startFrame, to: L[7].endFrame + 6, emphasis: ['approve']},
+  {text: 'Noah for Mac. Free to start.', from: L[9].startFrame, to: S.total, emphasis: ['Noah']},
 ];
 
 // Harmless, read-only diagnostic commands: the joke is the homework, not the commands.
 const COMMANDS = ['top -o cpu', 'vm_stat', 'du -sh ~/Library/Caches', 'launchctl list', 'log show --last 1h', 'sysctl vm.swapusage'];
 
-const has = (p: string) => getStaticFiles().some((f) => f.name === p);
 
-/* ---------- Host slot (real clip, or a marked placeholder) ---------- */
-const HostSlot: React.FC<{src: string; label: string}> = ({src, label}) =>
-  has(src) ? (
-    <OffthreadVideo src={staticFile(src)} muted style={{width: '100%', height: '100%', objectFit: 'cover', objectPosition: '50% 30%'}} />
-  ) : (
-    <AbsoluteFill
-      style={{
-        background: 'linear-gradient(160deg,#2B2F6B 0%,#1A1D61 55%,#3B2A7A 100%)',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingTop: 300,
-      }}
-    >
-      <div
-        style={{
-          border: '3px dashed rgba(255,255,255,.35)',
-          borderRadius: 28,
-          padding: '18px 28px',
-          fontFamily: SANS,
-          fontWeight: 800,
-          fontSize: 30,
-          letterSpacing: 2,
-          color: 'rgba(255,255,255,.7)',
-          textAlign: 'center',
-        }}
-      >
-        HOST CLIP (DRAFT)
-        <div style={{fontSize: 24, fontWeight: 600, letterSpacing: 0, marginTop: 6}}>{label}</div>
-      </div>
-    </AbsoluteFill>
-  );
+/* ---------- Animated host (Toon) in the illustrated Mac office ---------- */
+const BROWS = [L[1].startFrame + 6, L[3].startFrame + 30, L[4].startFrame + 20, L[8].startFrame];
+const SMIRKS: [number, number][] = [[L[1].endFrame, L[2].startFrame + 10], [L[8].endFrame, L[9].startFrame], [L[9].endFrame, S.total]];
+
+const HostScene: React.FC<{y?: number; size?: number}> = ({y = 330, size = 1050}) => (
+  <AbsoluteFill>
+    <ToonRoom />
+    <div style={{position: 'absolute', left: 40, top: y}}>
+      <Toon mouth={timing.mouth} browAt={BROWS} smirk={SMIRKS} size={size} />
+    </div>
+  </AbsoluteFill>
+);
 
 /* ---------- Hook ---------- */
 const Hook: React.FC = () => {
@@ -112,7 +95,7 @@ const Hook: React.FC = () => {
   };
   return (
     <AbsoluteFill style={{opacity: out}}>
-      <HostSlot src={S.hostClipHook} label="“I asked an AI chatbot why my Mac is slow. It gave me homework.”" />
+      <HostScene />
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '50%', background: 'linear-gradient(180deg,rgba(14,16,48,0),rgba(14,16,48,.75))'}} />
       <div style={{position: 'absolute', left: 50, right: 50, top: 1060, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18}}>
         <span style={{...text, fontSize: 92, opacity: l1, transform: `translateY(${(1 - l1) * 30}px)`}}>I ASKED AI WHY MY MAC IS SLOW</span>
@@ -469,9 +452,12 @@ const NoHomework: React.FC = () => {
   if (frame < S.noHomeworkFrom - 2 || frame > S.endFrom + 2) return null;
   const big: React.CSSProperties = {fontFamily: SANS, fontWeight: 800, fontSize: 112, color: 'white', letterSpacing: -3, lineHeight: 1, whiteSpace: 'nowrap'};
   return (
-    <AbsoluteFill style={{backgroundImage: AURORA, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 30, opacity: out}}>
+    <AbsoluteFill style={{backgroundImage: AURORA, alignItems: 'center', justifyContent: 'flex-start', paddingTop: 330, flexDirection: 'column', gap: 30, opacity: out}}>
       <span style={{...big, transform: `scale(${0.6 + 0.4 * a})`, opacity: Math.min(1, a * 1.4)}}>NO TERMINAL.</span>
       <span style={{...big, transform: `scale(${0.6 + 0.4 * b})`, opacity: Math.min(1, b * 1.4)}}>NO HOMEWORK.</span>
+      <div style={{position: 'absolute', left: 150, bottom: -60, transform: `translateY(${(1 - a) * 300}px)`}}>
+        <Toon mouth={timing.mouth} browAt={BROWS} smirk={SMIRKS} size={900} />
+      </div>
     </AbsoluteFill>
   );
 };
@@ -483,7 +469,7 @@ const EndCard: React.FC = () => {
   if (frame < S.endFrom) return null;
   return (
     <AbsoluteFill>
-      <HostSlot src={S.hostClipEnd} label="“No Terminal. No homework. Noah for Mac. Free to start.”" />
+      <HostScene />
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(180deg,rgba(14,16,48,0),rgba(14,16,48,.85))'}} />
       <div
         style={{
@@ -535,7 +521,7 @@ const Sfx: React.FC<{at: number; src: string; volume?: number}> = ({at, src, vol
 const Sound: React.FC = () => (
   <>
     <Audio src={staticFile('sfx/bed.wav')} loop volume={0.16} />
-    {has(S.vo) && <Audio src={staticFile(S.vo)} />}
+    <Audio src={staticFile(S.vo)} />
     <Sfx at={S.hookLine1At} src="pop" volume={0.35} />
     <Sfx at={S.hookLine2At} src="timesup" volume={0.35} />
     <Sfx at={S.chatFrom - 4} src="whoosh" volume={0.4} />
