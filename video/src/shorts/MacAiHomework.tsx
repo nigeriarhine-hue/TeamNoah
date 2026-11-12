@@ -9,20 +9,26 @@ import {
   useCurrentFrame,
 } from 'remotion';
 import {MacWindow} from '../components/MacWindow';
-import {Toon, ToonRoom} from '../components/Toon';
+import {ToonRoom} from '../components/Toon';
 import {Caption, clamp, NoahMark, useSpring} from '../components/ui';
 import {AURORA, C, MONO, SANS} from '../theme';
 
 // Short: "I Asked AI Why My Mac Is Slow. It Gave Me Homework."
 // Script: drafts/noah-mac-shorts-scripts.md, video 3. 30s at 30 fps.
 //
-// Host: the animated Toon presenter. Voice: Piper (en_US-joe-medium), built with tools/build_short_vo.py.
+// No on-screen host. Voice: Piper en_US-ljspeech-high (public domain), built with tools/build_short_vo.py.
 
 import timing from '../../public/vo/mac-ai/timing.json';
 
 // All beats are placed on the voice-over (public/vo/mac-ai/timing.json, from tools/build_short_vo.py).
 const L = timing.lines; // L[0] = line 1 ...
 const f = (sec: number) => Math.round(sec * 30);
+// k-th pause inside line i (0-based), or `frac` of the way through the line if the voice didn't pause there
+const pause = (i: number, k: number, frac: number) => {
+  const p = L[i].pauses[k];
+  return p !== undefined ? f(p) : Math.round(L[i].startFrame + frac * (L[i].endFrame - L[i].startFrame));
+};
+const lastPause = (i: number, frac: number) => (L[i].pauses.length ? f(L[i].pauses[L[i].pauses.length - 1]) : Math.round(L[i].startFrame + frac * (L[i].endFrame - L[i].startFrame)));
 
 export const MAC_AI_HOMEWORK_FRAMES = timing.totalFrames;
 
@@ -34,25 +40,25 @@ const S = {
   commandsAt: [0, 10, 20, 30, 40, 50].map((d) => L[2].startFrame - 2 + d),
   stamps: [
     {text: 'RUN THIS.', at: L[2].startFrame},
-    {text: 'PASTE THAT.', at: f(L[2].pauses[0])},
-    {text: 'TELL ME WHAT IT SAYS.', at: f(L[2].pauses[1])},
+    {text: 'PASTE THAT.', at: pause(2, 0, 0.3)},
+    {text: 'TELL ME WHAT IT SAYS.', at: pause(2, 1, 0.6)},
   ],
   splitFrom: L[3].startFrame - 3,
   noahFrom: L[4].startFrame - 4,
   // "Memory and swap. Disk. Login items. Crash logs."
-  checksAt: [L[5].startFrame + 12, f(L[5].pauses[0]) - 2, f(L[5].pauses[1]) - 2, f(L[5].pauses[2]) - 6, L[5].endFrame - 6],
-  findingAt: f(L[6].pauses[0]) - 6,
+  checksAt: [L[5].startFrame + 12, pause(5, 0, 0.3) - 2, pause(5, 1, 0.45) - 2, pause(5, 2, 0.7) - 6, L[5].endFrame - 6],
+  findingAt: pause(6, 0, 0.45) - 6,
   approveAt: L[7].startFrame,
-  clickAt: f(L[7].pauses[1]) + 6,
-  doneAt: f(L[7].pauses[1]) + 18,
+  clickAt: lastPause(7, 0.7) + 6,
+  doneAt: lastPause(7, 0.7) + 18,
   noHomeworkFrom: L[8].startFrame - 4,
   endFrom: L[9].startFrame - 4,
   total: timing.totalFrames,
 };
 
 const CAPTIONS: {text: string; from: number; to: number; emphasis?: string[]}[] = [
-  {text: 'Because a chatbot can’t see your Mac.', from: L[3].startFrame, to: f(L[3].pauses[0]), emphasis: ['can’t', 'see']},
-  {text: 'It answers the average Mac.', from: f(L[3].pauses[0]), to: L[3].endFrame + 6, emphasis: ['average']},
+  {text: 'Because a chatbot can’t see your Mac.', from: L[3].startFrame, to: pause(3, 0, 0.5), emphasis: ['can’t', 'see']},
+  {text: 'It answers the average Mac.', from: pause(3, 0, 0.5), to: L[3].endFrame + 6, emphasis: ['average']},
   {text: 'Noah’s different. It actually looks.', from: L[4].startFrame, to: L[4].endFrame + 3, emphasis: ['looks.']},
   {text: 'Memory and swap. Disk. Login items. Crash logs.', from: L[5].startFrame, to: L[5].endFrame + 6},
   {text: 'Then it names the cause, on my Mac, not a guess.', from: L[6].startFrame, to: L[6].endFrame + 4, emphasis: ['my', 'Mac,']},
@@ -64,18 +70,43 @@ const CAPTIONS: {text: string; from: number; to: number; emphasis?: string[]}[] 
 const COMMANDS = ['top -o cpu', 'vm_stat', 'du -sh ~/Library/Caches', 'launchctl list', 'log show --last 1h', 'sysctl vm.swapusage'];
 
 
-/* ---------- Animated host (Toon) in the illustrated Mac office ---------- */
-const BROWS = [L[1].startFrame + 6, L[3].startFrame + 30, L[4].startFrame + 20, L[8].startFrame];
-const SMIRKS: [number, number][] = [[L[1].endFrame, L[2].startFrame + 10], [L[8].endFrame, L[9].startFrame], [L[9].endFrame, S.total]];
+/* ---------- Illustrated Mac office (no host): slow push-in on a beachballing Mac ---------- */
+// The Mac's screen centre in ToonRoom coordinates.
+const MAC_CX = 855;
+const MAC_CY = 736;
 
-const HostScene: React.FC<{y?: number; size?: number}> = ({y = 330, size = 1050}) => (
-  <AbsoluteFill>
-    <ToonRoom />
-    <div style={{position: 'absolute', left: 40, top: y}}>
-      <Toon mouth={timing.mouth} browAt={BROWS} smirk={SMIRKS} size={size} />
-    </div>
-  </AbsoluteFill>
-);
+const Beachball: React.FC<{size: number}> = ({size}) => {
+  const frame = useCurrentFrame();
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        borderRadius: size / 2,
+        background: 'conic-gradient(#F43F5E, #F59E0B, #FACC15, #22C55E, #06B6D4, #3B82F6, #8B5CF6, #EC4899, #F43F5E)',
+        transform: `rotate(${frame * 14}deg)`,
+        boxShadow: '0 4px 10px rgba(0,0,0,.35), inset 0 0 0 2px rgba(255,255,255,.5)',
+      }}
+    />
+  );
+};
+
+const MacScene: React.FC<{zoomFrom: number; zoomTo: number; spinning?: boolean}> = ({zoomFrom, zoomTo, spinning}) => {
+  const frame = useCurrentFrame();
+  const t = interpolate(frame, [zoomFrom, zoomTo], [0, 1], {...clamp, easing: Easing.inOut(Easing.quad)});
+  const z = 1 + 0.5 * t;
+  // slide the Mac toward frame centre while pushing in on it
+  return (
+    <AbsoluteFill style={{transform: `translateX(${(540 - MAC_CX) * t}px) scale(${z})`, transformOrigin: `${MAC_CX}px ${MAC_CY - 120}px`}}>
+      <ToonRoom />
+      {spinning && (
+        <div style={{position: 'absolute', left: MAC_CX - 34, top: MAC_CY - 46}}>
+          <Beachball size={68} />
+        </div>
+      )}
+    </AbsoluteFill>
+  );
+};
 
 /* ---------- Hook ---------- */
 const Hook: React.FC = () => {
@@ -95,7 +126,7 @@ const Hook: React.FC = () => {
   };
   return (
     <AbsoluteFill style={{opacity: out}}>
-      <HostScene />
+      <MacScene zoomFrom={0} zoomTo={S.chatFrom} spinning />
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '50%', background: 'linear-gradient(180deg,rgba(14,16,48,0),rgba(14,16,48,.75))'}} />
       <div style={{position: 'absolute', left: 50, right: 50, top: 1060, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18}}>
         <span style={{...text, fontSize: 92, opacity: l1, transform: `translateY(${(1 - l1) * 30}px)`}}>I ASKED AI WHY MY MAC IS SLOW</span>
@@ -452,12 +483,9 @@ const NoHomework: React.FC = () => {
   if (frame < S.noHomeworkFrom - 2 || frame > S.endFrom + 2) return null;
   const big: React.CSSProperties = {fontFamily: SANS, fontWeight: 800, fontSize: 112, color: 'white', letterSpacing: -3, lineHeight: 1, whiteSpace: 'nowrap'};
   return (
-    <AbsoluteFill style={{backgroundImage: AURORA, alignItems: 'center', justifyContent: 'flex-start', paddingTop: 330, flexDirection: 'column', gap: 30, opacity: out}}>
+    <AbsoluteFill style={{backgroundImage: AURORA, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 30, opacity: out}}>
       <span style={{...big, transform: `scale(${0.6 + 0.4 * a})`, opacity: Math.min(1, a * 1.4)}}>NO TERMINAL.</span>
       <span style={{...big, transform: `scale(${0.6 + 0.4 * b})`, opacity: Math.min(1, b * 1.4)}}>NO HOMEWORK.</span>
-      <div style={{position: 'absolute', left: 150, bottom: -60, transform: `translateY(${(1 - a) * 300}px)`}}>
-        <Toon mouth={timing.mouth} browAt={BROWS} smirk={SMIRKS} size={900} />
-      </div>
     </AbsoluteFill>
   );
 };
@@ -469,7 +497,7 @@ const EndCard: React.FC = () => {
   if (frame < S.endFrom) return null;
   return (
     <AbsoluteFill>
-      <HostScene />
+      <MacScene zoomFrom={S.endFrom} zoomTo={S.total} />
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '55%', background: 'linear-gradient(180deg,rgba(14,16,48,0),rgba(14,16,48,.85))'}} />
       <div
         style={{
