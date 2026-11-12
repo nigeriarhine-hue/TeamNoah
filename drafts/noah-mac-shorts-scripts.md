@@ -47,7 +47,7 @@ Mac storage full but your files don't add up? Here's what "System Data" was on t
 
 Noah for Mac is an AI that checks your Mac's own folders, finds what's really using
 the space, and shows you the plan before it changes anything. Cleared files go to
-the Trash, so you can put them back. Free to start: https://onnoah.app/mac/
+the Trash, so you can put them back. Free to start: https://onnoah.app
 
 (Numbers shown are from this Mac. Yours will be different.)
 
@@ -90,7 +90,7 @@ Mac fans loud when nothing's open? Usually one process is pinning the CPU.
 
 Noah for Mac checks what's actually running on your Mac, explains it in plain
 English, and shows the fix before doing anything. It also tells you plainly when
-a problem is hardware. Free to start: https://onnoah.app/mac/
+a problem is hardware. Free to start: https://onnoah.app
 
 #macbook #mactips #macfan #overheating #shorts
 ```
@@ -129,7 +129,7 @@ a problem is hardware. Free to start: https://onnoah.app/mac/
 Chatbots can only guess from what you type, so you get a list of Terminal commands.
 Noah for Mac actually inspects your Mac: running processes, memory pressure and
 swap, disk usage, login items, crash logs. Then it names the likely cause, shows
-one fix, and does it only when you approve. Free to start: https://onnoah.app/mac/
+one fix, and does it only when you approve. Free to start: https://onnoah.app
 
 #mactips #macslow #ai #macbook #shorts
 ```
@@ -171,7 +171,7 @@ first? Does it move files to the Trash instead of erasing them? Does it log ever
 change? Does it skip the scare tactics?
 
 Noah for Mac does all four. It's notarized by Apple, never removes anything without
-showing you first, and is free to start: https://onnoah.app/mac/
+showing you first, and is free to start: https://onnoah.app
 
 #mactips #maccleaner #macsecurity #macbook #shorts
 ```
@@ -214,7 +214,7 @@ turned them off only after approval, and you can turn them back on anytime.
 
 Noah for Mac checks memory, storage, login items and launch agents on your actual
 Mac, then shows you one fix before doing anything. Free to start:
-https://onnoah.app/mac/
+https://onnoah.app
 
 #mactips #macslow #loginitems #macbook #shorts
 ```
@@ -227,7 +227,7 @@ https://onnoah.app/mac/
 
 - **File name:** match the keyword before uploading, e.g. `mac-system-data-storage-full-noah.mp4`.
 - **Title:** keyword first, under ~60 characters, `#shorts` at the end.
-- **Description first line:** the exact search phrase. "Noah for Mac" plus `https://onnoah.app/mac/` in every description.
+- **Description first line:** the exact search phrase. "Noah for Mac" plus `https://onnoah.app` in every description.
 - **Hashtags:** 3–5 in the description, the first 3 show above the title.
 - **Say "Noah" in the voice-over** (auto-captions are indexed), and show "Noah for Mac" on screen at least once.
 - **Upload your own captions file** (exact script) so spelling of "Noah" and the terms like "System Data" and "mds_stores" is right.

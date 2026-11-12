@@ -139,7 +139,7 @@ export const ToonRoom: React.FC = () => {
   const frame = useCurrentFrame();
   const glow = 0.5 + 0.1 * Math.sin(frame / 30);
   return (
-    <svg width={1080} height={1920} viewBox="0 0 1080 1920" style={{position: 'absolute', inset: 0}}>
+    <svg width={1080} height={1920} viewBox="0 0 1080 1920" style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
       <defs>
         <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#E9E6F2" />
@@ -159,8 +159,8 @@ export const ToonRoom: React.FC = () => {
           <stop offset="1" stopColor="#D5C3A6" />
         </linearGradient>
       </defs>
-      <rect width="1080" height="1920" fill="url(#wall)" />
-      <rect width="1080" height="1920" fill="url(#wallGlow)" />
+      <rect x="-1200" y="-600" width="3480" height="3120" fill="url(#wall)" />
+      <rect x="-1200" y="-600" width="3480" height="3120" fill="url(#wallGlow)" />
       {/* window */}
       <rect x="40" y="160" width="250" height="520" rx="10" fill="#F6F4FA" stroke="#CFCADC" strokeWidth="10" />
       <rect x="60" y="180" width="210" height="480" fill="#D7EAD9" opacity="0.7" />
@@ -170,8 +170,8 @@ export const ToonRoom: React.FC = () => {
       <path d="M860 320 C 840 270, 820 250, 790 240 M860 320 C 870 260, 900 240, 930 230 M860 320 C 860 280, 860 250, 865 215" stroke="#3E8E5A" strokeWidth="10" fill="none" strokeLinecap="round" />
       <rect x="930" y="350" width="90" height="30" rx="4" fill="#B9B4C8" />
       {/* desk */}
-      <rect x="0" y="1030" width="1080" height="890" fill="url(#desk)" />
-      <rect x="0" y="1030" width="1080" height="14" fill="#CDB896" />
+      <rect x="-1200" y="1030" width="3480" height="1600" fill="url(#desk)" />
+      <rect x="-1200" y="1030" width="3480" height="14" fill="#CDB896" />
       {/* all-in-one Mac (generic, no logo) */}
       <g transform="translate(655 604)">
         <rect x="0" y="0" width="400" height="290" rx="18" fill="#E7E8EC" stroke="#C9CBD1" strokeWidth="4" />

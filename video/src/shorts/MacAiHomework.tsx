@@ -518,7 +518,7 @@ const EndCard: React.FC = () => {
           <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 52, color: C.ink, letterSpacing: -1}}>Noah for Mac</span>
         </div>
         <div style={{fontFamily: SANS, fontWeight: 700, fontSize: 36, color: 'white'}}>Looks at your Mac. Asks before it fixes.</div>
-        <div style={{fontFamily: SANS, fontWeight: 800, fontSize: 34, color: '#FCD34D', letterSpacing: 1}}>FREE TO START · onnoah.app/mac</div>
+        <div style={{fontFamily: SANS, fontWeight: 800, fontSize: 34, color: '#FCD34D', letterSpacing: 1}}>FREE TO START · onnoah.app</div>
       </div>
     </AbsoluteFill>
   );
@@ -596,3 +596,96 @@ export const MacAiHomework: React.FC = () => (
     <Sound />
   </AbsoluteFill>
 );
+
+/* ---------- 9:16 thumbnail ---------- */
+// Render with: remotion still src/index.ts MacAiHomeworkThumb <out.png>
+export const MacAiHomeworkThumb: React.FC = () => {
+  const head: React.CSSProperties = {
+    fontFamily: SANS,
+    fontWeight: 800,
+    color: 'white',
+    letterSpacing: -3,
+    lineHeight: 0.98,
+    textShadow: '0 8px 34px rgba(10,12,40,.6)',
+  };
+  return (
+    <AbsoluteFill style={{background: C.page}}>
+      {/* the slow Mac */}
+      <MacScene zoomFrom={-10} zoomTo={0} spinning />
+      <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '62%', background: 'linear-gradient(180deg, rgba(14,16,48,0) 0%, rgba(14,16,48,.82) 38%, rgba(14,16,48,.95) 100%)'}} />
+
+      {/* the question */}
+      <div style={{position: 'absolute', top: 120, left: 0, right: 0, display: 'flex', justifyContent: 'center'}}>
+        <div
+          style={{
+            fontFamily: SANS,
+            fontWeight: 800,
+            fontSize: 58,
+            color: 'white',
+            background: '#3B82F6',
+            borderRadius: 40,
+            borderBottomRightRadius: 10,
+            padding: '20px 36px',
+            boxShadow: '0 18px 40px -14px rgba(37,99,235,.8)',
+          }}
+        >
+          Why is my Mac slow?
+        </div>
+      </div>
+
+      {/* the "homework" */}
+      <div style={{position: 'absolute', left: 70, right: 70, top: 930, transform: 'rotate(-3deg)'}}>
+        <div style={{background: '#FAF9F6', borderRadius: 30, padding: '22px 24px', boxShadow: '0 30px 70px -20px rgba(0,0,0,.6)'}}>
+          {['top -o cpu', 'vm_stat', 'du -sh ~/Library/Caches'].map((cmd) => (
+            <div
+              key={cmd}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                fontFamily: MONO,
+                fontSize: 36,
+                color: '#E5E7EB',
+                background: '#1F2430',
+                borderRadius: 16,
+                padding: '16px 20px',
+                marginBottom: 12,
+              }}
+            >
+              <span>$ {cmd}</span>
+              <span style={{fontFamily: SANS, fontSize: 22, color: '#9CA3AF', border: '1px solid #4B5563', borderRadius: 8, padding: '3px 10px'}}>Copy</span>
+            </div>
+          ))}
+          <div style={{fontFamily: SANS, fontSize: 30, fontWeight: 600, color: C.ink2}}>…then paste the output here!</div>
+        </div>
+      </div>
+
+      {/* headline */}
+      <div style={{position: 'absolute', left: 40, right: 40, top: 1350, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16}}>
+        <span style={{...head, fontSize: 120}}>AI GAVE ME</span>
+        <span
+          style={{
+            ...head,
+            fontSize: 150,
+            backgroundImage: AURORA,
+            borderRadius: 30,
+            padding: '0 32px 12px',
+            textShadow: 'none',
+            boxShadow: '0 18px 44px -12px rgba(79,70,229,.85)',
+            transform: 'rotate(-2deg)',
+          }}
+        >
+          HOMEWORK
+        </span>
+      </div>
+
+      {/* small branding */}
+      <div style={{position: 'absolute', left: 0, right: 0, top: 1745, display: 'flex', justifyContent: 'center'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,.95)', borderRadius: 999, padding: '10px 22px 10px 14px'}}>
+          <NoahMark size={40} />
+          <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 30, color: C.ink}}>Noah for Mac</span>
+        </div>
+      </div>
+    </AbsoluteFill>
+  );
+};
