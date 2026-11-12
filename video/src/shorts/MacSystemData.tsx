@@ -7,7 +7,8 @@ import {AURORA, C, SANS, SERIF} from '../theme';
 import {MacScene} from './MacAiHomework';
 
 // Short: "What Is 'System Data' on Mac? (80 GB Mystery)" — script 1 in drafts/noah-mac-shorts-scripts.md.
-// No on-screen host. Voice built with tools/build_short_vo.py into public/vo/mac-sysdata/.
+// No on-screen host. Voice: user-supplied recording (public/vo/mac-sysdata/generated-full.wav), split into lines
+// and placed with tools/build_short_vo.py.
 // All GB numbers are THIS Mac's example, labeled as such on screen.
 
 const L = timing.lines;
