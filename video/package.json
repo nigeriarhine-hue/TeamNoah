@@ -10,7 +10,10 @@
     "thumb:ep1:16x9": "remotion still src/index.ts ThumbnailEp1Wide ../out/noah-can-you-diagnose-this-pc-ep1-thumbnail-16x9.png --timeout=120000",
     "render:mac-ai": "remotion render src/index.ts MacAiHomework ../out/.mac-ai-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.mac-ai-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-mac-ai-homework.mp4 && rm ../out/.mac-ai-raw.mp4",
     "vo:mac-ai": "python3 tools/build_short_vo.py public/vo/mac-ai 0.15 0.12 0.25 0.3 0.35 0.15 0.25 0.2 0.3 0.3",
-    "thumb:mac-ai": "remotion still src/index.ts MacAiHomeworkThumb ../out/noah-mac-ai-homework-thumbnail.png --timeout=120000"
+    "thumb:mac-ai": "remotion still src/index.ts MacAiHomeworkThumb ../out/noah-mac-ai-homework-thumbnail.png --timeout=120000",
+    "render:mac-sysdata": "remotion render src/index.ts MacSystemData ../out/.mac-sysdata-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.mac-sysdata-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-mac-system-data.mp4 && rm ../out/.mac-sysdata-raw.mp4",
+    "vo:mac-sysdata": "python3 tools/build_short_vo.py public/vo/mac-sysdata 0.15 0.15 0.3 0.3 0.25 0.15 0.35 0.25 0.2 0.35 0.35 0.35",
+    "thumb:mac-sysdata": "remotion still src/index.ts MacSystemDataThumb ../out/noah-mac-system-data-thumbnail.png --timeout=120000"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",

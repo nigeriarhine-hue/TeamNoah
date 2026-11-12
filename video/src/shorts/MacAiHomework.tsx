@@ -91,7 +91,7 @@ const Beachball: React.FC<{size: number}> = ({size}) => {
   );
 };
 
-const MacScene: React.FC<{zoomFrom: number; zoomTo: number; spinning?: boolean}> = ({zoomFrom, zoomTo, spinning}) => {
+export const MacScene: React.FC<{zoomFrom: number; zoomTo: number; spinning?: boolean}> = ({zoomFrom, zoomTo, spinning}) => {
   const frame = useCurrentFrame();
   const t = interpolate(frame, [zoomFrom, zoomTo], [0, 1], {...clamp, easing: Easing.inOut(Easing.quad)});
   const z = 1 + 0.5 * t;

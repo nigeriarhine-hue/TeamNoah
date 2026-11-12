@@ -1,0 +1,47 @@
+1
+00:00:00,150 --> 00:00:02,887
+My Mac says I have eighty gigs of System Data.
+
+2
+00:00:02,887 --> 00:00:04,441
+I did not put it there.
+
+3
+00:00:04,591 --> 00:00:07,247
+And Storage settings won't tell me what it is.
+
+4
+00:00:07,397 --> 00:00:08,836
+So I asked Noah.
+
+5
+00:00:08,936 --> 00:00:12,192
+Noah doesn't guess. It checks the folders on this Mac,
+
+6
+00:00:12,192 --> 00:00:15,721
+and found it: old caches and leftovers nobody uses.
+
+7
+00:00:15,921 --> 00:00:18,480
+Here's the part I like: it shows the plan first.
+
+8
+00:00:18,580 --> 00:00:21,200
+Nothing's deleted. It all goes to the Trash.
+
+9
+00:00:21,250 --> 00:00:23,030
+And every change is in the log.
+
+10
+00:00:23,230 --> 00:00:26,306
+Forty-one gigs back. My files didn't change.
+
+11
+00:00:26,506 --> 00:00:28,559
+Noah for Mac. Free to start.
+
+12
+00:00:28,759 --> 00:00:30,768
+Now... what's your System Data at?
