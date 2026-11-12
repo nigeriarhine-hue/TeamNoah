@@ -128,13 +128,13 @@ const Hook: React.FC = () => {
     <AbsoluteFill style={{opacity: out}}>
       <MacScene zoomFrom={0} zoomTo={S.chatFrom} spinning />
       <div style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '50%', background: 'linear-gradient(180deg,rgba(14,16,48,0),rgba(14,16,48,.75))'}} />
-      <div style={{position: 'absolute', left: 50, right: 50, top: 1060, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18}}>
-        <span style={{...text, fontSize: 92, opacity: l1, transform: `translateY(${(1 - l1) * 30}px)`}}>I ASKED AI WHY MY MAC IS SLOW</span>
+      <div style={{position: 'absolute', left: 60, right: 160, top: 1000, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18}}>
+        <span style={{...text, fontSize: 80, opacity: l1, transform: `translateY(${(1 - l1) * 30}px)`}}>I ASKED AI WHY MY MAC IS SLOW</span>
         {frame >= S.hookLine2At - 2 && (
           <span
             style={{
               ...text,
-              fontSize: 104,
+              fontSize: 88,
               backgroundImage: AURORA,
               borderRadius: 24,
               padding: '0 24px 8px',
@@ -199,7 +199,7 @@ const ChatHomework: React.FC = () => {
         transform: `translateY(${(1 - enter) * 200 + leave * -120}px)`,
       }}
     >
-      <MacWindow title="AI Chat" width={960}>
+      <MacWindow title="AI Chat" width={860}>
         <div style={{height: 980, overflow: 'hidden', position: 'relative', background: '#FAF9F6'}}>
           <div style={{padding: '30px 30px 0', transform: `translateY(${-scrollEased}px)`}}>
             {/* user */}
@@ -294,7 +294,7 @@ const CantSee: React.FC = () => {
         <br />
         SEE YOUR MAC
       </div>
-      <div style={{position: 'absolute', top: 620, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 70}}>
+      <div style={{position: 'absolute', top: 620, left: 0, right: 110, display: 'flex', justifyContent: 'center', gap: 50}}>
         <div style={{opacity: a, transform: `translateX(${(1 - a) * -80}px)`}}>
           <MiniMac dim label="“THE AVERAGE MAC”" sub="what a chatbot answers" />
         </div>
@@ -324,8 +324,8 @@ const NoahChecks: React.FC = () => {
   const clickP = interpolate(frame, [S.clickAt, S.clickAt + 4, S.clickAt + 10], [0, 1, 0], clamp);
   const leave = interpolate(frame, [S.noHomeworkFrom - 6, S.noHomeworkFrom + 4], [0, 1], clamp);
   if (frame < S.noahFrom - 2 || leave >= 1) return null;
-  const cursorX = interpolate(frame, [S.approveAt + 10, S.clickAt], [980, 760], {...clamp, easing: Easing.inOut(Easing.cubic)});
-  const cursorY = interpolate(frame, [S.approveAt + 10, S.clickAt], [1700, 1468], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const cursorX = interpolate(frame, [S.approveAt + 10, S.clickAt], [900, 680], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const cursorY = interpolate(frame, [S.approveAt + 10, S.clickAt], [1500, 1430], {...clamp, easing: Easing.inOut(Easing.cubic)});
   return (
     <AbsoluteFill style={{opacity: 1 - leave}}>
       <div
@@ -347,7 +347,7 @@ const NoahChecks: React.FC = () => {
         NOAH LOOKS AT <span style={{color: 'white', backgroundImage: AURORA, borderRadius: 16, padding: '0 16px 6px'}}>THIS MAC</span>
       </div>
       <div style={{position: 'absolute', left: 60, top: 280, opacity: enter, transform: `translateY(${(1 - enter) * 220}px)`}}>
-        <MacWindow title="Noah" noah width={960}>
+        <MacWindow title="Noah" noah width={860}>
           <div style={{padding: '22px 28px 28px', fontFamily: SANS}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: 18}}>
               <div style={{fontSize: 28, fontWeight: 600, color: C.ink2, background: C.page2, border: `1px solid ${C.line2}`, borderRadius: 20, padding: '12px 20px'}}>
@@ -419,9 +419,9 @@ const NoahChecks: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            left: 90,
-            right: 90,
-            top: 1290,
+            left: 80,
+            right: 180,
+            top: 1230,
             borderRadius: 32,
             background: 'white',
             border: `1px solid ${C.line2}`,
@@ -481,7 +481,7 @@ const NoHomework: React.FC = () => {
   const b = useSpring(S.noHomeworkFrom + 16, {damping: 10, stiffness: 210, mass: 0.6});
   const out = interpolate(frame, [S.endFrom - 6, S.endFrom + 2], [1, 0], clamp);
   if (frame < S.noHomeworkFrom - 2 || frame > S.endFrom + 2) return null;
-  const big: React.CSSProperties = {fontFamily: SANS, fontWeight: 800, fontSize: 112, color: 'white', letterSpacing: -3, lineHeight: 1, whiteSpace: 'nowrap'};
+  const big: React.CSSProperties = {fontFamily: SANS, fontWeight: 800, fontSize: 82, color: 'white', letterSpacing: -3, lineHeight: 1, whiteSpace: 'nowrap', marginRight: 110};
   return (
     <AbsoluteFill style={{backgroundImage: AURORA, alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 30, opacity: out}}>
       <span style={{...big, transform: `scale(${0.6 + 0.4 * a})`, opacity: Math.min(1, a * 1.4)}}>NO TERMINAL.</span>
@@ -531,9 +531,9 @@ const Captions: React.FC = () => {
   if (!line) return null;
   const dark = frame >= S.splitFrom && frame < S.noHomeworkFrom;
   const out = interpolate(frame, [line.to - 4, line.to], [1, 0], clamp);
-  const top = frame >= S.endFrom ? 1500 : frame >= S.noahFrom ? 1700 : 1560;
+  const top = frame >= S.endFrom ? 1430 : frame >= S.noahFrom ? 1118 : 1340;
   return (
-    <div style={{position: 'absolute', left: 70, right: 70, top, opacity: out}}>
+    <div style={{position: 'absolute', left: 60, right: 160, top, opacity: out}}>
       <Caption key={line.from} text={line.text} from={line.from} emphasis={line.emphasis} size={frame >= S.noahFrom && frame < S.endFrom ? 48 : 56} dark={dark} />
     </div>
   );

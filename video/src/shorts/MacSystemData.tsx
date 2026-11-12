@@ -93,7 +93,7 @@ const StorageBar: React.FC<{fill: number; sysData: number}> = ({fill, sysData}) 
 const StorageWindow: React.FC<{sysData: number; fill: number; children?: React.ReactNode}> = ({sysData, fill, children}) => {
   const used = SEGMENTS.reduce((a, s) => a + (s.label === 'System Data' ? sysData : s.gb), 0);
   return (
-    <MacWindow title="Storage" width={960}>
+    <MacWindow title="Storage" width={860}>
       <div style={{padding: '30px 34px 34px', fontFamily: SANS}}>
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 18}}>
           <span style={{fontSize: 36, fontWeight: 800, color: C.ink}}>Mac storage</span>
@@ -117,7 +117,7 @@ const Mystery: React.FC = () => {
   const h2 = useSpring(T.hook2, {damping: 9, stiffness: 220, mass: 0.5});
   const shake = frame >= T.cursorClick && frame < T.cursorClick + 14 ? Math.sin((frame - T.cursorClick) * 2.2) * 10 : 0;
   const tip = interpolate(frame, [T.cursorClick + 2, T.cursorClick + 8], [0, 1], clamp);
-  const cx = interpolate(frame, [T.rows + 14, T.cursorClick], [900, 760], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const cx = interpolate(frame, [T.rows + 14, T.cursorClick], [880, 700], {...clamp, easing: Easing.inOut(Easing.cubic)});
   const cy = interpolate(frame, [T.rows + 14, T.cursorClick], [1500, 1062], {...clamp, easing: Easing.inOut(Easing.cubic)});
   const out = interpolate(frame, [T.noah - 6, T.noah + 4], [1, 0], clamp);
   if (frame > T.noah + 4) return null;
@@ -186,16 +186,16 @@ const Mystery: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 1460,
+            left: 60,
+            right: 160,
+            top: 1210,
             display: 'flex',
             justifyContent: 'center',
             transform: `scale(${0.5 + 0.5 * h2}) rotate(${(1 - h2) * -8 - 3}deg)`,
             opacity: Math.min(1, h2 * 1.5),
           }}
         >
-          <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 76, color: 'white', background: '#EF4444', borderRadius: 20, padding: '10px 28px 16px', boxShadow: '0 16px 40px -12px rgba(239,68,68,.7)'}}>
+          <span style={{fontFamily: SANS, fontWeight: 800, fontSize: 62, color: 'white', background: '#EF4444', borderRadius: 20, padding: '10px 28px 16px', boxShadow: '0 16px 40px -12px rgba(239,68,68,.7)'}}>
             I DID NOT PUT IT THERE.
           </span>
         </div>
@@ -259,7 +259,7 @@ const NoahScan: React.FC = () => {
         NOAH CHECKS <span style={{color: 'white', backgroundImage: AURORA, borderRadius: 16, padding: '0 16px 6px'}}>THIS MAC</span>
       </div>
       <div style={{position: 'absolute', left: 60, top: 250, opacity: enter, transform: `translateY(${(1 - enter) * 220}px)`}}>
-        <MacWindow title="Noah" noah width={960}>
+        <MacWindow title="Noah" noah width={860}>
           <div style={{padding: '22px 28px 28px', fontFamily: SANS}}>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginBottom: 18}}>
               <div style={{fontSize: 27, fontWeight: 600, color: C.ink2, background: C.page2, border: `1px solid ${C.line2}`, borderRadius: 20, padding: '12px 20px', maxWidth: 700}}>
@@ -324,24 +324,24 @@ const ApproveTrashLog: React.FC = () => {
   const logP = useSpring(T.log, {damping: 14, stiffness: 170, mass: 0.7});
   const trashBulge = interpolate(frame, [T.trash + 10, T.trash + 16, T.trash + 24], [1, 1.18, 1], clamp);
   if (frame < T.approve - 2) return null;
-  const cx = interpolate(frame, [T.approve + 10, T.click], [980, 760], {...clamp, easing: Easing.inOut(Easing.cubic)});
-  const cy = interpolate(frame, [T.approve + 10, T.click], [1780, 1560], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const cx = interpolate(frame, [T.approve + 10, T.click], [900, 680], {...clamp, easing: Easing.inOut(Easing.cubic)});
+  const cy = interpolate(frame, [T.approve + 10, T.click], [1500, 1360], {...clamp, easing: Easing.inOut(Easing.cubic)});
   return (
     <>
       {/* approval card */}
       <div
         style={{
           position: 'absolute',
-          left: 90,
-          right: 90,
-          top: 1360,
+          left: 80,
+          right: 180,
+          top: 1160,
           borderRadius: 32,
           background: 'white',
           border: `1px solid ${C.line2}`,
           boxShadow: '0 30px 70px -24px rgba(15,23,41,.5)',
           padding: '24px 28px',
           fontFamily: SANS,
-          opacity: approveP * (frame >= T.log ? 0 : 1),
+          opacity: approveP * interpolate(frame, [T.trash + 2, T.trash + 8], [1, 0], clamp),
           transform: `translateY(${(1 - approveP) * 80}px)`,
         }}
       >
@@ -388,20 +388,20 @@ const ApproveTrashLog: React.FC = () => {
           {[0, 1, 2, 3, 4, 5].map((i) => {
             const t0 = T.trash + i * 3;
             const p = interpolate(frame, [t0, t0 + 16], [0, 1], {...clamp, easing: Easing.in(Easing.quad)});
-            const x = 300 + i * 70 + (860 - (300 + i * 70)) * p;
-            const y = 1500 - 160 * Math.sin(p * Math.PI) + (1690 - 1500) * p;
+            const x = 200 + i * 70 + (780 - (200 + i * 70)) * p;
+            const y = 1180 - 120 * Math.sin(p * Math.PI) + (1300 - 1180) * p;
             return (
               <span key={i} style={{position: 'absolute', left: x, top: y, fontSize: 48, opacity: p < 1 ? 1 : 0, transform: `scale(${1 - 0.5 * p})`}}>
                 📄
               </span>
             );
           })}
-          <div style={{position: 'absolute', left: 820, top: 1650, fontSize: 110, transform: `scale(${trashBulge})`}}>🗑️</div>
+          <div style={{position: 'absolute', left: 740, top: 1250, fontSize: 110, transform: `scale(${trashBulge})`}}>🗑️</div>
           <div
             style={{
               position: 'absolute',
-              left: 70,
-              top: 1690,
+              left: 80,
+              top: 1420,
               fontFamily: SANS,
               fontWeight: 800,
               fontSize: 34,
@@ -422,9 +422,9 @@ const ApproveTrashLog: React.FC = () => {
         <div
           style={{
             position: 'absolute',
-            left: 90,
-            right: 90,
-            top: 1380,
+            left: 80,
+            right: 180,
+            top: 1180,
             borderRadius: 28,
             background: 'white',
             border: `1px solid ${C.line2}`,
@@ -511,10 +511,10 @@ const LoopQuestion: React.FC = () => {
   if (frame < T.loop - 4) return null;
   return (
     <AbsoluteFill style={{alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 50}}>
-      <div style={{opacity: p, transform: `scale(${0.85 + 0.15 * p})`}}>
+      <div style={{opacity: p, transform: `scale(${0.85 + 0.15 * p})`, marginRight: 100}}>
         <StorageWindow sysData={80} fill={1} />
       </div>
-      <div style={{fontFamily: SANS, fontWeight: 800, fontSize: 86, color: C.navy, letterSpacing: -2, textAlign: 'center', lineHeight: 1.05, opacity: p}}>
+      <div style={{fontFamily: SANS, fontWeight: 800, fontSize: 74, color: C.navy, letterSpacing: -2, textAlign: 'center', lineHeight: 1.05, opacity: p, marginRight: 100}}>
         WHAT’S <span style={{color: 'white', backgroundImage: AURORA, borderRadius: 18, padding: '0 18px 8px'}}>YOUR</span>
         <br />
         SYSTEM DATA AT? 👇
@@ -530,9 +530,9 @@ const Captions: React.FC = () => {
   if (!line) return null;
   const onDark = frame >= T.end && frame < T.loop;
   const out = interpolate(frame, [line.to - 4, line.to], [1, 0], clamp);
-  const top = onDark ? 1520 : frame >= T.approve && frame < T.result ? 1250 : 1630;
+  const top = onDark ? 1430 : frame >= T.approve && frame < T.result ? 1040 : 1340;
   return (
-    <div style={{position: 'absolute', left: 70, right: 70, top, opacity: out}}>
+    <div style={{position: 'absolute', left: 60, right: 160, top, opacity: out}}>
       <Caption key={line.from} text={line.text} from={line.from} emphasis={line.emphasis} size={50} dark={!onDark} />
     </div>
   );
