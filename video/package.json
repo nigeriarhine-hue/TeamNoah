@@ -7,7 +7,8 @@
     "render:ep1": "remotion render src/index.ts DiagnoseEp1 ../out/.ep1-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.ep1-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-can-you-diagnose-this-pc-ep1.mp4 && rm ../out/.ep1-raw.mp4",
     "thumb:ep1": "remotion still src/index.ts ThumbnailEp1 ../out/noah-can-you-diagnose-this-pc-ep1-thumbnail.png --timeout=120000",
     "vo:ep1": "python3 tools/build_vo.py 10.13",
-    "thumb:ep1:16x9": "remotion still src/index.ts ThumbnailEp1Wide ../out/noah-can-you-diagnose-this-pc-ep1-thumbnail-16x9.png --timeout=120000"
+    "thumb:ep1:16x9": "remotion still src/index.ts ThumbnailEp1Wide ../out/noah-can-you-diagnose-this-pc-ep1-thumbnail-16x9.png --timeout=120000",
+    "render:mac-ai": "remotion render src/index.ts MacAiHomework ../out/.mac-ai-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.mac-ai-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-mac-ai-homework-DRAFT.mp4 && rm ../out/.mac-ai-raw.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",
