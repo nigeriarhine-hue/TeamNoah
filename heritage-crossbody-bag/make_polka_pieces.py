@@ -2,7 +2,8 @@
 
 Usage: python3 make_polka_pieces.py <fonts_dir> <out_dir>
 Outputs (300 DPI): polka-accent-details_3000x1200.png (repeats end to end),
-polka-outside-label_900x900.png, polka-inside-label_900x900.png
+polka-outside-label_900x900.png, polka-inside-label_900x900.png,
+polka-inside-pocket_2010x1500.png
 """
 import sys
 from pathlib import Path
@@ -77,9 +78,15 @@ def inside(fonts, px=900):
     return im.resize((px, px), Image.LANCZOS)
 
 
+def inside_pocket(w=2010, h=1500):
+    """Lining: smaller dots than the outside (1/6" across, 1/3" apart)."""
+    return accent(w, h, step=100, r=25)
+
+
 if __name__ == "__main__":
     fonts, out = Path(sys.argv[1]), Path(sys.argv[2])
     accent().save(out / "polka-accent-details_3000x1200.png", dpi=(DPI, DPI), optimize=True)
     outside(fonts).save(out / "polka-outside-label_900x900.png", dpi=(DPI, DPI), optimize=True)
     inside(fonts).save(out / "polka-inside-label_900x900.png", dpi=(DPI, DPI), optimize=True)
+    inside_pocket().save(out / "polka-inside-pocket_2010x1500.png", dpi=(DPI, DPI), optimize=True)
     print("done")
