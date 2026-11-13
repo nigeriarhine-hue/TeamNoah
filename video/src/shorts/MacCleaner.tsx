@@ -7,7 +7,8 @@ import {AURORA, C, MONO, SANS} from '../theme';
 import {MacScene} from './MacAiHomework';
 
 // Short: "Do You Actually Need a Mac Cleaner App?" (script 4 in drafts/noah-mac-shorts-scripts.md).
-// No on-screen host. Voice placed with tools/build_short_vo.py into public/vo/mac-cleaner/.
+// No on-screen host. Voice: user-supplied recording (public/vo/mac-cleaner/generated-full.wav), split into lines
+// and placed with tools/build_short_vo.py.
 // The scareware pop-up is a generic mock-up: no real product, brand or domain (".example").
 // Layout stays inside the mobile safe area: x 60–920, y 150–1500.
 
@@ -24,8 +25,9 @@ const T = {
   tactics: L[2].startFrame - 4,
   list: L[3].startFrame - 4,
   item: [L[4].startFrame, L[5].startFrame, L[6].startFrame, L[7].startFrame],
-  sayNo: pause(7, 0, 0.45),
-  noThanksClick: pause(7, 0, 0.45) + 22,
+  // "…And you can always say no" starts after the LAST pause in line 8
+  sayNo: L[7].pauses.length ? f(L[7].pauses[L[7].pauses.length - 1]) : at(7, 0.45),
+  noThanksClick: (L[7].pauses.length ? f(L[7].pauses[L[7].pauses.length - 1]) : at(7, 0.45)) + 22,
   noah: L[8].startFrame - 4,
   notarized: pause(8, 0, 0.5),
   end: L[9].startFrame - 4,

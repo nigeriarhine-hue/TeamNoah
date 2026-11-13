@@ -1,43 +1,43 @@
 1
-00:00:00,150 --> 00:00:02,616
+00:00:00,150 --> 00:00:03,173
 "Your Mac is severely damaged. Clean now!"
 
 2
-00:00:02,816 --> 00:00:03,720
+00:00:03,423 --> 00:00:04,427
 Yeah... no.
 
 3
-00:00:03,920 --> 00:00:06,960
+00:00:04,627 --> 00:00:08,201
 Some Mac cleaner apps scare you first, and explain never.
 
 4
-00:00:07,110 --> 00:00:09,131
+00:00:08,351 --> 00:00:10,059
 Here's what you actually want instead.
 
 5
-00:00:09,281 --> 00:00:12,724
+00:00:10,309 --> 00:00:13,691
 One: it shows you exactly what it'll do, before it does it.
 
 6
-00:00:12,924 --> 00:00:16,399
+00:00:13,941 --> 00:00:17,128
 Two: nothing gets erased. Cleared files go to the Trash.
 
 7
-00:00:16,599 --> 00:00:18,646
+00:00:17,378 --> 00:00:19,433
 Three: a log of every change.
 
 8
-00:00:18,846 --> 00:00:22,125
+00:00:19,683 --> 00:00:23,036
 Four: no fake alarms. And you can always say no.
 
 9
-00:00:22,325 --> 00:00:25,241
+00:00:23,286 --> 00:00:25,993
 That's how Noah works. It's notarized by Apple.
 
 10
-00:00:25,441 --> 00:00:27,495
+00:00:26,243 --> 00:00:28,145
 Noah for Mac. Free to start.
 
 11
-00:00:27,745 --> 00:00:29,196
+00:00:28,445 --> 00:00:29,971
 And close that pop-up.
