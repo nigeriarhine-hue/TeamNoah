@@ -13,7 +13,10 @@
     "thumb:mac-ai": "remotion still src/index.ts MacAiHomeworkThumb ../out/noah-mac-ai-homework-thumbnail.png --timeout=120000",
     "render:mac-sysdata": "remotion render src/index.ts MacSystemData ../out/.mac-sysdata-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.mac-sysdata-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-mac-system-data.mp4 && rm ../out/.mac-sysdata-raw.mp4",
     "vo:mac-sysdata": "python3 tools/build_short_vo.py public/vo/mac-sysdata 0.15 0.15 0.3 0.3 0.25 0.15 0.35 0.25 0.2 0.35 0.35 0.35",
-    "thumb:mac-sysdata": "remotion still src/index.ts MacSystemDataThumb ../out/noah-mac-system-data-thumbnail.png --timeout=120000"
+    "thumb:mac-sysdata": "remotion still src/index.ts MacSystemDataThumb ../out/noah-mac-system-data-thumbnail.png --timeout=120000",
+    "render:mac-cleaner": "remotion render src/index.ts MacCleaner ../out/.mac-cleaner-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.mac-cleaner-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-mac-cleaner.mp4 && rm ../out/.mac-cleaner-raw.mp4",
+    "vo:mac-cleaner": "python3 tools/build_short_vo.py public/vo/mac-cleaner 0.15 0.35 0.35 0.3 0.3 0.35 0.35 0.35 0.35 0.35 0.4",
+    "thumb:mac-cleaner": "remotion still src/index.ts MacCleanerThumb ../out/noah-mac-cleaner-thumbnail.png --timeout=120000"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",
