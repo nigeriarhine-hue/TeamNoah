@@ -31,13 +31,13 @@ Three: a log of every change.
 Four: no fake alarms. And you can always say no.
 
 9
-00:00:23,286 --> 00:00:25,993
-That's how Noah works. It's notarized by Apple.
+00:00:23,286 --> 00:00:24,443
+That's how Noah works.
 
 10
-00:00:26,243 --> 00:00:28,145
+00:00:24,693 --> 00:00:26,595
 Noah for Mac. Free to start.
 
 11
-00:00:28,445 --> 00:00:29,971
+00:00:26,895 --> 00:00:28,421
 And close that pop-up.

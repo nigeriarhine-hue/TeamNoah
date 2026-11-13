@@ -153,7 +153,7 @@ one fix, and does it only when you approve. Free to start: https://onnoah.app
 | 0:12 | "Two: nothing gets erased. Cleared files go to the Trash." | [Files → Trash, restore arrow] ✓ TRASH, NOT DELETE |
 | 0:16 | "Three: a log of every change." | [Action Log] ✓ EVERYTHING LOGGED |
 | 0:19 | "Four: no nagging. No fake alarms." | ✓ NO SCARE TACTICS |
-| 0:21 | "That's how Noah works. It's notarized by Apple, and you can say no." | [Noah card: No thanks / Go ahead] |
+| 0:21 | "That's how Noah works, and you can say no." | [Noah card: No thanks / Go ahead] |
 | 0:25 | "Free to start. Noah for Mac." | onnoah.app/mac |
 | 0:27 | "…and close that pop-up." | [Pop-up closes, loop] |
 
@@ -170,7 +170,7 @@ Before you install a "Mac cleaner," check for this: does it show you the plan
 first? Does it move files to the Trash instead of erasing them? Does it log every
 change? Does it skip the scare tactics?
 
-Noah for Mac does all four. It's notarized by Apple, never removes anything without
+Noah for Mac does all four. It never removes anything without
 showing you first, and is free to start: https://onnoah.app
 
 #mactips #maccleaner #macsecurity #macbook #shorts

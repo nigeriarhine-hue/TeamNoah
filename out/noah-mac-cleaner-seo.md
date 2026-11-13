@@ -1,6 +1,6 @@
 # SEO: "Do You Actually Need a Mac Cleaner App?"
 
-Files: `noah-mac-cleaner.mp4` (9:16, 30.7s) · `noah-mac-cleaner-thumbnail.png` ·
+Files: `noah-mac-cleaner.mp4` (9:16, 29.2s) · `noah-mac-cleaner-thumbnail.png` ·
 `noah-mac-cleaner.srt` (captions)
 
 Upload the video with this file name:
@@ -29,7 +29,7 @@ Upload the video with this file name:
 4️⃣ No fake alarms, no countdowns, and you can always say no
 
 That's how Noah for Mac works. It checks your Mac, explains what it found,
-and asks before changing anything. Notarized by Apple. Free to start.
+and asks before changing anything. Free to start.
 
 Try Noah for Mac → https://onnoah.app
 
@@ -102,7 +102,8 @@ Noah for Mac does all four. Free to start → link in bio (onnoah.app)
 ## Claims check
 
 Matches onnoah.app/mac: shows the plan before acting, cleared files go to the Trash, every change in
-the Action Log, never scares you into paying, you can refuse, notarized by Apple, free to start.
+the Action Log, never scares you into paying, you can refuse, free to start. "Notarized by Apple" was
+removed on purpose: it isn't verified, so it isn't claimed anywhere in the video or copy.
 The scareware is a generic mock-up on a `.example` domain with made-up threat names. No real
 cleaner app or company is named or shown. "Some Mac cleaner apps" is stated as a general pattern
 (the page itself says "the Mac world is full of those"), not about any specific product.

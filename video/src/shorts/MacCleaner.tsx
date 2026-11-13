@@ -29,7 +29,6 @@ const T = {
   sayNo: L[7].pauses.length ? f(L[7].pauses[L[7].pauses.length - 1]) : at(7, 0.45),
   noThanksClick: (L[7].pauses.length ? f(L[7].pauses[L[7].pauses.length - 1]) : at(7, 0.45)) + 22,
   noah: L[8].startFrame - 4,
-  notarized: pause(8, 0, 0.5),
   end: L[9].startFrame - 4,
   loop: L[10].startFrame - 6,
   closeClick: L[10].endFrame - 4,
@@ -43,7 +42,7 @@ const CAPTIONS: {text: string; from: number; to: number; emphasis?: string[]}[] 
   {text: 'Two: nothing gets erased. Cleared files go to the Trash.', from: L[5].startFrame, to: L[5].endFrame + 6, emphasis: ['Trash.']},
   {text: 'Three: a log of every change.', from: L[6].startFrame, to: L[6].endFrame + 6, emphasis: ['every']},
   {text: 'Four: no fake alarms. And you can always say no.', from: L[7].startFrame, to: L[7].endFrame + 6, emphasis: ['say', 'no.']},
-  {text: 'That’s how Noah works. It’s notarized by Apple.', from: L[8].startFrame, to: L[8].endFrame + 6, emphasis: ['Noah']},
+  {text: 'That’s how Noah works.', from: L[8].startFrame, to: L[8].endFrame + 6, emphasis: ['Noah']},
   {text: 'Noah for Mac. Free to start.', from: L[9].startFrame, to: L[9].endFrame + 8, emphasis: ['Noah']},
   {text: 'And close that pop-up.', from: L[10].startFrame, to: T.total, emphasis: ['close']},
 ];
@@ -548,7 +547,6 @@ const Checklist: React.FC = () => {
 const NoahCard: React.FC = () => {
   const frame = useCurrentFrame();
   const p = useSpring(T.noah + 2, {damping: 14, stiffness: 170, mass: 0.7});
-  const badge = useSpring(T.notarized, {damping: 10, stiffness: 220, mass: 0.5});
   const out = interpolate(frame, [T.end - 6, T.end + 2], [1, 0], clamp);
   if (frame < T.noah - 2 || frame > T.end + 2) return null;
   return (
@@ -566,22 +564,6 @@ const NoahCard: React.FC = () => {
                   {x}
                 </div>
               ))}
-            </div>
-            <div
-              style={{
-                marginTop: 22,
-                fontSize: 32,
-                fontWeight: 800,
-                color: C.commit,
-                background: C.commitSoft,
-                border: '2px solid rgba(13,148,136,.4)',
-                borderRadius: 999,
-                padding: '12px 26px',
-                transform: `scale(${0.6 + 0.4 * badge})`,
-                opacity: Math.min(1, badge * 1.5),
-              }}
-            >
-              ✓ Notarized by Apple
             </div>
           </div>
         </MacWindow>
@@ -669,7 +651,6 @@ const Sound: React.FC = () => (
     ))}
     <Sfx at={T.noThanksClick} src="pop" volume={0.45} />
     <Sfx at={T.noah} src="whoosh" volume={0.35} />
-    <Sfx at={T.notarized} src="reveal" volume={0.45} />
     <Sfx at={T.end - 4} src="whoosh" volume={0.35} />
     <Sfx at={T.closeClick} src="pop" volume={0.5} />
   </>
