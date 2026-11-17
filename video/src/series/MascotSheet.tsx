@@ -26,7 +26,7 @@ export const MascotSheet: React.FC = () => (
     <div style={{display: 'flex', alignItems: 'center', gap: 18}}>
       <NoahMark size={56} />
       <span style={{fontSize: 44, fontWeight: 800, color: C.ink, letterSpacing: -1}}>Noah mascot</span>
-      <span style={{fontSize: 26, fontWeight: 700, color: 'white', backgroundImage: AURORA, borderRadius: 999, padding: '6px 16px'}}>concept v1 · name TBD</span>
+      <span style={{fontSize: 26, fontWeight: 700, color: 'white', backgroundImage: AURORA, borderRadius: 999, padding: '6px 16px'}}>concept v2 · robot · name TBD</span>
       <span style={{flex: 1}} />
       <span style={{fontFamily: SERIF, fontStyle: 'italic', fontSize: 34, color: C.ink2}}>A competent friend who already looked at the problem.</span>
     </div>
@@ -35,7 +35,7 @@ export const MascotSheet: React.FC = () => (
       {/* hero */}
       <div style={{width: 470, borderRadius: 36, background: 'white', border: `1px solid ${C.line}`, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '30px 0 20px'}}>
         <Mascot size={460} expression="calm" />
-        <div style={{fontSize: 24, fontWeight: 700, color: C.mute, marginTop: 8, textAlign: 'center', padding: '0 30px'}}>Sky above · tide below · the line stays level</div>
+        <div style={{fontSize: 24, fontWeight: 700, color: C.mute, marginTop: 8, textAlign: 'center', padding: '0 30px'}}>Visor face · tide body · the band stays level</div>
       </div>
 
       <div style={{flex: 1, display: 'flex', flexDirection: 'column', gap: 26}}>
@@ -72,7 +72,7 @@ export const MascotSheet: React.FC = () => (
       {[
         ['Never talks as “I”', 'Noah is always third person. The mascot acts; the narrator speaks.'],
         ['The line stays level', 'Never tilt the waterline, in any pose.'],
-        ['Not the logo', 'Pebble, not a circle. The line never overshoots the body.'],
+        ['Not the logo', 'Pebble, not a circle. The band never overshoots the body.'],
         ['No boats, no arks', 'It’s a load line, not a boat.'],
         ['Calm, never hype', 'No panic, no wizard tricks, no fake urgency.'],
       ].map(([h, t]) => (

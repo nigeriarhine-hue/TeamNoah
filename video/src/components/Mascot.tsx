@@ -1,6 +1,7 @@
 import React from 'react';
 
-// Noah mascot (concept v1). A calm, silent helper character for Shorts.
+// Noah mascot (concept v2: robot; v1 'soft' still available via variant="soft").
+// A calm, silent helper character for Shorts.
 //
 // Brand guardrails (from brand-kit.html):
 // - Noah is always third person. The mascot never speaks as "I"; it acts, the narrator talks.
@@ -24,7 +25,9 @@ export const Mascot: React.FC<{
   bob?: number; // vertical offset in px (for idle float)
   look?: number; // -1 left … 1 right (pupils)
   cardText?: string;
-}> = ({size = 400, expression = 'calm', pose = 'idle', blink = 1, glow = 0.6, bob = 0, look = 0, cardText = 'Plan'}) => {
+  variant?: 'soft' | 'robot';
+}> = ({size = 400, expression = 'calm', pose = 'idle', blink = 1, glow = 0.6, bob = 0, look = 0, cardText = 'Plan', variant = 'robot'}) => {
+  const robot = variant === 'robot';
   const W = 400;
   const H = 440;
   // body: soft pebble, slightly wider at the bottom
@@ -41,7 +44,9 @@ export const Mascot: React.FC<{
     const x = side === 'L' ? 62 : 338;
     return (
       <g transform={`rotate(${angle} ${x} 260)`}>
-        <rect x={x - 17} y={250} width={34} height={92} rx={17} fill="url(#mTide)" stroke={NAVY} strokeWidth={9} />
+        <rect x={x - 17} y={250} width={34} height={92} rx={robot ? 10 : 17} fill={robot ? 'url(#mMetal)' : 'url(#mTide)'} stroke={NAVY} strokeWidth={9} />
+        {robot && <circle cx={x} cy={296} r={9} fill={NAVY} />}
+        {robot && <rect x={x - 21} y={330} width={42} height={24} rx={10} fill="url(#mTide)" stroke={NAVY} strokeWidth={8} />}
         {extra}
       </g>
     );
@@ -108,6 +113,22 @@ export const Mascot: React.FC<{
           <stop offset="0" stopColor="#F3F4FF" />
           <stop offset="1" stopColor={SKY_SHADE} />
         </linearGradient>
+        <linearGradient id="mMetal" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#F4F5FF" />
+          <stop offset="0.45" stopColor="#D9DCF7" />
+          <stop offset="1" stopColor="#AEB3E3" />
+        </linearGradient>
+        <linearGradient id="mVisor" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#1B1F4F" />
+          <stop offset="1" stopColor="#0B1024" />
+        </linearGradient>
+        <filter id="mLed" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
         <clipPath id="mBody">
           <path d={body} />
         </clipPath>
@@ -119,17 +140,79 @@ export const Mascot: React.FC<{
       <g transform={`translate(0 ${bob})`}>
         {left}
         {/* feet */}
-        <ellipse cx={150} cy={392} rx={36} ry={20} fill={NAVY} />
-        <ellipse cx={250} cy={392} rx={36} ry={20} fill={NAVY} />
+        {robot ? (
+          <>
+            <rect x={108} y={374} width={84} height={34} rx={12} fill={NAVY} />
+            <rect x={208} y={374} width={84} height={34} rx={12} fill={NAVY} />
+            {[120, 140, 160, 180, 220, 240, 260, 280].map((x) => (
+              <rect key={x} x={x - 3} y={380} width={6} height={22} rx={3} fill="#3A3F8F" />
+            ))}
+          </>
+        ) : (
+          <>
+            <ellipse cx={150} cy={392} rx={36} ry={20} fill={NAVY} />
+            <ellipse cx={250} cy={392} rx={36} ry={20} fill={NAVY} />
+          </>
+        )}
         {/* body: sky above, tide below, level line between */}
         <g clipPath="url(#mBody)">
-          <rect x={0} y={0} width={W} height={LINE_Y} fill="url(#mSky)" />
+          <rect x={0} y={0} width={W} height={LINE_Y} fill={robot ? 'url(#mMetal)' : 'url(#mSky)'} />
+          {robot && <path d="M90 70 C 150 52, 230 50, 300 68" stroke="white" strokeWidth={10} opacity={0.7} fill="none" strokeLinecap="round" />}
           <rect x={0} y={LINE_Y} width={W} height={H} fill="url(#mTide)" />
           <rect x={0} y={LINE_Y} width={W} height={H} fill="url(#mGlow)" />
         </g>
         <path d={body} fill="none" stroke={NAVY} strokeWidth={11} />
         <line x1={52} y1={LINE_Y} x2={348} y2={LINE_Y} stroke={NAVY} strokeWidth={11} strokeLinecap="butt" />
 
+        {robot ? (
+          <>
+        {/* antenna */}
+        <line x1={200} y1={42} x2={200} y2={6} stroke={NAVY} strokeWidth={9} strokeLinecap="round" />
+        <circle cx={200} cy={0} r={15} fill="url(#mTide)" stroke={NAVY} strokeWidth={7} />
+        <circle cx={195} cy={-5} r={4} fill="white" opacity={0.8} />
+        {/* ear bolts */}
+        {[46, 354].map((x) => (
+          <g key={x}>
+            <circle cx={x} cy={150} r={22} fill="url(#mMetal)" stroke={NAVY} strokeWidth={8} />
+            <circle cx={x} cy={150} r={7} fill={NAVY} />
+          </g>
+        ))}
+        {/* rivets on the waterline band */}
+        {[100, 150, 200, 250, 300].map((x) => (
+          <circle key={x} cx={x} cy={LINE_Y} r={4} fill="#C7CBFF" />
+        ))}
+        {/* chest panel */}
+        <rect x={150} y={262} width={100} height={62} rx={14} fill="rgba(11,16,36,.25)" stroke={NAVY} strokeWidth={6} />
+        {[172, 200, 228].map((x, i) => (
+          <circle key={x} cx={x} cy={293} r={8} fill={i === 1 ? '#C7CBFF' : 'rgba(199,203,255,.45)'} filter="url(#mLed)" opacity={i === 1 ? 0.6 + 0.4 * glow : 1} />
+        ))}
+        {/* visor face */}
+        <rect x={86} y={92} width={228} height={124} rx={46} fill="url(#mVisor)" stroke={NAVY} strokeWidth={8} />
+        <path d="M108 108 C 150 98, 200 98, 236 104" stroke="white" strokeWidth={6} opacity={0.18} fill="none" strokeLinecap="round" />
+        <g filter="url(#mLed)">
+          {[156, 244].map((cx, i) => {
+            const lift = (i === 0 ? browL : browR) * 0.6;
+            if (happy) return <path key={cx} d={`M${cx - 20} ${158} Q ${cx} ${138} ${cx + 20} ${158}`} stroke="#C7CBFF" strokeWidth={10} fill="none" strokeLinecap="round" />;
+            if (expression === 'found') return <circle key={cx} cx={cx + px} cy={150} r={20 * blink} fill="#C7CBFF" />;
+            if (expression === 'waiting')
+              return <rect key={cx} x={cx - 20 + px} y={150 - 6 * blink} width={40} height={12 * blink} rx={6} fill="#C7CBFF" />;
+            const h = (expression === 'curious' && i === 0 ? 30 : 40) * blink;
+            return <rect key={cx} x={cx - 13 + px} y={148 - h / 2 + lift} width={26} height={Math.max(4, h)} rx={13} fill="#C7CBFF" />;
+          })}
+          {/* LED mouth */}
+          {expression === 'found' ? (
+            <circle cx={200} cy={194} r={8} fill="#C7CBFF" />
+          ) : happy ? (
+            <path d="M178 188 Q 200 206 222 188" stroke="#C7CBFF" strokeWidth={7} fill="none" strokeLinecap="round" />
+          ) : expression === 'curious' ? (
+            <path d="M182 194 L 200 190 L 218 196" stroke="#C7CBFF" strokeWidth={7} fill="none" strokeLinecap="round" />
+          ) : (
+            [184, 196, 208, 220].map((x, i) => <rect key={x} x={x - 4} y={190 + (i === 1 || i === 2 ? 3 : 0)} width={8} height={6} rx={3} fill="#C7CBFF" />)
+          )}
+        </g>
+          </>
+        ) : (
+          <>
         {/* face (in the sky) */}
         {[150, 250].map((cx, i) => (
           <g key={cx}>
@@ -156,6 +239,8 @@ export const Mascot: React.FC<{
           <path d="M184 202 Q 200 196 218 204" stroke={NAVY} strokeWidth={8} fill="none" strokeLinecap="round" />
         ) : (
           <path d={happy ? 'M176 194 Q 200 222 224 194' : 'M182 196 Q 200 212 218 196'} stroke={NAVY} strokeWidth={8} fill="none" strokeLinecap="round" />
+        )}
+          </>
         )}
         {right}
         {prop}
