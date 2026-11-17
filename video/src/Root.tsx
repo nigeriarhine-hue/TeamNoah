@@ -3,6 +3,7 @@ import {Composition, Still} from 'remotion';
 import {ep1} from './episodes/ep1.data';
 import {loadFonts} from './fonts';
 import {DiagnoseEpisode} from './series/DiagnoseEpisode';
+import {MascotSheet} from './series/MascotSheet';
 import {Thumbnail} from './series/Thumbnail';
 import {Thumbnail16x9} from './series/Thumbnail16x9';
 import {MAC_AI_HOMEWORK_FRAMES, MacAiHomework, MacAiHomeworkThumb} from './shorts/MacAiHomework';
@@ -26,6 +27,7 @@ export const RemotionRoot: React.FC = () => (
     <Still id="MacCleanerThumb" component={MacCleanerThumb} width={1080} height={1920} />
     <Still id="MacSystemDataThumb" component={MacSystemDataThumb} width={1080} height={1920} />
     <Still id="MacAiHomeworkThumb" component={MacAiHomeworkThumb} width={1080} height={1920} />
+    <Still id="MascotSheet" component={MascotSheet} width={1920} height={1080} />
     <Still id="ThumbnailEp1Wide" component={EP1_THUMB_16X9} width={1920} height={1080} />
   </>
 );
