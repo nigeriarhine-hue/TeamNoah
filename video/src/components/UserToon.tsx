@@ -28,7 +28,8 @@ export const UserToon: React.FC<{
   shake?: [number, number]; // head-shake range
   smileAfter?: number;
   waveFrom?: number;
-}> = ({cues, size = 1000, look, browAt = [], squintAt = [], shake, smileAfter = 1e9, waveFrom = 1e9}) => {
+  lean?: (frame: number) => number; // whole-body lean in degrees (+ = toward his left / screen right)
+}> = ({cues, size = 1000, look, browAt = [], squintAt = [], shake, smileAfter = 1e9, waveFrom = 1e9, lean}) => {
   const frame = useCurrentFrame();
   const t = frame / 30;
   const cue = cues.find((c) => t >= c.start && t < c.end)?.value ?? 'X';
@@ -39,24 +40,50 @@ export const UserToon: React.FC<{
   const brow = browAt.reduce((a, s) => Math.max(a, interpolate(frame, [s - 4, s + 3, s + 22, s + 30], [0, 1, 1, 0], clamp)), 0);
   const squint = squintAt.reduce((a, [s, e]) => Math.max(a, interpolate(frame, [s, s + 5, e - 5, e], [0, 1, 1, 0], clamp)), 0);
   const shakeAmt = shake ? interpolate(frame, [shake[0], shake[0] + 4, shake[1] - 6, shake[1]], [0, 1, 1, 0], clamp) : 0;
-  const shakeX = shake ? Math.sin((frame - shake[0]) / 2.1) * 14 * shakeAmt : 0;
-  const nod = talking ? Math.sin(frame / 3.2) * 1.6 : 0;
-  const sway = Math.sin(frame / 22) * 1.3;
+  const shakeS = shake ? Math.sin((frame - shake[0]) / 2.4) * shakeAmt : 0;
+  const nod = talking ? Math.sin(frame / 4) * 0.8 : 0;
   const breathe = Math.sin(frame / 18) * 2.5;
+  // body: idle sway + lean (from the composition) + a small bounce while talking
+  const bodyRot = Math.sin(frame / 34) * 1.2 + (lean ? lean(frame) : 0);
+  const bodyX = Math.sin(frame / 41) * 6;
+  const bodyY = (talking ? Math.abs(Math.sin(frame / 5)) * -3 : 0) + breathe * 0.5;
+  // head: follows the body, with only a gentle tilt of its own
+  const headRot = Math.sin(frame / 29) * 1.2 - bodyRot * 0.4 + shakeS * 5;
   const p = look ? look(frame) : {x: 0, y: 0};
   const eyeH = blink * (1 - 0.45 * squint);
 
-  const wave = interpolate(frame, [waveFrom, waveFrom + 8], [0, 1], clamp);
-  const waveRot = Math.sin((frame - waveFrom) / 3.4) * 14 * wave;
+  const wave = interpolate(frame, [waveFrom, waveFrom + 10], [0, 1], {...clamp, easing: (x) => 1 - Math.pow(1 - x, 3)});
+  const waveRot = Math.sin((frame - waveFrom - 10) / 3.6) * 13 * interpolate(frame, [waveFrom + 8, waveFrom + 12], [0, 1], clamp);
 
   return (
     <svg width={(size * 600) / 800} height={size} viewBox="0 0 600 800" style={{overflow: 'visible'}}>
+      <g transform={`translate(${bodyX} ${bodyY}) rotate(${bodyRot} 300 820)`}>
+      {/* waving arm, behind the torso: shoulder (488,650) → elbow (590,600) → hand (566,420) */}
+      {wave > 0 && (
+        <g transform={`rotate(${(1 - wave) * 115} 488 650)`}>
+          <path d="M488 650 L 590 604" stroke={SWEATER} strokeWidth={78} strokeLinecap="round" />
+          <g transform={`rotate(${waveRot} 590 604)`}>
+            <path d="M590 604 L 568 480" stroke={SWEATER} strokeWidth={70} strokeLinecap="round" />
+            <path d="M548 470 L 590 462" stroke={SWEATER_DARK} strokeWidth={18} strokeLinecap="round" />
+            {/* hand, palm out */}
+            <g transform="translate(566 418) rotate(-6)">
+              <rect x={-12} y={10} width={26} height={36} rx={10} fill={SKIN_SHADE} />
+              <ellipse cx={0} cy={4} rx={34} ry={36} fill={SKIN} />
+              {[-24, -8, 8, 24].map((x, i) => (
+                <rect key={x} x={x - 7.5} y={-56 + (i === 0 || i === 3 ? 10 : 0)} width={15} height={50} rx={7.5} fill={SKIN} />
+              ))}
+              <rect x={-52} y={-10} width={15} height={40} rx={7.5} fill={SKIN} transform="rotate(-40 -44 10)" />
+              <path d="M-16 22 Q 0 30 16 22" stroke={SKIN_SHADE} strokeWidth={4} fill="none" strokeLinecap="round" />
+            </g>
+          </g>
+        </g>
+      )}
       {/* sweater body */}
-      <g transform={`translate(0 ${breathe * 0.4})`}>
-        <path d="M24 800 C 34 650, 150 582, 300 578 C 450 582, 566 650, 576 800 Z" fill={SWEATER} />
+      <g>
+        <path d="M10 940 L 24 800 C 34 650, 150 582, 300 578 C 450 582, 566 650, 576 800 L 590 940 Z" fill={SWEATER} />
         {/* knit texture: soft vertical ribs */}
         {[90, 140, 190, 410, 460, 510].map((x) => (
-          <path key={x} d={`M${x} ${x < 300 ? 660 - (x - 60) * 0.3 : 660 - (540 - x) * 0.3} L ${x} 800`} stroke={SWEATER_DARK} strokeWidth={4} opacity={0.35} />
+          <path key={x} d={`M${x} ${x < 300 ? 660 - (x - 60) * 0.3 : 660 - (540 - x) * 0.3} L ${x} 940`} stroke={SWEATER_DARK} strokeWidth={4} opacity={0.35} />
         ))}
         {/* white tee peeking at the collar */}
         <path d="M244 578 C 262 612, 338 612, 356 578 L 346 600 C 330 626, 270 626, 254 600 Z" fill="#F7F6F2" />
@@ -65,30 +92,11 @@ export const UserToon: React.FC<{
         <path d="M236 574 C 256 628, 344 628, 364 574" stroke="#3A6E4A" strokeWidth={4} fill="none" strokeDasharray="3 7" />
       </g>
 
-      {/* waving arm (end card) */}
-      {wave > 0 && (
-        <g transform={`translate(0 ${(1 - wave) * 260})`} opacity={wave}>
-          <g transform={`rotate(${waveRot} 470 640)`}>
-            <path d="M440 700 C 470 620, 500 520, 520 440 L 580 456 C 566 540, 540 640, 520 720 Z" fill={SWEATER} />
-            <path d="M516 452 L 582 468" stroke={SWEATER_DARK} strokeWidth={16} strokeLinecap="round" />
-            {/* hand */}
-            <g transform="translate(552 406)">
-              <ellipse cx={0} cy={18} rx={38} ry={42} fill={SKIN} />
-              {[-28, -10, 8, 26].map((x, i) => (
-                <rect key={x} x={x - 8} y={-34 + (i === 0 || i === 3 ? 10 : 0)} width={17} height={50} rx={8.5} fill={SKIN} />
-              ))}
-              <rect x={30} y={6} width={17} height={38} rx={8.5} fill={SKIN} transform="rotate(-38 38 25)" />
-              <path d="M-20 34 Q 0 44 20 34" stroke={SKIN_SHADE} strokeWidth={4} fill="none" strokeLinecap="round" />
-            </g>
-          </g>
-        </g>
-      )}
-
       {/* neck */}
       <path d="M258 470 L 258 588 Q 300 612 342 588 L 342 470 Z" fill={SKIN_SHADE} />
 
       {/* head */}
-      <g transform={`translate(${shakeX} ${nod}) rotate(${sway + shakeX * 0.25} 300 470)`}>
+      <g transform={`translate(${shakeS * 4} ${nod}) rotate(${headRot} 300 560)`}>
         {/* ears */}
         <ellipse cx={156} cy={330} rx={22} ry={34} fill={SKIN_SHADE} />
         <ellipse cx={444} cy={330} rx={22} ry={34} fill={SKIN_SHADE} />
@@ -164,6 +172,7 @@ export const UserToon: React.FC<{
             <RhubarbMouth shape={cue} />
           </g>
         )}
+      </g>
       </g>
     </svg>
   );
