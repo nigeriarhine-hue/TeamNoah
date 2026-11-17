@@ -1,11 +1,13 @@
 import React from 'react';
 import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import rhubarb from '../../public/vo/gamer-test/rhubarb.json';
 import timing from '../../public/vo/gamer-test/timing.json';
 import {GamerRoom, GamerToon} from '../components/GamerToon';
 import {Caption, clamp, NoahMark, useSpring} from '../components/ui';
 import {C, SANS} from '../theme';
 
 // Lip-sync test: original illustrated character says "On noah dot app." (Piper Joe, CC0).
+// Mouth driven by Rhubarb Lip Sync cues (tools/lipsync.sh).
 
 export const GAMER_TEST_FRAMES = 120;
 const L = timing.lines[0];
@@ -19,8 +21,7 @@ export const GamerLipsyncTest: React.FC = () => {
       <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 40%'}}>
         <GamerRoom />
         <div style={{position: 'absolute', left: 90, top: 330}}>
-          {/* syllables found in the voice: on · noah · dot · app  →  O  O  O  A (lips close on the final p) */}
-          <GamerToon mouth={timing.mouth} visemes={['O', 'O', 'O', 'A']} size={1150} smileAfter={L.endFrame + 4} browAt={[L.startFrame + 2]} />
+          <GamerToon mouth={timing.mouth} cues={rhubarb.mouthCues} size={1150} smileAfter={L.endFrame + 4} browAt={[L.startFrame + 2]} />
         </div>
       </AbsoluteFill>
       {frame >= L.startFrame && frame < L.endFrame + 10 && (

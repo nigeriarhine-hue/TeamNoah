@@ -11,6 +11,65 @@ import {clamp} from './ui';
 // in the mouth track. The mouth closes fully on silence (and on a final 'P' if given).
 
 export type Viseme = 'O' | 'A' | 'E';
+export type RhubarbCue = {start: number; end: number; value: string};
+
+// Rhubarb Lip Sync mouth shapes (Preston Blair set), drawn around (0,0):
+// A closed (M/B/P) · B slightly open, teeth (K/S/T/EE) · C open (EH/AE) · D wide (AA)
+// E rounded (AO/ER) · F puckered (UW/OW/W) · G F/V (teeth on lip) · H L (tongue up) · X rest
+const LIP = '#6E3328';
+const MOUTH_IN = '#4A1E1E';
+const TEETH = '#F6F3EC';
+const TONGUE = '#C45A5A';
+const RhubarbMouth: React.FC<{shape: string}> = ({shape}) => {
+  const open = (w: number, h: number, teeth: number, tongue = true, tongueUp = false) => (
+    <>
+      <clipPath id={`rm${shape}`}>
+        <ellipse cx={0} cy={0} rx={w / 2} ry={h / 2} />
+      </clipPath>
+      <ellipse cx={0} cy={0} rx={w / 2} ry={h / 2} fill={MOUTH_IN} />
+      <g clipPath={`url(#rm${shape})`}>
+        {teeth > 0 && <rect x={-w / 2} y={-h / 2} width={w} height={teeth} fill={TEETH} />}
+        {tongue && !tongueUp && <ellipse cx={0} cy={h / 2} rx={w * 0.32} ry={h * 0.3} fill={TONGUE} />}
+        {tongueUp && <ellipse cx={0} cy={-h * 0.05} rx={w * 0.22} ry={h * 0.32} fill={TONGUE} />}
+      </g>
+      <ellipse cx={0} cy={0} rx={w / 2} ry={h / 2} fill="none" stroke={LIP} strokeWidth={4} />
+    </>
+  );
+  switch (shape) {
+    case 'A':
+      return <path d="M-30 0 Q 0 6 30 0" stroke={LIP} strokeWidth={9} fill="none" strokeLinecap="round" />;
+    case 'B':
+      return (
+        <>
+          <rect x={-34} y={-9} width={68} height={18} rx={9} fill={MOUTH_IN} />
+          <rect x={-30} y={-7} width={60} height={14} rx={4} fill={TEETH} />
+          <path d="M-30 0 L 30 0" stroke="#D9D4C8" strokeWidth={2} />
+          <rect x={-34} y={-9} width={68} height={18} rx={9} fill="none" stroke={LIP} strokeWidth={4} />
+        </>
+      );
+    case 'C':
+      return open(70, 30, 10);
+    case 'D':
+      return open(80, 52, 12);
+    case 'E':
+      return open(52, 34, 6);
+    case 'F':
+      return open(30, 26, 0);
+    case 'G':
+      return (
+        <>
+          <path d="M-34 -2 Q 0 18 34 -2 Q 0 6 -34 -2 Z" fill={MOUTH_IN} />
+          <rect x={-22} y={-4} width={44} height={9} rx={3} fill={TEETH} />
+          <path d="M-34 -2 Q 0 6 34 -2" stroke={LIP} strokeWidth={4} fill="none" />
+          <path d="M-30 6 Q 0 18 30 6" stroke={LIP} strokeWidth={6} fill="none" strokeLinecap="round" />
+        </>
+      );
+    case 'H':
+      return open(62, 40, 8, false, true);
+    default:
+      return <path d="M-32 -4 Q 0 12 32 -4" stroke={LIP} strokeWidth={7} fill="none" strokeLinecap="round" />;
+  }
+};
 
 const SKIN = '#A86B4C';
 const SKIN_SHADE = '#8C5639';
@@ -32,7 +91,8 @@ export const GamerToon: React.FC<{
   size?: number;
   smileAfter?: number; // frame after which he grins (closed-mouth smile)
   browAt?: number[];
-}> = ({mouth, visemes = [], size = 1100, smileAfter = 1e9, browAt = []}) => {
+  cues?: RhubarbCue[]; // Rhubarb Lip Sync output; when given, it drives the mouth
+}> = ({mouth, visemes = [], size = 1100, smileAfter = 1e9, browAt = [], cues}) => {
   const frame = useCurrentFrame();
   const m = mouth[Math.max(0, Math.min(mouth.length - 1, frame))] ?? 0;
   const peaks = React.useMemo(() => findPeaks(mouth), [mouth]);
@@ -43,7 +103,7 @@ export const GamerToon: React.FC<{
     for (let i = 1; i < peaks.length; i++) if (Math.abs(peaks[i] - frame) < Math.abs(peaks[best] - frame)) best = i;
     vis = visemes[Math.min(best, visemes.length - 1)];
   }
-  const talking = m > 0.06;
+  const talking = cues ? cues.some((c) => c.value !== 'X' && frame / 30 >= c.start && frame / 30 < c.end) : m > 0.06;
 
   const bt = (frame + 23) % 90;
   const blink = bt < 5 ? interpolate(bt, [0, 2, 5], [1, 0.08, 1], clamp) : 1;
@@ -138,7 +198,11 @@ export const GamerToon: React.FC<{
         {/* nose */}
         <path d="M292 330 C 286 360, 282 376, 292 384 Q 304 392 318 384" stroke={SKIN_SHADE} strokeWidth={7} fill="none" strokeLinecap="round" />
         {/* mouth */}
-        {talking ? (
+        {cues && !(frame > smileAfter) ? (
+          <g transform="translate(300 438)">
+            <RhubarbMouth shape={cues.find((c) => frame / 30 >= c.start && frame / 30 < c.end)?.value ?? 'X'} />
+          </g>
+        ) : talking && !cues ? (
           <g transform="translate(300 440)">
             <clipPath id="gMouth">
               <ellipse cx={0} cy={0} rx={shape.w / 2} ry={shape.h / 2} />

@@ -56,3 +56,18 @@ lip-sync track (`ffmpeg -i clip.mp4 -af silencedetect=n=-32dB:d=0.06 -f null -`)
 `hostSegmentsA` / `hostSegmentsB` in the episode data: each segment maps a stretch of the timeline to
 a start point and playback rate in the clip. Put segment boundaries inside pauses. The clips are muted;
 `public/vo/vo_full.wav` is the audio source.
+
+## Lip-sync (Rhubarb, free)
+
+Illustrated characters can talk using [Rhubarb Lip Sync](https://github.com/DanielSWolf/rhubarb-lip-sync)
+(MIT; the lip-sync data it produces is yours).
+
+```bash
+tools/get_rhubarb.sh                                   # one-time download into video/.tools/ (gitignored)
+tools/lipsync.sh public/vo/<name> "Exact dialog text."  # writes public/vo/<name>/rhubarb.json
+```
+
+Pass `rhubarb.mouthCues` to a character's `cues` prop (see `GamerToon` and `src/shorts/GamerLipsyncTest.tsx`).
+Mouth shapes follow Rhubarb's set: A closed (M/B/P), B teeth, C open, D wide, E rounded, F puckered,
+G F/V, H L, X rest. Giving the exact dialog text improves accuracy.
+
