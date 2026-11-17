@@ -380,11 +380,10 @@ export const ApproveFeature: React.FC = () => {
             browAt={[L[5].startFrame + 2]}
             shake={[L[1].startFrame - 2, L[1].endFrame + 4]}
             smileAfter={L[6].endFrame + 2}
-            waveFrom={L[6].startFrame}
             lean={(f) =>
               interpolate(f, [8, 20, 78, 90], [0, -3, -3, 0], clamp) + // leans away from the auto-fixer
               interpolate(f, [262, 280, 318, 330], [0, 2.5, 2.5, 0], clamp) + // leans in on "approve"
-              interpolate(f, [400, 414], [0, 2], clamp) // into the wave
+              interpolate(f, [400, 414], [0, 2], clamp) // relaxed lean on the end card
             }
           />
         </div>
