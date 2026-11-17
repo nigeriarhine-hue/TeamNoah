@@ -1,0 +1,28 @@
+1
+00:00:00,200 --> 00:00:02,675
+Would you let an app change your Mac... without asking?
+
+2
+00:00:02,925 --> 00:00:04,128
+Yeah, me neither.
+
+3
+00:00:04,378 --> 00:00:07,202
+Noah tells you what's wrong, in plain English,
+
+4
+00:00:07,202 --> 00:00:08,708
+shows you the fix first,
+
+5
+00:00:08,708 --> 00:00:10,661
+and nothing runs until you approve.
+
+6
+00:00:10,961 --> 00:00:13,058
+Changed your mind? Undo it.
+
+7
+00:00:13,308 --> 00:00:15,283
+Noah. On noah dot app.
+

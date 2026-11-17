@@ -20,7 +20,7 @@ const LIP = '#6E3328';
 const MOUTH_IN = '#4A1E1E';
 const TEETH = '#F6F3EC';
 const TONGUE = '#C45A5A';
-const RhubarbMouth: React.FC<{shape: string}> = ({shape}) => {
+export const RhubarbMouth: React.FC<{shape: string}> = ({shape}) => {
   const open = (w: number, h: number, teeth: number, tongue = true, tongueUp = false) => (
     <>
       <clipPath id={`rm${shape}`}>

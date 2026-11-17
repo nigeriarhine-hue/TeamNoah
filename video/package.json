@@ -19,7 +19,8 @@
     "thumb:mac-cleaner": "remotion still src/index.ts MacCleanerThumb ../out/noah-mac-cleaner-thumbnail.png --timeout=120000",
     "sheet:mascot": "remotion still src/index.ts MascotSheet ../out/noah-mascot-sheet.png --timeout=120000",
     "render:mascot-login": "remotion render src/index.ts MascotLoginItems ../out/.mascot-login-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.mascot-login-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-mascot-slow-startup.mp4 && rm ../out/.mascot-login-raw.mp4",
-    "render:gamer-test": "remotion render src/index.ts GamerLipsyncTest ../out/.gamer-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.gamer-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-lipsync-test.mp4 && rm ../out/.gamer-raw.mp4"
+    "render:gamer-test": "remotion render src/index.ts GamerLipsyncTest ../out/.gamer-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.gamer-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-lipsync-test.mp4 && rm ../out/.gamer-raw.mp4",
+    "render:approve": "remotion render src/index.ts ApproveFeature ../out/.approve-raw.mp4 --codec h264 --crf 18 --timeout=120000 --concurrency=2 && ffmpeg -y -loglevel error -i ../out/.approve-raw.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k -ar 48000 -movflags +faststart ../out/noah-approve-before-it-runs.mp4 && rm ../out/.approve-raw.mp4"
   },
   "dependencies": {
     "@remotion/cli": "4.0.290",
