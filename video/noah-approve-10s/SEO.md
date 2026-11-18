@@ -25,7 +25,7 @@ Try Noah: https://www.onnoah.app
 #Noah #MacTips #MacGaming #AI #Shorts
 ```
 
-**Tags** (paste into the YouTube tags box; about 470 characters, under the 500 limit)
+**Tags** (paste into the YouTube tags box; about 390 characters, under the 500 limit)
 ```
 Noah, Noah app, onnoah, Mac, MacBook, macOS, Mac tips, Mac help, fix Mac, Mac troubleshooting, app crashes on Mac, Photoshop crash Mac, AI assistant, AI for Mac, Mac gaming, gaming on Mac, MacBook gaming, Steam on Mac, Battle.net Mac, game crashes on launch, game won't launch, game won't open, fix game crash, game crash fix, PC gaming, gaming setup, gamer tips, gaming tips, Apple, tech tips
 ```
